@@ -555,7 +555,7 @@ class BaseFigure(object):
         for trace_ind, trace in enumerate(data):
             # By setting the trace's parent to be this figure, we tell the
             # trace object to use the figure's _data and _data_defaults
-            # dicts to get/set it's properties, rather than using the trace
+            # dicts to get/set its properties, rather than using the trace
             # object's internal _orphan_props dict.
             trace._parent = self
 
@@ -789,7 +789,7 @@ class BaseFigure(object):
     def __eq__(self, other):
         if not isinstance(other, BaseFigure):
             # Require objects to both be BaseFigure instances
-            return False
+            return NotImplemented
         else:
             # Compare plotly_json representations
 
@@ -1921,7 +1921,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
             val_parent = val_parent[key_path_el]
 
-        # Assign value to to final parent dict or list
+        # Assign value to final parent dict or list
         # --------------------------------------------
         # ### Get reference to final key path element ###
         last_key = key_path[-1]
@@ -2427,7 +2427,7 @@ Please use the add_trace method with the row and col parameters.
             * plotly.graph_objs.layout.Scene: if subplot type is 'scene'
             * plotly.graph_objs.layout.Polar: if subplot type is 'polar'
             * plotly.graph_objs.layout.Ternary: if subplot type is 'ternary'
-            * plotly.graph_objs.layout.Mapbox: if subplot type is 'ternary'
+            * plotly.graph_objs.layout.Map: if subplot type is 'map'
             * SubplotDomain namedtuple with `x` and `y` fields:
               if subplot type is 'domain'.
                 - x: length 2 list of the subplot start and stop width
@@ -3462,9 +3462,6 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
         warn: bool
             If False, suppress warnings about not using this in production.
 
@@ -3717,86 +3714,43 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        format: str or None
-            The desired image format. One of
-              - 'png'
-              - 'jpg' or 'jpeg'
-              - 'webp'
-              - 'svg'
-              - 'pdf'
-              - 'eps' (deprecated) (Requires the poppler library to be installed)
+        format: str
+            (optional) The desired image format. One of:
+                - 'png'
+                - 'jpg' or 'jpeg'
+                - 'webp'
+                - 'svg'
+                - 'pdf'
+            Defaults to `plotly.io.defaults.default_format`.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_format` if engine is "kaleido"
-                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+        width: int
+            (optional) The width of the exported image in layout pixels. If the
+            `scale` property is 1.0, this will also be the width of the exported image
+            in physical pixels. Defaults to `plotly.io.defaults.default_width`.
 
-        width: int or None
-            The width of the exported image in layout pixels. If the `scale`
-            property is 1.0, this will also be the width of the exported image
-            in physical pixels.
+        height: int
+            (optional) The height of the exported image in layout pixels. If the
+            `scale` property is 1.0, this will also be the height of the exported image
+            in physical pixels. Defaults to `plotly.io.defaults.default_height`.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_width` if engine is "kaleido"
-                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
-
-        height: int or None
-            The height of the exported image in layout pixels. If the `scale`
-            property is 1.0, this will also be the height of the exported image
-            in physical pixels.
-
-            If not specified, will default to:
-                - `plotly.io.defaults.default_height` if engine is "kaleido"
-                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
-
-        scale: int or float or None
-            The scale factor to use when exporting the figure. A scale factor
-            larger than 1.0 will increase the image resolution with respect
-            to the figure's layout pixel dimensions. Whereas as scale factor of
-            less than 1.0 will decrease the image resolution.
-
-            If not specified, will default to:
-                - `plotly.io.defaults.default_scale` if engine is "kaliedo"
-                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+        scale: int or float
+            (optional) The scale factor to use when exporting the figure. A scale
+            factor larger than 1.0 will increase the image resolution with respect
+            to the figure's layout pixel dimensions, while a scale factor of
+            less than 1.0 will decrease the image resolution. Defaults to
+            `plotly.io.defaults.default_scale`.
 
         validate: bool
-            True if the figure should be validated before being converted to
-            an image, False otherwise.
-
-        engine (deprecated): str
-            Image export engine to use. This parameter is deprecated and Orca engine support will be
-            dropped in the next major Plotly version. Until then, the following values are supported:
-            - "kaleido": Use Kaleido for image export
-            - "orca": Use Orca for image export
-            - "auto" (default): Use Kaleido if installed, otherwise use Orca
+            (optional) True if the figure should be validated before being converted
+            to an image, False otherwise. Defaults to True.
 
         Returns
         -------
         bytes
             The image data
         """
-        import plotly.io as pio
-        from plotly.io.kaleido import (
-            kaleido_available,
-            kaleido_major,
-            ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS,
-            KALEIDO_DEPRECATION_MSG,
-            ORCA_DEPRECATION_MSG,
-            ENGINE_PARAM_DEPRECATION_MSG,
-        )
 
-        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
-            if (
-                kwargs.get("engine", None) in {None, "auto", "kaleido"}
-                and kaleido_available()
-                and kaleido_major() < 1
-            ):
-                warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-            if kwargs.get("engine", None) == "orca":
-                warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-            if kwargs.get("engine", None):
-                warnings.warn(
-                    ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
-                )
+        import plotly.io as pio
 
         return pio.to_image(self, *args, **kwargs)
 
@@ -3811,87 +3765,43 @@ Invalid property path '{key_path_str}' for layout
             A string representing a local file path or a writeable object
             (e.g. a pathlib.Path object or an open file descriptor)
 
-        format: str or None
-            The desired image format. One of
-              - 'png'
-              - 'jpg' or 'jpeg'
-              - 'webp'
-              - 'svg'
-              - 'pdf'
-              - 'eps' (deprecated) (Requires the poppler library to be installed)
+        format: str
+            (optional) The desired image format. One of:
+            - 'png'
+            - 'jpg' or 'jpeg'
+            - 'webp'
+            - 'svg'
+            - 'pdf'
+            Defaults to the file extension of `file`, if given; otherwise
+            defaults to `plotly.io.defaults.default_format`.
 
-            If not specified and `file` is a string then this will default to the
-            file extension. If not specified and `file` is not a string then this
-            will default to:
-                - `plotly.io.defaults.default_format` if engine is "kaleido"
-                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+        width: int
+            (optional) The width of the exported image in layout pixels. If the
+            `scale` property is 1.0, this will also be the width of the exported image
+            in physical pixels. Defaults to `plotly.io.defaults.default_width`.
 
-        width: int or None
-            The width of the exported image in layout pixels. If the `scale`
-            property is 1.0, this will also be the width of the exported image
-            in physical pixels.
+        height: int
+            (optional) The height of the exported image in layout pixels. If the
+            `scale` property is 1.0, this will also be the height of the exported image
+            in physical pixels. Defaults to `plotly.io.defaults.default_height`.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_width` if engine is "kaleido"
-                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
-
-        height: int or None
-            The height of the exported image in layout pixels. If the `scale`
-            property is 1.0, this will also be the height of the exported image
-            in physical pixels.
-
-            If not specified, will default to:
-                - `plotly.io.defaults.default_height` if engine is "kaleido"
-                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
-
-        scale: int or float or None
-            The scale factor to use when exporting the figure. A scale factor
-            larger than 1.0 will increase the image resolution with respect
-            to the figure's layout pixel dimensions. Whereas as scale factor of
-            less than 1.0 will decrease the image resolution.
-
-            If not specified, will default to:
-                - `plotly.io.defaults.default_scale` if engine is "kaleido"
-                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+        scale: int or float
+            (optional) The scale factor to use when exporting the figure. A scale
+            factor larger than 1.0 will increase the image resolution with respect
+            to the figure's layout pixel dimensions, while a scale factor of
+            less than 1.0 will decrease the image resolution. Defaults to
+            `plotly.io.defaults.default_scale`.
 
         validate: bool
-            True if the figure should be validated before being converted to
-            an image, False otherwise.
-
-        engine (deprecated): str
-            Image export engine to use. This parameter is deprecated and Orca engine support will be
-            dropped in the next major Plotly version. Until then, the following values are supported:
-            - "kaleido": Use Kaleido for image export
-            - "orca": Use Orca for image export
-            - "auto" (default): Use Kaleido if installed, otherwise use Orca
+            (optional) True if the figure should be validated before being converted
+            to an image, False otherwise. Defaults to True.
 
         Returns
         -------
         None
         """
         import plotly.io as pio
-        from plotly.io.kaleido import (
-            kaleido_available,
-            kaleido_major,
-            ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS,
-            KALEIDO_DEPRECATION_MSG,
-            ORCA_DEPRECATION_MSG,
-            ENGINE_PARAM_DEPRECATION_MSG,
-        )
 
-        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
-            if (
-                kwargs.get("engine", None) in {None, "auto", "kaleido"}
-                and kaleido_available()
-                and kaleido_major() < 1
-            ):
-                warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-            if kwargs.get("engine", None) == "orca":
-                warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-            if kwargs.get("engine", None):
-                warnings.warn(
-                    ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
-                )
         return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
@@ -4281,7 +4191,7 @@ Invalid property path '{key_path_str}' for layout
                 ret |= any(
                     t == (xref, yref)
                     for t in [
-                        # if a object exists but has no xaxis or yaxis keys, then it
+                        # if an object exists but has no xaxis or yaxis keys, then it
                         # is plotted with xaxis/xref 'x' and yaxis/yref 'y'
                         (
                             "x" if d[xaxiskw] is None else d[xaxiskw],
@@ -5017,7 +4927,7 @@ class BasePlotlyType(object):
         """
         if not isinstance(other, self.__class__):
             # Require objects to be of the same plotly type
-            return False
+            return NotImplemented
         else:
             # Compare plotly_json representations
 

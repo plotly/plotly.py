@@ -22,7 +22,7 @@ from plotly.io._base_renderers import (
     BrowserRenderer,
     IFrameRenderer,
     SphinxGalleryHtmlRenderer,
-    SphinxGalleryOrcaRenderer,
+    SphinxGalleryPngRenderer,
     CoCalcRenderer,
     DatabricksRenderer,
 )
@@ -465,7 +465,7 @@ renderers["chromium"] = BrowserRenderer(
 renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
 renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
 renderers["sphinx_gallery"] = SphinxGalleryHtmlRenderer()
-renderers["sphinx_gallery_png"] = SphinxGalleryOrcaRenderer()
+renderers["sphinx_gallery_png"] = SphinxGalleryPngRenderer()
 
 # Set default renderer
 # --------------------
@@ -488,13 +488,10 @@ environment variable: {env_renderer}""".format(env_renderer=env_renderer)
 elif ipython and ipython.get_ipython():
     # Try to detect environment so that we can enable a useful
     # default renderer
-    if not default_renderer:
-        try:
-            import google.colab  # noqa: F401
 
-            default_renderer = "colab"
-        except ImportError:
-            pass
+    # Check if we're running in a Colab web notebook
+    if not default_renderer and "COLAB_NOTEBOOK_ID" in os.environ:
+        default_renderer = "colab"
 
     # Check if we're running in a Kaggle notebook
     if not default_renderer and os.path.exists("/kaggle/input"):
@@ -518,17 +515,6 @@ elif ipython and ipython.get_ipython():
 
     if not default_renderer and "DATABRICKS_RUNTIME_VERSION" in os.environ:
         default_renderer = "databricks"
-
-    # Check if we're running in spyder and orca is installed
-    if not default_renderer and "SPYDER_ARGS" in os.environ:
-        try:
-            from plotly.io.orca import validate_executable
-
-            validate_executable()
-            default_renderer = "svg"
-        except ValueError:
-            # orca not found
-            pass
 
     # Check if we're running in ipython terminal
     ipython_info = ipython.get_ipython()

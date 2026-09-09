@@ -11,7 +11,6 @@ class Layout(_BaseLayoutType):
         "geo",
         "legend",
         "map",
-        "mapbox",
         "polar",
         "scene",
         "smith",
@@ -40,7 +39,6 @@ class Layout(_BaseLayoutType):
             "geo": ValidatorCache.get_validator("layout", "geo"),
             "legend": ValidatorCache.get_validator("layout", "legend"),
             "map": ValidatorCache.get_validator("layout", "map"),
-            "mapbox": ValidatorCache.get_validator("layout", "mapbox"),
             "polar": ValidatorCache.get_validator("layout", "polar"),
             "scene": ValidatorCache.get_validator("layout", "scene"),
             "smith": ValidatorCache.get_validator("layout", "smith"),
@@ -70,6 +68,7 @@ class Layout(_BaseLayoutType):
         "boxgroupgap",
         "boxmode",
         "calendar",
+        "clickanywhere",
         "clickmode",
         "coloraxis",
         "colorscale",
@@ -92,21 +91,19 @@ class Layout(_BaseLayoutType):
         "grid",
         "height",
         "hiddenlabels",
-        "hiddenlabelssrc",
-        "hidesources",
+        "hoveranywhere",
         "hoverdistance",
         "hoverlabel",
         "hovermode",
+        "hoversort",
         "hoversubplots",
         "iciclecolorway",
         "imagedefaults",
         "images",
         "legend",
         "map",
-        "mapbox",
         "margin",
         "meta",
-        "metasrc",
         "minreducedheight",
         "minreducedwidth",
         "modebar",
@@ -241,8 +238,8 @@ class Layout(_BaseLayoutType):
         layout width or height is always initialized on the first call
         to plot.
 
-        The 'autosize' property must be specified as a bool
-        (either True, or False)
+        The 'autosize' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -469,6 +466,30 @@ class Layout(_BaseLayoutType):
         self["calendar"] = val
 
     @property
+    def clickanywhere(self):
+        """
+        If true, `plotly_click` events will fire for any click position
+        within the plot area, not just over traces. When clicking where
+        there is no trace data, the event will have an empty `points`
+        array but will include `xvals` and `yvals` with click
+        coordinates in data space, and `xPixel` and `yPixel` with click
+        coordinates in pixels, relative to the top-left corner of the
+        graph div.
+
+        The 'clickanywhere' property is a boolean and must be specified as:
+          - A boolean value: True or False
+
+        Returns
+        -------
+        bool
+        """
+        return self["clickanywhere"]
+
+    @clickanywhere.setter
+    def clickanywhere(self, val):
+        self["clickanywhere"] = val
+
+    @property
     def clickmode(self):
         """
         Determines the mode of single click interactions. "event" is
@@ -654,8 +675,8 @@ class Layout(_BaseLayoutType):
         Colors provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendfunnelareacolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendfunnelareacolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -679,8 +700,8 @@ class Layout(_BaseLayoutType):
         provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendiciclecolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendiciclecolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -703,8 +724,8 @@ class Layout(_BaseLayoutType):
         but you can set `false` to disable. Colors provided in the
         trace, using `marker.colors`, are never extended.
 
-        The 'extendpiecolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendpiecolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -728,8 +749,8 @@ class Layout(_BaseLayoutType):
         Colors provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendsunburstcolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendsunburstcolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -753,8 +774,8 @@ class Layout(_BaseLayoutType):
         Colors provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendtreemapcolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendtreemapcolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -949,45 +970,29 @@ class Layout(_BaseLayoutType):
         self["hiddenlabels"] = val
 
     @property
-    def hiddenlabelssrc(self):
+    def hoveranywhere(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hiddenlabels`.
+        If true, `plotly_hover` events will fire for any cursor
+        position within the plot area, not just over traces. When the
+        cursor is not over a trace, the event will have an empty
+        `points` array but will include `xvals` and `yvals` with cursor
+        coordinates in data space, and `xPixel` and `yPixel` with
+        cursor coordinates in pixels, relative to the top-left corner
+        of the graph div. A `plotly_unhover` event fires when the
+        cursor leaves the plot area.
 
-        The 'hiddenlabelssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hiddenlabelssrc"]
-
-    @hiddenlabelssrc.setter
-    def hiddenlabelssrc(self, val):
-        self["hiddenlabelssrc"] = val
-
-    @property
-    def hidesources(self):
-        """
-        Determines whether or not a text link citing the data source is
-        placed at the bottom-right cored of the figure. Has only an
-        effect only on graphs that have been generated via forked
-        graphs from the Chart Studio Cloud (at https://chart-
-        studio.plotly.com or on-premise).
-
-        The 'hidesources' property must be specified as a bool
-        (either True, or False)
+        The 'hoveranywhere' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
         bool
         """
-        return self["hidesources"]
+        return self["hoveranywhere"]
 
-    @hidesources.setter
-    def hidesources(self, val):
-        self["hidesources"] = val
+    @hoveranywhere.setter
+    def hoveranywhere(self, val):
+        self["hoveranywhere"] = val
 
     @property
     def hoverdistance(self):
@@ -1000,7 +1005,7 @@ class Layout(_BaseLayoutType):
         outside, but these objects will not supersede hover on point-
         like objects in case of conflict.
 
-        The 'hoverdistance' property is a integer and may be specified as:
+        The 'hoverdistance' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -1062,6 +1067,30 @@ class Layout(_BaseLayoutType):
     @hovermode.setter
     def hovermode(self, val):
         self["hovermode"] = val
+
+    @property
+    def hoversort(self):
+        """
+        Determines the order of items shown in unified hover labels. If
+        "trace", items are sorted by trace index. If *value
+        descending*, items are sorted by value from largest to
+        smallest. If *value ascending*, items are sorted by value from
+        smallest to largest. Only applies when `hovermode` is *x
+        unified* or *y unified*.
+
+        The 'hoversort' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['trace', 'value descending', 'value ascending']
+
+        Returns
+        -------
+        Any
+        """
+        return self["hoversort"]
+
+    @hoversort.setter
+    def hoversort(self, val):
+        self["hoversort"] = val
 
     @property
     def hoversubplots(self):
@@ -1190,25 +1219,6 @@ class Layout(_BaseLayoutType):
         self["map"] = val
 
     @property
-    def mapbox(self):
-        """
-        The 'mapbox' property is an instance of Mapbox
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.Mapbox`
-          - A dict of string/value properties that will be passed
-            to the Mapbox constructor
-
-        Returns
-        -------
-        plotly.graph_objs.layout.Mapbox
-        """
-        return self["mapbox"]
-
-    @mapbox.setter
-    def mapbox(self, val):
-        self["mapbox"] = val
-
-    @property
     def margin(self):
         """
         The 'margin' property is an instance of Margin
@@ -1250,24 +1260,6 @@ class Layout(_BaseLayoutType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def minreducedheight(self):
@@ -1370,12 +1362,18 @@ class Layout(_BaseLayoutType):
         Sets the background color of the paper where the graph is
         drawn.
 
-        The 'paper_bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'paper_bgcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -1415,12 +1413,18 @@ class Layout(_BaseLayoutType):
         Sets the background color of the plotting area in-between x and
         y axes.
 
-        The 'plot_bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'plot_bgcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -1668,8 +1672,8 @@ class Layout(_BaseLayoutType):
         trace is shown in the legend. c) One trace is explicitly given
         with `showlegend: true`.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1751,7 +1755,7 @@ class Layout(_BaseLayoutType):
         like objects. In addition, some objects can be hovered on but
         will not generate spikelines, such as scatter fills.
 
-        The 'spikedistance' property is a integer and may be specified as:
+        The 'spikedistance' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -2268,6 +2272,15 @@ class Layout(_BaseLayoutType):
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
+        clickanywhere
+            If true, `plotly_click` events will fire for any click
+            position within the plot area, not just over traces.
+            When clicking where there is no trace data, the event
+            will have an empty `points` array but will include
+            `xvals` and `yvals` with click coordinates in data
+            space, and `xPixel` and `yPixel` with click coordinates
+            in pixels, relative to the top-left corner of the graph
+            div.
         clickmode
             Determines the mode of single click interactions.
             "event" is the default value and emits the
@@ -2395,16 +2408,16 @@ class Layout(_BaseLayoutType):
             visible:'legendonly' but it can contain many labels,
             and can simultaneously hide slices from several
             pies/funnelarea charts
-        hiddenlabelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `hiddenlabels`.
-        hidesources
-            Determines whether or not a text link citing the data
-            source is placed at the bottom-right cored of the
-            figure. Has only an effect only on graphs that have
-            been generated via forked graphs from the Chart Studio
-            Cloud (at https://chart-studio.plotly.com or on-
-            premise).
+        hoveranywhere
+            If true, `plotly_hover` events will fire for any cursor
+            position within the plot area, not just over traces.
+            When the cursor is not over a trace, the event will
+            have an empty `points` array but will include `xvals`
+            and `yvals` with cursor coordinates in data space, and
+            `xPixel` and `yPixel` with cursor coordinates in
+            pixels, relative to the top-left corner of the graph
+            div. A `plotly_unhover` event fires when the cursor
+            leaves the plot area.
         hoverdistance
             Sets the default distance (in pixels) to look for data
             to add hover labels (-1 means no cutoff, 0 means no
@@ -2432,6 +2445,13 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversort
+            Determines the order of items shown in unified hover
+            labels. If "trace", items are sorted by trace index. If
+            *value descending*, items are sorted by value from
+            largest to smallest. If *value ascending*, items are
+            sorted by value from smallest to largest. Only applies
+            when `hovermode` is *x unified* or *y unified*.
         hoversubplots
             Determines expansion of hover effects to other subplots
             If "single" just the axis pair of the primary point is
@@ -2458,9 +2478,6 @@ class Layout(_BaseLayoutType):
         map
             :class:`plotly.graph_objects.layout.Map` instance or
             dict with compatible properties
-        mapbox
-            :class:`plotly.graph_objects.layout.Mapbox` instance or
-            dict with compatible properties
         margin
             :class:`plotly.graph_objects.layout.Margin` instance or
             dict with compatible properties
@@ -2475,9 +2492,6 @@ class Layout(_BaseLayoutType):
             `meta` item in question. `meta` can also be an object
             for example `{key: value}` which can be accessed
             %{meta[key]}.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         minreducedheight
             Minimum height of the plot with margin.automargin
             applied (in px)
@@ -2705,6 +2719,7 @@ class Layout(_BaseLayoutType):
         boxgroupgap=None,
         boxmode=None,
         calendar=None,
+        clickanywhere=None,
         clickmode=None,
         coloraxis=None,
         colorscale=None,
@@ -2727,21 +2742,19 @@ class Layout(_BaseLayoutType):
         grid=None,
         height=None,
         hiddenlabels=None,
-        hiddenlabelssrc=None,
-        hidesources=None,
+        hoveranywhere=None,
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
+        hoversort=None,
         hoversubplots=None,
         iciclecolorway=None,
         images=None,
         imagedefaults=None,
         legend=None,
         map=None,
-        mapbox=None,
         margin=None,
         meta=None,
-        metasrc=None,
         minreducedheight=None,
         minreducedwidth=None,
         modebar=None,
@@ -2868,6 +2881,15 @@ class Layout(_BaseLayoutType):
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
+        clickanywhere
+            If true, `plotly_click` events will fire for any click
+            position within the plot area, not just over traces.
+            When clicking where there is no trace data, the event
+            will have an empty `points` array but will include
+            `xvals` and `yvals` with click coordinates in data
+            space, and `xPixel` and `yPixel` with click coordinates
+            in pixels, relative to the top-left corner of the graph
+            div.
         clickmode
             Determines the mode of single click interactions.
             "event" is the default value and emits the
@@ -2995,16 +3017,16 @@ class Layout(_BaseLayoutType):
             visible:'legendonly' but it can contain many labels,
             and can simultaneously hide slices from several
             pies/funnelarea charts
-        hiddenlabelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `hiddenlabels`.
-        hidesources
-            Determines whether or not a text link citing the data
-            source is placed at the bottom-right cored of the
-            figure. Has only an effect only on graphs that have
-            been generated via forked graphs from the Chart Studio
-            Cloud (at https://chart-studio.plotly.com or on-
-            premise).
+        hoveranywhere
+            If true, `plotly_hover` events will fire for any cursor
+            position within the plot area, not just over traces.
+            When the cursor is not over a trace, the event will
+            have an empty `points` array but will include `xvals`
+            and `yvals` with cursor coordinates in data space, and
+            `xPixel` and `yPixel` with cursor coordinates in
+            pixels, relative to the top-left corner of the graph
+            div. A `plotly_unhover` event fires when the cursor
+            leaves the plot area.
         hoverdistance
             Sets the default distance (in pixels) to look for data
             to add hover labels (-1 means no cutoff, 0 means no
@@ -3032,6 +3054,13 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversort
+            Determines the order of items shown in unified hover
+            labels. If "trace", items are sorted by trace index. If
+            *value descending*, items are sorted by value from
+            largest to smallest. If *value ascending*, items are
+            sorted by value from smallest to largest. Only applies
+            when `hovermode` is *x unified* or *y unified*.
         hoversubplots
             Determines expansion of hover effects to other subplots
             If "single" just the axis pair of the primary point is
@@ -3058,9 +3087,6 @@ class Layout(_BaseLayoutType):
         map
             :class:`plotly.graph_objects.layout.Map` instance or
             dict with compatible properties
-        mapbox
-            :class:`plotly.graph_objects.layout.Mapbox` instance or
-            dict with compatible properties
         margin
             :class:`plotly.graph_objects.layout.Margin` instance or
             dict with compatible properties
@@ -3075,9 +3101,6 @@ class Layout(_BaseLayoutType):
             `meta` item in question. `meta` can also be an object
             for example `{key: value}` which can be accessed
             %{meta[key]}.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         minreducedheight
             Minimum height of the plot with margin.automargin
             applied (in px)
@@ -3311,6 +3334,7 @@ class Layout(_BaseLayoutType):
             "boxgroupgap",
             "boxmode",
             "calendar",
+            "clickanywhere",
             "clickmode",
             "coloraxis",
             "colorscale",
@@ -3333,21 +3357,19 @@ class Layout(_BaseLayoutType):
             "grid",
             "height",
             "hiddenlabels",
-            "hiddenlabelssrc",
-            "hidesources",
+            "hoveranywhere",
             "hoverdistance",
             "hoverlabel",
             "hovermode",
+            "hoversort",
             "hoversubplots",
             "iciclecolorway",
             "imagedefaults",
             "images",
             "legend",
             "map",
-            "mapbox",
             "margin",
             "meta",
-            "metasrc",
             "minreducedheight",
             "minreducedwidth",
             "modebar",
@@ -3423,6 +3445,7 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("boxgroupgap", arg, boxgroupgap)
         self._set_property("boxmode", arg, boxmode)
         self._set_property("calendar", arg, calendar)
+        self._set_property("clickanywhere", arg, clickanywhere)
         self._set_property("clickmode", arg, clickmode)
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorscale", arg, colorscale)
@@ -3445,21 +3468,19 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("grid", arg, grid)
         self._set_property("height", arg, height)
         self._set_property("hiddenlabels", arg, hiddenlabels)
-        self._set_property("hiddenlabelssrc", arg, hiddenlabelssrc)
-        self._set_property("hidesources", arg, hidesources)
+        self._set_property("hoveranywhere", arg, hoveranywhere)
         self._set_property("hoverdistance", arg, hoverdistance)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovermode", arg, hovermode)
+        self._set_property("hoversort", arg, hoversort)
         self._set_property("hoversubplots", arg, hoversubplots)
         self._set_property("iciclecolorway", arg, iciclecolorway)
         self._set_property("images", arg, images)
         self._set_property("imagedefaults", arg, imagedefaults)
         self._set_property("legend", arg, legend)
         self._set_property("map", arg, map)
-        self._set_property("mapbox", arg, mapbox)
         self._set_property("margin", arg, margin)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("minreducedheight", arg, minreducedheight)
         self._set_property("minreducedwidth", arg, minreducedwidth)
         self._set_property("modebar", arg, modebar)

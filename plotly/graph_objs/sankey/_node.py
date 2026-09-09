@@ -11,23 +11,19 @@ class Node(_BaseTraceHierarchyType):
     _valid_props = {
         "align",
         "color",
-        "colorsrc",
         "customdata",
-        "customdatasrc",
         "groups",
         "hoverinfo",
         "hoverlabel",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "label",
-        "labelsrc",
         "line",
         "pad",
+        "sort",
         "thickness",
         "x",
-        "xsrc",
         "y",
-        "ysrc",
     }
 
     @property
@@ -60,12 +56,18 @@ class Node(_BaseTraceHierarchyType):
         fully opaque, to allow some visibility of what is beneath the
         node.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -77,24 +79,6 @@ class Node(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self["color"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def customdata(self):
@@ -113,25 +97,6 @@ class Node(_BaseTraceHierarchyType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def groups(self):
@@ -158,7 +123,7 @@ class Node(_BaseTraceHierarchyType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear when hovering nodes.
+        Determines what trace information appears when hovering nodes.
         If `none` or `skip` are set, no information is displayed upon
         hovering. But, if `none` is set, click and hover events are
         still fired.
@@ -214,15 +179,18 @@ class Node(_BaseTraceHierarchyType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Variables
-        `sourceLinks` and `targetLinks` are arrays of link
-        objects.Finally, the template string has access to variables
-        `value` and `label`. Anything contained in tag `<extra>` is
-        displayed in the secondary box, for example
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `value`
+        and `label`. Anything contained in tag `<extra>` is displayed
+        in the secondary box, for example
         `<extra>%{fullData.name}</extra>`. To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
@@ -242,23 +210,23 @@ class Node(_BaseTraceHierarchyType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def label(self):
@@ -277,24 +245,6 @@ class Node(_BaseTraceHierarchyType):
     @label.setter
     def label(self, val):
         self["label"] = val
-
-    @property
-    def labelsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `label`.
-
-        The 'labelsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["labelsrc"]
-
-    @labelsrc.setter
-    def labelsrc(self, val):
-        self["labelsrc"] = val
 
     @property
     def line(self):
@@ -334,6 +284,28 @@ class Node(_BaseTraceHierarchyType):
         self["pad"] = val
 
     @property
+    def sort(self):
+        """
+        For `auto` (the default), the vertical order of nodes will be
+        determined automatically by the layout. For `input`, the
+        vertical order of nodes is kept the same as the order in the
+        input array.
+
+        The 'sort' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['auto', 'input']
+
+        Returns
+        -------
+        Any
+        """
+        return self["sort"]
+
+    @sort.setter
+    def sort(self, val):
+        self["sort"] = val
+
+    @property
     def thickness(self):
         """
         Sets the thickness (in px) of the `nodes`.
@@ -370,24 +342,6 @@ class Node(_BaseTraceHierarchyType):
         self["x"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         The normalized vertical position of the node.
@@ -406,24 +360,6 @@ class Node(_BaseTraceHierarchyType):
         self["y"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         align
@@ -436,20 +372,14 @@ class Node(_BaseTraceHierarchyType):
             color palette will be cycled through to have a variety
             of colors. These defaults are not fully opaque, to
             allow some visibility of what is beneath the node.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         customdata
             Assigns extra data to each node.
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         groups
             Groups of nodes. Each group is defined by an array with
             the indices of the nodes it contains. Multiple groups
             can be specified.
         hoverinfo
-            Determines which trace information appear when hovering
+            Determines what trace information appears when hovering
             nodes. If `none` or `skip` are set, no information is
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
@@ -474,45 +404,46 @@ class Node(_BaseTraceHierarchyType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  Variables `sourceLinks` and
-            `targetLinks` are arrays of link objects.Finally, the
-            template string has access to variables `value` and
-            `label`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
-            `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         label
             The shown name of the node.
-        labelsrc
-            Sets the source reference on Chart Studio Cloud for
-            `label`.
         line
             :class:`plotly.graph_objects.sankey.node.Line` instance
             or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
+        sort
+            For `auto` (the default), the vertical order of nodes
+            will be determined automatically by the layout. For
+            `input`, the vertical order of nodes is kept the same
+            as the order in the input array.
         thickness
             Sets the thickness (in px) of the `nodes`.
         x
             The normalized horizontal position of the node.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             The normalized vertical position of the node.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         """
 
     def __init__(
@@ -520,23 +451,19 @@ class Node(_BaseTraceHierarchyType):
         arg=None,
         align=None,
         color=None,
-        colorsrc=None,
         customdata=None,
-        customdatasrc=None,
         groups=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         label=None,
-        labelsrc=None,
         line=None,
         pad=None,
+        sort=None,
         thickness=None,
         x=None,
-        xsrc=None,
         y=None,
-        ysrc=None,
         **kwargs,
     ):
         """
@@ -559,20 +486,14 @@ class Node(_BaseTraceHierarchyType):
             color palette will be cycled through to have a variety
             of colors. These defaults are not fully opaque, to
             allow some visibility of what is beneath the node.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         customdata
             Assigns extra data to each node.
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         groups
             Groups of nodes. Each group is defined by an array with
             the indices of the nodes it contains. Multiple groups
             can be specified.
         hoverinfo
-            Determines which trace information appear when hovering
+            Determines what trace information appears when hovering
             nodes. If `none` or `skip` are set, no information is
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
@@ -597,45 +518,46 @@ class Node(_BaseTraceHierarchyType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  Variables `sourceLinks` and
-            `targetLinks` are arrays of link objects.Finally, the
-            template string has access to variables `value` and
-            `label`. Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
-            `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `value` and `label`. Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         label
             The shown name of the node.
-        labelsrc
-            Sets the source reference on Chart Studio Cloud for
-            `label`.
         line
             :class:`plotly.graph_objects.sankey.node.Line` instance
             or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
+        sort
+            For `auto` (the default), the vertical order of nodes
+            will be determined automatically by the layout. For
+            `input`, the vertical order of nodes is kept the same
+            as the order in the input array.
         thickness
             Sets the thickness (in px) of the `nodes`.
         x
             The normalized horizontal position of the node.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             The normalized vertical position of the node.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
 
         Returns
         -------
@@ -663,22 +585,18 @@ an instance of :class:`plotly.graph_objs.sankey.Node`""")
 
         self._set_property("align", arg, align)
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("groups", arg, groups)
         self._set_property("hoverinfo", arg, hoverinfo)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("label", arg, label)
-        self._set_property("labelsrc", arg, labelsrc)
         self._set_property("line", arg, line)
         self._set_property("pad", arg, pad)
+        self._set_property("sort", arg, sort)
         self._set_property("thickness", arg, thickness)
         self._set_property("x", arg, x)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
-        self._set_property("ysrc", arg, ysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

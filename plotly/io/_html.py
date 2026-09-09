@@ -22,12 +22,12 @@ def _generate_sri_hash(content):
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
-<script type="text/javascript">\
+<script>\
 window.PlotlyConfig = {MathJaxConfig: 'local'};\
 </script>"""
 
 _mathjax_config = """\
-<script type="text/javascript">\
+<script>\
 if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
@@ -179,21 +179,10 @@ def to_html(
     else:
         div_height = str(div_height) + "px"
 
-    # ## Get platform URL ##
-    if config.get("showLink", False) or config.get("showSendToCloud", False):
-        # Figure is going to include a Chart Studio link or send-to-cloud button,
-        # So we need to configure the PLOTLYENV.BASE_URL property
-        base_url_line = """
-                    window.PLOTLYENV.BASE_URL='{plotly_platform_url}';\
-""".format(plotly_platform_url=config.get("plotlyServerURL", "https://plot.ly"))
-    else:
-        # Figure is not going to include a Chart Studio link or send-to-cloud button,
-        # In this case we don't want https://plot.ly to show up anywhere in the HTML
-        # output
+    # Remove plotlyServerURL from config if showSendToCloud is False,
+    # so that a Plotly URL does not appear in the HTML output
+    if not config.get("showSendToCloud", False):
         config.pop("plotlyServerURL", None)
-        config.pop("linkText", None)
-        config.pop("showLink", None)
-        base_url_line = ""
 
     # ## Build script body ##
     # This is the part that actually calls Plotly.js
@@ -282,7 +271,7 @@ def to_html(
     elif include_plotlyjs:
         load_plotlyjs = """\
         {win_config}
-        <script type="text/javascript">{plotlyjs}</script>\
+        <script>{plotlyjs}</script>\
     """.format(win_config=_window_plotly_config, plotlyjs=get_plotlyjs())
 
     # ## Handle loading/initializing MathJax ##
@@ -291,12 +280,14 @@ def to_html(
         include_mathjax = include_mathjax.lower()
 
     mathjax_template = """\
-    <script src="{url}?config=TeX-AMS-MML_SVG"></script>"""
+    <script src="{url}"></script>"""
 
     if include_mathjax == "cdn":
         mathjax_script = (
             mathjax_template.format(
-                url=("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js")
+                url=(
+                    "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"
+                )
             )
             + _mathjax_config
         )
@@ -318,13 +309,13 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         )
 
     plotly_html_div = """\
-<div>\
+<div style="height:{height}; width:{width};">\
         {mathjax_script}\
         {load_plotlyjs}\
             <div id="{id}" class="plotly-graph-div" \
-style="height:{height}; width:{width};"></div>\
-            <script type="text/javascript">\
-                window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
+style="height:100%; width:100%;"></div>\
+            <script>\
+                window.PLOTLYENV=window.PLOTLYENV || {{}};\
                 {script};\
             </script>\
         </div>""".format(
@@ -333,14 +324,17 @@ style="height:{height}; width:{width};"></div>\
         id=plotdivid,
         width=div_width,
         height=div_height,
-        base_url_line=base_url_line,
         script=script,
     ).strip()
 
     if full_html:
         return """\
+<!doctype html>
 <html>
-<head><meta charset="utf-8" /></head>
+<head>
+    <meta charset="utf-8" />
+    <style>html, body {{height: 100%;}}</style>
+</head>
 <body>
     {div}
 </body>

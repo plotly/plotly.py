@@ -19,16 +19,12 @@ class Cone(_BaseTraceType):
         "colorbar",
         "colorscale",
         "customdata",
-        "customdatasrc",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -37,7 +33,6 @@ class Cone(_BaseTraceType):
         "lighting",
         "lightposition",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "reversescale",
@@ -46,31 +41,23 @@ class Cone(_BaseTraceType):
         "showscale",
         "sizemode",
         "sizeref",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "u",
         "uhoverformat",
         "uid",
         "uirevision",
-        "usrc",
         "v",
         "vhoverformat",
         "visible",
-        "vsrc",
         "w",
         "whoverformat",
-        "wsrc",
         "x",
         "xhoverformat",
-        "xsrc",
         "y",
         "yhoverformat",
-        "ysrc",
         "z",
         "zhoverformat",
-        "zsrc",
     }
 
     @property
@@ -104,8 +91,8 @@ class Cone(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -125,8 +112,8 @@ class Cone(_BaseTraceType):
         in `cmin` and `cmax` Defaults to `false` when `cmin` and `cmax`
         are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -210,9 +197,9 @@ class Cone(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -248,7 +235,7 @@ class Cone(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `cmin` and `cmax`.
@@ -316,28 +303,9 @@ class Cone(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -357,25 +325,6 @@ class Cone(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -414,15 +363,20 @@ class Cone(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. Finally, the
-        template string has access to variable `norm` Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example `<extra>%{fullData.name}</extra>`. To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variable `norm`
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -440,23 +394,23 @@ class Cone(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertext(self):
@@ -479,25 +433,6 @@ class Cone(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -518,24 +453,6 @@ class Cone(_BaseTraceType):
         self["ids"] = val
 
     @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
-
-    @property
     def legend(self):
         """
         Sets the reference to a legend to show this trace in.
@@ -544,9 +461,9 @@ class Cone(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -707,24 +624,6 @@ class Cone(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -774,8 +673,8 @@ class Cone(_BaseTraceType):
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -796,9 +695,9 @@ class Cone(_BaseTraceType):
         coordinates refer to `layout.scene2`, and so on.
 
         The 'scene' property is an identifier of a particular
-        subplot, of type 'scene', that may be specified as the string 'scene'
-        optionally followed by an integer >= 1
-        (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
+        subplot, of type 'scene', that may be specified as:
+          - the string 'scene' optionally followed by an integer >= 1
+            (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
 
         Returns
         -------
@@ -816,8 +715,8 @@ class Cone(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -835,8 +734,8 @@ class Cone(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -900,25 +799,6 @@ class Cone(_BaseTraceType):
         self["sizeref"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.cone.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.cone.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets the text elements associated with the cones. If trace
@@ -941,24 +821,6 @@ class Cone(_BaseTraceType):
         self["text"] = val
 
     @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
-
-    @property
     def u(self):
         """
         Sets the x components of the vector field.
@@ -979,7 +841,7 @@ class Cone(_BaseTraceType):
     @property
     def uhoverformat(self):
         """
-        Sets the hover text formatting rulefor `u`  using d3 formatting
+        Sets the hover text formatting rule for `u` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1051,24 +913,6 @@ class Cone(_BaseTraceType):
         self["uirevision"] = val
 
     @property
-    def usrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `u`.
-
-        The 'usrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["usrc"]
-
-    @usrc.setter
-    def usrc(self, val):
-        self["usrc"] = val
-
-    @property
     def v(self):
         """
         Sets the y components of the vector field.
@@ -1089,7 +933,7 @@ class Cone(_BaseTraceType):
     @property
     def vhoverformat(self):
         """
-        Sets the hover text formatting rulefor `v`  using d3 formatting
+        Sets the hover text formatting rule for `v` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1131,24 +975,6 @@ class Cone(_BaseTraceType):
         self["visible"] = val
 
     @property
-    def vsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `v`.
-
-        The 'vsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["vsrc"]
-
-    @vsrc.setter
-    def vsrc(self, val):
-        self["vsrc"] = val
-
-    @property
     def w(self):
         """
         Sets the z components of the vector field.
@@ -1169,7 +995,7 @@ class Cone(_BaseTraceType):
     @property
     def whoverformat(self):
         """
-        Sets the hover text formatting rulefor `w`  using d3 formatting
+        Sets the hover text formatting rule for `w` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1188,24 +1014,6 @@ class Cone(_BaseTraceType):
     @whoverformat.setter
     def whoverformat(self, val):
         self["whoverformat"] = val
-
-    @property
-    def wsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `w`.
-
-        The 'wsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["wsrc"]
-
-    @wsrc.setter
-    def wsrc(self, val):
-        self["wsrc"] = val
 
     @property
     def x(self):
@@ -1229,7 +1037,7 @@ class Cone(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1256,24 +1064,6 @@ class Cone(_BaseTraceType):
         self["xhoverformat"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the y coordinates of the vector field and of the displayed
@@ -1295,7 +1085,7 @@ class Cone(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1322,24 +1112,6 @@ class Cone(_BaseTraceType):
         self["yhoverformat"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def z(self):
         """
         Sets the z coordinates of the vector field and of the displayed
@@ -1361,7 +1133,7 @@ class Cone(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rulefor `z`  using d3 formatting
+        Sets the hover text formatting rule for `z` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1386,24 +1158,6 @@ class Cone(_BaseTraceType):
     @zhoverformat.setter
     def zhoverformat(self, val):
         self["zhoverformat"] = val
-
-    @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
 
     @property
     def type(self):
@@ -1454,31 +1208,25 @@ class Cone(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.cone.Hoverlabel` instance
             or dict with compatible properties
@@ -1500,11 +1248,16 @@ class Cone(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `norm` Anything contained in tag `<extra>`
@@ -1512,21 +1265,17 @@ class Cone(_BaseTraceType):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1573,9 +1322,6 @@ class Cone(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1622,21 +1368,15 @@ class Cone(_BaseTraceType):
             0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
-        stream
-            :class:`plotly.graph_objects.cone.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with the cones. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rulefor `u`  using d3
+            Sets the hover text formatting rule for `u` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -1663,13 +1403,10 @@ class Cone(_BaseTraceType):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
-        usrc
-            Sets the source reference on Chart Studio Cloud for
-            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rulefor `v`  using d3
+            Sets the hover text formatting rule for `v` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -1679,25 +1416,19 @@ class Cone(_BaseTraceType):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        vsrc
-            Sets the source reference on Chart Studio Cloud for
-            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rulefor `w`  using d3
+            Sets the hover text formatting rule for `w` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        wsrc
-            Sets the source reference on Chart Studio Cloud for
-            `w`.
         x
             Sets the x coordinates of the vector field and of the
             displayed cones.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1709,14 +1440,11 @@ class Cone(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates of the vector field and of the
             displayed cones.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1728,14 +1456,11 @@ class Cone(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates of the vector field and of the
             displayed cones.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1747,9 +1472,6 @@ class Cone(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1765,16 +1487,12 @@ class Cone(_BaseTraceType):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1783,7 +1501,6 @@ class Cone(_BaseTraceType):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -1792,30 +1509,22 @@ class Cone(_BaseTraceType):
         showscale=None,
         sizemode=None,
         sizeref=None,
-        stream=None,
         text=None,
-        textsrc=None,
         u=None,
         uhoverformat=None,
         uid=None,
         uirevision=None,
-        usrc=None,
         v=None,
         vhoverformat=None,
         visible=None,
-        vsrc=None,
         w=None,
         whoverformat=None,
-        wsrc=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -1873,31 +1582,25 @@ class Cone(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.cone.Hoverlabel` instance
             or dict with compatible properties
@@ -1919,11 +1622,16 @@ class Cone(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `norm` Anything contained in tag `<extra>`
@@ -1931,21 +1639,17 @@ class Cone(_BaseTraceType):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1992,9 +1696,6 @@ class Cone(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2041,21 +1742,15 @@ class Cone(_BaseTraceType):
             0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
-        stream
-            :class:`plotly.graph_objects.cone.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with the cones. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rulefor `u`  using d3
+            Sets the hover text formatting rule for `u` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2082,13 +1777,10 @@ class Cone(_BaseTraceType):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
-        usrc
-            Sets the source reference on Chart Studio Cloud for
-            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rulefor `v`  using d3
+            Sets the hover text formatting rule for `v` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2098,25 +1790,19 @@ class Cone(_BaseTraceType):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        vsrc
-            Sets the source reference on Chart Studio Cloud for
-            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rulefor `w`  using d3
+            Sets the hover text formatting rule for `w` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        wsrc
-            Sets the source reference on Chart Studio Cloud for
-            `w`.
         x
             Sets the x coordinates of the vector field and of the
             displayed cones.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2128,14 +1814,11 @@ class Cone(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates of the vector field and of the
             displayed cones.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2147,14 +1830,11 @@ class Cone(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates of the vector field and of the
             displayed cones.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2166,9 +1846,6 @@ class Cone(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -2204,16 +1881,12 @@ an instance of :class:`plotly.graph_objs.Cone`""")
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colorscale", arg, colorscale)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -2222,7 +1895,6 @@ an instance of :class:`plotly.graph_objs.Cone`""")
         self._set_property("lighting", arg, lighting)
         self._set_property("lightposition", arg, lightposition)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("reversescale", arg, reversescale)
@@ -2231,30 +1903,22 @@ an instance of :class:`plotly.graph_objs.Cone`""")
         self._set_property("showscale", arg, showscale)
         self._set_property("sizemode", arg, sizemode)
         self._set_property("sizeref", arg, sizeref)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("u", arg, u)
         self._set_property("uhoverformat", arg, uhoverformat)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
-        self._set_property("usrc", arg, usrc)
         self._set_property("v", arg, v)
         self._set_property("vhoverformat", arg, vhoverformat)
         self._set_property("visible", arg, visible)
-        self._set_property("vsrc", arg, vsrc)
         self._set_property("w", arg, w)
         self._set_property("whoverformat", arg, whoverformat)
-        self._set_property("wsrc", arg, wsrc)
         self._set_property("x", arg, x)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("z", arg, z)
         self._set_property("zhoverformat", arg, zhoverformat)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "cone"
         arg.pop("type", None)

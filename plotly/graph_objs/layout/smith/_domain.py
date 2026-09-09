@@ -14,9 +14,9 @@ class Domain(_BaseLayoutHierarchyType):
     def column(self):
         """
         If there is a layout grid, use the domain for this column in
-        the grid for this smith subplot .
+        the grid for this smith subplot.
 
-        The 'column' property is a integer and may be specified as:
+        The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -34,9 +34,9 @@ class Domain(_BaseLayoutHierarchyType):
     def row(self):
         """
         If there is a layout grid, use the domain for this row in the
-        grid for this smith subplot .
+        grid for this smith subplot.
 
-        The 'row' property is a integer and may be specified as:
+        The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -103,10 +103,10 @@ class Domain(_BaseLayoutHierarchyType):
         return """\
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this smith subplot .
+            column in the grid for this smith subplot.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this smith subplot .
+            in the grid for this smith subplot.
         x
             Sets the horizontal domain of this smith subplot (in
             plot fraction).
@@ -127,10 +127,10 @@ class Domain(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objs.layout.smith.Domain`
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this smith subplot .
+            column in the grid for this smith subplot.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this smith subplot .
+            in the grid for this smith subplot.
         x
             Sets the horizontal domain of this smith subplot (in
             plot fraction).

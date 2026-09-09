@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: IPython vs Python
-    order: 26
+    order: 27
     permalink: python/ipython-vs-python/
     thumbnail: thumbnail/venn.jpg
 ---

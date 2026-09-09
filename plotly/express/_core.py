@@ -95,20 +95,6 @@ defaults = PxDefaults()
 del PxDefaults
 
 
-MAPBOX_TOKEN = None
-
-
-def set_mapbox_access_token(token):
-    """
-    Arguments:
-        token: A Mapbox token to be used in `plotly.express.scatter_mapbox` and \
-        `plotly.express.line_mapbox` figures. See \
-        https://docs.mapbox.com/help/how-mapbox-works/access-tokens/ for more details
-    """
-    global MAPBOX_TOKEN
-    MAPBOX_TOKEN = token
-
-
 def get_trendline_results(fig):
     """
     Extracts fit statistics for trendlines (when applied to figures generated with
@@ -367,10 +353,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 trace_patch["marker"]["sizeref"] = sizeref
                 mapping_labels[attr_label] = "%{marker.size}"
             elif attr_name == "marginal_x":
-                if trace_spec.constructor == go.Histogram:
+                if trace_spec.constructor == go.Histogram and args.get("z") is None:
                     mapping_labels["count"] = "%{y}"
             elif attr_name == "marginal_y":
-                if trace_spec.constructor == go.Histogram:
+                if trace_spec.constructor == go.Histogram and args.get("z") is None:
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
                 if (
@@ -503,7 +489,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if trace_spec.constructor in [
                     go.Choropleth,
                     go.Choroplethmap,
-                    go.Choroplethmapbox,
                 ]:
                     trace_patch["z"] = trace_data.get_column(attr_value)
                     trace_patch["coloraxis"] = "coloraxis1"
@@ -580,6 +565,12 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     mapping_labels[_label] = "%{label}"
                 else:
                     trace_patch[attr_name] = trace_data.get_column(attr_value)
+            elif attr_name == "z" and trace_spec.constructor == go.Histogram:
+                # marginal histogram aggregating z via histfunc: feed it onto
+                # the axis opposite the shared coordinate (trace_spec.marginal)
+                other_letter = "y" if trace_spec.marginal == "x" else "x"
+                trace_patch[other_letter] = trace_data.get_column(attr_value)
+                mapping_labels[attr_label] = "%%{%s}" % other_letter
             else:
                 trace_patch[attr_name] = trace_data.get_column(attr_value)
                 mapping_labels[attr_label] = "%%{%s}" % attr_name
@@ -588,7 +579,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             and attr_name == "z"
         ):
             # ensure that stuff like "count" gets into the hoverlabel
-            mapping_labels[attr_label] = "%%{%s}" % attr_name
+            if attr_label is not None:
+                mapping_labels[attr_label] = "%%{%s}" % attr_name
     if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         # Modify mapping_labels according to hover_data keys
         # if hover_data is a dict
@@ -620,9 +612,6 @@ def configure_axes(args, constructor, fig, orders):
         go.Scattermap: configure_map,
         go.Choroplethmap: configure_map,
         go.Densitymap: configure_map,
-        go.Scattermapbox: configure_mapbox,
-        go.Choroplethmapbox: configure_mapbox,
-        go.Densitymapbox: configure_mapbox,
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
@@ -809,30 +798,9 @@ def configure_3d_axes(args, fig, orders):
     fig.update_scenes(patch)
 
 
-def configure_mapbox(args, fig, orders):
-    center = args["center"]
-    if not center and "lat" in args and "lon" in args:
-        center = dict(
-            lat=args["data_frame"][args["lat"]].mean(),
-            lon=args["data_frame"][args["lon"]].mean(),
-        )
-    fig.update_mapboxes(
-        accesstoken=MAPBOX_TOKEN,
-        center=center,
-        zoom=args["zoom"],
-        style=args["mapbox_style"],
-    )
-
-
 def configure_map(args, fig, orders):
-    center = args["center"]
-    if not center and "lat" in args and "lon" in args:
-        center = dict(
-            lat=args["data_frame"][args["lat"]].mean(),
-            lon=args["data_frame"][args["lon"]].mean(),
-        )
     fig.update_maps(
-        center=center,
+        center=args["center"],
         zoom=args["zoom"],
         style=args["map_style"],
     )
@@ -935,10 +903,16 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
                 yaxis="y1" if letter == "y" else "y2",
             )
             if args["marginal_" + letter] == "histogram":
+                marginal_attrs = [letter, "marginal_" + letter]
+                marginal_trace_patch = dict(opacity=0.5, bingroup=letter, **axis_map)
+                if args.get("z") is not None:
+                    marginal_attrs.append("z")
+                    marginal_trace_patch["histfunc"] = args.get("histfunc")
+                    marginal_trace_patch["orientation"] = "v" if letter == "x" else "h"
                 trace_spec = TraceSpec(
                     constructor=go.Histogram,
-                    attrs=[letter, "marginal_" + letter],
-                    trace_patch=dict(opacity=0.5, bingroup=letter, **axis_map),
+                    attrs=marginal_attrs,
+                    trace_patch=marginal_trace_patch,
                     marginal=letter,
                 )
             elif args["marginal_" + letter] == "violin":
@@ -970,7 +944,55 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
                     ),
                     marginal=letter,
                 )
-            if "color" in attrs or "color" not in args:
+            elif args["marginal_" + letter] == "heatmap":
+                if constructor != go.Histogram2d:
+                    raise ValueError(
+                        "`marginal_x`/`marginal_y` value `'heatmap'` is only supported "
+                        "for `density_heatmap`."
+                    )
+                other_letter = "y" if letter == "x" else "x"
+                heatmap_trace_patch = dict(
+                    coloraxis="coloraxis1", histfunc=args.get("histfunc"), **axis_map
+                )
+                # `nbinsx`/`nbinsy` are only a target bin count -- plotly.js's "nice
+                # number" bin-sizing can still round to more than one bin. Force
+                # exactly one bin by setting explicit bin edges covering the data.
+                other_col = args["data_frame"].get_column(args[other_letter])
+                other_min = nw.to_py_scalar(other_col.min())
+                other_max = nw.to_py_scalar(other_col.max())
+                span = (other_max - other_min) or 1
+                pad = span * 0.001
+                other_bins = dict(
+                    start=other_min - pad, end=other_max + pad, size=span + 2 * pad
+                )
+                if letter == "x":
+                    heatmap_trace_patch["xbingroup"] = "x"
+                    heatmap_trace_patch["ybins"] = other_bins
+                else:
+                    heatmap_trace_patch["ybingroup"] = "y"
+                    heatmap_trace_patch["xbins"] = other_bins
+                if args.get("text_auto", False) is not False:
+                    if args["text_auto"] is True:
+                        heatmap_trace_patch["texttemplate"] = "%{z}"
+                    else:
+                        heatmap_trace_patch["texttemplate"] = (
+                            "%{z:" + args["text_auto"] + "}"
+                        )
+                trace_spec = TraceSpec(
+                    constructor=go.Histogram2d,
+                    attrs=[letter, other_letter, "z"],
+                    trace_patch=heatmap_trace_patch,
+                    marginal=letter,
+                )
+            else:
+                raise ValueError(
+                    f"Invalid value '{args['marginal_' + letter]}' for `marginal_{letter}`. "
+                    "Supported marginal plot types are: "
+                    "'rug', 'box', 'violin', 'histogram', 'heatmap'."
+                )
+            if trace_spec.constructor != go.Histogram2d and (
+                "color" in attrs or "color" not in args
+            ):
                 if "marker" not in trace_spec.trace_patch:
                     trace_spec.trace_patch["marker"] = dict()
                 first_default_color = args["color_continuous_scale"][0]
@@ -1003,7 +1025,7 @@ def one_group(x):
     return ""
 
 
-def apply_default_cascade(args):
+def apply_default_cascade(args, constructor):
     # first we apply px.defaults to unspecified args
 
     for param in defaults.__slots__:
@@ -1037,9 +1059,29 @@ def apply_default_cascade(args):
         if args["color_continuous_scale"] is None:
             args["color_continuous_scale"] = sequential.Viridis
 
+    # if color_discrete_sequence not set explicitly or in px.defaults,
+    # see if we can defer to template. Try trace-specific colors first,
+    # then layout.colorway, then set reasonable defaults
     if "color_discrete_sequence" in args:
+        if args["color_discrete_sequence"] is None and constructor is not None:
+            if constructor == "timeline":
+                trace_type = "bar"
+            else:
+                trace_type = constructor().type
+            if trace_data_list := getattr(args["template"].data, trace_type, None):
+                trace_specific_colors = [
+                    trace_data.marker.color
+                    for trace_data in trace_data_list
+                    if hasattr(trace_data, "marker")
+                    and hasattr(trace_data.marker, "color")
+                ]
+                # If template contains at least one color for this trace type, assign to color_discrete_sequence
+                if any(trace_specific_colors):
+                    args["color_discrete_sequence"] = trace_specific_colors
+        # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
+        # final fallback to default qualitative palette
         if args["color_discrete_sequence"] is None:
             args["color_discrete_sequence"] = qualitative.D3
 
@@ -2308,7 +2350,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         else:
             trace_patch["texttemplate"] = "%{" + letter + ":" + args["text_auto"] + "}"
 
-    if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]:
+    if constructor in [go.Histogram2d, go.Densitymap]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -2318,7 +2360,6 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                 trace_patch["marker"] = dict(opacity=0.5)
         elif constructor in [
             go.Densitymap,
-            go.Densitymapbox,
             go.Pie,
             go.Funnel,
             go.Funnelarea,
@@ -2339,9 +2380,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         if len(modes) == 0:
             modes.add("lines")
         trace_patch["mode"] = "+".join(sorted(modes))
-    elif constructor != go.Splom and (
-        "symbol" in args or constructor in [go.Scattermap, go.Scattermapbox]
-    ):
+    elif constructor != go.Splom and ("symbol" in args or constructor == go.Scattermap):
         trace_patch["mode"] = "markers" + ("+text" if args["text"] else "")
 
     if "line_shape" in args:
@@ -2486,7 +2525,10 @@ def get_groups_and_orders(args, grouper):
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
-    apply_default_cascade(args)
+    # Track if color_continuous_scale was explicitly provided by user
+    # (before apply_default_cascade fills it from template/defaults)
+    user_provided_colorscale = args.get("color_continuous_scale") is not None
+    apply_default_cascade(args, constructor=constructor)
 
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
@@ -2560,9 +2602,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 go.Parcoords,
                 go.Choropleth,
                 go.Choroplethmap,
-                go.Choroplethmapbox,
                 go.Densitymap,
-                go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,
@@ -2610,8 +2650,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     ):
                         trace.update(marker=dict(color=m.val_map[val]))
                     elif (
-                        trace_spec.constructor
-                        in [go.Choropleth, go.Choroplethmap, go.Choroplethmapbox]
+                        trace_spec.constructor in [go.Choropleth, go.Choroplethmap]
                         and m.variable == "color"
                     ):
                         trace.update(
@@ -2696,15 +2735,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         )
 
     if show_colorbar:
-        colorvar = (
-            "z"
-            if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]
-            else "color"
-        )
+        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymap] else "color"
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
-        layout_patch["coloraxis1"] = dict(
+        coloraxis_dict = dict(
             colorscale=colorscale_validator.validate_coerce(
                 args["color_continuous_scale"]
             ),
@@ -2715,6 +2750,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 title_text=get_decorated_label(args, args[colorvar], colorvar)
             ),
         )
+        # Set autocolorscale=False if user explicitly provided colorscale. Otherwise a template
+        # that sets autocolorscale=True would override the user provided colorscale.
+        if user_provided_colorscale:
+            coloraxis_dict["autocolorscale"] = False
+        layout_patch["coloraxis1"] = coloraxis_dict
     for v in ["height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
@@ -2845,7 +2885,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             horizontal_spacing = args.get("facet_col_spacing") or 0.02
     else:
         # Other subplot types:
-        #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None
+        #   'scene', 'geo', 'polar', 'ternary', 'map', 'domain', None
         #
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types

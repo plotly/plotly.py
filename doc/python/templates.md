@@ -37,7 +37,7 @@ jupyter:
 
 The Plotly Python library comes pre-loaded with several themes that you can get started using right away, and it also provides support for creating and registering your own themes.
 
-> Note on terminology: Theming generally refers to the process of defining default styles for visual elements. Themes in plotly are implemented using objects called templates. Templates are slightly more general than traditional themes because in addition to defining default styles, templates can pre-populate a figure with visual elements like annotations, shapes, images, and more. In the documentation we will refer to the overall process of defining default styles as theming, and when in comes to the plotly API we will talk about how themes are implemented using templates.
+> Note on terminology: Theming generally refers to the process of defining default styles for visual elements. Themes in plotly are implemented using objects called templates. Templates are slightly more general than traditional themes because in addition to defining default styles, templates can pre-populate a figure with visual elements like annotations, shapes, images, and more. In the documentation we will refer to the overall process of defining default styles as theming, and when it comes to the plotly API we will talk about how themes are implemented using templates.
 
 ### Using built-in themes
 
@@ -93,7 +93,7 @@ for template in ["plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", 
     fig.show()
 ```
 
-#### Specifying a default themes
+#### Specifying a default theme
 
 If a theme is not provided to a Plotly Express function or to a graph object figure, then the default theme is used. The default theme starts out as `"plotly"`, but it can be changed by setting the `plotly.io.templates.default` property to the name of a registered theme.
 

@@ -1,0 +1,9 @@
+version: 2
+
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 3  # Should match tool.uv.exclude-newer option in pyproject.toml

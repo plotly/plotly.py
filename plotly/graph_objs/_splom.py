@@ -10,19 +10,15 @@ class Splom(_BaseTraceType):
     _path_str = "splom"
     _valid_props = {
         "customdata",
-        "customdatasrc",
         "diagonal",
         "dimensiondefaults",
         "dimensions",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -30,7 +26,6 @@ class Splom(_BaseTraceType):
         "legendwidth",
         "marker",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "selected",
@@ -38,9 +33,7 @@ class Splom(_BaseTraceType):
         "showlegend",
         "showlowerhalf",
         "showupperhalf",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
@@ -72,25 +65,6 @@ class Splom(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def diagonal(self):
@@ -156,7 +130,7 @@ class Splom(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -176,25 +150,6 @@ class Splom(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -233,14 +188,19 @@ class Splom(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example `<extra>%{fullData.name}</extra>`. To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -258,23 +218,23 @@ class Splom(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertext(self):
@@ -297,25 +257,6 @@ class Splom(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -336,24 +277,6 @@ class Splom(_BaseTraceType):
         self["ids"] = val
 
     @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
-
-    @property
     def legend(self):
         """
         Sets the reference to a legend to show this trace in.
@@ -362,9 +285,9 @@ class Splom(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -506,24 +429,6 @@ class Splom(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -608,8 +513,8 @@ class Splom(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -627,8 +532,8 @@ class Splom(_BaseTraceType):
         Determines whether or not subplots on the lower half from the
         diagonal are displayed.
 
-        The 'showlowerhalf' property must be specified as a bool
-        (either True, or False)
+        The 'showlowerhalf' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -646,8 +551,8 @@ class Splom(_BaseTraceType):
         Determines whether or not subplots on the upper half from the
         diagonal are displayed.
 
-        The 'showupperhalf' property must be specified as a bool
-        (either True, or False)
+        The 'showupperhalf' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -658,25 +563,6 @@ class Splom(_BaseTraceType):
     @showupperhalf.setter
     def showupperhalf(self, val):
         self["showupperhalf"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.splom.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.splom.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def text(self):
@@ -700,24 +586,6 @@ class Splom(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -823,9 +691,9 @@ class Splom(_BaseTraceType):
         The 'xaxes' property is an info array that may be specified as:
         * a list of elements where:
           The 'xaxes[i]' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -840,7 +708,7 @@ class Splom(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -879,9 +747,9 @@ class Splom(_BaseTraceType):
         The 'yaxes' property is an info array that may be specified as:
         * a list of elements where:
           The 'yaxes[i]' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -896,7 +764,7 @@ class Splom(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -934,9 +802,6 @@ class Splom(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         diagonal
             :class:`plotly.graph_objects.splom.Diagonal` instance
             or dict with compatible properties
@@ -950,13 +815,10 @@ class Splom(_BaseTraceType):
             default property values to use for elements of
             splom.dimensions
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.splom.Hoverlabel` instance
             or dict with compatible properties
@@ -978,32 +840,33 @@ class Splom(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1047,9 +910,6 @@ class Splom(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1074,18 +934,12 @@ class Splom(_BaseTraceType):
         showupperhalf
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
-        stream
-            :class:`plotly.graph_objects.splom.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair to
             appear on hover. If a single string, the same string
             appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (x,y) coordinates.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1125,7 +979,7 @@ class Splom(_BaseTraceType):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1146,7 +1000,7 @@ class Splom(_BaseTraceType):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1164,19 +1018,15 @@ class Splom(_BaseTraceType):
         self,
         arg=None,
         customdata=None,
-        customdatasrc=None,
         diagonal=None,
         dimensions=None,
         dimensiondefaults=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1184,7 +1034,6 @@ class Splom(_BaseTraceType):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         selected=None,
@@ -1192,9 +1041,7 @@ class Splom(_BaseTraceType):
         showlegend=None,
         showlowerhalf=None,
         showupperhalf=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -1226,9 +1073,6 @@ class Splom(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         diagonal
             :class:`plotly.graph_objects.splom.Diagonal` instance
             or dict with compatible properties
@@ -1242,13 +1086,10 @@ class Splom(_BaseTraceType):
             default property values to use for elements of
             splom.dimensions
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.splom.Hoverlabel` instance
             or dict with compatible properties
@@ -1270,32 +1111,33 @@ class Splom(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1339,9 +1181,6 @@ class Splom(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1366,18 +1205,12 @@ class Splom(_BaseTraceType):
         showupperhalf
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
-        stream
-            :class:`plotly.graph_objects.splom.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair to
             appear on hover. If a single string, the same string
             appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (x,y) coordinates.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1417,7 +1250,7 @@ class Splom(_BaseTraceType):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1438,7 +1271,7 @@ class Splom(_BaseTraceType):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1476,19 +1309,15 @@ an instance of :class:`plotly.graph_objs.Splom`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("diagonal", arg, diagonal)
         self._set_property("dimensions", arg, dimensions)
         self._set_property("dimensiondefaults", arg, dimensiondefaults)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -1496,7 +1325,6 @@ an instance of :class:`plotly.graph_objs.Splom`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("selected", arg, selected)
@@ -1504,9 +1332,7 @@ an instance of :class:`plotly.graph_objs.Splom`""")
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showlowerhalf", arg, showlowerhalf)
         self._set_property("showupperhalf", arg, showupperhalf)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("unselected", arg, unselected)

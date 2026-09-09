@@ -386,7 +386,6 @@ fig = px.scatter_map(
     size="car_hours",
     color_continuous_scale=px.colors.cyclical.IceFire,
     size_max=15,
-    zoom=10,
 )
 fig.write_html(os.path.join(dir_name, "scatter_map.html"))
 

@@ -18,8 +18,8 @@ class Line(_BaseTraceHierarchyType):
         "coloraxis",
         "colorbar",
         "colorscale",
-        "colorsrc",
         "hovertemplate",
+        "hovertemplatefallback",
         "reversescale",
         "shape",
         "showscale",
@@ -36,8 +36,8 @@ class Line(_BaseTraceHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -58,8 +58,8 @@ class Line(_BaseTraceHierarchyType):
         `line.color` is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -143,12 +143,18 @@ class Line(_BaseTraceHierarchyType):
         the max and min values of the array or relative to `line.cmin`
         and `line.cmax` if set.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A number that will be interpreted as a color
             according to parcats.line.colorscale
           - A list or array of any of the above
@@ -174,9 +180,9 @@ class Line(_BaseTraceHierarchyType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -213,9 +219,9 @@ class Line(_BaseTraceHierarchyType):
         Sets the colorscale. Has an effect only if in `line.color` is
         set to a numerical array. The colorscale must be an array
         containing arrays mapping a normalized value to an rgb, rgba,
-        hex, hsl, hsv, or named color string. At minimum, a mapping for
-        the lowest (0) and highest (1) values are required. For
-        example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
+        hex, hsl, hsla, hwb, or named color string. At minimum, a
+        mapping for the lowest (0) and highest (1) values are required.
+        For example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
         control the bounds of the colorscale in color space, use
         `line.cmin` and `line.cmax`. Alternatively, `colorscale` may be
         a palette name string of the following list: Blackbody,Bluered,
@@ -260,24 +266,6 @@ class Line(_BaseTraceHierarchyType):
         self["colorscale"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def hovertemplate(self):
         """
         Template string used for rendering the information that appear
@@ -295,17 +283,20 @@ class Line(_BaseTraceHierarchyType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  This value
-        here applies when hovering over lines.Finally, the template
-        string has access to variables `count` and `probability`.
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example `<extra>%{fullData.name}</extra>`.
-        To hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `count`
+        and `probability`. Anything contained in tag `<extra>` is
+        displayed in the secondary box, for example
+        `<extra>%{fullData.name}</extra>`. To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -322,6 +313,25 @@ class Line(_BaseTraceHierarchyType):
         self["hovertemplate"] = val
 
     @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
+
+    @property
     def reversescale(self):
         """
         Reverses the color mapping if true. Has an effect only if in
@@ -329,8 +339,8 @@ class Line(_BaseTraceHierarchyType):
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -370,8 +380,8 @@ class Line(_BaseTraceHierarchyType):
         trace. Has an effect only if in `line.color` is set to a
         numerical array.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -439,8 +449,8 @@ class Line(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `line.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -449,9 +459,6 @@ class Line(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -470,19 +477,29 @@ class Line(_BaseTraceHierarchyType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over lines.Finally, the template string has access to
-            variables `count` and `probability`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count` and `probability`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color` is set to a numerical array. If
@@ -511,8 +528,8 @@ class Line(_BaseTraceHierarchyType):
         coloraxis=None,
         colorbar=None,
         colorscale=None,
-        colorsrc=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         reversescale=None,
         shape=None,
         showscale=None,
@@ -579,8 +596,8 @@ class Line(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `line.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -589,9 +606,6 @@ class Line(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -610,19 +624,29 @@ class Line(_BaseTraceHierarchyType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over lines.Finally, the template string has access to
-            variables `count` and `probability`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count` and `probability`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color` is set to a numerical array. If
@@ -671,8 +695,8 @@ an instance of :class:`plotly.graph_objs.parcats.Line`""")
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colorscale", arg, colorscale)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("shape", arg, shape)
         self._set_property("showscale", arg, showscale)

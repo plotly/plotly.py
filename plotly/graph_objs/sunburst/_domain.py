@@ -14,9 +14,9 @@ class Domain(_BaseTraceHierarchyType):
     def column(self):
         """
         If there is a layout grid, use the domain for this column in
-        the grid for this sunburst trace .
+        the grid for this sunburst trace.
 
-        The 'column' property is a integer and may be specified as:
+        The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -34,9 +34,9 @@ class Domain(_BaseTraceHierarchyType):
     def row(self):
         """
         If there is a layout grid, use the domain for this row in the
-        grid for this sunburst trace .
+        grid for this sunburst trace.
 
-        The 'row' property is a integer and may be specified as:
+        The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -103,10 +103,10 @@ class Domain(_BaseTraceHierarchyType):
         return """\
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this sunburst trace .
+            column in the grid for this sunburst trace.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this sunburst trace .
+            in the grid for this sunburst trace.
         x
             Sets the horizontal domain of this sunburst trace (in
             plot fraction).
@@ -127,10 +127,10 @@ class Domain(_BaseTraceHierarchyType):
             :class:`plotly.graph_objs.sunburst.Domain`
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this sunburst trace .
+            column in the grid for this sunburst trace.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this sunburst trace .
+            in the grid for this sunburst trace.
         x
             Sets the horizontal domain of this sunburst trace (in
             plot fraction).

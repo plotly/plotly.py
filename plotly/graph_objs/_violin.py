@@ -13,18 +13,14 @@ class Violin(_BaseTraceType):
         "bandwidth",
         "box",
         "customdata",
-        "customdatasrc",
         "fillcolor",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hoveron",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "jitter",
         "legend",
         "legendgroup",
@@ -35,7 +31,6 @@ class Violin(_BaseTraceType):
         "marker",
         "meanline",
         "meta",
-        "metasrc",
         "name",
         "offsetgroup",
         "opacity",
@@ -51,9 +46,7 @@ class Violin(_BaseTraceType):
         "side",
         "span",
         "spanmode",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
@@ -64,12 +57,10 @@ class Violin(_BaseTraceType):
         "x0",
         "xaxis",
         "xhoverformat",
-        "xsrc",
         "y",
         "y0",
         "yaxis",
         "yhoverformat",
-        "ysrc",
         "zorder",
     }
 
@@ -155,37 +146,24 @@ class Violin(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def fillcolor(self):
         """
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -200,7 +178,7 @@ class Violin(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -220,25 +198,6 @@ class Violin(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -300,14 +259,19 @@ class Violin(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example `<extra>%{fullData.name}</extra>`. To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -325,23 +289,23 @@ class Violin(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertext(self):
@@ -364,25 +328,6 @@ class Violin(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -401,24 +346,6 @@ class Violin(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def jitter(self):
@@ -450,9 +377,9 @@ class Violin(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -632,24 +559,6 @@ class Violin(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -815,7 +724,7 @@ class Violin(_BaseTraceType):
     def scalegroup(self):
         """
         If there are multiple violins that should be sized according to
-        to some metric (see `scalemode`), link them by providing a non-
+        some metric (see `scalemode`), link them by providing a non-
         empty group id here shared by every trace in the same group. If
         a violin's `width` is undefined, `scalegroup` will default to
         the trace's name. In this case, violins with the same names
@@ -904,8 +813,8 @@ class Violin(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -988,25 +897,6 @@ class Violin(_BaseTraceType):
         self["spanmode"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.violin.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.violin.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets the text elements associated with each sample value. If a
@@ -1029,24 +919,6 @@ class Violin(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -1206,9 +1078,9 @@ class Violin(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1223,7 +1095,7 @@ class Violin(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1248,24 +1120,6 @@ class Violin(_BaseTraceType):
     @xhoverformat.setter
     def xhoverformat(self, val):
         self["xhoverformat"] = val
-
-    @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
 
     @property
     def y(self):
@@ -1314,9 +1168,9 @@ class Violin(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -1331,7 +1185,7 @@ class Violin(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1358,31 +1212,13 @@ class Violin(_BaseTraceType):
         self["yhoverformat"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def zorder(self):
         """
         Sets the layer on which this trace is displayed, relative to
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1419,21 +1255,15 @@ class Violin(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.violin.Hoverlabel`
             instance or dict with compatible properties
@@ -1459,32 +1289,33 @@ class Violin(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -1539,9 +1370,6 @@ class Violin(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover. For violin traces, the name
@@ -1594,9 +1422,9 @@ class Violin(_BaseTraceType):
             and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
-            according to to some metric (see `scalemode`), link
-            them by providing a non-empty group id here shared by
-            every trace in the same group. If a violin's `width` is
+            according to some metric (see `scalemode`), link them
+            by providing a non-empty group id here shared by every
+            trace in the same group. If a violin's `width` is
             undefined, `scalegroup` will default to the trace's
             name. In this case, violins with the same names will be
             linked together
@@ -1637,9 +1465,6 @@ class Violin(_BaseTraceType):
             sample's minimum to its maximum value. For custom span
             settings, use mode "manual" and fill in the `span`
             attribute.
-        stream
-            :class:`plotly.graph_objects.violin.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -1647,9 +1472,6 @@ class Violin(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1698,7 +1520,7 @@ class Violin(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1710,9 +1532,6 @@ class Violin(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -1726,7 +1545,7 @@ class Violin(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1738,9 +1557,6 @@ class Violin(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -1755,18 +1571,14 @@ class Violin(_BaseTraceType):
         bandwidth=None,
         box=None,
         customdata=None,
-        customdatasrc=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         jitter=None,
         legend=None,
         legendgroup=None,
@@ -1777,7 +1589,6 @@ class Violin(_BaseTraceType):
         marker=None,
         meanline=None,
         meta=None,
-        metasrc=None,
         name=None,
         offsetgroup=None,
         opacity=None,
@@ -1793,9 +1604,7 @@ class Violin(_BaseTraceType):
         side=None,
         span=None,
         spanmode=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -1805,12 +1614,10 @@ class Violin(_BaseTraceType):
         x0=None,
         xaxis=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         yhoverformat=None,
-        ysrc=None,
         zorder=None,
         **kwargs,
     ):
@@ -1821,8 +1628,7 @@ class Violin(_BaseTraceType):
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
         violin per distinct x (y) value is drawn If no `x` (`y`) list
         is provided, a single violin is drawn. That violin position is
-        then positioned with with `name` or with `x0` (`y0`) if
-        provided.
+        then positioned with `name` or with `x0` (`y0`) if provided.
 
         Parameters
         ----------
@@ -1846,21 +1652,15 @@ class Violin(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.violin.Hoverlabel`
             instance or dict with compatible properties
@@ -1886,32 +1686,33 @@ class Violin(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -1966,9 +1767,6 @@ class Violin(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover. For violin traces, the name
@@ -2021,9 +1819,9 @@ class Violin(_BaseTraceType):
             and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
-            according to to some metric (see `scalemode`), link
-            them by providing a non-empty group id here shared by
-            every trace in the same group. If a violin's `width` is
+            according to some metric (see `scalemode`), link them
+            by providing a non-empty group id here shared by every
+            trace in the same group. If a violin's `width` is
             undefined, `scalegroup` will default to the trace's
             name. In this case, violins with the same names will be
             linked together
@@ -2064,9 +1862,6 @@ class Violin(_BaseTraceType):
             sample's minimum to its maximum value. For custom span
             settings, use mode "manual" and fill in the `span`
             attribute.
-        stream
-            :class:`plotly.graph_objects.violin.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -2074,9 +1869,6 @@ class Violin(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2125,7 +1917,7 @@ class Violin(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2137,9 +1929,6 @@ class Violin(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -2153,7 +1942,7 @@ class Violin(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2165,9 +1954,6 @@ class Violin(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2202,18 +1988,14 @@ an instance of :class:`plotly.graph_objs.Violin`""")
         self._set_property("bandwidth", arg, bandwidth)
         self._set_property("box", arg, box)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("fillcolor", arg, fillcolor)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hoveron", arg, hoveron)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("jitter", arg, jitter)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
@@ -2224,7 +2006,6 @@ an instance of :class:`plotly.graph_objs.Violin`""")
         self._set_property("marker", arg, marker)
         self._set_property("meanline", arg, meanline)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("offsetgroup", arg, offsetgroup)
         self._set_property("opacity", arg, opacity)
@@ -2240,9 +2021,7 @@ an instance of :class:`plotly.graph_objs.Violin`""")
         self._set_property("side", arg, side)
         self._set_property("span", arg, span)
         self._set_property("spanmode", arg, spanmode)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("unselected", arg, unselected)
@@ -2252,12 +2031,10 @@ an instance of :class:`plotly.graph_objs.Violin`""")
         self._set_property("x0", arg, x0)
         self._set_property("xaxis", arg, xaxis)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("y0", arg, y0)
         self._set_property("yaxis", arg, yaxis)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "violin"

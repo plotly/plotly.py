@@ -79,7 +79,7 @@ You'll also need to install a [supported dataframe library](/python/px-arguments
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -183,11 +183,9 @@ See [_Displaying Figures in Python_](/python/renderers/) for more information on
 ### Static Image Export
 
 plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
-using the [`kaleido`](https://github.com/plotly/Kaleido) package. (Support for the legacy [`orca`](https://github.com/plotly/orca) image export utility is deprecated and will be removed after September 2025.)
+using the [`kaleido`](https://github.com/plotly/Kaleido) package (version 1.0.0 or greater).
 
-#### Kaleido
-
-The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
+Kaleido has minimal  dependencies and can be installed
 using pip...
 
 ```
@@ -200,23 +198,9 @@ or conda.
 $ conda install -c plotly python-kaleido
 ```
 
-#### Extended Geo Support
+Kaleido requires Chrome or Chromium to generate images. By default, Kaleido will use the Chrome or Chromium version already installed on your system. If you don't have it installed or Kaleido can't find it, you may need to install it by running the following command:
 
-Some plotly.py features rely on fairly large geographic shape files. The county
-choropleth figure factory is one such example. These shape files are distributed as a
-separate `plotly-geo` package. This package can be installed using pip...
-
-```
-$ pip install plotly-geo==1.0.0
-```
-
-or conda.
-
-```
-$ conda install -c plotly plotly-geo=1.0.0
-```
-
-See [_USA County Choropleth Maps in Python_](/python/county-choropleth/) for more information on the county choropleth figure factory.
+`plotly_get_chrome`
 
 ### Where to next?
 

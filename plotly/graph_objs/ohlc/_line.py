@@ -39,8 +39,8 @@ class Line(_BaseTraceHierarchyType):
     @property
     def width(self):
         """
-        [object Object] Note that this style setting can also be set
-        per direction via `increasing.line.width` and
+        Sets the line width (in px). Note that this style setting can
+        also be set per direction via `increasing.line.width` and
         `decreasing.line.width`.
 
         The 'width' property is a number and may be specified as:
@@ -67,9 +67,9 @@ class Line(_BaseTraceHierarchyType):
             also be set per direction via `increasing.line.dash`
             and `decreasing.line.dash`.
         width
-            [object Object] Note that this style setting can also
-            be set per direction via `increasing.line.width` and
-            `decreasing.line.width`.
+            Sets the line width (in px). Note that this style
+            setting can also be set per direction via
+            `increasing.line.width` and `decreasing.line.width`.
         """
 
     def __init__(self, arg=None, dash=None, width=None, **kwargs):
@@ -89,9 +89,9 @@ class Line(_BaseTraceHierarchyType):
             also be set per direction via `increasing.line.dash`
             and `decreasing.line.dash`.
         width
-            [object Object] Note that this style setting can also
-            be set per direction via `increasing.line.width` and
-            `decreasing.line.width`.
+            Sets the line width (in px). Note that this style
+            setting can also be set per direction via
+            `increasing.line.width` and `decreasing.line.width`.
 
         Returns
         -------

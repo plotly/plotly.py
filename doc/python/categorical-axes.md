@@ -79,7 +79,7 @@ fig.update_traces(marker_size=10)
 fig.show()
 ```
 
-[Box plots]() and [violin plots]() are often shown with one categorical and one continuous axis.
+[Box plots](/python/box-plots/) and [violin plots](/python/violin/) are often shown with one categorical and one continuous axis.
 
 ```python
 import plotly.express as px

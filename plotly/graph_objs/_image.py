@@ -11,30 +11,23 @@ class Image(_BaseTraceType):
     _valid_props = {
         "colormodel",
         "customdata",
-        "customdatasrc",
         "dx",
         "dy",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgrouptitle",
         "legendrank",
         "legendwidth",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "source",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
@@ -48,7 +41,6 @@ class Image(_BaseTraceType):
         "zmin",
         "zorder",
         "zsmooth",
-        "zsrc",
     }
 
     @property
@@ -95,25 +87,6 @@ class Image(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def dx(self):
         """
         Set the pixel's horizontal size.
@@ -152,7 +125,7 @@ class Image(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -172,25 +145,6 @@ class Image(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -229,14 +183,18 @@ class Image(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. Finally, the
-        template string has access to variables `z`, `color` and
-        `colormodel`. Anything contained in tag `<extra>` is displayed
-        in the secondary box, for example
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `z`,
+        `color` and `colormodel`. Anything contained in tag `<extra>`
+        is displayed in the secondary box, for example
         `<extra>%{fullData.name}</extra>`. To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
@@ -256,23 +214,23 @@ class Image(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertext(self):
@@ -291,25 +249,6 @@ class Image(_BaseTraceType):
     @hovertext.setter
     def hovertext(self, val):
         self["hovertext"] = val
-
-    @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
 
     @property
     def ids(self):
@@ -332,24 +271,6 @@ class Image(_BaseTraceType):
         self["ids"] = val
 
     @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
-
-    @property
     def legend(self):
         """
         Sets the reference to a legend to show this trace in.
@@ -358,9 +279,9 @@ class Image(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -462,24 +383,6 @@ class Image(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -539,25 +442,6 @@ class Image(_BaseTraceType):
         self["source"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.image.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.image.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets the text elements associated with each z value.
@@ -574,24 +458,6 @@ class Image(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -693,9 +559,9 @@ class Image(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -738,9 +604,9 @@ class Image(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -843,7 +709,7 @@ class Image(_BaseTraceType):
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -877,24 +743,6 @@ class Image(_BaseTraceType):
         self["zsmooth"] = val
 
     @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
-
-    @property
     def type(self):
         return self._props["type"]
 
@@ -911,21 +759,15 @@ class Image(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
             Set the pixel's vertical size
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -947,11 +789,16 @@ class Image(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `z`, `color` and `colormodel`. Anything
@@ -960,21 +807,17 @@ class Image(_BaseTraceType):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1011,9 +854,6 @@ class Image(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1023,14 +863,8 @@ class Image(_BaseTraceType):
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
             subtype\\>][;base64\\],<data\\>"
-        stream
-            :class:`plotly.graph_objects.image.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each z value.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1110,9 +944,6 @@ class Image(_BaseTraceType):
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
             `source` attribute.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1120,30 +951,23 @@ class Image(_BaseTraceType):
         arg=None,
         colormodel=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         source=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -1156,7 +980,6 @@ class Image(_BaseTraceType):
         zmin=None,
         zorder=None,
         zsmooth=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -1184,21 +1007,15 @@ class Image(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
             Set the pixel's vertical size
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -1220,11 +1037,16 @@ class Image(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `z`, `color` and `colormodel`. Anything
@@ -1233,21 +1055,17 @@ class Image(_BaseTraceType):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1284,9 +1102,6 @@ class Image(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1296,14 +1111,8 @@ class Image(_BaseTraceType):
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
             subtype\\>][;base64\\],<data\\>"
-        stream
-            :class:`plotly.graph_objects.image.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each z value.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1383,9 +1192,6 @@ class Image(_BaseTraceType):
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
             `source` attribute.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -1413,30 +1219,23 @@ an instance of :class:`plotly.graph_objs.Image`""")
 
         self._set_property("colormodel", arg, colormodel)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("dx", arg, dx)
         self._set_property("dy", arg, dy)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("source", arg, source)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("visible", arg, visible)
@@ -1449,7 +1248,6 @@ an instance of :class:`plotly.graph_objs.Image`""")
         self._set_property("zmin", arg, zmin)
         self._set_property("zorder", arg, zorder)
         self._set_property("zsmooth", arg, zsmooth)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "image"
         arg.pop("type", None)

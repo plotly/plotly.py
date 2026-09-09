@@ -22,13 +22,13 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.11.10
   plotly:
-    description: How to make subplots in with Plotly's Python graphing library. Examples
+    description: How to make subplots with Plotly's Python graphing library. Examples
       of stacked, custom-sized, gridded, and annotated subplots.
     display_as: file_settings
     language: python
     layout: base
     name: Subplots
-    order: 17
+    order: 18
     page_type: u-guide
     permalink: python/subplots/
     redirect_from: ipython-notebooks/subplots/
@@ -156,6 +156,28 @@ fig.update_layout(height=500, width=700,
 fig.show()
 ```
 
+#### Customizing the Subplot Title Font
+
+*New in 6.8*
+
+Use the `font` argument of `make_subplots` to customize the font used for `subplot_titles`, `column_titles`, `row_titles`, `x_title`, and `y_title`. The argument accepts a dict with any of the standard [font attributes](https://plotly.com/python/reference/layout/annotations/#layout-annotations-items-annotation-font) (`family`, `size`, `color`, `weight`, etc.).
+
+```python
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=("Plot 1", "Plot 2"),
+    font=dict(family="Courier New, monospace", size=20, color="RebeccaPurple"),
+)
+
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6]), row=1, col=1)
+fig.add_trace(go.Scatter(x=[20, 30, 40], y=[50, 60, 70]), row=1, col=2)
+
+fig.show()
+```
+
 #### Subplots with Annotations
 
 ```python
@@ -215,7 +237,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -409,7 +431,7 @@ Here are the possible values for the `type` option:
  - `"scene"`: 3D Cartesian subplot for scatter3d, cone, etc.
  - `"polar"`: Polar subplot for scatterpolar, barpolar, etc.
  - `"ternary"`: Ternary subplot for scatterternary.
- - `"mapbox"`: Mapbox subplot for scattermapbox.
+ - `"map"`: Map subplot for scattermap.
  - `"domain"`: Subplot type for traces that are individually positioned. pie, parcoords, parcats, etc.
  - trace type: A trace type name (e.g. `"bar"`, `"scattergeo"`, `"carpet"`, `"mesh"`, etc.) which will be used to determine the appropriate subplot type for that trace.
 

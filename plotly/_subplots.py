@@ -8,7 +8,7 @@
 # little differently.
 import collections
 
-_single_subplot_types = {"scene", "geo", "polar", "ternary", "map", "mapbox"}
+_single_subplot_types = {"scene", "geo", "polar", "ternary", "map"}
 _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 
 # For most subplot types, a trace is associated with a particular subplot
@@ -20,7 +20,7 @@ _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
 # the trace property is just named `subplot`.  For example setting
 # the `scatterpolar.subplot` property to `polar3` associates the scatterpolar
 # trace with the third polar subplot in the figure
-_subplot_prop_named_subplot = {"polar", "ternary", "map", "mapbox"}
+_subplot_prop_named_subplot = {"polar", "ternary", "map"}
 
 
 # Named tuple to hold an xaxis/yaxis pair that represent a single subplot
@@ -58,6 +58,7 @@ def make_subplots(
     x_title=None,
     y_title=None,
     figure=None,
+    font=None,
     **kwargs,
 ):
     """
@@ -92,7 +93,7 @@ def make_subplots(
 
           - 'top-left': Subplots are numbered with (1, 1) in the top
                         left corner
-          - 'bottom-left': Subplots are numbererd with (1, 1) in the bottom
+          - 'bottom-left': Subplots are numbered with (1, 1) in the bottom
                            left corner
 
     print_grid: boolean (default True):
@@ -151,7 +152,6 @@ def make_subplots(
                 - 'polar': Polar subplot for scatterpolar, barpolar, etc.
                 - 'ternary': Ternary subplot for scatterternary
                 - 'map': Map subplot for scattermap, choroplethmap and densitymap
-                - 'mapbox': Mapbox subplot for scattermapbox, choroplethmapbox and densitymapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
                 - trace type: A trace type which will be used to determine
@@ -166,7 +166,7 @@ def make_subplots(
                 for this subplot to span.
             * l (float, default 0.0): padding left of cell
             * r (float, default 0.0): padding right of cell
-            * t (float, default 0.0): padding right of cell
+            * t (float, default 0.0): padding top of cell
             * b (float, default 0.0): padding bottom of cell
 
         - Note: Use 'horizontal_spacing' and 'vertical_spacing' to adjust
@@ -234,6 +234,9 @@ def make_subplots(
         If a go.Figure instance, the axes will be added to the
         layout of this figure and this figure will be returned. If the figure
         already contains axes, they will be overwritten.
+
+    font: dict (default None)
+        Font used by any title of the subplots.
 
     Examples
     --------
@@ -746,8 +749,19 @@ The row_titles argument to make_subplots must be a list or tuple
             )
             grid_ref[r][c] = subplot_refs
 
-    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir)
-    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir)
+    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir, False)
+    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, False)
+
+    any_secondary_y = any(
+        spec["secondary_y"]
+        for spec_row in specs
+        for spec in spec_row
+        if spec is not None
+    )
+    if any_secondary_y:
+        _configure_shared_axes(
+            layout, grid_ref, specs, "y", shared_yaxes, row_dir, True
+        )
 
     # Build inset reference
     # ---------------------
@@ -803,7 +817,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
     # Add subplot titles
     plot_title_annotations = _build_subplot_title_annotations(
-        subplot_titles, list_of_domains
+        subplot_titles, list_of_domains, font=font
     )
 
     layout["annotations"] = plot_title_annotations
@@ -824,7 +838,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            column_titles, domains_list
+            column_titles, domains_list, font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -838,7 +852,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            row_titles, domains_list, title_edge="right"
+            row_titles, domains_list, title_edge="right", font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -848,7 +862,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            [x_title], domains_list, title_edge="bottom", offset=30
+            [x_title], domains_list, title_edge="bottom", offset=30, font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -858,7 +872,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            [y_title], domains_list, title_edge="left", offset=40
+            [y_title], domains_list, title_edge="left", offset=40, font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -879,7 +893,9 @@ The row_titles argument to make_subplots must be a list or tuple
     return figure
 
 
-def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
+def _configure_shared_axes(
+    layout, grid_ref, specs, x_or_y, shared, row_dir, secondary_y
+):
     rows = len(grid_ref)
     cols = len(grid_ref[0])
 
@@ -889,6 +905,13 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         rows_iter = range(rows - 1, -1, -1)
     else:
         rows_iter = range(rows)
+
+    if secondary_y:
+        cols_iter = range(cols - 1, -1, -1)
+        axis_index = 1
+    else:
+        cols_iter = range(cols)
+        axis_index = 0
 
     def update_axis_matches(first_axis_id, subplot_ref, spec, remove_label):
         if subplot_ref is None:
@@ -913,13 +936,15 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         return first_axis_id
 
     if shared == "columns" or (x_or_y == "x" and shared is True):
-        for c in range(cols):
+        for c in cols_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == "x"
             for r in rows_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
@@ -929,10 +954,12 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         for r in rows_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == "y"
-            for c in range(cols):
+            for c in cols_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
@@ -940,15 +967,17 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
 
     elif shared == "all":
         first_axis_id = None
-        for c in range(cols):
-            for ri, r in enumerate(rows_iter):
+        for ri, r in enumerate(rows_iter):
+            for c in cols_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
 
                 if x_or_y == "y":
-                    ok_to_remove_label = c > 0
+                    ok_to_remove_label = c < cols - 1 if secondary_y else c > 0
                 else:
                     ok_to_remove_label = ri > 0 if row_dir > 0 else r < rows - 1
 
@@ -1137,7 +1166,7 @@ def _get_cartesian_label(x_or_y, r, c, cnt):
 
 
 def _build_subplot_title_annotations(
-    subplot_titles, list_of_domains, title_edge="top", offset=0
+    subplot_titles, list_of_domains, title_edge="top", offset=0, font=None
 ):
     # If shared_axes is False (default) use list_of_domains
     # This is used for insets and irregular layouts
@@ -1146,6 +1175,10 @@ def _build_subplot_title_annotations(
     y_dom = list_of_domains[1::2]
     subtitle_pos_x = []
     subtitle_pos_y = []
+
+    # If no font size is provided, use this fallback
+    if font is None:
+        font = dict(size=16)
 
     if title_edge == "top":
         text_angle = 0
@@ -1210,7 +1243,7 @@ def _build_subplot_title_annotations(
                 "yref": "paper",
                 "text": subplot_titles[index],
                 "showarrow": False,
-                "font": dict(size=16),
+                "font": font,
                 "xanchor": xanchor,
                 "yanchor": yanchor,
             }

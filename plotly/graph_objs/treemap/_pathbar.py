@@ -33,8 +33,8 @@ class Pathbar(_BaseTraceHierarchyType):
     @property
     def side(self):
         """
-        Determines on which side of the the treemap the `pathbar`
-        should be presented.
+        Determines on which side of the treemap the `pathbar` should be
+        presented.
 
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -97,8 +97,8 @@ class Pathbar(_BaseTraceHierarchyType):
         Determines if the path bar is drawn i.e. outside the trace
         `domain` and with one pixel gap.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -117,8 +117,8 @@ class Pathbar(_BaseTraceHierarchyType):
             Determines which shape is used for edges between
             `barpath` labels.
         side
-            Determines on which side of the the treemap the
-            `pathbar` should be presented.
+            Determines on which side of the treemap the `pathbar`
+            should be presented.
         textfont
             Sets the font used inside `pathbar`.
         thickness
@@ -153,8 +153,8 @@ class Pathbar(_BaseTraceHierarchyType):
             Determines which shape is used for edges between
             `barpath` labels.
         side
-            Determines on which side of the the treemap the
-            `pathbar` should be presented.
+            Determines on which side of the treemap the `pathbar`
+            should be presented.
         textfont
             Sets the font used inside `pathbar`.
         thickness

@@ -117,7 +117,7 @@ fig.show()
 ### Cheater plot layout
 
 
-The layout of cheater plots is not unique and depends upon the `cheaterslope` and axis `cheatertype` parameters. If `x` is not specified, each row of the `x` array is constructed based on the the formula `a + cheaterslope * b`, where `a` and `b` are either the value or the integer index of `a` and `b` respectively, depending on the corresponding axis `cheatertype`. Although the layout of the axis below is different than the plots above, it represents the same data as the axes above.
+The layout of cheater plots is not unique and depends upon the `cheaterslope` and axis `cheatertype` parameters. If `x` is not specified, each row of the `x` array is constructed based on the formula `a + cheaterslope * b`, where `a` and `b` are either the value or the integer index of `a` and `b` respectively, depending on the corresponding axis `cheatertype`. Although the layout of the axis below is different than the plots above, it represents the same data as the axes above.
 
 ```python
 import plotly.graph_objects as go

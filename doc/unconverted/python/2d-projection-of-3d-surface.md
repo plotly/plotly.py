@@ -41,7 +41,7 @@ Namely, if $x, y, z$ are numpy arrays of shape (m, n), defined by a discretizati
 
 This method allows to project a surface onto planes perpendicular to the z, x or y-direction in the 3d space
 and interpret the projection as a planar surface colored according to the z, x or y value at each point
-of the coresponding plane.
+of the corresponding plane.
 
 First, define the surface and its discretization:
 

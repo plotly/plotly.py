@@ -19,16 +19,13 @@ class Histogram2dContour(_BaseTraceType):
         "colorscale",
         "contours",
         "customdata",
-        "customdatasrc",
         "histfunc",
         "histnorm",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -37,7 +34,6 @@ class Histogram2dContour(_BaseTraceType):
         "line",
         "marker",
         "meta",
-        "metasrc",
         "name",
         "nbinsx",
         "nbinsy",
@@ -46,9 +42,9 @@ class Histogram2dContour(_BaseTraceType):
         "reversescale",
         "showlegend",
         "showscale",
-        "stream",
         "textfont",
         "texttemplate",
+        "texttemplatefallback",
         "type",
         "uid",
         "uirevision",
@@ -59,21 +55,18 @@ class Histogram2dContour(_BaseTraceType):
         "xbins",
         "xcalendar",
         "xhoverformat",
-        "xsrc",
         "y",
         "yaxis",
         "ybingroup",
         "ybins",
         "ycalendar",
         "yhoverformat",
-        "ysrc",
         "z",
         "zauto",
         "zhoverformat",
         "zmax",
         "zmid",
         "zmin",
-        "zsrc",
     }
 
     @property
@@ -84,8 +77,8 @@ class Histogram2dContour(_BaseTraceType):
         `autobinx: true` or `false` and will update `xbins` accordingly
         before deleting `autobinx` from the trace.
 
-        The 'autobinx' property must be specified as a bool
-        (either True, or False)
+        The 'autobinx' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -105,8 +98,8 @@ class Histogram2dContour(_BaseTraceType):
         `autobiny: true` or `false` and will update `ybins` accordingly
         before deleting `autobiny` from the trace.
 
-        The 'autobiny' property must be specified as a bool
-        (either True, or False)
+        The 'autobiny' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -128,8 +121,8 @@ class Histogram2dContour(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -149,8 +142,8 @@ class Histogram2dContour(_BaseTraceType):
         can be set in `ncontours`. If False, set the contour level
         attributes in `contours`.
 
-        The 'autocontour' property must be specified as a bool
-        (either True, or False)
+        The 'autocontour' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -194,9 +187,9 @@ class Histogram2dContour(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -232,7 +225,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `zmin` and `zmax`.
@@ -319,25 +312,6 @@ class Histogram2dContour(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def histfunc(self):
         """
         Specifies the binning function used for this histogram trace.
@@ -396,7 +370,7 @@ class Histogram2dContour(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -416,25 +390,6 @@ class Histogram2dContour(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -473,15 +428,20 @@ class Histogram2dContour(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. Finally, the
-        template string has access to variable `z` Anything contained
-        in tag `<extra>` is displayed in the secondary box, for example
-        `<extra>%{fullData.name}</extra>`. To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variable `z`
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -499,23 +459,23 @@ class Histogram2dContour(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def ids(self):
@@ -538,24 +498,6 @@ class Histogram2dContour(_BaseTraceType):
         self["ids"] = val
 
     @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
-
-    @property
     def legend(self):
         """
         Sets the reference to a legend to show this trace in.
@@ -564,9 +506,9 @@ class Histogram2dContour(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -727,24 +669,6 @@ class Histogram2dContour(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -772,7 +696,7 @@ class Histogram2dContour(_BaseTraceType):
         such that the histogram best visualizes the distribution of the
         data. Ignored if `xbins.size` is provided.
 
-        The 'nbinsx' property is a integer and may be specified as:
+        The 'nbinsx' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -794,7 +718,7 @@ class Histogram2dContour(_BaseTraceType):
         such that the histogram best visualizes the distribution of the
         data. Ignored if `ybins.size` is provided.
 
-        The 'nbinsy' property is a integer and may be specified as:
+        The 'nbinsy' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -816,7 +740,7 @@ class Histogram2dContour(_BaseTraceType):
         to the value of `ncontours`. Has an effect only if
         `autocontour` is True or if `contours.size` is missing.
 
-        The 'ncontours' property is a integer and may be specified as:
+        The 'ncontours' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -855,8 +779,8 @@ class Histogram2dContour(_BaseTraceType):
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -874,8 +798,8 @@ class Histogram2dContour(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -893,8 +817,8 @@ class Histogram2dContour(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -905,25 +829,6 @@ class Histogram2dContour(_BaseTraceType):
     @showscale.setter
     def showscale(self, val):
         self["showscale"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.histogram2dcontour.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.histogram2dcontour.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def textfont(self):
@@ -952,7 +857,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         For this trace it only has an effect if `coloring` is set to
         "heatmap". Template string used for rendering the information
-        text that appear on points. Note that this will override
+        text that appears on points. Note that this will override
         `textinfo`. Variables are inserted using %{variable}, for
         example "y: %{y}". Numbers are formatted using d3-format's
         syntax %{variable:d3-format}, for example "Price: %{y:$.2f}".
@@ -961,10 +866,14 @@ class Histogram2dContour(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. Every attributes that can be specified per-
-        point (the ones that are `arrayOk: true`) are available.
-        Finally, the template string has access to variables `x`, `y`,
-        `z` and `text`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. All attributes that can be
+        specified per-point (the ones that are `arrayOk: true`) are
+        available. Finally, the template string has access to variables
+        `x`, `y`, `z` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -979,6 +888,25 @@ class Histogram2dContour(_BaseTraceType):
     @texttemplate.setter
     def texttemplate(self, val):
         self["texttemplate"] = val
+
+    @property
+    def texttemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'texttemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["texttemplatefallback"]
+
+    @texttemplatefallback.setter
+    def texttemplatefallback(self, val):
+        self["texttemplatefallback"] = val
 
     @property
     def uid(self):
@@ -1079,9 +1007,9 @@ class Histogram2dContour(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1160,7 +1088,7 @@ class Histogram2dContour(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1185,24 +1113,6 @@ class Histogram2dContour(_BaseTraceType):
     @xhoverformat.setter
     def xhoverformat(self, val):
         self["xhoverformat"] = val
-
-    @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
 
     @property
     def y(self):
@@ -1231,9 +1141,9 @@ class Histogram2dContour(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -1312,7 +1222,7 @@ class Histogram2dContour(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1337,24 +1247,6 @@ class Histogram2dContour(_BaseTraceType):
     @yhoverformat.setter
     def yhoverformat(self, val):
         self["yhoverformat"] = val
-
-    @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
 
     @property
     def z(self):
@@ -1382,8 +1274,8 @@ class Histogram2dContour(_BaseTraceType):
         `zmin` and `zmax` Defaults to `false` when `zmin` and `zmax`
         are set by the user.
 
-        The 'zauto' property must be specified as a bool
-        (either True, or False)
+        The 'zauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1398,7 +1290,7 @@ class Histogram2dContour(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rulefor `z`  using d3 formatting
+        Sets the hover text formatting rule for `z` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1477,24 +1369,6 @@ class Histogram2dContour(_BaseTraceType):
         self["zmin"] = val
 
     @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
-
-    @property
     def type(self):
         return self._props["type"]
 
@@ -1543,15 +1417,15 @@ class Histogram2dContour(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
             :class:`plotly.graph_objects.histogram2dcontour.Contour
             s` instance or dict with compatible properties
@@ -1560,9 +1434,6 @@ class Histogram2dContour(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         histfunc
             Specifies the binning function used for this histogram
             trace. If "count", the histogram values are computed by
@@ -1589,13 +1460,10 @@ class Histogram2dContour(_BaseTraceType):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
@@ -1617,11 +1485,16 @@ class Histogram2dContour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
@@ -1629,16 +1502,15 @@ class Histogram2dContour(_BaseTraceType):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1685,9 +1557,6 @@ class Histogram2dContour(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1721,16 +1590,13 @@ class Histogram2dContour(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.histogram2dcontour.Stream`
-            instance or dict with compatible properties
         textfont
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Sets the text font.
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -1741,10 +1607,20 @@ class Histogram2dContour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1792,7 +1668,7 @@ class Histogram2dContour(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1804,9 +1680,6 @@ class Histogram2dContour(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -1827,7 +1700,7 @@ class Histogram2dContour(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1839,9 +1712,6 @@ class Histogram2dContour(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the aggregation data.
         zauto
@@ -1850,7 +1720,7 @@ class Histogram2dContour(_BaseTraceType):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -1868,9 +1738,6 @@ class Histogram2dContour(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1886,16 +1753,13 @@ class Histogram2dContour(_BaseTraceType):
         colorscale=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         histfunc=None,
         histnorm=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1904,7 +1768,6 @@ class Histogram2dContour(_BaseTraceType):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -1913,9 +1776,9 @@ class Histogram2dContour(_BaseTraceType):
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         textfont=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -1925,21 +1788,18 @@ class Histogram2dContour(_BaseTraceType):
         xbins=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yaxis=None,
         ybingroup=None,
         ybins=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zauto=None,
         zhoverformat=None,
         zmax=None,
         zmid=None,
         zmin=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -2000,15 +1860,15 @@ class Histogram2dContour(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
             :class:`plotly.graph_objects.histogram2dcontour.Contour
             s` instance or dict with compatible properties
@@ -2017,9 +1877,6 @@ class Histogram2dContour(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         histfunc
             Specifies the binning function used for this histogram
             trace. If "count", the histogram values are computed by
@@ -2046,13 +1903,10 @@ class Histogram2dContour(_BaseTraceType):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
@@ -2074,11 +1928,16 @@ class Histogram2dContour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
@@ -2086,16 +1945,15 @@ class Histogram2dContour(_BaseTraceType):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -2142,9 +2000,6 @@ class Histogram2dContour(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2178,16 +2033,13 @@ class Histogram2dContour(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.histogram2dcontour.Stream`
-            instance or dict with compatible properties
         textfont
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Sets the text font.
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -2198,10 +2050,20 @@ class Histogram2dContour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2249,7 +2111,7 @@ class Histogram2dContour(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2261,9 +2123,6 @@ class Histogram2dContour(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -2284,7 +2143,7 @@ class Histogram2dContour(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2296,9 +2155,6 @@ class Histogram2dContour(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the aggregation data.
         zauto
@@ -2307,7 +2163,7 @@ class Histogram2dContour(_BaseTraceType):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2325,9 +2181,6 @@ class Histogram2dContour(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -2363,16 +2216,13 @@ an instance of :class:`plotly.graph_objs.Histogram2dContour`""")
         self._set_property("colorscale", arg, colorscale)
         self._set_property("contours", arg, contours)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("histfunc", arg, histfunc)
         self._set_property("histnorm", arg, histnorm)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -2381,7 +2231,6 @@ an instance of :class:`plotly.graph_objs.Histogram2dContour`""")
         self._set_property("line", arg, line)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("nbinsx", arg, nbinsx)
         self._set_property("nbinsy", arg, nbinsy)
@@ -2390,9 +2239,9 @@ an instance of :class:`plotly.graph_objs.Histogram2dContour`""")
         self._set_property("reversescale", arg, reversescale)
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showscale", arg, showscale)
-        self._set_property("stream", arg, stream)
         self._set_property("textfont", arg, textfont)
         self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("visible", arg, visible)
@@ -2402,21 +2251,18 @@ an instance of :class:`plotly.graph_objs.Histogram2dContour`""")
         self._set_property("xbins", arg, xbins)
         self._set_property("xcalendar", arg, xcalendar)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("yaxis", arg, yaxis)
         self._set_property("ybingroup", arg, ybingroup)
         self._set_property("ybins", arg, ybins)
         self._set_property("ycalendar", arg, ycalendar)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("z", arg, z)
         self._set_property("zauto", arg, zauto)
         self._set_property("zhoverformat", arg, zhoverformat)
         self._set_property("zmax", arg, zmax)
         self._set_property("zmid", arg, zmid)
         self._set_property("zmin", arg, zmin)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "histogram2dcontour"
         arg.pop("type", None)

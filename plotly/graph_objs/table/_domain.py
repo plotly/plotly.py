@@ -14,9 +14,9 @@ class Domain(_BaseTraceHierarchyType):
     def column(self):
         """
         If there is a layout grid, use the domain for this column in
-        the grid for this table trace .
+        the grid for this table trace.
 
-        The 'column' property is a integer and may be specified as:
+        The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -34,9 +34,9 @@ class Domain(_BaseTraceHierarchyType):
     def row(self):
         """
         If there is a layout grid, use the domain for this row in the
-        grid for this table trace .
+        grid for this table trace.
 
-        The 'row' property is a integer and may be specified as:
+        The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -103,10 +103,10 @@ class Domain(_BaseTraceHierarchyType):
         return """\
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this table trace .
+            column in the grid for this table trace.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this table trace .
+            in the grid for this table trace.
         x
             Sets the horizontal domain of this table trace (in plot
             fraction).
@@ -126,10 +126,10 @@ class Domain(_BaseTraceHierarchyType):
             an instance of :class:`plotly.graph_objs.table.Domain`
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this table trace .
+            column in the grid for this table trace.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this table trace .
+            in the grid for this table trace.
         x
             Sets the horizontal domain of this table trace (in plot
             fraction).

@@ -34,9 +34,7 @@ class Axis(_BaseTraceHierarchyType):
         "ticks",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "tickwidth",
         "visible",
     }
@@ -84,11 +82,16 @@ class Axis(_BaseTraceHierarchyType):
         example, consider the number 1,000,000,000. If "none", it
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
-        "B", 1B.
+        "B", 1B. "SI" uses prefixes from "femto" f (10^-15) to "tera" T
+        (10^12). *SI extended* covers instead the full SI range from
+        "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or *SI
+        extended* is used and the exponent is beyond the above ranges,
+        the formatting rule will automatically be switched to the power
+        notation.
 
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+                ['none', 'e', 'E', 'power', 'SI', 'B', 'SI extended']
 
         Returns
         -------
@@ -152,7 +155,7 @@ class Axis(_BaseTraceHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -194,8 +197,8 @@ class Axis(_BaseTraceHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -234,8 +237,8 @@ class Axis(_BaseTraceHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -340,12 +343,18 @@ class Axis(_BaseTraceHierarchyType):
         """
         Sets the tick color.
 
-        The 'tickcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'tickcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -459,7 +468,7 @@ class Axis(_BaseTraceHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -596,24 +605,6 @@ class Axis(_BaseTraceHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -631,24 +622,6 @@ class Axis(_BaseTraceHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -675,8 +648,8 @@ class Axis(_BaseTraceHierarchyType):
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -720,7 +693,13 @@ class Axis(_BaseTraceHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
@@ -831,16 +810,10 @@ class Axis(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         visible
@@ -877,9 +850,7 @@ class Axis(_BaseTraceHierarchyType):
         ticks=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         tickwidth=None,
         visible=None,
         **kwargs,
@@ -922,7 +893,13 @@ class Axis(_BaseTraceHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
@@ -1033,16 +1010,10 @@ class Axis(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         visible
@@ -1099,9 +1070,7 @@ an instance of :class:`plotly.graph_objs.indicator.gauge.Axis`""")
         self._set_property("ticks", arg, ticks)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("tickwidth", arg, tickwidth)
         self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))

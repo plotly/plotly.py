@@ -70,7 +70,7 @@ def get_plotlyjs():
     >>> html = '''
     ... <html>
     ...     <head>
-    ...         <script type="text/javascript">{plotlyjs}</script>
+    ...         <script>{plotlyjs}</script>
     ...     </head>
     ...     <body>
     ...        {div1}
@@ -89,7 +89,7 @@ def get_plotlyjs():
 
 def _build_resize_script(plotdivid, plotly_root="Plotly"):
     resize_script = (
-        '<script type="text/javascript">'
+        "<script>"
         'window.addEventListener("resize", function(){{'
         'if (document.getElementById("{id}")) {{'
         '{plotly_root}.Plots.resize(document.getElementById("{id}"));'
@@ -100,31 +100,30 @@ def _build_resize_script(plotdivid, plotly_root="Plotly"):
 
 
 def _build_mathjax_script(url):
-    return '<script src="{url}?config=TeX-AMS-MML_SVG"></script>'.format(url=url)
+    return '<script src="{url}"></script>'.format(url=url)
 
 
 def _get_jconfig(config=None):
     configkeys = (
         "staticPlot",
+        "typesetMath",
         "plotlyServerURL",
         "editable",
         "edits",
+        "editSelection",
         "autosizable",
         "responsive",
-        "queueLength",
         "fillFrame",
         "frameMargins",
         "scrollZoom",
         "doubleClick",
-        "showTips",
+        "doubleClickDelay",
         "showAxisDragHandles",
         "showAxisRangeEntryBoxes",
-        "showLink",
-        "sendData",
-        "showSendToCloud",
-        "linkText",
-        "showSources",
+        "showTips",
+        "displayNotifier",
         "displayModeBar",
+        "showSendToCloud",
         "modeBarButtonsToRemove",
         "modeBarButtonsToAdd",
         "modeBarButtons",
@@ -134,12 +133,11 @@ def _get_jconfig(config=None):
         "plotGlPixelRatio",
         "setBackground",
         "topojsonURL",
-        "mapboxAccessToken",
         "logging",
-        "globalTransforms",
+        "notifyOnLogging",
+        "queueLength",
         "locale",
         "locales",
-        "doubleClickDelay",
     )
 
     if config and isinstance(config, dict):
@@ -158,33 +156,7 @@ Unrecognized config options supplied: {bad_config}""".format(bad_config=bad_conf
     else:
         clean_config = {}
 
-    plotly_platform_url = tools.get_config_plotly_server_url()
-
-    if not clean_config.get("plotlyServerURL", None):
-        clean_config["plotlyServerURL"] = plotly_platform_url
-
-    if (
-        plotly_platform_url != "https://plot.ly"
-        and clean_config.get("linkText", None) == "Export to plot.ly"
-    ):
-        link_domain = plotly_platform_url.replace("https://", "").replace("http://", "")
-        link_text = clean_config["linkText"].replace("plot.ly", link_domain)
-        clean_config["linkText"] = link_text
-
     return clean_config
-
-
-# Build script to set global PlotlyConfig object. This must execute before
-# plotly.js is loaded.
-_window_plotly_config = """\
-<script type="text/javascript">\
-window.PlotlyConfig = {MathJaxConfig: 'local'};\
-</script>"""
-
-_mathjax_config = """\
-<script type="text/javascript">\
-if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
-</script>"""
 
 
 def get_image_download_script(caller):
@@ -288,8 +260,6 @@ def init_notebook_mode(connected=False):
 
 def iplot(
     figure_or_data,
-    show_link=False,
-    link_text="Export to plot.ly",
     validate=True,
     image=None,
     filename="plot_image",
@@ -308,10 +278,6 @@ def iplot(
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=False) -- display a link in the bottom-right corner of
-                                of the chart that will export the chart to
-                                Plotly Cloud or Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
                                are valid? omit if your version of plotly.js
                                has become outdated with your version of
@@ -327,9 +293,7 @@ def iplot(
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
-    config (default=None) -- Plot view options dictionary. Keyword arguments
-        `show_link` and `link_text` set the associated options in this
-        dictionary if it doesn't contain them already.
+    config (default=None) -- Plot view options dictionary.
     auto_play (default=True) -- Whether to automatically start the animation
         sequence on page load, if the figure contains frames. Has no effect if
         the figure does not contain frames.
@@ -366,13 +330,11 @@ def iplot(
     """
     import plotly.io as pio
 
+    config = dict(config) if config else {}
+
     ipython = get_module("IPython")
     if not ipython:
         raise ImportError("`iplot` can only run inside an IPython Notebook.")
-
-    config = dict(config) if config else {}
-    config.setdefault("showLink", show_link)
-    config.setdefault("linkText", link_text)
 
     # Get figure
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -395,8 +357,6 @@ def iplot(
 
 def plot(
     figure_or_data,
-    show_link=False,
-    link_text="Export to plot.ly",
     validate=True,
     output_type="file",
     include_plotlyjs=True,
@@ -432,10 +392,6 @@ def plot(
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=False) -- display a link in the bottom-right corner of
-        of the chart that will export the chart to Plotly Cloud or
-        Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
         are valid? omit if your version of plotly.js has become outdated
         with your version of graph_reference.json or if you need to include
@@ -449,7 +405,7 @@ def plot(
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
-        other graphs or HTML markup, like a HTML report or an website.
+        other graphs or HTML markup, like an HTML report or a website.
     include_plotlyjs (True | False | 'cdn' | 'directory' | path - default=True)
         Specifies how the plotly.js library is included in the output html
         file or div string.
@@ -501,9 +457,7 @@ def plot(
         image will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
-    config (default=None) -- Plot view options dictionary. Keyword arguments
-        `show_link` and `link_text` set the associated options in this
-        dictionary if it doesn't contain them already.
+    config (default=None) -- Plot view options dictionary.
     include_mathjax (False | 'cdn' | path - default=False) --
         Specifies how the MathJax.js library is included in the output html
         file or div string.  MathJax is required in order to display labels
@@ -546,6 +500,8 @@ def plot(
     """
     import plotly.io as pio
 
+    config = dict(config) if config else {}
+
     # Output type
     if output_type not in ["div", "file"]:
         raise ValueError(
@@ -558,11 +514,6 @@ def plot(
             "Adding .html to the end of your file."
         )
         filename += ".html"
-
-    # Config
-    config = dict(config) if config else {}
-    config.setdefault("showLink", show_link)
-    config.setdefault("linkText", link_text)
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
     width = figure.get("layout", {}).get("width", "100%")
@@ -610,8 +561,6 @@ def plot_mpl(
     resize=False,
     strip_style=False,
     verbose=False,
-    show_link=False,
-    link_text="Export to plot.ly",
     validate=True,
     output_type="file",
     include_plotlyjs=True,
@@ -637,10 +586,6 @@ def plot_mpl(
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=False) -- display a link in the bottom-right corner of
-        of the chart that will export the chart to Plotly Cloud or
-        Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
         are valid? omit if your version of plotly.js has become outdated
         with your version of graph_reference.json or if you need to include
@@ -654,7 +599,7 @@ def plot_mpl(
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
-        other graphs or HTML markup, like a HTML report or an website.
+        other graphs or HTML markup, like an HTML report or a website.
     include_plotlyjs (default=True) -- If True, include the plotly.js
         source code in the output file or string.
         Set as False if your HTML file already contains a copy of the plotly.js
@@ -687,15 +632,13 @@ def plot_mpl(
     plt.plot(x, y, "o")
 
     plot_mpl(fig)
-    # If you want to to download an image of the figure as well
+    # If you want to download an image of the figure as well
     plot_mpl(fig, image='png')
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return plot(
         plotly_plot,
-        show_link,
-        link_text,
         validate,
         output_type,
         include_plotlyjs,
@@ -713,8 +656,6 @@ def iplot_mpl(
     resize=False,
     strip_style=False,
     verbose=False,
-    show_link=False,
-    link_text="Export to plot.ly",
     validate=True,
     image=None,
     image_filename="plot_image",
@@ -740,10 +681,6 @@ def iplot_mpl(
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=False) -- display a link in the bottom-right corner of
-                                of the chart that will export the chart to
-                                Plotly Cloud or Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
                                are valid? omit if your version of plotly.js
                                has become outdated with your version of
@@ -777,8 +714,6 @@ def iplot_mpl(
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(
         plotly_plot,
-        show_link,
-        link_text,
         validate,
         image=image,
         filename=image_filename,
@@ -791,8 +726,6 @@ def enable_mpl_offline(
     resize=False,
     strip_style=False,
     verbose=False,
-    show_link=False,
-    link_text="Export to plot.ly",
     validate=True,
 ):
     """
@@ -828,7 +761,5 @@ def enable_mpl_offline(
     formatter = ip.display_formatter.formatters["text/html"]
     formatter.for_type(
         matplotlib.figure.Figure,
-        lambda fig: iplot_mpl(
-            fig, resize, strip_style, verbose, show_link, link_text, validate
-        ),
+        lambda fig: iplot_mpl(fig, resize, strip_style, verbose, validate),
     )

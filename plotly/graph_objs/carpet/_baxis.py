@@ -14,7 +14,6 @@ class Baxis(_BaseTraceHierarchyType):
         "autorange",
         "autotypenumbers",
         "categoryarray",
-        "categoryarraysrc",
         "categoryorder",
         "cheatertype",
         "color",
@@ -62,9 +61,7 @@ class Baxis(_BaseTraceHierarchyType):
         "tickprefix",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "title",
         "type",
     }
@@ -74,7 +71,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         The stride between grid lines along the axis
 
-        The 'arraydtick' property is a integer and may be specified as:
+        The 'arraydtick' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -93,7 +90,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         The starting index of grid lines along the axis
 
-        The 'arraytick0' property is a integer and may be specified as:
+        The 'arraytick0' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -171,25 +168,6 @@ class Baxis(_BaseTraceHierarchyType):
         self["categoryarray"] = val
 
     @property
-    def categoryarraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `categoryarray`.
-
-        The 'categoryarraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["categoryarraysrc"]
-
-    @categoryarraysrc.setter
-    def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
-
-    @property
     def categoryorder(self):
         """
         Specifies the ordering logic for the case of categorical
@@ -244,12 +222,18 @@ class Baxis(_BaseTraceHierarchyType):
         lightened by blending this with the plot background Individual
         pieces can override this.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -286,8 +270,8 @@ class Baxis(_BaseTraceHierarchyType):
         value of this axis. If True, the end line is drawn on top of
         the grid lines.
 
-        The 'endline' property must be specified as a bool
-        (either True, or False)
+        The 'endline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -304,12 +288,18 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the line color of the end line.
 
-        The 'endlinecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'endlinecolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -350,7 +340,7 @@ class Baxis(_BaseTraceHierarchyType):
 
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+                ['none', 'e', 'E', 'power', 'SI', 'B', 'SI extended']
 
         Returns
         -------
@@ -368,8 +358,8 @@ class Baxis(_BaseTraceHierarchyType):
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
 
-        The 'fixedrange' property must be specified as a bool
-        (either True, or False)
+        The 'fixedrange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -386,12 +376,18 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the axis line color.
 
-        The 'gridcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'gridcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -475,7 +471,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Extra padding between label and the axis
 
-        The 'labelpadding' property is a integer and may be specified as:
+        The 'labelpadding' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -531,12 +527,18 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the axis line color.
 
-        The 'linecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'linecolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -589,12 +591,18 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the color of the grid lines.
 
-        The 'minorgridcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'minorgridcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -611,7 +619,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the number of minor grid ticks per major grid tick
 
-        The 'minorgridcount' property is a integer and may be specified as:
+        The 'minorgridcount' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -675,7 +683,7 @@ class Baxis(_BaseTraceHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -744,8 +752,8 @@ class Baxis(_BaseTraceHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -785,8 +793,8 @@ class Baxis(_BaseTraceHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -803,8 +811,8 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -900,8 +908,8 @@ class Baxis(_BaseTraceHierarchyType):
         value of this axis. If True, the start line is drawn on top of
         the grid lines.
 
-        The 'startline' property must be specified as a bool
-        (either True, or False)
+        The 'startline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -918,12 +926,18 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the line color of the start line.
 
-        The 'startlinecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'startlinecolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -1161,24 +1175,6 @@ class Baxis(_BaseTraceHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -1196,24 +1192,6 @@ class Baxis(_BaseTraceHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def title(self):
@@ -1277,9 +1255,6 @@ class Baxis(_BaseTraceHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1457,16 +1432,10 @@ class Baxis(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         title
             :class:`plotly.graph_objects.carpet.baxis.Title`
             instance or dict with compatible properties
@@ -1484,7 +1453,6 @@ class Baxis(_BaseTraceHierarchyType):
         autorange=None,
         autotypenumbers=None,
         categoryarray=None,
-        categoryarraysrc=None,
         categoryorder=None,
         cheatertype=None,
         color=None,
@@ -1532,9 +1500,7 @@ class Baxis(_BaseTraceHierarchyType):
         tickprefix=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         title=None,
         type=None,
         **kwargs,
@@ -1566,9 +1532,6 @@ class Baxis(_BaseTraceHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1746,16 +1709,10 @@ class Baxis(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         title
             :class:`plotly.graph_objects.carpet.baxis.Title`
             instance or dict with compatible properties
@@ -1793,7 +1750,6 @@ an instance of :class:`plotly.graph_objs.carpet.Baxis`""")
         self._set_property("autorange", arg, autorange)
         self._set_property("autotypenumbers", arg, autotypenumbers)
         self._set_property("categoryarray", arg, categoryarray)
-        self._set_property("categoryarraysrc", arg, categoryarraysrc)
         self._set_property("categoryorder", arg, categoryorder)
         self._set_property("cheatertype", arg, cheatertype)
         self._set_property("color", arg, color)
@@ -1841,9 +1797,7 @@ an instance of :class:`plotly.graph_objs.carpet.Baxis`""")
         self._set_property("tickprefix", arg, tickprefix)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("title", arg, title)
         self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))

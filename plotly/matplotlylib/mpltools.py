@@ -10,6 +10,8 @@ import math
 import warnings
 import matplotlib.dates
 
+from _plotly_utils.colors import hex_to_rgb
+
 
 def check_bar_match(old_bar, new_bar):
     """Check if two bars belong in the same collection (bar chart).
@@ -104,23 +106,6 @@ def convert_symbol(mpl_symbol):
         return "circle"  # default
 
 
-def hex_to_rgb(value):
-    """
-    Change a hex color to an rgb tuple
-
-    :param (str|unicode) value: The hex string we want to convert.
-    :return: (int, int, int) The red, green, blue int-tuple.
-
-    Example:
-
-        '#FFFFFF' --> (255, 255, 255)
-
-    """
-    value = value.lstrip("#")
-    lv = len(value)
-    return tuple(int(value[i : i + lv // 3], 16) for i in range(0, lv, lv // 3))
-
-
 def merge_color_and_opacity(color, opacity):
     """
     Merge hex color with an alpha (opacity) to get an rgba tuple.
@@ -135,10 +120,10 @@ def merge_color_and_opacity(color, opacity):
 
     rgb_tup = hex_to_rgb(color)
     if opacity is None:
-        return "rgb {}".format(rgb_tup)
+        return "rgb{}".format(rgb_tup)
 
     rgba_tup = rgb_tup + (opacity,)
-    return "rgba {}".format(rgba_tup)
+    return "rgba{}".format(rgba_tup)
 
 
 def convert_va(mpl_va):
@@ -451,18 +436,20 @@ def prep_ticks(ax, index, ax_type, props):
             tick0 = tickvalues[0]
             dticks = [
                 round(tickvalues[i] - tickvalues[i - 1], 12)
-                for i in range(1, len(tickvalues) - 1)
+                for i in range(1, len(tickvalues))
             ]
-            if all([dticks[i] == dticks[i - 1] for i in range(1, len(dticks) - 1)]):
+            if all([dticks[i] == dticks[i - 1] for i in range(1, len(dticks))]):
                 dtick = tickvalues[1] - tickvalues[0]
             else:
                 warnings.warn(
                     "'linear' {0}-axis tick spacing not even, "
-                    "ignoring mpl tick formatting.".format(ax_type)
+                    "exporting explicit tick values instead of dtick.".format(ax_type)
                 )
                 raise TypeError
         except (IndexError, TypeError):
             axis_dict["nticks"] = props["axes"][index]["nticks"]
+            if props["axes"][index]["tickvalues"] is not None:
+                axis_dict["tickvals"] = props["axes"][index]["tickvalues"]
         else:
             axis_dict["tick0"] = tick0
             axis_dict["dtick"] = dtick
@@ -500,17 +487,26 @@ def prep_ticks(ax, index, ax_type, props):
     formatter = axis.get_major_formatter().__class__.__name__
     if ax_type == "x" and "DateFormatter" in formatter:
         axis_dict["type"] = "date"
-        try:
-            axis_dict["tick0"] = mpl_dates_to_datestrings(axis_dict["tick0"], formatter)
-        except KeyError:
-            pass
-        finally:
+        tickvalues = props["axes"][index]["tickvalues"]
+        if tickvalues is not None:
+            # custom ticks: export the exact locations and drop the
+            # arithmetic tick0/dtick spec, which plotly would use instead
+            axis_dict["tickvals"] = mpl_dates_to_datestrings(tickvalues, formatter)
+            axis_dict.pop("tick0", None)
             axis_dict.pop("dtick", None)
             axis_dict.pop("tickmode", None)
-            axis_dict["range"] = mpl_dates_to_datestrings(props["xlim"], formatter)
+        axis_dict["range"] = mpl_dates_to_datestrings(props["xlim"], formatter)
 
     if formatter == "LogFormatterMathtext":
         axis_dict["exponentformat"] = "e"
+    elif (
+        formatter in ("FuncFormatter", "FixedFormatter")
+        and props["axes"][index]["tickformat"] is not None
+    ):
+        axis_dict.pop("dtick", None)
+        axis_dict.pop("tickmode", None)
+        axis_dict["ticktext"] = props["axes"][index]["tickformat"]
+        axis_dict["tickvals"] = props["axes"][index]["tickvalues"]
     return axis_dict
 
 

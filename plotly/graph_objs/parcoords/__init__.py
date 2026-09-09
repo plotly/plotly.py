@@ -8,7 +8,6 @@ if TYPE_CHECKING:
     from ._legendgrouptitle import Legendgrouptitle
     from ._line import Line
     from ._rangefont import Rangefont
-    from ._stream import Stream
     from ._tickfont import Tickfont
     from ._unselected import Unselected
     from . import legendgrouptitle
@@ -27,7 +26,6 @@ else:
             "._legendgrouptitle.Legendgrouptitle",
             "._line.Line",
             "._rangefont.Rangefont",
-            "._stream.Stream",
             "._tickfont.Tickfont",
             "._unselected.Unselected",
         ],

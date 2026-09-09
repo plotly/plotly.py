@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from ._insidetextfont import Insidetextfont
     from ._legendgrouptitle import Legendgrouptitle
     from ._marker import Marker
-    from ._stream import Stream
     from ._textfont import Textfont
     from ._title import Title
     from . import hoverlabel
@@ -26,7 +25,6 @@ else:
             "._insidetextfont.Insidetextfont",
             "._legendgrouptitle.Legendgrouptitle",
             "._marker.Marker",
-            "._stream.Stream",
             "._textfont.Textfont",
             "._title.Title",
         ],

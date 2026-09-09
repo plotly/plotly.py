@@ -270,7 +270,7 @@ def create_trisurf(
     :param (array) z: data values of z in a 1D array
     :param (array) simplices: an array of shape (ntri, 3) where ntri is
         the number of triangles in the triangularization. Each row of the
-        array contains the indicies of the verticies of each triangle
+        array contains the indices of the vertices of each triangle
     :param (str|tuple|list) colormap: either a plotly scale name, an rgb
         or hex color, a color tuple or a list of colors. An rgb color is
         of the form 'rgb(x, y, z)' where x, y, z belong to the interval

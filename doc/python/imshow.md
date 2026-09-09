@@ -400,11 +400,11 @@ for compression_level in range(0, 9):
 fig.show()
 ```
 
-### Exploring 3-D images, timeseries and sequences of images with `facet_col`
+### Exploring 3-D and 4-D images with `facet_col` and `facet_row`
 
-*Introduced in plotly 4.14*
+*`facet_col` introduced in plotly 4.14, `facet_row` introduced in plotly 6.7.0*
 
-For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axis the image is sliced through to make the facets. With `facet_col_wrap`, one can set the maximum number of columns. For image datasets passed as xarrays, it is also possible to specify the axis by its name (label), thus passing a string to `facet_col`.
+For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axis the image is sliced through to make column facets, while `facet_row` specifies the axis for row facets. Using both together creates a grid of subplots for 4-D datasets. With `facet_col_wrap`, one can set the maximum number of columns (ignored when `facet_row` is set). For image datasets passed as xarrays, it is also possible to specify the axis by its name (label), thus passing a string to `facet_col` or `facet_row`.
 
 It is recommended to use `binary_string=True` for facetted plots of images in order to keep a small figure size and a short rendering time.
 
@@ -433,6 +433,18 @@ fig = px.imshow(np.array(img_sequence), facet_col=0, binary_string=True,
 # Set facet titles
 for i, sigma in enumerate(sigmas):
     fig.layout.annotations[i]['text'] = 'sigma = %d' %sigma
+fig.show()
+```
+
+The `facet_row` argument slices the image along a different axis to arrange facets vertically. When both `facet_row` and `facet_col` are used together, a grid of subplots is created from a 4-D dataset.
+
+```python
+import plotly.express as px
+from skimage import io
+data = io.imread("https://github.com/scikit-image/skimage-tutorials/raw/main/images/cells.tif")
+data = data.reshape((6, 10, 256, 256))[:3, :2]
+fig = px.imshow(data, facet_row=0, facet_col=1, binary_string=True,
+                labels={'facet_row':'group', 'facet_col':'slice'})
 fig.show()
 ```
 
@@ -476,6 +488,17 @@ from skimage import io
 data = io.imread("https://github.com/scikit-image/skimage-tutorials/raw/main/images/cells.tif")
 data = data.reshape((15, 4, 256, 256))[5:]
 fig = px.imshow(data, animation_frame=0, facet_col=1, binary_string=True)
+fig.show()
+```
+
+With `facet_row`, it is also possible to view 5-dimensional datasets by combining `animation_frame`, `facet_row`, and `facet_col`.
+
+```python
+import plotly.express as px
+from skimage import io
+data = io.imread("https://github.com/scikit-image/skimage-tutorials/raw/main/images/cells.tif")
+data = data.reshape((5, 3, 4, 256, 256))
+fig = px.imshow(data, animation_frame=0, facet_row=1, facet_col=2, binary_string=True)
 fig.show()
 ```
 

@@ -311,11 +311,24 @@ class TestJSONEncoder(TestCase):
         fig_json = _json.dumps(
             fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
         )
-        self.assertTrue(
-            fig_json.startswith(
-                '{"data":[{"customdata":["2010-01-01T00:00:00.000000000","2010-01-02T00:00:00.000000000"]'
+
+        fig_from_json = Figure(_json.loads(fig_json))
+
+        import pandas
+
+        if Version(pandas.__version__) >= Version("3.0.0"):
+            # Starting in pandas 3, datetimes have ms precision by default
+            # https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#datetime-timedelta-resolution-inference
+            assert fig_from_json.data[0].customdata == (
+                "2010-01-01T00:00:00.000000",
+                "2010-01-02T00:00:00.000000",
             )
-        )
+        else:
+            # Before pandas 3, datetimes have ns precision by default
+            assert fig_from_json.data[0].customdata == (
+                "2010-01-01T00:00:00.000000000",
+                "2010-01-02T00:00:00.000000000",
+            )
 
     def test_encode_customdata_datetime_homogeneous_dataframe(self):
         df = pd.DataFrame(
@@ -332,13 +345,24 @@ class TestJSONEncoder(TestCase):
         fig_json = _json.dumps(
             fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
         )
-        self.assertTrue(
-            fig_json.startswith(
-                '{"data":[{"customdata":'
-                '[["2010-01-01T00:00:00.000000000","2011-01-01T00:00:00.000000000"],'
-                '["2010-01-02T00:00:00.000000000","2011-01-02T00:00:00.000000000"]'
+
+        fig_from_json = Figure(_json.loads(fig_json))
+
+        import pandas
+
+        if Version(pandas.__version__) >= Version("3.0.0"):
+            # Starting in pandas 3, datetimes have ms precision by default
+            # https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#datetime-timedelta-resolution-inference
+            assert fig_from_json.data[0].customdata == (
+                ["2010-01-01T00:00:00.000000", "2011-01-01T00:00:00.000000"],
+                ["2010-01-02T00:00:00.000000", "2011-01-02T00:00:00.000000"],
             )
-        )
+        else:
+            # Before pandas 3, datetimes have ns precision by default
+            assert fig_from_json.data[0].customdata == (
+                ["2010-01-01T00:00:00.000000000", "2011-01-01T00:00:00.000000000"],
+                ["2010-01-02T00:00:00.000000000", "2011-01-02T00:00:00.000000000"],
+            )
 
     def test_encode_customdata_datetime_inhomogeneous_dataframe(self):
         df = pd.DataFrame(
@@ -384,11 +408,26 @@ class TestJSONEncoder(TestCase):
     def test_numpy_datetime64(self):
         a = pd.date_range("2011-07-11", "2011-07-13", freq="D").values
         j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
-        assert (
-            j1 == '["2011-07-11T00:00:00.000000000", '
-            '"2011-07-12T00:00:00.000000000", '
-            '"2011-07-13T00:00:00.000000000"]'
-        )
+
+        from_json = _json.loads(j1)
+
+        import pandas
+
+        if Version(pandas.__version__) >= Version("3.0.0"):
+            # Starting in pandas 3, datetimes have ms precision by default
+            # https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#datetime-timedelta-resolution-inference
+            assert from_json == [
+                "2011-07-11T00:00:00.000000",
+                "2011-07-12T00:00:00.000000",
+                "2011-07-13T00:00:00.000000",
+            ]
+        else:
+            # Before pandas 3, datetimes have ns precision by default
+            assert from_json == [
+                "2011-07-11T00:00:00.000000000",
+                "2011-07-12T00:00:00.000000000",
+                "2011-07-13T00:00:00.000000000",
+            ]
 
     def test_pil_image_encoding(self):
         img_path = os.path.join(

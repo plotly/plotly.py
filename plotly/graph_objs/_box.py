@@ -13,20 +13,16 @@ class Box(_BaseTraceType):
         "boxmean",
         "boxpoints",
         "customdata",
-        "customdatasrc",
         "dx",
         "dy",
         "fillcolor",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hoveron",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "jitter",
         "legend",
         "legendgroup",
@@ -35,45 +31,34 @@ class Box(_BaseTraceType):
         "legendwidth",
         "line",
         "lowerfence",
-        "lowerfencesrc",
         "marker",
         "mean",
-        "meansrc",
         "median",
-        "mediansrc",
         "meta",
-        "metasrc",
         "name",
         "notched",
         "notchspan",
-        "notchspansrc",
         "notchwidth",
         "offsetgroup",
         "opacity",
         "orientation",
         "pointpos",
         "q1",
-        "q1src",
         "q3",
-        "q3src",
         "quartilemethod",
         "sd",
         "sdmultiple",
-        "sdsrc",
         "selected",
         "selectedpoints",
         "showlegend",
         "showwhiskers",
         "sizemode",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
         "unselected",
         "upperfence",
-        "upperfencesrc",
         "visible",
         "whiskerwidth",
         "width",
@@ -85,7 +70,6 @@ class Box(_BaseTraceType):
         "xperiod",
         "xperiod0",
         "xperiodalignment",
-        "xsrc",
         "y",
         "y0",
         "yaxis",
@@ -94,7 +78,6 @@ class Box(_BaseTraceType):
         "yperiod",
         "yperiod0",
         "yperiodalignment",
-        "ysrc",
         "zorder",
     }
 
@@ -190,25 +173,6 @@ class Box(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def dx(self):
         """
         Sets the x coordinate step for multi-box traces set using
@@ -253,12 +217,18 @@ class Box(_BaseTraceType):
         the line color, marker color, or marker line color, whichever
         is available.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -273,7 +243,7 @@ class Box(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -293,25 +263,6 @@ class Box(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -335,7 +286,7 @@ class Box(_BaseTraceType):
     @property
     def hoveron(self):
         """
-        Do the hover effects highlight individual boxes  or sample
+        Do the hover effects highlight individual boxes or sample
         points or both?
 
         The 'hoveron' property is a flaglist and may be specified
@@ -371,14 +322,19 @@ class Box(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example `<extra>%{fullData.name}</extra>`. To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -396,23 +352,23 @@ class Box(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertext(self):
@@ -435,25 +391,6 @@ class Box(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -472,24 +409,6 @@ class Box(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def jitter(self):
@@ -521,9 +440,9 @@ class Box(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -661,25 +580,6 @@ class Box(_BaseTraceType):
         self["lowerfence"] = val
 
     @property
-    def lowerfencesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `lowerfence`.
-
-        The 'lowerfencesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["lowerfencesrc"]
-
-    @lowerfencesrc.setter
-    def lowerfencesrc(self, val):
-        self["lowerfencesrc"] = val
-
-    @property
     def marker(self):
         """
         The 'marker' property is an instance of Marker
@@ -721,24 +621,6 @@ class Box(_BaseTraceType):
         self["mean"] = val
 
     @property
-    def meansrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `mean`.
-
-        The 'meansrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["meansrc"]
-
-    @meansrc.setter
-    def meansrc(self, val):
-        self["meansrc"] = val
-
-    @property
     def median(self):
         """
         Sets the median values. There should be as many items as the
@@ -756,24 +638,6 @@ class Box(_BaseTraceType):
     @median.setter
     def median(self, val):
         self["median"] = val
-
-    @property
-    def mediansrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `median`.
-
-        The 'mediansrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["mediansrc"]
-
-    @mediansrc.setter
-    def mediansrc(self, val):
-        self["mediansrc"] = val
 
     @property
     def meta(self):
@@ -800,24 +664,6 @@ class Box(_BaseTraceType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def name(self):
@@ -854,8 +700,8 @@ class Box(_BaseTraceType):
         box-plots for more info. Defaults to False unless `notchwidth`
         or `notchspan` is set.
 
-        The 'notched' property must be specified as a bool
-        (either True, or False)
+        The 'notched' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -891,28 +737,9 @@ class Box(_BaseTraceType):
         self["notchspan"] = val
 
     @property
-    def notchspansrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `notchspan`.
-
-        The 'notchspansrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["notchspansrc"]
-
-    @notchspansrc.setter
-    def notchspansrc(self, val):
-        self["notchspansrc"] = val
-
-    @property
     def notchwidth(self):
         """
-        Sets the width of the notches relative to the box' width. For
+        Sets the width of the notches relative to the box width. For
         example, with 0, the notches are as wide as the box(es).
 
         The 'notchwidth' property is a number and may be specified as:
@@ -1029,24 +856,6 @@ class Box(_BaseTraceType):
         self["q1"] = val
 
     @property
-    def q1src(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `q1`.
-
-        The 'q1src' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["q1src"]
-
-    @q1src.setter
-    def q1src(self, val):
-        self["q1src"] = val
-
-    @property
     def q3(self):
         """
         Sets the Quartile 3 values. There should be as many items as
@@ -1064,24 +873,6 @@ class Box(_BaseTraceType):
     @q3.setter
     def q3(self, val):
         self["q3"] = val
-
-    @property
-    def q3src(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `q3`.
-
-        The 'q3src' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["q3src"]
-
-    @q3src.setter
-    def q3src(self, val):
-        self["q3src"] = val
 
     @property
     def quartilemethod(self):
@@ -1156,24 +947,6 @@ class Box(_BaseTraceType):
         self["sdmultiple"] = val
 
     @property
-    def sdsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `sd`.
-
-        The 'sdsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sdsrc"]
-
-    @sdsrc.setter
-    def sdsrc(self, val):
-        self["sdsrc"] = val
-
-    @property
     def selected(self):
         """
         The 'selected' property is an instance of Selected
@@ -1220,8 +993,8 @@ class Box(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1239,8 +1012,8 @@ class Box(_BaseTraceType):
         Determines whether or not whiskers are visible. Defaults to
         true for `sizemode` "quartiles", false for "sd".
 
-        The 'showwhiskers' property must be specified as a bool
-        (either True, or False)
+        The 'showwhiskers' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1276,25 +1049,6 @@ class Box(_BaseTraceType):
         self["sizemode"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.box.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.box.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets the text elements associated with each sample value. If a
@@ -1317,24 +1071,6 @@ class Box(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -1429,25 +1165,6 @@ class Box(_BaseTraceType):
         self["upperfence"] = val
 
     @property
-    def upperfencesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `upperfence`.
-
-        The 'upperfencesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["upperfencesrc"]
-
-    @upperfencesrc.setter
-    def upperfencesrc(self, val):
-        self["upperfencesrc"] = val
-
-    @property
     def visible(self):
         """
         Determines whether or not this trace is visible. If
@@ -1471,7 +1188,7 @@ class Box(_BaseTraceType):
     @property
     def whiskerwidth(self):
         """
-        Sets the width of the whiskers relative to the box' width. For
+        Sets the width of the whiskers relative to the box width. For
         example, with 1, the whiskers are as wide as the box(es).
 
         The 'whiskerwidth' property is a number and may be specified as:
@@ -1554,9 +1271,9 @@ class Box(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1593,7 +1310,7 @@ class Box(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1681,24 +1398,6 @@ class Box(_BaseTraceType):
         self["xperiodalignment"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the y sample data or coordinates. See overview for more
@@ -1745,9 +1444,9 @@ class Box(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -1784,7 +1483,7 @@ class Box(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1872,31 +1571,13 @@ class Box(_BaseTraceType):
         self["yperiodalignment"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def zorder(self):
         """
         Sets the layer on which this trace is displayed, relative to
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1943,9 +1624,6 @@ class Box(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step for multi-box traces set
             using q1/median/q3.
@@ -1957,18 +1635,15 @@ class Box(_BaseTraceType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
-            Do the hover effects highlight individual boxes  or
+            Do the hover effects highlight individual boxes or
             sample points or both?
         hovertemplate
             Template string used for rendering the information that
@@ -1988,32 +1663,33 @@ class Box(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -2056,9 +1732,6 @@ class Box(_BaseTraceType):
             `lowerfence` is not provided but a sample (in `y` or
             `x`) is set, we compute the lower as the last sample
             point below 1.5 times the IQR.
-        lowerfencesrc
-            Sets the source reference on Chart Studio Cloud for
-            `lowerfence`.
         marker
             :class:`plotly.graph_objects.box.Marker` instance or
             dict with compatible properties
@@ -2068,15 +1741,9 @@ class Box(_BaseTraceType):
             only under the q1/median/q3 signature. If `mean` is not
             provided but a sample (in `y` or `x`) is set, we
             compute the mean for each box using the sample values.
-        meansrc
-            Sets the source reference on Chart Studio Cloud for
-            `mean`.
         median
             Sets the median values. There should be as many items
             as the number of boxes desired.
-        mediansrc
-            Sets the source reference on Chart Studio Cloud for
-            `median`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2090,9 +1757,6 @@ class Box(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover. For box traces, the name will
@@ -2116,11 +1780,8 @@ class Box(_BaseTraceType):
             q1/median/q3 signature. If `notchspan` is not provided
             but a sample (in `y` or `x`) is set, we compute it as
             1.57 * IQR / sqrt(N), where N is the sample size.
-        notchspansrc
-            Sets the source reference on Chart Studio Cloud for
-            `notchspan`.
         notchwidth
-            Sets the width of the notches relative to the box'
+            Sets the width of the notches relative to the box
             width. For example, with 0, the notches are as wide as
             the box(es).
         offsetgroup
@@ -2142,15 +1803,9 @@ class Box(_BaseTraceType):
         q1
             Sets the Quartile 1 values. There should be as many
             items as the number of boxes desired.
-        q1src
-            Sets the source reference on Chart Studio Cloud for
-            `q1`.
         q3
             Sets the Quartile 3 values. There should be as many
             items as the number of boxes desired.
-        q3src
-            Sets the source reference on Chart Studio Cloud for
-            `q3`.
         quartilemethod
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
@@ -2177,9 +1832,6 @@ class Box(_BaseTraceType):
             Scales the box size when sizemode=sd Allowing boxes to
             be drawn across any stddev range For example 1-stddev,
             3-stddev, 5-stddev
-        sdsrc
-            Sets the source reference on Chart Studio Cloud for
-            `sd`.
         selected
             :class:`plotly.graph_objects.box.Selected` instance or
             dict with compatible properties
@@ -2203,9 +1855,6 @@ class Box(_BaseTraceType):
             is drawn between Mean +- Standard Deviation Argument
             sdmultiple (default 1) to scale the box size So it
             could be drawn 1-stddev, 3-stddev etc
-        stream
-            :class:`plotly.graph_objects.box.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -2213,9 +1862,6 @@ class Box(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2248,16 +1894,13 @@ class Box(_BaseTraceType):
             `upperfence` is not provided but a sample (in `y` or
             `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
-        upperfencesrc
-            Sets the source reference on Chart Studio Cloud for
-            `upperfence`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         width
@@ -2280,7 +1923,7 @@ class Box(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2308,9 +1951,6 @@ class Box(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -2326,7 +1966,7 @@ class Box(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2354,9 +1994,6 @@ class Box(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2371,20 +2008,16 @@ class Box(_BaseTraceType):
         boxmean=None,
         boxpoints=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         jitter=None,
         legend=None,
         legendgroup=None,
@@ -2393,44 +2026,33 @@ class Box(_BaseTraceType):
         legendwidth=None,
         line=None,
         lowerfence=None,
-        lowerfencesrc=None,
         marker=None,
         mean=None,
-        meansrc=None,
         median=None,
-        mediansrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         notched=None,
         notchspan=None,
-        notchspansrc=None,
         notchwidth=None,
         offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
         q1=None,
-        q1src=None,
         q3=None,
-        q3src=None,
         quartilemethod=None,
         sd=None,
         sdmultiple=None,
-        sdsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         showwhiskers=None,
         sizemode=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
         upperfence=None,
-        upperfencesrc=None,
         visible=None,
         whiskerwidth=None,
         width=None,
@@ -2442,7 +2064,6 @@ class Box(_BaseTraceType):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -2451,7 +2072,6 @@ class Box(_BaseTraceType):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         **kwargs,
     ):
@@ -2515,9 +2135,6 @@ class Box(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step for multi-box traces set
             using q1/median/q3.
@@ -2529,18 +2146,15 @@ class Box(_BaseTraceType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
-            Do the hover effects highlight individual boxes  or
+            Do the hover effects highlight individual boxes or
             sample points or both?
         hovertemplate
             Template string used for rendering the information that
@@ -2560,32 +2174,33 @@ class Box(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -2628,9 +2243,6 @@ class Box(_BaseTraceType):
             `lowerfence` is not provided but a sample (in `y` or
             `x`) is set, we compute the lower as the last sample
             point below 1.5 times the IQR.
-        lowerfencesrc
-            Sets the source reference on Chart Studio Cloud for
-            `lowerfence`.
         marker
             :class:`plotly.graph_objects.box.Marker` instance or
             dict with compatible properties
@@ -2640,15 +2252,9 @@ class Box(_BaseTraceType):
             only under the q1/median/q3 signature. If `mean` is not
             provided but a sample (in `y` or `x`) is set, we
             compute the mean for each box using the sample values.
-        meansrc
-            Sets the source reference on Chart Studio Cloud for
-            `mean`.
         median
             Sets the median values. There should be as many items
             as the number of boxes desired.
-        mediansrc
-            Sets the source reference on Chart Studio Cloud for
-            `median`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2662,9 +2268,6 @@ class Box(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover. For box traces, the name will
@@ -2688,11 +2291,8 @@ class Box(_BaseTraceType):
             q1/median/q3 signature. If `notchspan` is not provided
             but a sample (in `y` or `x`) is set, we compute it as
             1.57 * IQR / sqrt(N), where N is the sample size.
-        notchspansrc
-            Sets the source reference on Chart Studio Cloud for
-            `notchspan`.
         notchwidth
-            Sets the width of the notches relative to the box'
+            Sets the width of the notches relative to the box
             width. For example, with 0, the notches are as wide as
             the box(es).
         offsetgroup
@@ -2714,15 +2314,9 @@ class Box(_BaseTraceType):
         q1
             Sets the Quartile 1 values. There should be as many
             items as the number of boxes desired.
-        q1src
-            Sets the source reference on Chart Studio Cloud for
-            `q1`.
         q3
             Sets the Quartile 3 values. There should be as many
             items as the number of boxes desired.
-        q3src
-            Sets the source reference on Chart Studio Cloud for
-            `q3`.
         quartilemethod
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
@@ -2749,9 +2343,6 @@ class Box(_BaseTraceType):
             Scales the box size when sizemode=sd Allowing boxes to
             be drawn across any stddev range For example 1-stddev,
             3-stddev, 5-stddev
-        sdsrc
-            Sets the source reference on Chart Studio Cloud for
-            `sd`.
         selected
             :class:`plotly.graph_objects.box.Selected` instance or
             dict with compatible properties
@@ -2775,9 +2366,6 @@ class Box(_BaseTraceType):
             is drawn between Mean +- Standard Deviation Argument
             sdmultiple (default 1) to scale the box size So it
             could be drawn 1-stddev, 3-stddev etc
-        stream
-            :class:`plotly.graph_objects.box.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -2785,9 +2373,6 @@ class Box(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2820,16 +2405,13 @@ class Box(_BaseTraceType):
             `upperfence` is not provided but a sample (in `y` or
             `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
-        upperfencesrc
-            Sets the source reference on Chart Studio Cloud for
-            `upperfence`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         width
@@ -2852,7 +2434,7 @@ class Box(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2880,9 +2462,6 @@ class Box(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -2898,7 +2477,7 @@ class Box(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2926,9 +2505,6 @@ class Box(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2963,20 +2539,16 @@ an instance of :class:`plotly.graph_objs.Box`""")
         self._set_property("boxmean", arg, boxmean)
         self._set_property("boxpoints", arg, boxpoints)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("dx", arg, dx)
         self._set_property("dy", arg, dy)
         self._set_property("fillcolor", arg, fillcolor)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hoveron", arg, hoveron)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("jitter", arg, jitter)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
@@ -2985,44 +2557,33 @@ an instance of :class:`plotly.graph_objs.Box`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("lowerfence", arg, lowerfence)
-        self._set_property("lowerfencesrc", arg, lowerfencesrc)
         self._set_property("marker", arg, marker)
         self._set_property("mean", arg, mean)
-        self._set_property("meansrc", arg, meansrc)
         self._set_property("median", arg, median)
-        self._set_property("mediansrc", arg, mediansrc)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("notched", arg, notched)
         self._set_property("notchspan", arg, notchspan)
-        self._set_property("notchspansrc", arg, notchspansrc)
         self._set_property("notchwidth", arg, notchwidth)
         self._set_property("offsetgroup", arg, offsetgroup)
         self._set_property("opacity", arg, opacity)
         self._set_property("orientation", arg, orientation)
         self._set_property("pointpos", arg, pointpos)
         self._set_property("q1", arg, q1)
-        self._set_property("q1src", arg, q1src)
         self._set_property("q3", arg, q3)
-        self._set_property("q3src", arg, q3src)
         self._set_property("quartilemethod", arg, quartilemethod)
         self._set_property("sd", arg, sd)
         self._set_property("sdmultiple", arg, sdmultiple)
-        self._set_property("sdsrc", arg, sdsrc)
         self._set_property("selected", arg, selected)
         self._set_property("selectedpoints", arg, selectedpoints)
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showwhiskers", arg, showwhiskers)
         self._set_property("sizemode", arg, sizemode)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("unselected", arg, unselected)
         self._set_property("upperfence", arg, upperfence)
-        self._set_property("upperfencesrc", arg, upperfencesrc)
         self._set_property("visible", arg, visible)
         self._set_property("whiskerwidth", arg, whiskerwidth)
         self._set_property("width", arg, width)
@@ -3034,7 +2595,6 @@ an instance of :class:`plotly.graph_objs.Box`""")
         self._set_property("xperiod", arg, xperiod)
         self._set_property("xperiod0", arg, xperiod0)
         self._set_property("xperiodalignment", arg, xperiodalignment)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("y0", arg, y0)
         self._set_property("yaxis", arg, yaxis)
@@ -3043,7 +2603,6 @@ an instance of :class:`plotly.graph_objs.Box`""")
         self._set_property("yperiod", arg, yperiod)
         self._set_property("yperiod0", arg, yperiod0)
         self._set_property("yperiodalignment", arg, yperiodalignment)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "box"

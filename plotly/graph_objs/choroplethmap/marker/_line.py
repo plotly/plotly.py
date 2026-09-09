@@ -8,7 +8,7 @@ import copy as _copy
 class Line(_BaseTraceHierarchyType):
     _parent_path_str = "choroplethmap.marker"
     _path_str = "choroplethmap.marker.line"
-    _valid_props = {"color", "colorsrc", "width", "widthsrc"}
+    _valid_props = {"color", "width"}
 
     @property
     def color(self):
@@ -18,12 +18,18 @@ class Line(_BaseTraceHierarchyType):
         relative to the max and min values of the array or relative to
         `marker.line.cmin` and `marker.line.cmax` if set.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -35,24 +41,6 @@ class Line(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self["color"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def width(self):
@@ -74,24 +62,6 @@ class Line(_BaseTraceHierarchyType):
         self["width"] = val
 
     @property
-    def widthsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `width`.
-
-        The 'widthsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["widthsrc"]
-
-    @widthsrc.setter
-    def widthsrc(self, val):
-        self["widthsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
@@ -100,20 +70,12 @@ class Line(_BaseTraceHierarchyType):
             to the colorscale relative to the max and min values of
             the array or relative to `marker.line.cmin` and
             `marker.line.cmax` if set.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         width
             Sets the width (in px) of the lines bounding the marker
             points.
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         """
 
-    def __init__(
-        self, arg=None, color=None, colorsrc=None, width=None, widthsrc=None, **kwargs
-    ):
+    def __init__(self, arg=None, color=None, width=None, **kwargs):
         """
         Construct a new Line object
 
@@ -129,15 +91,9 @@ class Line(_BaseTraceHierarchyType):
             to the colorscale relative to the max and min values of
             the array or relative to `marker.line.cmin` and
             `marker.line.cmax` if set.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         width
             Sets the width (in px) of the lines bounding the marker
             points.
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
 
         Returns
         -------
@@ -164,8 +120,6 @@ an instance of :class:`plotly.graph_objs.choroplethmap.marker.Line`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("width", arg, width)
-        self._set_property("widthsrc", arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

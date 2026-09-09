@@ -24,16 +24,15 @@ class Figure(BaseFigure):
                 - The 'type' property specifies the trace type
                     One of: ['bar', 'barpolar', 'box', 'candlestick',
                              'carpet', 'choropleth', 'choroplethmap',
-                             'choroplethmapbox', 'cone', 'contour',
-                             'contourcarpet', 'densitymap',
-                             'densitymapbox', 'funnel', 'funnelarea',
+                             'cone', 'contour', 'contourcarpet',
+                             'densitymap', 'funnel', 'funnelarea',
                              'heatmap', 'histogram', 'histogram2d',
                              'histogram2dcontour', 'icicle', 'image',
                              'indicator', 'isosurface', 'mesh3d', 'ohlc',
-                             'parcats', 'parcoords', 'pie', 'sankey',
-                             'scatter', 'scatter3d', 'scattercarpet',
-                             'scattergeo', 'scattergl', 'scattermap',
-                             'scattermapbox', 'scatterpolar',
+                             'parcats', 'parcoords', 'pie', 'quiver',
+                             'sankey', 'scatter', 'scatter3d',
+                             'scattercarpet', 'scattergeo', 'scattergl',
+                             'scattermap', 'scatterpolar',
                              'scatterpolargl', 'scattersmith',
                              'scatterternary', 'splom', 'streamtube',
                              'sunburst', 'surface', 'table', 'treemap',
@@ -652,24 +651,19 @@ class Figure(BaseFigure):
         self,
         alignmentgroup=None,
         base=None,
-        basesrc=None,
         cliponaxis=None,
         constraintext=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         error_x=None,
         error_y=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
         legend=None,
@@ -679,32 +673,26 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         offset=None,
         offsetgroup=None,
-        offsetsrc=None,
         opacity=None,
         orientation=None,
         outsidetextfont=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textangle=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
         visible=None,
         width=None,
-        widthsrc=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -713,7 +701,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -722,7 +709,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -749,9 +735,6 @@ class Figure(BaseFigure):
             units). In "stack" or "relative" barmode, traces that
             set "base" will be excluded and drawn in "overlay" mode
             instead.
-        basesrc
-            Sets the source reference on Chart Studio Cloud for
-            `base`.
         cliponaxis
             Determines whether the text nodes are clipped about the
             subplot axes. To show the text nodes above axis lines
@@ -765,9 +748,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -779,13 +759,10 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.bar.ErrorY` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.bar.Hoverlabel` instance
             or dict with compatible properties
@@ -807,11 +784,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `value` and `label`. Anything contained in
@@ -819,9 +801,11 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -829,16 +813,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -887,9 +865,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -902,9 +877,6 @@ class Figure(BaseFigure):
             Set several traces linked to the same position axis or
             matching axes to the same offsetgroup where bars of the
             same position coordinate will line up.
-        offsetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -926,9 +898,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.bar.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -955,15 +924,9 @@ class Figure(BaseFigure):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -974,13 +937,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `value` and `label`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1013,9 +983,6 @@ class Figure(BaseFigure):
             visible).
         width
             Sets the bar width (in position axis units).
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         x
             Sets the x coordinates.
         x0
@@ -1030,7 +997,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1058,9 +1025,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -1075,7 +1039,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1103,9 +1067,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -1141,24 +1102,19 @@ class Figure(BaseFigure):
         new_trace = Bar(
             alignmentgroup=alignmentgroup,
             base=base,
-            basesrc=basesrc,
             cliponaxis=cliponaxis,
             constraintext=constraintext,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             error_x=error_x,
             error_y=error_y,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legend=legend,
@@ -1168,32 +1124,26 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             offset=offset,
             offsetgroup=offsetgroup,
-            offsetsrc=offsetsrc,
             opacity=opacity,
             orientation=orientation,
             outsidetextfont=outsidetextfont,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textangle=textangle,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             width=width,
-            widthsrc=widthsrc,
             x=x,
             x0=x0,
             xaxis=xaxis,
@@ -1202,7 +1152,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
@@ -1211,7 +1160,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -1220,20 +1168,15 @@ class Figure(BaseFigure):
     def add_barpolar(
         self,
         base=None,
-        basesrc=None,
         customdata=None,
-        customdatasrc=None,
         dr=None,
         dtheta=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1241,31 +1184,24 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         offset=None,
-        offsetsrc=None,
         opacity=None,
         r=None,
         r0=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         subplot=None,
         text=None,
-        textsrc=None,
         theta=None,
         theta0=None,
-        thetasrc=None,
         thetaunit=None,
         uid=None,
         uirevision=None,
         unselected=None,
         visible=None,
         width=None,
-        widthsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -1282,17 +1218,11 @@ class Figure(BaseFigure):
             Sets where the bar base is drawn (in radial axis
             units). In "stack" barmode, traces that set "base" will
             be excluded and drawn in "overlay" mode instead.
-        basesrc
-            Sets the source reference on Chart Studio Cloud for
-            `base`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -1300,13 +1230,10 @@ class Figure(BaseFigure):
             `dtheta` step equals the subplot's period divided by
             the length of the `r` coordinates.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.barpolar.Hoverlabel`
             instance or dict with compatible properties
@@ -1328,32 +1255,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1397,18 +1325,12 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         offset
             Shifts the angular position where the bar is drawn (in
             "thetatunit" units).
-        offsetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `offset`.
         opacity
             Sets the opacity of the trace.
         r
@@ -1417,9 +1339,6 @@ class Figure(BaseFigure):
             Alternate to `r`. Builds a linear space of r
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for
-            `r`.
         selected
             :class:`plotly.graph_objects.barpolar.Selected`
             instance or dict with compatible properties
@@ -1433,9 +1352,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.barpolar.Stream` instance
-            or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -1446,18 +1362,12 @@ class Figure(BaseFigure):
             single string, the same string appears over all bars.
             If an array of string, the items are mapped in order to
             the this trace's coordinates.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         theta
             Sets the angular coordinates
         theta0
             Alternate to `theta`. Builds a linear space of theta
             coordinates. Use with `dtheta` where `theta0` is the
             starting coordinate and `dtheta` the step.
-        thetasrc
-            Sets the source reference on Chart Studio Cloud for
-            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -1493,9 +1403,6 @@ class Figure(BaseFigure):
             visible).
         width
             Sets the bar angular width (in "thetaunit" units).
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -1515,20 +1422,15 @@ class Figure(BaseFigure):
 
         new_trace = Barpolar(
             base=base,
-            basesrc=basesrc,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dr=dr,
             dtheta=dtheta,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -1536,31 +1438,24 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             offset=offset,
-            offsetsrc=offsetsrc,
             opacity=opacity,
             r=r,
             r0=r0,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             subplot=subplot,
             text=text,
-            textsrc=textsrc,
             theta=theta,
             theta0=theta0,
-            thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             width=width,
-            widthsrc=widthsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -1571,20 +1466,16 @@ class Figure(BaseFigure):
         boxmean=None,
         boxpoints=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         jitter=None,
         legend=None,
         legendgroup=None,
@@ -1593,44 +1484,33 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         lowerfence=None,
-        lowerfencesrc=None,
         marker=None,
         mean=None,
-        meansrc=None,
         median=None,
-        mediansrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         notched=None,
         notchspan=None,
-        notchspansrc=None,
         notchwidth=None,
         offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
         q1=None,
-        q1src=None,
         q3=None,
-        q3src=None,
         quartilemethod=None,
         sd=None,
         sdmultiple=None,
-        sdsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         showwhiskers=None,
         sizemode=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
         upperfence=None,
-        upperfencesrc=None,
         visible=None,
         whiskerwidth=None,
         width=None,
@@ -1642,7 +1522,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -1651,7 +1530,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -1715,9 +1593,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step for multi-box traces set
             using q1/median/q3.
@@ -1729,18 +1604,15 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
-            Do the hover effects highlight individual boxes  or
+            Do the hover effects highlight individual boxes or
             sample points or both?
         hovertemplate
             Template string used for rendering the information that
@@ -1760,32 +1632,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -1828,9 +1701,6 @@ class Figure(BaseFigure):
             `lowerfence` is not provided but a sample (in `y` or
             `x`) is set, we compute the lower as the last sample
             point below 1.5 times the IQR.
-        lowerfencesrc
-            Sets the source reference on Chart Studio Cloud for
-            `lowerfence`.
         marker
             :class:`plotly.graph_objects.box.Marker` instance or
             dict with compatible properties
@@ -1840,15 +1710,9 @@ class Figure(BaseFigure):
             only under the q1/median/q3 signature. If `mean` is not
             provided but a sample (in `y` or `x`) is set, we
             compute the mean for each box using the sample values.
-        meansrc
-            Sets the source reference on Chart Studio Cloud for
-            `mean`.
         median
             Sets the median values. There should be as many items
             as the number of boxes desired.
-        mediansrc
-            Sets the source reference on Chart Studio Cloud for
-            `median`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1862,9 +1726,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover. For box traces, the name will
@@ -1888,11 +1749,8 @@ class Figure(BaseFigure):
             q1/median/q3 signature. If `notchspan` is not provided
             but a sample (in `y` or `x`) is set, we compute it as
             1.57 * IQR / sqrt(N), where N is the sample size.
-        notchspansrc
-            Sets the source reference on Chart Studio Cloud for
-            `notchspan`.
         notchwidth
-            Sets the width of the notches relative to the box'
+            Sets the width of the notches relative to the box
             width. For example, with 0, the notches are as wide as
             the box(es).
         offsetgroup
@@ -1914,15 +1772,9 @@ class Figure(BaseFigure):
         q1
             Sets the Quartile 1 values. There should be as many
             items as the number of boxes desired.
-        q1src
-            Sets the source reference on Chart Studio Cloud for
-            `q1`.
         q3
             Sets the Quartile 3 values. There should be as many
             items as the number of boxes desired.
-        q3src
-            Sets the source reference on Chart Studio Cloud for
-            `q3`.
         quartilemethod
             Sets the method used to compute the sample's Q1 and Q3
             quartiles. The "linear" method uses the 25th percentile
@@ -1949,9 +1801,6 @@ class Figure(BaseFigure):
             Scales the box size when sizemode=sd Allowing boxes to
             be drawn across any stddev range For example 1-stddev,
             3-stddev, 5-stddev
-        sdsrc
-            Sets the source reference on Chart Studio Cloud for
-            `sd`.
         selected
             :class:`plotly.graph_objects.box.Selected` instance or
             dict with compatible properties
@@ -1975,9 +1824,6 @@ class Figure(BaseFigure):
             is drawn between Mean +- Standard Deviation Argument
             sdmultiple (default 1) to scale the box size So it
             could be drawn 1-stddev, 3-stddev etc
-        stream
-            :class:`plotly.graph_objects.box.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -1985,9 +1831,6 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2020,16 +1863,13 @@ class Figure(BaseFigure):
             `upperfence` is not provided but a sample (in `y` or
             `x`) is set, we compute the upper as the last sample
             point above 1.5 times the IQR.
-        upperfencesrc
-            Sets the source reference on Chart Studio Cloud for
-            `upperfence`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         width
@@ -2052,7 +1892,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2080,9 +1920,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -2098,7 +1935,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2126,9 +1963,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2166,20 +2000,16 @@ class Figure(BaseFigure):
             boxmean=boxmean,
             boxpoints=boxpoints,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             jitter=jitter,
             legend=legend,
             legendgroup=legendgroup,
@@ -2188,44 +2018,33 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             lowerfence=lowerfence,
-            lowerfencesrc=lowerfencesrc,
             marker=marker,
             mean=mean,
-            meansrc=meansrc,
             median=median,
-            mediansrc=mediansrc,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             notched=notched,
             notchspan=notchspan,
-            notchspansrc=notchspansrc,
             notchwidth=notchwidth,
             offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             pointpos=pointpos,
             q1=q1,
-            q1src=q1src,
             q3=q3,
-            q3src=q3src,
             quartilemethod=quartilemethod,
             sd=sd,
             sdmultiple=sdmultiple,
-            sdsrc=sdsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             showwhiskers=showwhiskers,
             sizemode=sizemode,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
             upperfence=upperfence,
-            upperfencesrc=upperfencesrc,
             visible=visible,
             whiskerwidth=whiskerwidth,
             width=width,
@@ -2237,7 +2056,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
@@ -2246,7 +2064,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -2255,19 +2072,15 @@ class Figure(BaseFigure):
     def add_candlestick(
         self,
         close=None,
-        closesrc=None,
         customdata=None,
-        customdatasrc=None,
         decreasing=None,
         high=None,
-        highsrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         increasing=None,
         legend=None,
         legendgroup=None,
@@ -2276,18 +2089,13 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         low=None,
-        lowsrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         open=None,
-        opensrc=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -2299,7 +2107,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         yaxis=None,
         yhoverformat=None,
         zorder=None,
@@ -2316,7 +2123,7 @@ class Figure(BaseFigure):
         time). The boxes represent the spread between the `open` and
         `close` values and the lines represent the spread between the
         `low` and `high` values Sample points where the close value is
-        higher (lower) then the open value are called increasing
+        higher (lower) than the open value are called increasing
         (decreasing). By default, increasing candles are drawn in green
         whereas decreasing are drawn in red.
 
@@ -2324,48 +2131,71 @@ class Figure(BaseFigure):
         ----------
         close
             Sets the close values.
-        closesrc
-            Sets the source reference on Chart Studio Cloud for
-            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         decreasing
             :class:`plotly.graph_objects.candlestick.Decreasing`
             instance or dict with compatible properties
         high
             Sets the high values.
-        highsrc
-            Sets the source reference on Chart Studio Cloud for
-            `high`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.candlestick.Hoverlabel`
             instance or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, all attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. Finally, the template string has access
+            to variables `open`, `high`, `low` and `close`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
@@ -2401,9 +2231,6 @@ class Figure(BaseFigure):
             or dict with compatible properties
         low
             Sets the low values.
-        lowsrc
-            Sets the source reference on Chart Studio Cloud for
-            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -2417,9 +2244,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2427,9 +2251,6 @@ class Figure(BaseFigure):
             Sets the opacity of the trace.
         open
             Sets the open values.
-        opensrc
-            Sets the source reference on Chart Studio Cloud for
-            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -2440,17 +2261,11 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.candlestick.Stream`
-            instance or dict with compatible properties
         text
             Sets hover text elements associated with each sample
             point. If a single string, the same string appears over
             all the data points. If an array of string, the items
             are mapped in order to this trace's sample points.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2479,7 +2294,7 @@ class Figure(BaseFigure):
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         x
@@ -2493,7 +2308,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2521,16 +2336,13 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2576,19 +2388,15 @@ class Figure(BaseFigure):
 
         new_trace = Candlestick(
             close=close,
-            closesrc=closesrc,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             decreasing=decreasing,
             high=high,
-            highsrc=highsrc,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             increasing=increasing,
             legend=legend,
             legendgroup=legendgroup,
@@ -2597,18 +2405,13 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             low=low,
-            lowsrc=lowsrc,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             open=open,
-            opensrc=opensrc,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -2620,7 +2423,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
             zorder=zorder,
@@ -2633,39 +2435,31 @@ class Figure(BaseFigure):
         a=None,
         a0=None,
         aaxis=None,
-        asrc=None,
         b=None,
         b0=None,
         baxis=None,
-        bsrc=None,
         carpet=None,
         cheaterslope=None,
         color=None,
         customdata=None,
-        customdatasrc=None,
         da=None,
         db=None,
         font=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
-        stream=None,
         uid=None,
         uirevision=None,
         visible=None,
         x=None,
         xaxis=None,
-        xsrc=None,
         y=None,
         yaxis=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -2693,9 +2487,6 @@ class Figure(BaseFigure):
         aaxis
             :class:`plotly.graph_objects.carpet.Aaxis` instance or
             dict with compatible properties
-        asrc
-            Sets the source reference on Chart Studio Cloud for
-            `a`.
         b
             A two dimensional array of y coordinates at each carpet
             point.
@@ -2706,9 +2497,6 @@ class Figure(BaseFigure):
         baxis
             :class:`plotly.graph_objects.carpet.Baxis` instance or
             dict with compatible properties
-        bsrc
-            Sets the source reference on Chart Studio Cloud for
-            `b`.
         carpet
             An identifier for this carpet, so that `scattercarpet`
             and `contourcarpet` traces can specify a carpet plot on
@@ -2727,9 +2515,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         da
             Sets the a coordinate step. See `a0` for more info.
         db
@@ -2741,9 +2526,6 @@ class Figure(BaseFigure):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -2780,17 +2562,11 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
-        stream
-            :class:`plotly.graph_objects.carpet.Stream` instance or
-            dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2827,9 +2603,6 @@ class Figure(BaseFigure):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             A two dimensional array of y coordinates at each carpet
             point.
@@ -2838,9 +2611,6 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2877,39 +2647,31 @@ class Figure(BaseFigure):
             a=a,
             a0=a0,
             aaxis=aaxis,
-            asrc=asrc,
             b=b,
             b0=b0,
             baxis=baxis,
-            bsrc=bsrc,
             carpet=carpet,
             cheaterslope=cheaterslope,
             color=color,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             da=da,
             db=db,
             font=font,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
-            stream=stream,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
             x=x,
             xaxis=xaxis,
-            xsrc=xsrc,
             y=y,
             yaxis=yaxis,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -2922,19 +2684,15 @@ class Figure(BaseFigure):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         featureidkey=None,
         geo=None,
         geojson=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -2942,19 +2700,15 @@ class Figure(BaseFigure):
         legendwidth=None,
         locationmode=None,
         locations=None,
-        locationssrc=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         reversescale=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -2964,7 +2718,6 @@ class Figure(BaseFigure):
         zmax=None,
         zmid=None,
         zmin=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -2998,23 +2751,20 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -3034,13 +2784,10 @@ class Figure(BaseFigure):
             "FeatureCollection" or "Feature" with geometries of
             type "Polygon" or "MultiPolygon".
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choropleth.Hoverlabel`
             instance or dict with compatible properties
@@ -3062,32 +2809,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -3116,21 +2864,17 @@ class Figure(BaseFigure):
             Sets the width (in px or fraction) of the legend for
             this trace.
         locationmode
-            The library used by the *country names* `locationmode`
-            option is changing in an upcoming version. Country
-            names in existing plots may not work in the new
-            version. Determines the set of locations used to match
-            entries in `locations` to regions on the map. Values
-            "ISO-3", "USA-states", *country names* correspond to
-            features on the base map and value "geojson-id"
-            corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            Determines the set of locations used to match entries
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute. "USA-states" accepts both two-letter
+            abbreviations (e.g. "CA") and full state names (e.g.
+            "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         marker
             :class:`plotly.graph_objects.choropleth.Marker`
             instance or dict with compatible properties
@@ -3147,9 +2891,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -3173,14 +2914,8 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.choropleth.Stream`
-            instance or dict with compatible properties
         text
             Sets the text elements associated with each location.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -3231,9 +2966,6 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -3257,19 +2989,15 @@ class Figure(BaseFigure):
             colorbar=colorbar,
             colorscale=colorscale,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             featureidkey=featureidkey,
             geo=geo,
             geojson=geojson,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -3277,19 +3005,15 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             locationmode=locationmode,
             locations=locations,
-            locationssrc=locationssrc,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             reversescale=reversescale,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -3299,7 +3023,6 @@ class Figure(BaseFigure):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -3312,38 +3035,30 @@ class Figure(BaseFigure):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         featureidkey=None,
         geojson=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         locations=None,
-        locationssrc=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         reversescale=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         subplot=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -3353,7 +3068,6 @@ class Figure(BaseFigure):
         zmax=None,
         zmid=None,
         zmin=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -3393,23 +3107,20 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array.
@@ -3421,13 +3132,10 @@ class Figure(BaseFigure):
             "FeatureCollection" or "Feature" with geometries of
             type "Polygon" or "MultiPolygon".
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choroplethmap.Hoverlabel`
             instance or dict with compatible properties
@@ -3449,11 +3157,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `properties` Anything contained in tag
@@ -3461,21 +3174,17 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -3506,9 +3215,6 @@ class Figure(BaseFigure):
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         marker
             :class:`plotly.graph_objects.choroplethmap.Marker`
             instance or dict with compatible properties
@@ -3525,9 +3231,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -3551,9 +3254,6 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.choroplethmap.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a map subplot. If "map" (the default value), the
@@ -3561,9 +3261,6 @@ class Figure(BaseFigure):
             to `layout.map2`, and so on.
         text
             Sets the text elements associated with each location.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -3614,9 +3311,6 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -3641,38 +3335,30 @@ class Figure(BaseFigure):
             colorbar=colorbar,
             colorscale=colorscale,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             featureidkey=featureidkey,
             geojson=geojson,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             locations=locations,
-            locationssrc=locationssrc,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             reversescale=reversescale,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             subplot=subplot,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -3682,399 +3368,6 @@ class Figure(BaseFigure):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
-            zsrc=zsrc,
-            **kwargs,
-        )
-        return self.add_trace(new_trace, row=row, col=col)
-
-    def add_choroplethmapbox(
-        self,
-        autocolorscale=None,
-        below=None,
-        coloraxis=None,
-        colorbar=None,
-        colorscale=None,
-        customdata=None,
-        customdatasrc=None,
-        featureidkey=None,
-        geojson=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        locations=None,
-        locationssrc=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        reversescale=None,
-        selected=None,
-        selectedpoints=None,
-        showlegend=None,
-        showscale=None,
-        stream=None,
-        subplot=None,
-        text=None,
-        textsrc=None,
-        uid=None,
-        uirevision=None,
-        unselected=None,
-        visible=None,
-        z=None,
-        zauto=None,
-        zmax=None,
-        zmid=None,
-        zmin=None,
-        zsrc=None,
-        row=None,
-        col=None,
-        **kwargs,
-    ) -> "Figure":
-        """
-        Add a new Choroplethmapbox trace
-
-        "choroplethmapbox" trace is deprecated! Please consider
-        switching to the "choroplethmap" trace type and `map` subplots.
-        Learn more at: https://plotly.com/python/maplibre-migration/ as
-        well as https://plotly.com/javascript/maplibre-migration/
-        GeoJSON features to be filled are set in `geojson` The data
-        that describes the choropleth value-to-color mapping is set in
-        `locations` and `z`.
-
-        Parameters
-        ----------
-        autocolorscale
-            Determines whether the colorscale is a default palette
-            (`autocolorscale: true`) or the palette determined by
-            `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default palette will be
-            chosen according to whether numbers in the `color`
-            array are all positive, all negative or mixed.
-        below
-            Determines if the choropleth polygons will be inserted
-            before the layer with the specified ID. By default,
-            choroplethmapbox traces are placed above the water
-            layers. If set to '', the layer will be inserted above
-            every existing layer.
-        coloraxis
-            Sets a reference to a shared color axis. References to
-            these shared color axes are "coloraxis", "coloraxis2",
-            "coloraxis3", etc. Settings for these shared color axes
-            are set in the layout, under `layout.coloraxis`,
-            `layout.coloraxis2`, etc. Note that multiple color
-            scales can be linked to the same color axis.
-        colorbar
-            :class:`plotly.graph_objects.choroplethmapbox.ColorBar`
-            instance or dict with compatible properties
-        colorscale
-            Sets the colorscale. The colorscale must be an array
-            containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-        customdata
-            Assigns extra data each datum. This may be useful when
-            listening to hover, click and selection events. Note
-            that, "scatter" traces also appends customdata items in
-            the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
-        featureidkey
-            Sets the key in GeoJSON features which is used as id to
-            match the items included in the `locations` array.
-            Support nested property, for example "properties.name".
-        geojson
-            Sets the GeoJSON data associated with this trace. It
-            can be set as a valid GeoJSON object or as a URL
-            string. Note that we only accept GeoJSONs of type
-            "FeatureCollection" or "Feature" with geometries of
-            type "Polygon" or "MultiPolygon".
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
-        hoverlabel
-            :class:`plotly.graph_objects.choroplethmapbox.Hoverlabe
-            l` instance or dict with compatible properties
-        hovertemplate
-            Template string used for rendering the information that
-            appear on hover box. Note that this will override
-            `hoverinfo`. Variables are inserted using %{variable},
-            for example "y: %{y}" as well as %{xother}, {%_xother},
-            {%_xother_}, {%xother_}. When showing info for several
-            points, "xother" will be added to those with different
-            x positions from the first point. An underscore before
-            or after "(x|y)other" will add a space on that side,
-            only when this field is shown. Numbers are formatted
-            using d3-format's syntax %{variable:d3-format}, for
-            example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
-            for details on the formatting syntax. Dates are
-            formatted using d3-time-format's syntax
-            %{variable|d3-time-format}, for example "Day:
-            %{2019-01-01|%A}". https://github.com/d3/d3-time-
-            format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
-            `hovertemplate` are the ones emitted as event data
-            described at this link
-            https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
-            specified per-point (the ones that are `arrayOk: true`)
-            are available. Finally, the template string has access
-            to variable `properties` Anything contained in tag
-            `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
-        hovertext
-            Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
-        ids
-            Assigns id labels to each datum. These ids for object
-            constancy of data points during animation. Should be an
-            array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
-        legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
-        legendgroup
-            Sets the legend group for this trace. Traces and shapes
-            part of the same legend group hide/show at the same
-            time when toggling legend items.
-        legendgrouptitle
-            :class:`plotly.graph_objects.choroplethmapbox.Legendgro
-            uptitle` instance or dict with compatible properties
-        legendrank
-            Sets the legend rank for this trace. Items and groups
-            with smaller ranks are presented on top/left side while
-            with "reversed" `legend.traceorder` they are on
-            bottom/right side. The default legendrank is 1000, so
-            that you can use ranks less than 1000 to place certain
-            items before all unranked items, and ranks greater than
-            1000 to go after all unranked items. When having
-            unranked or equal rank items shapes would be displayed
-            after traces i.e. according to their order in data and
-            layout.
-        legendwidth
-            Sets the width (in px or fraction) of the legend for
-            this trace.
-        locations
-            Sets which features found in "geojson" to plot using
-            their feature `id` field.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
-        marker
-            :class:`plotly.graph_objects.choroplethmapbox.Marker`
-            instance or dict with compatible properties
-        meta
-            Assigns extra meta information associated with this
-            trace that can be used in various text attributes.
-            Attributes such as trace `name`, graph, axis and
-            colorbar `title.text`, annotation `text`
-            `rangeselector`, `updatemenues` and `sliders` `label`
-            text all support `meta`. To access the trace `meta`
-            values in an attribute in the same trace, simply use
-            `%{meta[i]}` where `i` is the index or key of the
-            `meta` item in question. To access trace `meta` in
-            layout attributes, use `%{data[n[.meta[i]}` where `i`
-            is the index or key of the `meta` and `n` is the trace
-            index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
-        name
-            Sets the trace name. The trace name appears as the
-            legend item and on hover.
-        reversescale
-            Reverses the color mapping if true. If true, `zmin`
-            will correspond to the last color in the array and
-            `zmax` will correspond to the first color.
-        selected
-            :class:`plotly.graph_objects.choroplethmapbox.Selected`
-            instance or dict with compatible properties
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
-        showscale
-            Determines whether or not a colorbar is displayed for
-            this trace.
-        stream
-            :class:`plotly.graph_objects.choroplethmapbox.Stream`
-            instance or dict with compatible properties
-        subplot
-            mapbox subplots and traces are deprecated! Please
-            consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/python/maplibre-migration/
-            as well as https://plotly.com/javascript/maplibre-
-            migration/ Sets a reference between this trace's data
-            coordinates and a mapbox subplot. If "mapbox" (the
-            default value), the data refer to `layout.mapbox`. If
-            "mapbox2", the data refer to `layout.mapbox2`, and so
-            on.
-        text
-            Sets the text elements associated with each location.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
-        uid
-            Assign an id to this trace, Use this to provide object
-            constancy between traces during animations and
-            transitions.
-        uirevision
-            Controls persistence of some user-driven changes to the
-            trace: `constraintrange` in `parcoords` traces, as well
-            as some `editable: true` modifications such as `name`
-            and `colorbar.title`. Defaults to `layout.uirevision`.
-            Note that other user-driven trace attribute changes are
-            controlled by `layout` attributes: `trace.visible` is
-            controlled by `layout.legend.uirevision`,
-            `selectedpoints` is controlled by
-            `layout.selectionrevision`, and `colorbar.(x|y)`
-            (accessible with `config: {editable: true}`) is
-            controlled by `layout.editrevision`. Trace changes are
-            tracked by `uid`, which only falls back on trace index
-            if no `uid` is provided. So if your app can add/remove
-            traces before the end of the `data` array, such that
-            the same trace has a different index, you can still
-            preserve user-driven changes if you give each trace a
-            `uid` that stays with it as it moves.
-        unselected
-            :class:`plotly.graph_objects.choroplethmapbox.Unselecte
-            d` instance or dict with compatible properties
-        visible
-            Determines whether or not this trace is visible. If
-            "legendonly", the trace is not drawn, but can appear as
-            a legend item (provided that the legend itself is
-            visible).
-        z
-            Sets the color values.
-        zauto
-            Determines whether or not the color domain is computed
-            with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax` Defaults to `false`
-            when `zmin` and `zmax` are set by the user.
-        zmax
-            Sets the upper bound of the color domain. Value should
-            have the same units as in `z` and if set, `zmin` must
-            be set as well.
-        zmid
-            Sets the mid-point of the color domain by scaling
-            `zmin` and/or `zmax` to be equidistant to this point.
-            Value should have the same units as in `z`. Has no
-            effect when `zauto` is `false`.
-        zmin
-            Sets the lower bound of the color domain. Value should
-            have the same units as in `z` and if set, `zmax` must
-            be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
-        row : 'all', int or None (default)
-            Subplot row index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            rows in the specified column(s).
-        col : 'all', int or None (default)
-            Subplot col index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            columns in the specified row(s).
-
-        Returns
-        -------
-        Figure
-        """
-        from plotly.graph_objs import Choroplethmapbox
-
-        new_trace = Choroplethmapbox(
-            autocolorscale=autocolorscale,
-            below=below,
-            coloraxis=coloraxis,
-            colorbar=colorbar,
-            colorscale=colorscale,
-            customdata=customdata,
-            customdatasrc=customdatasrc,
-            featureidkey=featureidkey,
-            geojson=geojson,
-            hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
-            hoverlabel=hoverlabel,
-            hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
-            hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
-            ids=ids,
-            idssrc=idssrc,
-            legend=legend,
-            legendgroup=legendgroup,
-            legendgrouptitle=legendgrouptitle,
-            legendrank=legendrank,
-            legendwidth=legendwidth,
-            locations=locations,
-            locationssrc=locationssrc,
-            marker=marker,
-            meta=meta,
-            metasrc=metasrc,
-            name=name,
-            reversescale=reversescale,
-            selected=selected,
-            selectedpoints=selectedpoints,
-            showlegend=showlegend,
-            showscale=showscale,
-            stream=stream,
-            subplot=subplot,
-            text=text,
-            textsrc=textsrc,
-            uid=uid,
-            uirevision=uirevision,
-            unselected=unselected,
-            visible=visible,
-            z=z,
-            zauto=zauto,
-            zmax=zmax,
-            zmid=zmid,
-            zmin=zmin,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -4091,16 +3384,12 @@ class Figure(BaseFigure):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -4109,7 +3398,6 @@ class Figure(BaseFigure):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -4118,30 +3406,22 @@ class Figure(BaseFigure):
         showscale=None,
         sizemode=None,
         sizeref=None,
-        stream=None,
         text=None,
-        textsrc=None,
         u=None,
         uhoverformat=None,
         uid=None,
         uirevision=None,
-        usrc=None,
         v=None,
         vhoverformat=None,
         visible=None,
-        vsrc=None,
         w=None,
         whoverformat=None,
-        wsrc=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -4198,31 +3478,25 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.cone.Hoverlabel` instance
             or dict with compatible properties
@@ -4244,11 +3518,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `norm` Anything contained in tag `<extra>`
@@ -4256,21 +3535,17 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -4317,9 +3592,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -4366,21 +3638,15 @@ class Figure(BaseFigure):
             0.5. With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
-        stream
-            :class:`plotly.graph_objects.cone.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with the cones. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rulefor `u`  using d3
+            Sets the hover text formatting rule for `u` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -4407,13 +3673,10 @@ class Figure(BaseFigure):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
-        usrc
-            Sets the source reference on Chart Studio Cloud for
-            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rulefor `v`  using d3
+            Sets the hover text formatting rule for `v` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -4423,25 +3686,19 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        vsrc
-            Sets the source reference on Chart Studio Cloud for
-            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rulefor `w`  using d3
+            Sets the hover text formatting rule for `w` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        wsrc
-            Sets the source reference on Chart Studio Cloud for
-            `w`.
         x
             Sets the x coordinates of the vector field and of the
             displayed cones.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -4453,14 +3710,11 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates of the vector field and of the
             displayed cones.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -4472,14 +3726,11 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates of the vector field and of the
             displayed cones.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -4491,9 +3742,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -4522,16 +3770,12 @@ class Figure(BaseFigure):
             colorbar=colorbar,
             colorscale=colorscale,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -4540,7 +3784,6 @@ class Figure(BaseFigure):
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             reversescale=reversescale,
@@ -4549,30 +3792,22 @@ class Figure(BaseFigure):
             showscale=showscale,
             sizemode=sizemode,
             sizeref=sizeref,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             u=u,
             uhoverformat=uhoverformat,
             uid=uid,
             uirevision=uirevision,
-            usrc=usrc,
             v=v,
             vhoverformat=vhoverformat,
             visible=visible,
-            vsrc=vsrc,
             w=w,
             whoverformat=whoverformat,
-            wsrc=wsrc,
             x=x,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -4587,20 +3822,16 @@ class Figure(BaseFigure):
         connectgaps=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoverongaps=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -4608,18 +3839,16 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         ncontours=None,
         opacity=None,
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
         textfont=None,
-        textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -4632,7 +3861,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         xtype=None,
         y=None,
         y0=None,
@@ -4642,7 +3870,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         ytype=None,
         z=None,
         zauto=None,
@@ -4651,7 +3878,6 @@ class Figure(BaseFigure):
         zmid=None,
         zmin=None,
         zorder=None,
-        zsrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -4695,15 +3921,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in. It is defaulted
@@ -4717,9 +3943,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -4730,13 +3953,10 @@ class Figure(BaseFigure):
             color, marker color, or marker line color, whichever is
             available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.contour.Hoverlabel`
             instance or dict with compatible properties
@@ -4762,32 +3982,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -4831,9 +4052,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -4855,21 +4073,15 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.contour.Stream` instance
-            or dict with compatible properties
         text
             Sets the text elements associated with each z value.
         textfont
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Sets the text font.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -4880,10 +4092,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         transpose
             Transposes the z data.
         uid
@@ -4927,7 +4149,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -4955,9 +4177,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -4978,7 +4197,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -5006,9 +4225,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -5023,7 +4239,7 @@ class Figure(BaseFigure):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -5046,9 +4262,6 @@ class Figure(BaseFigure):
             relative to other SVG traces on the same subplot. SVG
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -5085,20 +4298,16 @@ class Figure(BaseFigure):
             connectgaps=connectgaps,
             contours=contours,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoverongaps=hoverongaps,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -5106,18 +4315,16 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             ncontours=ncontours,
             opacity=opacity,
             reversescale=reversescale,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             text=text,
             textfont=textfont,
-            textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             transpose=transpose,
             uid=uid,
             uirevision=uirevision,
@@ -5130,7 +4337,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             xtype=xtype,
             y=y,
             y0=y0,
@@ -5140,7 +4346,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             ytype=ytype,
             z=z,
             zauto=zauto,
@@ -5149,7 +4354,6 @@ class Figure(BaseFigure):
             zmid=zmid,
             zmin=zmin,
             zorder=zorder,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -5158,13 +4362,11 @@ class Figure(BaseFigure):
         self,
         a=None,
         a0=None,
-        asrc=None,
         atype=None,
         autocolorscale=None,
         autocontour=None,
         b=None,
         b0=None,
-        bsrc=None,
         btype=None,
         carpet=None,
         coloraxis=None,
@@ -5172,14 +4374,11 @@ class Figure(BaseFigure):
         colorscale=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         da=None,
         db=None,
         fillcolor=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -5187,16 +4386,13 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         ncontours=None,
         opacity=None,
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
-        textsrc=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -5209,7 +4405,6 @@ class Figure(BaseFigure):
         zmid=None,
         zmin=None,
         zorder=None,
-        zsrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -5230,9 +4425,6 @@ class Figure(BaseFigure):
             Alternate to `x`. Builds a linear space of x
             coordinates. Use with `dx` where `x0` is the starting
             coordinate and `dx` the step.
-        asrc
-            Sets the source reference on Chart Studio Cloud for
-            `a`.
         atype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -5257,9 +4449,6 @@ class Figure(BaseFigure):
             Alternate to `y`. Builds a linear space of y
             coordinates. Use with `dy` where `y0` is the starting
             coordinate and `dy` the step.
-        bsrc
-            Sets the source reference on Chart Studio Cloud for
-            `b`.
         btype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -5282,15 +4471,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
             :class:`plotly.graph_objects.contourcarpet.Contours`
             instance or dict with compatible properties
@@ -5299,9 +4488,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         da
             Sets the x coordinate step. See `x0` for more info.
         db
@@ -5313,16 +4499,10 @@ class Figure(BaseFigure):
             available.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -5366,9 +4546,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -5390,14 +4567,8 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.contourcarpet.Stream`
-            instance or dict with compatible properties
         text
             Sets the text elements associated with each z value.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         transpose
             Transposes the z data.
         uid
@@ -5462,9 +4633,6 @@ class Figure(BaseFigure):
             relative to other SVG traces on the same subplot. SVG
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -5495,13 +4663,11 @@ class Figure(BaseFigure):
         new_trace = Contourcarpet(
             a=a,
             a0=a0,
-            asrc=asrc,
             atype=atype,
             autocolorscale=autocolorscale,
             autocontour=autocontour,
             b=b,
             b0=b0,
-            bsrc=bsrc,
             btype=btype,
             carpet=carpet,
             coloraxis=coloraxis,
@@ -5509,14 +4675,11 @@ class Figure(BaseFigure):
             colorscale=colorscale,
             contours=contours,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             da=da,
             db=db,
             fillcolor=fillcolor,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -5524,16 +4687,13 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             ncontours=ncontours,
             opacity=opacity,
             reversescale=reversescale,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             transpose=transpose,
             uid=uid,
             uirevision=uirevision,
@@ -5546,7 +4706,6 @@ class Figure(BaseFigure):
             zmid=zmid,
             zmin=zmin,
             zorder=zorder,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -5559,38 +4718,28 @@ class Figure(BaseFigure):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         lat=None,
-        latsrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         lon=None,
-        lonsrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         radius=None,
-        radiussrc=None,
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         subplot=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -5599,7 +4748,6 @@ class Figure(BaseFigure):
         zmax=None,
         zmid=None,
         zmin=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -5639,31 +4787,25 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.densitymap.Hoverlabel`
             instance or dict with compatible properties
@@ -5685,20 +4827,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair If a single string, the same string appears over
@@ -5706,21 +4855,12 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (lon,lat)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
-        latsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lat`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -5750,9 +4890,6 @@ class Figure(BaseFigure):
             this trace.
         lon
             Sets the longitude coordinates (in degrees East).
-        lonsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lon`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -5766,9 +4903,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -5778,9 +4912,6 @@ class Figure(BaseFigure):
             Sets the radius of influence of one `lon` / `lat` point
             in pixels. Increasing the value makes the densitymap
             trace smoother, but less detailed.
-        radiussrc
-            Sets the source reference on Chart Studio Cloud for
-            `radius`.
         reversescale
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
@@ -5791,9 +4922,6 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.densitymap.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a map subplot. If "map" (the default value), the
@@ -5807,9 +4935,6 @@ class Figure(BaseFigure):
             coordinates. If trace `hoverinfo` contains a "text"
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -5859,9 +4984,6 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -5886,38 +5008,28 @@ class Figure(BaseFigure):
             colorbar=colorbar,
             colorscale=colorscale,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             lat=lat,
-            latsrc=latsrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             lon=lon,
-            lonsrc=lonsrc,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             radius=radius,
-            radiussrc=radiussrc,
             reversescale=reversescale,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             subplot=subplot,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -5926,396 +5038,6 @@ class Figure(BaseFigure):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
-            zsrc=zsrc,
-            **kwargs,
-        )
-        return self.add_trace(new_trace, row=row, col=col)
-
-    def add_densitymapbox(
-        self,
-        autocolorscale=None,
-        below=None,
-        coloraxis=None,
-        colorbar=None,
-        colorscale=None,
-        customdata=None,
-        customdatasrc=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        lat=None,
-        latsrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        lon=None,
-        lonsrc=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        opacity=None,
-        radius=None,
-        radiussrc=None,
-        reversescale=None,
-        showlegend=None,
-        showscale=None,
-        stream=None,
-        subplot=None,
-        text=None,
-        textsrc=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        z=None,
-        zauto=None,
-        zmax=None,
-        zmid=None,
-        zmin=None,
-        zsrc=None,
-        row=None,
-        col=None,
-        **kwargs,
-    ) -> "Figure":
-        """
-        Add a new Densitymapbox trace
-
-        "densitymapbox" trace is deprecated! Please consider switching
-        to the "densitymap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/python/maplibre-migration/ as well as
-        https://plotly.com/javascript/maplibre-migration/ Draws a
-        bivariate kernel density estimation with a Gaussian kernel from
-        `lon` and `lat` coordinates and optional `z` values using a
-        colorscale.
-
-        Parameters
-        ----------
-        autocolorscale
-            Determines whether the colorscale is a default palette
-            (`autocolorscale: true`) or the palette determined by
-            `colorscale`. In case `colorscale` is unspecified or
-            `autocolorscale` is true, the default palette will be
-            chosen according to whether numbers in the `color`
-            array are all positive, all negative or mixed.
-        below
-            Determines if the densitymapbox trace will be inserted
-            before the layer with the specified ID. By default,
-            densitymapbox traces are placed below the first layer
-            of type symbol If set to '', the layer will be inserted
-            above every existing layer.
-        coloraxis
-            Sets a reference to a shared color axis. References to
-            these shared color axes are "coloraxis", "coloraxis2",
-            "coloraxis3", etc. Settings for these shared color axes
-            are set in the layout, under `layout.coloraxis`,
-            `layout.coloraxis2`, etc. Note that multiple color
-            scales can be linked to the same color axis.
-        colorbar
-            :class:`plotly.graph_objects.densitymapbox.ColorBar`
-            instance or dict with compatible properties
-        colorscale
-            Sets the colorscale. The colorscale must be an array
-            containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-        customdata
-            Assigns extra data each datum. This may be useful when
-            listening to hover, click and selection events. Note
-            that, "scatter" traces also appends customdata items in
-            the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
-        hoverlabel
-            :class:`plotly.graph_objects.densitymapbox.Hoverlabel`
-            instance or dict with compatible properties
-        hovertemplate
-            Template string used for rendering the information that
-            appear on hover box. Note that this will override
-            `hoverinfo`. Variables are inserted using %{variable},
-            for example "y: %{y}" as well as %{xother}, {%_xother},
-            {%_xother_}, {%xother_}. When showing info for several
-            points, "xother" will be added to those with different
-            x positions from the first point. An underscore before
-            or after "(x|y)other" will add a space on that side,
-            only when this field is shown. Numbers are formatted
-            using d3-format's syntax %{variable:d3-format}, for
-            example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
-            for details on the formatting syntax. Dates are
-            formatted using d3-time-format's syntax
-            %{variable|d3-time-format}, for example "Day:
-            %{2019-01-01|%A}". https://github.com/d3/d3-time-
-            format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
-            `hovertemplate` are the ones emitted as event data
-            described at this link
-            https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
-            specified per-point (the ones that are `arrayOk: true`)
-            are available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
-            `<extra>%{fullData.name}</extra>`. To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
-        hovertext
-            Sets hover text elements associated with each (lon,lat)
-            pair If a single string, the same string appears over
-            all the data points. If an array of string, the items
-            are mapped in order to the this trace's (lon,lat)
-            coordinates. To be seen, trace `hoverinfo` must contain
-            a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
-        ids
-            Assigns id labels to each datum. These ids for object
-            constancy of data points during animation. Should be an
-            array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
-        lat
-            Sets the latitude coordinates (in degrees North).
-        latsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lat`.
-        legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
-        legendgroup
-            Sets the legend group for this trace. Traces and shapes
-            part of the same legend group hide/show at the same
-            time when toggling legend items.
-        legendgrouptitle
-            :class:`plotly.graph_objects.densitymapbox.Legendgroupt
-            itle` instance or dict with compatible properties
-        legendrank
-            Sets the legend rank for this trace. Items and groups
-            with smaller ranks are presented on top/left side while
-            with "reversed" `legend.traceorder` they are on
-            bottom/right side. The default legendrank is 1000, so
-            that you can use ranks less than 1000 to place certain
-            items before all unranked items, and ranks greater than
-            1000 to go after all unranked items. When having
-            unranked or equal rank items shapes would be displayed
-            after traces i.e. according to their order in data and
-            layout.
-        legendwidth
-            Sets the width (in px or fraction) of the legend for
-            this trace.
-        lon
-            Sets the longitude coordinates (in degrees East).
-        lonsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lon`.
-        meta
-            Assigns extra meta information associated with this
-            trace that can be used in various text attributes.
-            Attributes such as trace `name`, graph, axis and
-            colorbar `title.text`, annotation `text`
-            `rangeselector`, `updatemenues` and `sliders` `label`
-            text all support `meta`. To access the trace `meta`
-            values in an attribute in the same trace, simply use
-            `%{meta[i]}` where `i` is the index or key of the
-            `meta` item in question. To access trace `meta` in
-            layout attributes, use `%{data[n[.meta[i]}` where `i`
-            is the index or key of the `meta` and `n` is the trace
-            index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
-        name
-            Sets the trace name. The trace name appears as the
-            legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
-        radius
-            Sets the radius of influence of one `lon` / `lat` point
-            in pixels. Increasing the value makes the densitymapbox
-            trace smoother, but less detailed.
-        radiussrc
-            Sets the source reference on Chart Studio Cloud for
-            `radius`.
-        reversescale
-            Reverses the color mapping if true. If true, `zmin`
-            will correspond to the last color in the array and
-            `zmax` will correspond to the first color.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
-        showscale
-            Determines whether or not a colorbar is displayed for
-            this trace.
-        stream
-            :class:`plotly.graph_objects.densitymapbox.Stream`
-            instance or dict with compatible properties
-        subplot
-            mapbox subplots and traces are deprecated! Please
-            consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/python/maplibre-migration/
-            as well as https://plotly.com/javascript/maplibre-
-            migration/ Sets a reference between this trace's data
-            coordinates and a mapbox subplot. If "mapbox" (the
-            default value), the data refer to `layout.mapbox`. If
-            "mapbox2", the data refer to `layout.mapbox2`, and so
-            on.
-        text
-            Sets text elements associated with each (lon,lat) pair
-            If a single string, the same string appears over all
-            the data points. If an array of string, the items are
-            mapped in order to the this trace's (lon,lat)
-            coordinates. If trace `hoverinfo` contains a "text"
-            flag and "hovertext" is not set, these elements will be
-            seen in the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
-        uid
-            Assign an id to this trace, Use this to provide object
-            constancy between traces during animations and
-            transitions.
-        uirevision
-            Controls persistence of some user-driven changes to the
-            trace: `constraintrange` in `parcoords` traces, as well
-            as some `editable: true` modifications such as `name`
-            and `colorbar.title`. Defaults to `layout.uirevision`.
-            Note that other user-driven trace attribute changes are
-            controlled by `layout` attributes: `trace.visible` is
-            controlled by `layout.legend.uirevision`,
-            `selectedpoints` is controlled by
-            `layout.selectionrevision`, and `colorbar.(x|y)`
-            (accessible with `config: {editable: true}`) is
-            controlled by `layout.editrevision`. Trace changes are
-            tracked by `uid`, which only falls back on trace index
-            if no `uid` is provided. So if your app can add/remove
-            traces before the end of the `data` array, such that
-            the same trace has a different index, you can still
-            preserve user-driven changes if you give each trace a
-            `uid` that stays with it as it moves.
-        visible
-            Determines whether or not this trace is visible. If
-            "legendonly", the trace is not drawn, but can appear as
-            a legend item (provided that the legend itself is
-            visible).
-        z
-            Sets the points' weight. For example, a value of 10
-            would be equivalent to having 10 points of weight 1 in
-            the same spot
-        zauto
-            Determines whether or not the color domain is computed
-            with respect to the input data (here in `z`) or the
-            bounds set in `zmin` and `zmax` Defaults to `false`
-            when `zmin` and `zmax` are set by the user.
-        zmax
-            Sets the upper bound of the color domain. Value should
-            have the same units as in `z` and if set, `zmin` must
-            be set as well.
-        zmid
-            Sets the mid-point of the color domain by scaling
-            `zmin` and/or `zmax` to be equidistant to this point.
-            Value should have the same units as in `z`. Has no
-            effect when `zauto` is `false`.
-        zmin
-            Sets the lower bound of the color domain. Value should
-            have the same units as in `z` and if set, `zmax` must
-            be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
-        row : 'all', int or None (default)
-            Subplot row index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            rows in the specified column(s).
-        col : 'all', int or None (default)
-            Subplot col index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            columns in the specified row(s).
-
-        Returns
-        -------
-        Figure
-        """
-        from plotly.graph_objs import Densitymapbox
-
-        new_trace = Densitymapbox(
-            autocolorscale=autocolorscale,
-            below=below,
-            coloraxis=coloraxis,
-            colorbar=colorbar,
-            colorscale=colorscale,
-            customdata=customdata,
-            customdatasrc=customdatasrc,
-            hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
-            hoverlabel=hoverlabel,
-            hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
-            hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
-            ids=ids,
-            idssrc=idssrc,
-            lat=lat,
-            latsrc=latsrc,
-            legend=legend,
-            legendgroup=legendgroup,
-            legendgrouptitle=legendgrouptitle,
-            legendrank=legendrank,
-            legendwidth=legendwidth,
-            lon=lon,
-            lonsrc=lonsrc,
-            meta=meta,
-            metasrc=metasrc,
-            name=name,
-            opacity=opacity,
-            radius=radius,
-            radiussrc=radiussrc,
-            reversescale=reversescale,
-            showlegend=showlegend,
-            showscale=showscale,
-            stream=stream,
-            subplot=subplot,
-            text=text,
-            textsrc=textsrc,
-            uid=uid,
-            uirevision=uirevision,
-            visible=visible,
-            z=z,
-            zauto=zauto,
-            zmax=zmax,
-            zmid=zmid,
-            zmin=zmin,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -6327,18 +5049,14 @@ class Figure(BaseFigure):
         connector=None,
         constraintext=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
         legend=None,
@@ -6348,7 +5066,6 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         offset=None,
         offsetgroup=None,
@@ -6357,16 +5074,13 @@ class Figure(BaseFigure):
         outsidetextfont=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textangle=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -6378,7 +5092,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -6386,7 +5099,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -6426,21 +5138,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
             Sets the y coordinate step. See `y0` for more info.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.funnel.Hoverlabel`
             instance or dict with compatible properties
@@ -6462,11 +5168,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `percentInitial`, `percentPrevious` and
@@ -6475,9 +5186,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -6485,16 +5198,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -6543,9 +5250,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -6580,9 +5284,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.funnel.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -6600,9 +5301,12 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `text`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
             In the case of having multiple funnels, percentages &
-            totals are computed separately (per trace).
+            totals are computed separately (per trace). Flags are
+            rendered in a fixed order; use `texttemplate` if you
+            need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
@@ -6613,15 +5317,9 @@ class Figure(BaseFigure):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -6632,14 +5330,21 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `percentInitial`, `percentPrevious`,
             `percentTotal`, `label` and `value`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -6681,7 +5386,7 @@ class Figure(BaseFigure):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -6709,9 +5414,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -6724,7 +5426,7 @@ class Figure(BaseFigure):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -6752,9 +5454,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -6793,18 +5492,14 @@ class Figure(BaseFigure):
             connector=connector,
             constraintext=constraintext,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legend=legend,
@@ -6814,7 +5509,6 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             offset=offset,
             offsetgroup=offsetgroup,
@@ -6823,16 +5517,13 @@ class Figure(BaseFigure):
             outsidetextfont=outsidetextfont,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textangle=textangle,
             textfont=textfont,
             textinfo=textinfo,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -6844,7 +5535,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
@@ -6852,7 +5542,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -6863,22 +5552,17 @@ class Figure(BaseFigure):
         aspectratio=None,
         baseratio=None,
         customdata=None,
-        customdatasrc=None,
         dlabel=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         label0=None,
         labels=None,
-        labelssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -6886,25 +5570,20 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         scalegroup=None,
         showlegend=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         title=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         row=None,
         col=None,
@@ -6931,22 +5610,17 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dlabel
             Sets the label step. See `label0` for more info.
         domain
             :class:`plotly.graph_objects.funnelarea.Domain`
             instance or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.funnelarea.Hoverlabel`
             instance or dict with compatible properties
@@ -6968,11 +5642,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `text` and
@@ -6981,25 +5660,21 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -7013,9 +5688,6 @@ class Figure(BaseFigure):
             occurrences if `values` is not provided. For other
             array attributes (including color) we use the first
             non-empty entry among all occurrences of the label.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -7059,9 +5731,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -7075,9 +5744,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.funnelarea.Stream`
-            instance or dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -7087,18 +5753,15 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Specifies the location of the `textinfo`.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -7109,14 +5772,21 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `text` and
             `percent`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         title
             :class:`plotly.graph_objects.funnelarea.Title` instance
             or dict with compatible properties
@@ -7145,9 +5815,6 @@ class Figure(BaseFigure):
         values
             Sets the values of the sectors. If omitted, we count
             occurrences of each label.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -7174,22 +5841,17 @@ class Figure(BaseFigure):
             aspectratio=aspectratio,
             baseratio=baseratio,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dlabel=dlabel,
             domain=domain,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextfont=insidetextfont,
             label0=label0,
             labels=labels,
-            labelssrc=labelssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -7197,25 +5859,20 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             scalegroup=scalegroup,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textfont=textfont,
             textinfo=textinfo,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             title=title,
             uid=uid,
             uirevision=uirevision,
             values=values,
-            valuessrc=valuessrc,
             visible=visible,
             **kwargs,
         )
@@ -7229,36 +5886,30 @@ class Figure(BaseFigure):
         colorscale=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoverongaps=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
         textfont=None,
-        textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -7272,7 +5923,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         xtype=None,
         y=None,
         y0=None,
@@ -7283,7 +5933,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         ytype=None,
         z=None,
         zauto=None,
@@ -7293,7 +5942,6 @@ class Figure(BaseFigure):
         zmin=None,
         zorder=None,
         zsmooth=None,
-        zsrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -7342,15 +5990,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in. It is defaulted
@@ -7361,21 +6009,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
             Sets the y coordinate step. See `y0` for more info.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.heatmap.Hoverlabel`
             instance or dict with compatible properties
@@ -7401,32 +6043,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -7467,9 +6110,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -7485,19 +6125,13 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.heatmap.Stream` instance
-            or dict with compatible properties
         text
             Sets the text elements associated with each z value.
         textfont
             Sets the text font.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -7508,10 +6142,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         transpose
             Transposes the z data.
         uid
@@ -7557,7 +6201,7 @@ class Figure(BaseFigure):
         xgap
             Sets the horizontal gap (in pixels) between bricks.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -7585,9 +6229,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -7610,7 +6251,7 @@ class Figure(BaseFigure):
         ygap
             Sets the vertical gap (in pixels) between bricks.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -7638,9 +6279,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -7655,7 +6293,7 @@ class Figure(BaseFigure):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -7680,9 +6318,6 @@ class Figure(BaseFigure):
             with lower `zorder`.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -7717,36 +6352,30 @@ class Figure(BaseFigure):
             colorscale=colorscale,
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoverongaps=hoverongaps,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             reversescale=reversescale,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             text=text,
             textfont=textfont,
-            textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             transpose=transpose,
             uid=uid,
             uirevision=uirevision,
@@ -7760,7 +6389,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             xtype=xtype,
             y=y,
             y0=y0,
@@ -7771,7 +6399,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             ytype=ytype,
             z=z,
             zauto=zauto,
@@ -7781,7 +6408,6 @@ class Figure(BaseFigure):
             zmin=zmin,
             zorder=zorder,
             zsmooth=zsmooth,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -7796,20 +6422,16 @@ class Figure(BaseFigure):
         constraintext=None,
         cumulative=None,
         customdata=None,
-        customdatasrc=None,
         error_x=None,
         error_y=None,
         histfunc=None,
         histnorm=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
         legend=None,
@@ -7819,7 +6441,6 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -7830,13 +6451,12 @@ class Figure(BaseFigure):
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textangle=None,
         textfont=None,
         textposition=None,
-        textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -7846,13 +6466,11 @@ class Figure(BaseFigure):
         xbins=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yaxis=None,
         ybins=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -7912,9 +6530,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         error_x
             :class:`plotly.graph_objects.histogram.ErrorX` instance
             or dict with compatible properties
@@ -7947,13 +6562,10 @@ class Figure(BaseFigure):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram.Hoverlabel`
             instance or dict with compatible properties
@@ -7975,11 +6587,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `binNumber` Anything contained in tag
@@ -7987,21 +6604,17 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -8050,9 +6663,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -8093,9 +6703,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.histogram.Stream` instance
-            or dict with compatible properties
         text
             Sets hover text elements associated with each bar. If a
             single string, the same string appears over all bars.
@@ -8119,12 +6726,9 @@ class Figure(BaseFigure):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -8135,10 +6739,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label` and `value`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8182,7 +6796,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -8194,9 +6808,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -8210,7 +6821,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -8222,9 +6833,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -8266,20 +6874,16 @@ class Figure(BaseFigure):
             constraintext=constraintext,
             cumulative=cumulative,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             error_x=error_x,
             error_y=error_y,
             histfunc=histfunc,
             histnorm=histnorm,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
             legend=legend,
@@ -8289,7 +6893,6 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             nbinsx=nbinsx,
             nbinsy=nbinsy,
@@ -8300,13 +6903,12 @@ class Figure(BaseFigure):
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textangle=textangle,
             textfont=textfont,
             textposition=textposition,
-            textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -8316,13 +6918,11 @@ class Figure(BaseFigure):
             xbins=xbins,
             xcalendar=xcalendar,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yaxis=yaxis,
             ybins=ybins,
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -8338,16 +6938,13 @@ class Figure(BaseFigure):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         histfunc=None,
         histnorm=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -8355,7 +6952,6 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -8363,9 +6959,9 @@ class Figure(BaseFigure):
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         textfont=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -8376,7 +6972,6 @@ class Figure(BaseFigure):
         xcalendar=None,
         xgap=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yaxis=None,
         ybingroup=None,
@@ -8384,7 +6979,6 @@ class Figure(BaseFigure):
         ycalendar=None,
         ygap=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zauto=None,
         zhoverformat=None,
@@ -8392,7 +6986,6 @@ class Figure(BaseFigure):
         zmid=None,
         zmin=None,
         zsmooth=None,
-        zsrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -8447,23 +7040,20 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         histfunc
             Specifies the binning function used for this histogram
             trace. If "count", the histogram values are computed by
@@ -8490,13 +7080,10 @@ class Figure(BaseFigure):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram2d.Hoverlabel`
             instance or dict with compatible properties
@@ -8518,11 +7105,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
@@ -8530,16 +7122,15 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -8583,9 +7174,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -8613,14 +7201,11 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.histogram2d.Stream`
-            instance or dict with compatible properties
         textfont
             Sets the text font.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -8631,10 +7216,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z`
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8684,7 +7279,7 @@ class Figure(BaseFigure):
         xgap
             Sets the horizontal gap (in pixels) between bricks.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -8696,9 +7291,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -8721,7 +7313,7 @@ class Figure(BaseFigure):
         ygap
             Sets the vertical gap (in pixels) between bricks.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -8733,9 +7325,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the aggregation data.
         zauto
@@ -8744,7 +7333,7 @@ class Figure(BaseFigure):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -8764,9 +7353,6 @@ class Figure(BaseFigure):
             be set as well.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -8803,16 +7389,13 @@ class Figure(BaseFigure):
             colorbar=colorbar,
             colorscale=colorscale,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             histfunc=histfunc,
             histnorm=histnorm,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -8820,7 +7403,6 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             nbinsx=nbinsx,
             nbinsy=nbinsy,
@@ -8828,9 +7410,9 @@ class Figure(BaseFigure):
             reversescale=reversescale,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             textfont=textfont,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -8841,7 +7423,6 @@ class Figure(BaseFigure):
             xcalendar=xcalendar,
             xgap=xgap,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yaxis=yaxis,
             ybingroup=ybingroup,
@@ -8849,7 +7430,6 @@ class Figure(BaseFigure):
             ycalendar=ycalendar,
             ygap=ygap,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zauto=zauto,
             zhoverformat=zhoverformat,
@@ -8857,7 +7437,6 @@ class Figure(BaseFigure):
             zmid=zmid,
             zmin=zmin,
             zsmooth=zsmooth,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -8874,16 +7453,13 @@ class Figure(BaseFigure):
         colorscale=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         histfunc=None,
         histnorm=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -8892,7 +7468,6 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -8901,9 +7476,9 @@ class Figure(BaseFigure):
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         textfont=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -8913,21 +7488,18 @@ class Figure(BaseFigure):
         xbins=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yaxis=None,
         ybingroup=None,
         ybins=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zauto=None,
         zhoverformat=None,
         zmax=None,
         zmid=None,
         zmin=None,
-        zsrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -8987,15 +7559,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
             :class:`plotly.graph_objects.histogram2dcontour.Contour
             s` instance or dict with compatible properties
@@ -9004,9 +7576,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         histfunc
             Specifies the binning function used for this histogram
             trace. If "count", the histogram values are computed by
@@ -9033,13 +7602,10 @@ class Figure(BaseFigure):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
@@ -9061,11 +7627,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
@@ -9073,16 +7644,15 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -9129,9 +7699,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -9165,16 +7732,13 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.histogram2dcontour.Stream`
-            instance or dict with compatible properties
         textfont
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Sets the text font.
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -9185,10 +7749,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -9236,7 +7810,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -9248,9 +7822,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -9271,7 +7842,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -9283,9 +7854,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the aggregation data.
         zauto
@@ -9294,7 +7862,7 @@ class Figure(BaseFigure):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -9312,9 +7880,6 @@ class Figure(BaseFigure):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -9353,16 +7918,13 @@ class Figure(BaseFigure):
             colorscale=colorscale,
             contours=contours,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             histfunc=histfunc,
             histnorm=histnorm,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -9371,7 +7933,6 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             nbinsx=nbinsx,
             nbinsy=nbinsy,
@@ -9380,9 +7941,9 @@ class Figure(BaseFigure):
             reversescale=reversescale,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             textfont=textfont,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -9392,21 +7953,18 @@ class Figure(BaseFigure):
             xbins=xbins,
             xcalendar=xcalendar,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yaxis=yaxis,
             ybingroup=ybingroup,
             ybins=ybins,
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zauto=zauto,
             zhoverformat=zhoverformat,
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -9416,20 +7974,15 @@ class Figure(BaseFigure):
         branchvalues=None,
         count=None,
         customdata=None,
-        customdatasrc=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         labels=None,
-        labelssrc=None,
         leaf=None,
         legend=None,
         legendgrouptitle=None,
@@ -9439,28 +7992,23 @@ class Figure(BaseFigure):
         marker=None,
         maxdepth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
         parents=None,
-        parentssrc=None,
         pathbar=None,
         root=None,
         sort=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         tiling=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         row=None,
         col=None,
@@ -9491,20 +8039,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.icicle.Domain` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.icicle.Hoverlabel`
             instance or dict with compatible properties
@@ -9526,11 +8069,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
@@ -9540,33 +8088,26 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
         labels
             Sets the labels of each of the sectors.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         leaf
             :class:`plotly.graph_objects.icicle.Leaf` instance or
             dict with compatible properties
@@ -9619,9 +8160,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -9641,9 +8179,6 @@ class Figure(BaseFigure):
             items are understood to be "ids" themselves. When `ids`
             is not set, plotly attempts to find matching items in
             `labels`, but beware they must be unique.
-        parentssrc
-            Sets the source reference on Chart Studio Cloud for
-            `parents`.
         pathbar
             :class:`plotly.graph_objects.icicle.Pathbar` instance
             or dict with compatible properties
@@ -9653,9 +8188,6 @@ class Figure(BaseFigure):
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.icicle.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -9665,15 +8197,15 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Sets the positions of the `text` elements.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -9684,15 +8216,22 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
             `percentRoot`, `percentEntry`, `percentParent`, `label`
             and `value`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         tiling
             :class:`plotly.graph_objects.icicle.Tiling` instance or
             dict with compatible properties
@@ -9722,9 +8261,6 @@ class Figure(BaseFigure):
             Sets the values associated with each of the sectors.
             Use with `branchvalues` to determine how the values are
             summed.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -9751,20 +8287,15 @@ class Figure(BaseFigure):
             branchvalues=branchvalues,
             count=count,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             domain=domain,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextfont=insidetextfont,
             labels=labels,
-            labelssrc=labelssrc,
             leaf=leaf,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
@@ -9774,28 +8305,23 @@ class Figure(BaseFigure):
             marker=marker,
             maxdepth=maxdepth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             outsidetextfont=outsidetextfont,
             parents=parents,
-            parentssrc=parentssrc,
             pathbar=pathbar,
             root=root,
             sort=sort,
-            stream=stream,
             text=text,
             textfont=textfont,
             textinfo=textinfo,
             textposition=textposition,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             tiling=tiling,
             uid=uid,
             uirevision=uirevision,
             values=values,
-            valuessrc=valuessrc,
             visible=visible,
             **kwargs,
         )
@@ -9805,30 +8331,23 @@ class Figure(BaseFigure):
         self,
         colormodel=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         source=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -9841,7 +8360,6 @@ class Figure(BaseFigure):
         zmin=None,
         zorder=None,
         zsmooth=None,
-        zsrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -9869,21 +8387,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Set the pixel's horizontal size.
         dy
             Set the pixel's vertical size
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.image.Hoverlabel` instance
             or dict with compatible properties
@@ -9905,11 +8417,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `z`, `color` and `colormodel`. Anything
@@ -9918,21 +8435,17 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -9969,9 +8482,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -9981,14 +8491,8 @@ class Figure(BaseFigure):
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
             subtype\\>][;base64\\],<data\\>"
-        stream
-            :class:`plotly.graph_objects.image.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each z value.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -10068,9 +8572,6 @@ class Figure(BaseFigure):
             Picks a smoothing algorithm used to smooth `z` data.
             This only applies for image traces that use the
             `source` attribute.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -10101,30 +8602,23 @@ class Figure(BaseFigure):
         new_trace = Image(
             colormodel=colormodel,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             source=source,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -10137,7 +8631,6 @@ class Figure(BaseFigure):
             zmin=zmin,
             zorder=zorder,
             zsmooth=zsmooth,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -10146,22 +8639,18 @@ class Figure(BaseFigure):
         self,
         align=None,
         customdata=None,
-        customdatasrc=None,
         delta=None,
         domain=None,
         gauge=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         number=None,
-        stream=None,
         title=None,
         uid=None,
         uirevision=None,
@@ -10193,9 +8682,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         delta
             :class:`plotly.graph_objects.indicator.Delta` instance
             or dict with compatible properties
@@ -10208,9 +8694,6 @@ class Figure(BaseFigure):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -10247,9 +8730,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines how the value is displayed on the graph.
             `number` displays the value numerically in text.
@@ -10261,9 +8741,6 @@ class Figure(BaseFigure):
             legend item and on hover.
         number
             :class:`plotly.graph_objects.indicator.Number` instance
-            or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.indicator.Stream` instance
             or dict with compatible properties
         title
             :class:`plotly.graph_objects.indicator.Title` instance
@@ -10317,22 +8794,18 @@ class Figure(BaseFigure):
         new_trace = Indicator(
             align=align,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             delta=delta,
             domain=domain,
             gauge=gauge,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             number=number,
-            stream=stream,
             title=title,
             uid=uid,
             uirevision=uirevision,
@@ -10355,17 +8828,13 @@ class Figure(BaseFigure):
         colorscale=None,
         contour=None,
         customdata=None,
-        customdatasrc=None,
         flatshading=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         isomax=None,
         isomin=None,
         legend=None,
@@ -10376,7 +8845,6 @@ class Figure(BaseFigure):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -10385,25 +8853,19 @@ class Figure(BaseFigure):
         showscale=None,
         slices=None,
         spaceframe=None,
-        stream=None,
         surface=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         value=None,
         valuehoverformat=None,
-        valuesrc=None,
         visible=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -10461,15 +8923,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.isosurface.Contour`
             instance or dict with compatible properties
@@ -10478,21 +8940,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.isosurface.Hoverlabel`
             instance or dict with compatible properties
@@ -10514,32 +8970,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         isomax
             Sets the maximum boundary for iso-surface plot.
         isomin
@@ -10590,9 +9047,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -10626,9 +9080,6 @@ class Figure(BaseFigure):
         spaceframe
             :class:`plotly.graph_objects.isosurface.Spaceframe`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.isosurface.Stream`
-            instance or dict with compatible properties
         surface
             :class:`plotly.graph_objects.isosurface.Surface`
             instance or dict with compatible properties
@@ -10637,9 +9088,6 @@ class Figure(BaseFigure):
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -10665,14 +9113,11 @@ class Figure(BaseFigure):
         value
             Sets the 4th dimension (value) of the vertices.
         valuehoverformat
-            Sets the hover text formatting rulefor `value`  using
+            Sets the hover text formatting rule for `value` using
             d3 formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        valuesrc
-            Sets the source reference on Chart Studio Cloud for
-            `value`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -10681,7 +9126,7 @@ class Figure(BaseFigure):
         x
             Sets the X coordinates of the vertices on X axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -10693,13 +9138,10 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -10711,13 +9153,10 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -10729,9 +9168,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -10761,17 +9197,13 @@ class Figure(BaseFigure):
             colorscale=colorscale,
             contour=contour,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             flatshading=flatshading,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
             legend=legend,
@@ -10782,7 +9214,6 @@ class Figure(BaseFigure):
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             reversescale=reversescale,
@@ -10791,25 +9222,19 @@ class Figure(BaseFigure):
             showscale=showscale,
             slices=slices,
             spaceframe=spaceframe,
-            stream=stream,
             surface=surface,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             value=value,
             valuehoverformat=valuehoverformat,
-            valuesrc=valuesrc,
             visible=visible,
             x=x,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -10828,29 +9253,20 @@ class Figure(BaseFigure):
         colorscale=None,
         contour=None,
         customdata=None,
-        customdatasrc=None,
         delaunayaxis=None,
         facecolor=None,
-        facecolorsrc=None,
         flatshading=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         i=None,
         ids=None,
-        idssrc=None,
         intensity=None,
         intensitymode=None,
-        intensitysrc=None,
-        isrc=None,
         j=None,
-        jsrc=None,
         k=None,
-        ksrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -10859,33 +9275,26 @@ class Figure(BaseFigure):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
         scene=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         vertexcolor=None,
-        vertexcolorsrc=None,
         visible=None,
         x=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zcalendar=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -10959,15 +9368,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.mesh3d.Contour` instance
             or dict with compatible properties
@@ -10976,9 +9385,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         delaunayaxis
             Sets the Delaunay axis, which is the axis that is
             perpendicular to the surface of the Delaunay
@@ -10988,21 +9394,15 @@ class Figure(BaseFigure):
         facecolor
             Sets the color of each face Overrides "color" and
             "vertexcolor".
-        facecolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `facecolor`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.mesh3d.Hoverlabel`
             instance or dict with compatible properties
@@ -11024,25 +9424,29 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -11056,33 +9460,21 @@ class Figure(BaseFigure):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         intensity
             Sets the intensity values for vertices or cells as
             defined by `intensitymode`. It can be used for plotting
             fields on meshes.
         intensitymode
             Determines the source of `intensity` values.
-        intensitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `intensity`.
-        isrc
-            Sets the source reference on Chart Studio Cloud for
-            `i`.
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
             the "second" vertex of a triangle. For example, `{i[m],
-            j[m], k[m]}`  together represent face m (triangle m) in
+            j[m], k[m]}` together represent face m (triangle m) in
             the mesh, where `j[m] = n` points to the triplet
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
             each element in `j` represents a point in space, which
             is the second vertex of a triangle.
-        jsrc
-            Sets the source reference on Chart Studio Cloud for
-            `j`.
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -11092,9 +9484,6 @@ class Figure(BaseFigure):
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
             each element in `k` represents a point in space, which
             is the third vertex of a triangle.
-        ksrc
-            Sets the source reference on Chart Studio Cloud for
-            `k`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -11141,9 +9530,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -11171,17 +9557,11 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.mesh3d.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -11210,9 +9590,6 @@ class Figure(BaseFigure):
             255; in the case of having vertex color data in RGBA
             format, the alpha color should be normalized to be
             between 0 and 1.
-        vertexcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `vertexcolor`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -11225,7 +9602,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -11237,9 +9614,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -11247,7 +9621,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -11259,9 +9633,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -11269,7 +9640,7 @@ class Figure(BaseFigure):
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -11281,9 +9652,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -11314,29 +9682,20 @@ class Figure(BaseFigure):
             colorscale=colorscale,
             contour=contour,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             delaunayaxis=delaunayaxis,
             facecolor=facecolor,
-            facecolorsrc=facecolorsrc,
             flatshading=flatshading,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             i=i,
             ids=ids,
-            idssrc=idssrc,
             intensity=intensity,
             intensitymode=intensitymode,
-            intensitysrc=intensitysrc,
-            isrc=isrc,
             j=j,
-            jsrc=jsrc,
             k=k,
-            ksrc=ksrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -11345,33 +9704,26 @@ class Figure(BaseFigure):
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             reversescale=reversescale,
             scene=scene,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             vertexcolor=vertexcolor,
-            vertexcolorsrc=vertexcolorsrc,
             visible=visible,
             x=x,
             xcalendar=xcalendar,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zcalendar=zcalendar,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -11379,19 +9731,15 @@ class Figure(BaseFigure):
     def add_ohlc(
         self,
         close=None,
-        closesrc=None,
         customdata=None,
-        customdatasrc=None,
         decreasing=None,
         high=None,
-        highsrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         increasing=None,
         legend=None,
         legendgroup=None,
@@ -11400,18 +9748,13 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         low=None,
-        lowsrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         open=None,
-        opensrc=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
-        textsrc=None,
         tickwidth=None,
         uid=None,
         uirevision=None,
@@ -11423,7 +9766,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         yaxis=None,
         yhoverformat=None,
         zorder=None,
@@ -11440,7 +9782,7 @@ class Figure(BaseFigure):
         given `x` coordinate (most likely time). The tip of the lines
         represent the `low` and `high` values and the horizontal
         segments represent the `open` and `close` values. Sample points
-        where the close value is higher (lower) then the open value are
+        where the close value is higher (lower) than the open value are
         called increasing (decreasing). By default, increasing items
         are drawn in green whereas decreasing are drawn in red.
 
@@ -11448,48 +9790,71 @@ class Figure(BaseFigure):
         ----------
         close
             Sets the close values.
-        closesrc
-            Sets the source reference on Chart Studio Cloud for
-            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         decreasing
             :class:`plotly.graph_objects.ohlc.Decreasing` instance
             or dict with compatible properties
         high
             Sets the high values.
-        highsrc
-            Sets the source reference on Chart Studio Cloud for
-            `high`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
             or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, all attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. Finally, the template string has access
+            to variables `open`, `high`, `low` and `close`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         increasing
             :class:`plotly.graph_objects.ohlc.Increasing` instance
             or dict with compatible properties
@@ -11525,9 +9890,6 @@ class Figure(BaseFigure):
             dict with compatible properties
         low
             Sets the low values.
-        lowsrc
-            Sets the source reference on Chart Studio Cloud for
-            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -11541,9 +9903,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -11551,9 +9910,6 @@ class Figure(BaseFigure):
             Sets the opacity of the trace.
         open
             Sets the open values.
-        opensrc
-            Sets the source reference on Chart Studio Cloud for
-            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -11564,17 +9920,11 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.ohlc.Stream` instance or
-            dict with compatible properties
         text
             Sets hover text elements associated with each sample
             point. If a single string, the same string appears over
             all the data points. If an array of string, the items
             are mapped in order to this trace's sample points.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         tickwidth
             Sets the width of the open/close tick marks relative to
             the "x" minimal interval.
@@ -11616,7 +9966,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -11644,16 +9994,13 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -11699,19 +10046,15 @@ class Figure(BaseFigure):
 
         new_trace = Ohlc(
             close=close,
-            closesrc=closesrc,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             decreasing=decreasing,
             high=high,
-            highsrc=highsrc,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             increasing=increasing,
             legend=legend,
             legendgroup=legendgroup,
@@ -11720,18 +10063,13 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             low=low,
-            lowsrc=lowsrc,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             open=open,
-            opensrc=opensrc,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             tickwidth=tickwidth,
             uid=uid,
             uirevision=uirevision,
@@ -11743,7 +10081,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
             zorder=zorder,
@@ -11756,22 +10093,20 @@ class Figure(BaseFigure):
         arrangement=None,
         bundlecolors=None,
         counts=None,
-        countssrc=None,
         dimensions=None,
         dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         labelfont=None,
         legendgrouptitle=None,
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         sortpaths=None,
-        stream=None,
         tickfont=None,
         uid=None,
         uirevision=None,
@@ -11802,9 +10137,6 @@ class Figure(BaseFigure):
             The number of observations represented by each state.
             Defaults to 1 so that each state represents one
             observation
-        countssrc
-            Sets the source reference on Chart Studio Cloud for
-            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -11817,7 +10149,7 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
@@ -11846,23 +10178,30 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over dimensions. Note that "categorycount",
-            "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flag. Finally, the
-            template string has access to variables `count`,
-            `probability`, `category`, `categorycount`,
-            `colorcount` and `bandcolorcount`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count`, `probability`, `category`,
+            `categorycount`, `colorcount` and `bandcolorcount`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -11887,9 +10226,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -11898,9 +10234,6 @@ class Figure(BaseFigure):
             paths based on dimension categories from left to right.
             If `backward`, sort paths based on dimensions
             categories from right to left.
-        stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -11951,22 +10284,20 @@ class Figure(BaseFigure):
             arrangement=arrangement,
             bundlecolors=bundlecolors,
             counts=counts,
-            countssrc=countssrc,
             dimensions=dimensions,
             dimensiondefaults=dimensiondefaults,
             domain=domain,
             hoverinfo=hoverinfo,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             labelfont=labelfont,
             legendgrouptitle=legendgrouptitle,
             legendwidth=legendwidth,
             line=line,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             sortpaths=sortpaths,
-            stream=stream,
             tickfont=tickfont,
             uid=uid,
             uirevision=uirevision,
@@ -11978,12 +10309,10 @@ class Figure(BaseFigure):
     def add_parcoords(
         self,
         customdata=None,
-        customdatasrc=None,
         dimensions=None,
         dimensiondefaults=None,
         domain=None,
         ids=None,
-        idssrc=None,
         labelangle=None,
         labelfont=None,
         labelside=None,
@@ -11993,10 +10322,8 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         rangefont=None,
-        stream=None,
         tickfont=None,
         uid=None,
         uirevision=None,
@@ -12020,9 +10347,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
@@ -12038,9 +10362,6 @@ class Figure(BaseFigure):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         labelangle
             Sets the angle of the labels with respect to the
             horizontal. For example, a `tickangle` of -90 draws the
@@ -12094,17 +10415,11 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         rangefont
             Sets the font for the `dimension` range values.
-        stream
-            :class:`plotly.graph_objects.parcoords.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
         uid
@@ -12156,12 +10471,10 @@ class Figure(BaseFigure):
 
         new_trace = Parcoords(
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dimensions=dimensions,
             dimensiondefaults=dimensiondefaults,
             domain=domain,
             ids=ids,
-            idssrc=idssrc,
             labelangle=labelangle,
             labelfont=labelfont,
             labelside=labelside,
@@ -12171,10 +10484,8 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             rangefont=rangefont,
-            stream=stream,
             tickfont=tickfont,
             uid=uid,
             uirevision=uirevision,
@@ -12188,25 +10499,20 @@ class Figure(BaseFigure):
         self,
         automargin=None,
         customdata=None,
-        customdatasrc=None,
         direction=None,
         dlabel=None,
         domain=None,
         hole=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         insidetextorientation=None,
         label0=None,
         labels=None,
-        labelssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -12214,30 +10520,24 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
         pull=None,
-        pullsrc=None,
         rotation=None,
         scalegroup=None,
         showlegend=None,
         sort=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         title=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         row=None,
         col=None,
@@ -12260,9 +10560,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         direction
             Specifies the direction at which succeeding sectors
             follow one another.
@@ -12275,13 +10572,11 @@ class Figure(BaseFigure):
             Sets the fraction of the radius to cut out of the pie.
             Use this to make a donut chart.
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.pie.Hoverlabel` instance
             or dict with compatible properties
@@ -12303,11 +10598,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
@@ -12316,25 +10616,21 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -12358,15 +10654,14 @@ class Figure(BaseFigure):
             occurrences if `values` is not provided. For other
             array attributes (including color) we use the first
             non-empty entry among all occurrences of the label.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
+            Sets the reference to a legend to show the pie slices
+            in. Can be an array if `values` is set. In that case,
+            each entry specifies the legend reference for one
+            slice. References to these legends are "legend",
+            "legend2", "legend3", etc. Settings for these legends
+            are set in the layout, under `layout.legend`,
+            `layout.legend2`, etc.
         legendgroup
             Sets the legend group for this trace. Traces and shapes
             part of the same legend group hide/show at the same
@@ -12375,16 +10670,17 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
-            Sets the legend rank for this trace. Items and groups
-            with smaller ranks are presented on top/left side while
-            with "reversed" `legend.traceorder` they are on
-            bottom/right side. The default legendrank is 1000, so
-            that you can use ranks less than 1000 to place certain
-            items before all unranked items, and ranks greater than
-            1000 to go after all unranked items. When having
-            unranked or equal rank items shapes would be displayed
-            after traces i.e. according to their order in data and
-            layout.
+            Sets the legend rank for this pie. If passed as an
+            array, this will set the legend rank of the individual
+            pie slices. Items and groups with smaller ranks are
+            presented on top/left side while with "reversed"
+            `legend.traceorder` they are on bottom/right side. The
+            default legendrank is 1000, so that you can use ranks
+            less than 1000 to place certain items before all
+            unranked items, and ranks greater than 1000 to go after
+            all unranked items. When having unranked or equal rank
+            items shapes would be displayed after traces i.e.
+            according to their order in data and layout.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -12404,9 +10700,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -12420,9 +10713,6 @@ class Figure(BaseFigure):
             out from the center. This can be a constant to pull all
             slices apart from each other equally or an array to
             highlight one or more slices.
-        pullsrc
-            Sets the source reference on Chart Studio Cloud for
-            `pull`.
         rotation
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
@@ -12432,14 +10722,13 @@ class Figure(BaseFigure):
             non-empty group id here shared by every trace in the
             same group.
         showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
+            Determines whether or not items corresponding to the
+            pie slices are shown in the legend. Can be an array if
+            `values` is set. In that case, each entry specifies
+            appearance in the legend for one slice.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.pie.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -12449,18 +10738,15 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Specifies the location of the `textinfo`.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -12471,14 +10757,21 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
             `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
@@ -12507,9 +10800,6 @@ class Figure(BaseFigure):
         values
             Sets the values of the sectors. If omitted, we count
             occurrences of each label.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -12535,25 +10825,20 @@ class Figure(BaseFigure):
         new_trace = Pie(
             automargin=automargin,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             direction=direction,
             dlabel=dlabel,
             domain=domain,
             hole=hole,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextfont=insidetextfont,
             insidetextorientation=insidetextorientation,
             label0=label0,
             labels=labels,
-            labelssrc=labelssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -12561,57 +10846,431 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             outsidetextfont=outsidetextfont,
             pull=pull,
-            pullsrc=pullsrc,
             rotation=rotation,
             scalegroup=scalegroup,
             showlegend=showlegend,
             sort=sort,
-            stream=stream,
             text=text,
             textfont=textfont,
             textinfo=textinfo,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             title=title,
             uid=uid,
             uirevision=uirevision,
             values=values,
-            valuessrc=valuessrc,
             visible=visible,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
+    def add_quiver(
+        self,
+        anchor=None,
+        arrowref=None,
+        customdata=None,
+        dx=None,
+        dy=None,
+        hoverinfo=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        ids=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        lengthfactor=None,
+        lengthmode=None,
+        marker=None,
+        meta=None,
+        name=None,
+        opacity=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        text=None,
+        textfont=None,
+        textposition=None,
+        u=None,
+        uhoverformat=None,
+        uid=None,
+        uirevision=None,
+        unselected=None,
+        v=None,
+        vhoverformat=None,
+        visible=None,
+        x=None,
+        x0=None,
+        xaxis=None,
+        xhoverformat=None,
+        y=None,
+        y0=None,
+        yaxis=None,
+        yhoverformat=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs,
+    ) -> "Figure":
+        """
+        Add a new Quiver trace
+
+        The quiver trace type visualizes vector fields using arrows.
+        Specify a vector field using 4 1D arrays: 2 position arrays
+        `x`, `y` and 2 vector component arrays `u`, `v`. The arrows are
+        drawn exactly at the positions given by `x` and `y`. Arrow
+        length and direction are determined by `u` and `v` components.
+
+        Parameters
+        ----------
+        anchor
+            Sets the vector arrows' anchor with respect to their
+            (x,y) positions. Use "tail" to place (x,y) at the base,
+            "tip" to place (x,y) at the head, or "center" to center
+            the vector arrow on (x,y).
+        arrowref
+            Determines how the u/v vector components are
+            interpreted. If "paper", u/v are interpreted in pixel
+            coordinates and the rendered vector angle does not
+            change regardless of the axis scales. If "data", u/v
+            are interpreted in data coordinates and the rendered
+            vector angle may change, e.g. if zooming in along a
+            single axis
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        dx
+            Sets the x coordinate step. See `x0` for more info.
+        dy
+            Sets the y coordinate step. See `y0` for more info.
+        hoverinfo
+            Determines what trace information appears on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverlabel
+            :class:`plotly.graph_objects.quiver.Hoverlabel`
+            instance or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, all attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. Finally, the template string has access
+            to variables `x`, `y`, `u`, `v`, `text` and `name`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        legend
+            Sets the reference to a legend to show this trace in.
+            References to these legends are "legend", "legend2",
+            "legend3", etc. Settings for these legends are set in
+            the layout, under `layout.legend`, `layout.legend2`,
+            etc.
+        legendgroup
+            Sets the legend group for this trace. Traces and shapes
+            part of the same legend group hide/show at the same
+            time when toggling legend items.
+        legendgrouptitle
+            :class:`plotly.graph_objects.quiver.Legendgrouptitle`
+            instance or dict with compatible properties
+        legendrank
+            Sets the legend rank for this trace. Items and groups
+            with smaller ranks are presented on top/left side while
+            with "reversed" `legend.traceorder` they are on
+            bottom/right side. The default legendrank is 1000, so
+            that you can use ranks less than 1000 to place certain
+            items before all unranked items, and ranks greater than
+            1000 to go after all unranked items. When having
+            unranked or equal rank items shapes would be displayed
+            after traces i.e. according to their order in data and
+            layout.
+        legendwidth
+            Sets the width (in px or fraction) of the legend for
+            this trace.
+        lengthfactor
+            Adjusts the drawn length of the vector arrows. The
+            arrow length is determined by the values of u and v,
+            then optionally rescaled when `lengthmode` is "scaled",
+            then multiplied by `lengthfactor`.
+        lengthmode
+            Determines whether vector arrows are drawn according to
+            their raw lengths, or scaled based on the maximum
+            vector length and point density. Note: When `arrowref`
+            is "paper" vectors are always scaled and `lengthmode`
+            "raw" is ignored.
+        marker
+            :class:`plotly.graph_objects.quiver.Marker` instance or
+            dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        name
+            Sets the trace name. The trace name appears as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        selected
+            :class:`plotly.graph_objects.quiver.Selected` instance
+            or dict with compatible properties
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        text
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textfont
+            Sets the text font.
+        textposition
+            Sets the positions of the `text` elements with respects
+            to the (x,y) coordinates.
+        u
+            Sets the x components of the vector arrows.
+        uhoverformat
+            Sets the hover text formatting rule for `u` using d3
+            formatting mini-languages which are very similar to
+            those in Python. For numbers, see: https://github.com/d
+            3/d3-format/tree/v1.4.5#d3-format.By default the values
+            are formatted using generic number format.
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        unselected
+            :class:`plotly.graph_objects.quiver.Unselected`
+            instance or dict with compatible properties
+        v
+            Sets the y components of the vector arrows.
+        vhoverformat
+            Sets the hover text formatting rule for `v` using d3
+            formatting mini-languages which are very similar to
+            those in Python. For numbers, see: https://github.com/d
+            3/d3-format/tree/v1.4.5#d3-format.By default the values
+            are formatted using generic number format.
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        x
+            Sets the x coordinates of the vector arrow locations.
+        x0
+            Alternate to `x`. Builds a linear space of x
+            coordinates. Use with `dx` where `x0` is the starting
+            coordinate and `dx` the step.
+        xaxis
+            Sets a reference between this trace's x coordinates and
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
+            coordinates refer to `layout.xaxis2`, and so on.
+        xhoverformat
+            Sets the hover text formatting rule for `x` using d3
+            formatting mini-languages which are very similar to
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `xaxis.hoverformat`.
+        y
+            Sets the y coordinates of the vector arrow locations.
+        y0
+            Alternate to `y`. Builds a linear space of y
+            coordinates. Use with `dy` where `y0` is the starting
+            coordinate and `dy` the step.
+        yaxis
+            Sets a reference between this trace's y coordinates and
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
+            coordinates refer to `layout.yaxis2`, and so on.
+        yhoverformat
+            Sets the hover text formatting rule for `y` using d3
+            formatting mini-languages which are very similar to
+            those in Python. For numbers, see:
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
+            And for dates see: https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format. We add two items to
+            d3's date formatter: "%h" for half of the year as a
+            decimal number as well as "%{n}f" for fractional
+            seconds with n digits. For example, *2016-10-13
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display *09~15~23.46*By default the values are
+            formatted using `yaxis.hoverformat`.
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
+
+        Returns
+        -------
+        Figure
+        """
+        from plotly.graph_objs import Quiver
+
+        new_trace = Quiver(
+            anchor=anchor,
+            arrowref=arrowref,
+            customdata=customdata,
+            dx=dx,
+            dy=dy,
+            hoverinfo=hoverinfo,
+            hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            ids=ids,
+            legend=legend,
+            legendgroup=legendgroup,
+            legendgrouptitle=legendgrouptitle,
+            legendrank=legendrank,
+            legendwidth=legendwidth,
+            lengthfactor=lengthfactor,
+            lengthmode=lengthmode,
+            marker=marker,
+            meta=meta,
+            name=name,
+            opacity=opacity,
+            selected=selected,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            text=text,
+            textfont=textfont,
+            textposition=textposition,
+            u=u,
+            uhoverformat=uhoverformat,
+            uid=uid,
+            uirevision=uirevision,
+            unselected=unselected,
+            v=v,
+            vhoverformat=vhoverformat,
+            visible=visible,
+            x=x,
+            x0=x0,
+            xaxis=xaxis,
+            xhoverformat=xhoverformat,
+            y=y,
+            y0=y0,
+            yaxis=yaxis,
+            yhoverformat=yhoverformat,
+            **kwargs,
+        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
+
     def add_sankey(
         self,
         arrangement=None,
         customdata=None,
-        customdatasrc=None,
+        direction=None,
         domain=None,
         hoverinfo=None,
         hoverlabel=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         link=None,
         meta=None,
-        metasrc=None,
         name=None,
         node=None,
         orientation=None,
         selectedpoints=None,
-        stream=None,
         textfont=None,
         uid=None,
         uirevision=None,
@@ -12645,14 +11304,17 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
+        direction
+            Sets the direction of the flow along the `orientation`
+            axis. With `forward` (the default), sources are on the
+            left (horizontal) or top (vertical). With `reversed`,
+            sources are on the right (horizontal) or bottom
+            (vertical).
         domain
             :class:`plotly.graph_objects.sankey.Domain` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired. Note that this attribute is
@@ -12665,9 +11327,6 @@ class Figure(BaseFigure):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -12706,16 +11365,16 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         node
             The nodes of the Sankey plot.
         orientation
-            Sets the orientation of the Sankey diagram.
+            Sets the orientation of the Sankey diagram. With `h`
+            (the default), the flow runs horizontally. With `v`,
+            the flow runs vertically. Use `direction` to control
+            which side the sources are placed on.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -12723,9 +11382,6 @@ class Figure(BaseFigure):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        stream
-            :class:`plotly.graph_objects.sankey.Stream` instance or
-            dict with compatible properties
         textfont
             Sets the font for node labels
         uid
@@ -12784,24 +11440,21 @@ class Figure(BaseFigure):
         new_trace = Sankey(
             arrangement=arrangement,
             customdata=customdata,
-            customdatasrc=customdatasrc,
+            direction=direction,
             domain=domain,
             hoverinfo=hoverinfo,
             hoverlabel=hoverlabel,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             link=link,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             node=node,
             orientation=orientation,
             selectedpoints=selectedpoints,
-            stream=stream,
             textfont=textfont,
             uid=uid,
             uirevision=uirevision,
@@ -12818,7 +11471,6 @@ class Figure(BaseFigure):
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         error_x=None,
@@ -12829,15 +11481,12 @@ class Figure(BaseFigure):
         fillpattern=None,
         groupnorm=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -12846,7 +11495,6 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         offsetgroup=None,
@@ -12857,14 +11505,11 @@ class Figure(BaseFigure):
         showlegend=None,
         stackgaps=None,
         stackgroup=None,
-        stream=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -12877,7 +11522,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -12886,7 +11530,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -12924,9 +11567,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -12983,13 +11623,10 @@ class Figure(BaseFigure):
             multiple subplots, or multiple `stackgroup`s on one
             subplot, each will be normalized within its own set.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter.Hoverlabel`
             instance or dict with compatible properties
@@ -13017,20 +11654,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -13038,16 +11682,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -13094,9 +11732,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -13159,9 +11794,6 @@ class Figure(BaseFigure):
             `stackgroup`s or some traces stacked and some not, if
             fill-linked traces are not already consecutive, the
             later ones will be pushed down in the drawing order.
-        stream
-            :class:`plotly.graph_objects.scatter.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -13175,15 +11807,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -13194,12 +11820,19 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -13244,7 +11877,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -13272,9 +11905,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -13289,7 +11919,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -13317,9 +11947,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -13357,7 +11984,6 @@ class Figure(BaseFigure):
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             error_x=error_x,
@@ -13368,15 +11994,12 @@ class Figure(BaseFigure):
             fillpattern=fillpattern,
             groupnorm=groupnorm,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -13385,7 +12008,6 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             offsetgroup=offsetgroup,
@@ -13396,14 +12018,11 @@ class Figure(BaseFigure):
             showlegend=showlegend,
             stackgaps=stackgaps,
             stackgroup=stackgroup,
-            stream=stream,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -13416,7 +12035,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
@@ -13425,7 +12043,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -13435,19 +12052,15 @@ class Figure(BaseFigure):
         self,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         error_x=None,
         error_y=None,
         error_z=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -13456,38 +12069,31 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         projection=None,
         scene=None,
         showlegend=None,
-        stream=None,
         surfaceaxis=None,
         surfacecolor=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
         x=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zcalendar=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -13512,9 +12118,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         error_x
             :class:`plotly.graph_objects.scatter3d.ErrorX` instance
             or dict with compatible properties
@@ -13525,13 +12128,10 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.scatter3d.ErrorZ` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatter3d.Hoverlabel`
             instance or dict with compatible properties
@@ -13553,20 +12153,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets text elements associated with each (x,y,z)
             triplet. If a single string, the same string appears
@@ -13574,16 +12181,10 @@ class Figure(BaseFigure):
             items are mapped in order to the this trace's (x,y,z)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -13630,9 +12231,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -13657,9 +12255,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scatter3d.Stream` instance
-            or dict with compatible properties
         surfaceaxis
             If "-1", the scatter points are not fill with a surface
             If 0, 1, 2, the scatter points are filled with a
@@ -13679,15 +12274,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -13698,12 +12287,19 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -13736,7 +12332,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -13748,15 +12344,12 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -13768,15 +12361,12 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates.
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -13788,9 +12378,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -13811,19 +12398,15 @@ class Figure(BaseFigure):
         new_trace = Scatter3d(
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             error_x=error_x,
             error_y=error_y,
             error_z=error_z,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -13832,38 +12415,31 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             projection=projection,
             scene=scene,
             showlegend=showlegend,
-            stream=stream,
             surfaceaxis=surfaceaxis,
             surfacecolor=surfacecolor,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
             x=x,
             xcalendar=xcalendar,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zcalendar=zcalendar,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -13871,25 +12447,19 @@ class Figure(BaseFigure):
     def add_scattercarpet(
         self,
         a=None,
-        asrc=None,
         b=None,
-        bsrc=None,
         carpet=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -13898,21 +12468,17 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -13935,14 +12501,8 @@ class Figure(BaseFigure):
         ----------
         a
             Sets the a-axis coordinates.
-        asrc
-            Sets the source reference on Chart Studio Cloud for
-            `a`.
         b
             Sets the b-axis coordinates.
-        bsrc
-            Sets the source reference on Chart Studio Cloud for
-            `b`.
         carpet
             An identifier for this carpet, so that `scattercarpet`
             and `contourcarpet` traces can specify a carpet plot on
@@ -13955,9 +12515,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scatterternary has a subset
@@ -13974,13 +12531,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattercarpet.Hoverlabel`
             instance or dict with compatible properties
@@ -14008,36 +12562,37 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (a,b)
             point. If a single string, the same string appears over
             all the data points. If an array of strings, the items
-            are mapped in order to the the data points in (a,b). To
-            be seen, trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
+            are mapped in order to the data points in (a,b). To be
+            seen, trace `hoverinfo` must contain a "text" flag.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -14084,9 +12639,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -14112,31 +12664,22 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattercarpet.Stream`
-            instance or dict with compatible properties
         text
             Sets text elements associated with each (a,b) point. If
             a single string, the same string appears over all the
             data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b). If
-            trace `hoverinfo` contains a "text" flag and
-            "hovertext" is not set, these elements will be seen in
-            the hover labels.
+            mapped in order to the data points in (a,b). If trace
+            `hoverinfo` contains a "text" flag and "hovertext" is
+            not set, these elements will be seen in the hover
+            labels.
         textfont
             Sets the text font.
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -14147,13 +12690,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `a`, `b` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -14228,25 +12778,19 @@ class Figure(BaseFigure):
 
         new_trace = Scattercarpet(
             a=a,
-            asrc=asrc,
             b=b,
-            bsrc=bsrc,
             carpet=carpet,
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -14255,21 +12799,17 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -14285,23 +12825,18 @@ class Figure(BaseFigure):
         self,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         featureidkey=None,
         fill=None,
         fillcolor=None,
         geo=None,
         geojson=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         lat=None,
-        latsrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -14310,26 +12845,20 @@ class Figure(BaseFigure):
         line=None,
         locationmode=None,
         locations=None,
-        locationssrc=None,
         lon=None,
-        lonsrc=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -14356,9 +12885,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -14388,13 +12914,10 @@ class Figure(BaseFigure):
             "Feature" with geometries of type "Polygon" or
             "MultiPolygon".
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergeo.Hoverlabel`
             instance or dict with compatible properties
@@ -14416,20 +12939,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair or item in `locations`. If a single string, the
@@ -14437,21 +12967,12 @@ class Figure(BaseFigure):
             array of string, the items are mapped in order to the
             this trace's (lon,lat) or `locations` coordinates. To
             be seen, trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
-        latsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lat`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -14483,27 +13004,20 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.scattergeo.Line` instance
             or dict with compatible properties
         locationmode
-            The library used by the *country names* `locationmode`
-            option is changing in an upcoming version. Country
-            names in existing plots may not work in the new
-            version. Determines the set of locations used to match
-            entries in `locations` to regions on the map. Values
-            "ISO-3", "USA-states", *country names* correspond to
-            features on the base map and value "geojson-id"
-            corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            Determines the set of locations used to match entries
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute. "USA-states" accepts both two-letter
+            abbreviations (e.g. "CA") and full state names (e.g.
+            "California").
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location
             given. See `locationmode` for more info.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         lon
             Sets the longitude coordinates (in degrees East).
-        lonsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lon`.
         marker
             :class:`plotly.graph_objects.scattergeo.Marker`
             instance or dict with compatible properties
@@ -14520,9 +13034,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -14548,9 +13059,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattergeo.Stream`
-            instance or dict with compatible properties
         text
             Sets text elements associated with each (lon,lat) pair
             or item in `locations`. If a single string, the same
@@ -14565,15 +13073,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -14584,13 +13086,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `lat`, `lon`, `location` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -14641,23 +13150,18 @@ class Figure(BaseFigure):
         new_trace = Scattergeo(
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             featureidkey=featureidkey,
             fill=fill,
             fillcolor=fillcolor,
             geo=geo,
             geojson=geojson,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             lat=lat,
-            latsrc=latsrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -14666,26 +13170,20 @@ class Figure(BaseFigure):
             line=line,
             locationmode=locationmode,
             locations=locations,
-            locationssrc=locationssrc,
             lon=lon,
-            lonsrc=lonsrc,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -14698,7 +13196,6 @@ class Figure(BaseFigure):
         self,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         error_x=None,
@@ -14706,14 +13203,11 @@ class Figure(BaseFigure):
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -14722,21 +13216,17 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -14749,7 +13239,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -14758,7 +13247,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         row=None,
         col=None,
         secondary_y=None,
@@ -14782,9 +13270,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -14823,13 +13308,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergl.Hoverlabel`
             instance or dict with compatible properties
@@ -14851,20 +13333,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -14872,16 +13361,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -14928,9 +13411,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace.
         name
@@ -14951,9 +13431,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattergl.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -14967,15 +13444,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -14986,12 +13457,19 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -15036,7 +13514,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -15064,9 +13542,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -15081,7 +13556,7 @@ class Figure(BaseFigure):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -15109,9 +13584,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -15142,7 +13614,6 @@ class Figure(BaseFigure):
         new_trace = Scattergl(
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dx=dx,
             dy=dy,
             error_x=error_x,
@@ -15150,14 +13621,11 @@ class Figure(BaseFigure):
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -15166,21 +13634,17 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -15193,7 +13657,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
@@ -15202,7 +13665,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
@@ -15213,20 +13675,15 @@ class Figure(BaseFigure):
         cluster=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         lat=None,
-        latsrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -15234,24 +13691,20 @@ class Figure(BaseFigure):
         legendwidth=None,
         line=None,
         lon=None,
-        lonsrc=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         subplot=None,
         text=None,
         textfont=None,
         textposition=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -15286,9 +13739,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". "toself" connects the
@@ -15299,13 +13749,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattermap.Hoverlabel`
             instance or dict with compatible properties
@@ -15327,20 +13774,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair If a single string, the same string appears over
@@ -15348,21 +13802,12 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (lon,lat)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         lat
             Sets the latitude coordinates (in degrees North).
-        latsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lat`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -15395,9 +13840,6 @@ class Figure(BaseFigure):
             or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
-        lonsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lon`.
         marker
             :class:`plotly.graph_objects.scattermap.Marker`
             instance or dict with compatible properties
@@ -15414,9 +13856,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -15440,9 +13879,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattermap.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a map subplot. If "map" (the default value), the
@@ -15463,12 +13899,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -15479,13 +13912,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `lat`, `lon` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -15538,20 +13978,15 @@ class Figure(BaseFigure):
             cluster=cluster,
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             lat=lat,
-            latsrc=latsrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -15559,411 +13994,20 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             line=line,
             lon=lon,
-            lonsrc=lonsrc,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             subplot=subplot,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
-            uid=uid,
-            uirevision=uirevision,
-            unselected=unselected,
-            visible=visible,
-            **kwargs,
-        )
-        return self.add_trace(new_trace, row=row, col=col)
-
-    def add_scattermapbox(
-        self,
-        below=None,
-        cluster=None,
-        connectgaps=None,
-        customdata=None,
-        customdatasrc=None,
-        fill=None,
-        fillcolor=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        lat=None,
-        latsrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        line=None,
-        lon=None,
-        lonsrc=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        mode=None,
-        name=None,
-        opacity=None,
-        selected=None,
-        selectedpoints=None,
-        showlegend=None,
-        stream=None,
-        subplot=None,
-        text=None,
-        textfont=None,
-        textposition=None,
-        textsrc=None,
-        texttemplate=None,
-        texttemplatesrc=None,
-        uid=None,
-        uirevision=None,
-        unselected=None,
-        visible=None,
-        row=None,
-        col=None,
-        **kwargs,
-    ) -> "Figure":
-        """
-        Add a new Scattermapbox trace
-
-        "scattermapbox" trace is deprecated! Please consider switching
-        to the "scattermap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/python/maplibre-migration/ as well as
-        https://plotly.com/javascript/maplibre-migration/ The data
-        visualized as scatter point, lines or marker symbols on a
-        Mapbox GL geographic map is provided by longitude/latitude
-        pairs in `lon` and `lat`.
-
-        Parameters
-        ----------
-        below
-            Determines if this scattermapbox trace's layers are to
-            be inserted before the layer with the specified ID. By
-            default, scattermapbox layers are inserted above all
-            the base layers. To place the scattermapbox layers
-            above every other layer, set `below` to "''".
-        cluster
-            :class:`plotly.graph_objects.scattermapbox.Cluster`
-            instance or dict with compatible properties
-        connectgaps
-            Determines whether or not gaps (i.e. {nan} or missing
-            values) in the provided data arrays are connected.
-        customdata
-            Assigns extra data each datum. This may be useful when
-            listening to hover, click and selection events. Note
-            that, "scatter" traces also appends customdata items in
-            the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
-        fill
-            Sets the area to fill with a solid color. Use with
-            `fillcolor` if not "none". "toself" connects the
-            endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape.
-        fillcolor
-            Sets the fill color. Defaults to a half-transparent
-            variant of the line color, marker color, or marker line
-            color, whichever is available.
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
-        hoverlabel
-            :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
-            instance or dict with compatible properties
-        hovertemplate
-            Template string used for rendering the information that
-            appear on hover box. Note that this will override
-            `hoverinfo`. Variables are inserted using %{variable},
-            for example "y: %{y}" as well as %{xother}, {%_xother},
-            {%_xother_}, {%xother_}. When showing info for several
-            points, "xother" will be added to those with different
-            x positions from the first point. An underscore before
-            or after "(x|y)other" will add a space on that side,
-            only when this field is shown. Numbers are formatted
-            using d3-format's syntax %{variable:d3-format}, for
-            example "Price: %{y:$.2f}".
-            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
-            for details on the formatting syntax. Dates are
-            formatted using d3-time-format's syntax
-            %{variable|d3-time-format}, for example "Day:
-            %{2019-01-01|%A}". https://github.com/d3/d3-time-
-            format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
-            `hovertemplate` are the ones emitted as event data
-            described at this link
-            https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
-            specified per-point (the ones that are `arrayOk: true`)
-            are available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
-            `<extra>%{fullData.name}</extra>`. To hide the
-            secondary box completely, use an empty tag
-            `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
-        hovertext
-            Sets hover text elements associated with each (lon,lat)
-            pair If a single string, the same string appears over
-            all the data points. If an array of string, the items
-            are mapped in order to the this trace's (lon,lat)
-            coordinates. To be seen, trace `hoverinfo` must contain
-            a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
-        ids
-            Assigns id labels to each datum. These ids for object
-            constancy of data points during animation. Should be an
-            array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
-        lat
-            Sets the latitude coordinates (in degrees North).
-        latsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lat`.
-        legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
-        legendgroup
-            Sets the legend group for this trace. Traces and shapes
-            part of the same legend group hide/show at the same
-            time when toggling legend items.
-        legendgrouptitle
-            :class:`plotly.graph_objects.scattermapbox.Legendgroupt
-            itle` instance or dict with compatible properties
-        legendrank
-            Sets the legend rank for this trace. Items and groups
-            with smaller ranks are presented on top/left side while
-            with "reversed" `legend.traceorder` they are on
-            bottom/right side. The default legendrank is 1000, so
-            that you can use ranks less than 1000 to place certain
-            items before all unranked items, and ranks greater than
-            1000 to go after all unranked items. When having
-            unranked or equal rank items shapes would be displayed
-            after traces i.e. according to their order in data and
-            layout.
-        legendwidth
-            Sets the width (in px or fraction) of the legend for
-            this trace.
-        line
-            :class:`plotly.graph_objects.scattermapbox.Line`
-            instance or dict with compatible properties
-        lon
-            Sets the longitude coordinates (in degrees East).
-        lonsrc
-            Sets the source reference on Chart Studio Cloud for
-            `lon`.
-        marker
-            :class:`plotly.graph_objects.scattermapbox.Marker`
-            instance or dict with compatible properties
-        meta
-            Assigns extra meta information associated with this
-            trace that can be used in various text attributes.
-            Attributes such as trace `name`, graph, axis and
-            colorbar `title.text`, annotation `text`
-            `rangeselector`, `updatemenues` and `sliders` `label`
-            text all support `meta`. To access the trace `meta`
-            values in an attribute in the same trace, simply use
-            `%{meta[i]}` where `i` is the index or key of the
-            `meta` item in question. To access trace `meta` in
-            layout attributes, use `%{data[n[.meta[i]}` where `i`
-            is the index or key of the `meta` and `n` is the trace
-            index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
-        mode
-            Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes "text" then the `text`
-            elements appear at the coordinates. Otherwise, the
-            `text` elements appear on hover.
-        name
-            Sets the trace name. The trace name appears as the
-            legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
-        selected
-            :class:`plotly.graph_objects.scattermapbox.Selected`
-            instance or dict with compatible properties
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattermapbox.Stream`
-            instance or dict with compatible properties
-        subplot
-            mapbox subplots and traces are deprecated! Please
-            consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/python/maplibre-migration/
-            as well as https://plotly.com/javascript/maplibre-
-            migration/ Sets a reference between this trace's data
-            coordinates and a mapbox subplot. If "mapbox" (the
-            default value), the data refer to `layout.mapbox`. If
-            "mapbox2", the data refer to `layout.mapbox2`, and so
-            on.
-        text
-            Sets text elements associated with each (lon,lat) pair
-            If a single string, the same string appears over all
-            the data points. If an array of string, the items are
-            mapped in order to the this trace's (lon,lat)
-            coordinates. If trace `hoverinfo` contains a "text"
-            flag and "hovertext" is not set, these elements will be
-            seen in the hover labels.
-        textfont
-            Sets the icon text font (color=mapbox.layer.paint.text-
-            color, size=mapbox.layer.layout.text-size). Has an
-            effect only when `type` is set to "symbol".
-        textposition
-            Sets the positions of the `text` elements with respects
-            to the (x,y) coordinates.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
-        texttemplate
-            Template string used for rendering the information text
-            that appear on points. Note that this will override
-            `textinfo`. Variables are inserted using %{variable},
-            for example "y: %{y}". Numbers are formatted using
-            d3-format's syntax %{variable:d3-format}, for example
-            "Price: %{y:$.2f}".
-            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
-            for details on the formatting syntax. Dates are
-            formatted using d3-time-format's syntax
-            %{variable|d3-time-format}, for example "Day:
-            %{2019-01-01|%A}". https://github.com/d3/d3-time-
-            format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
-            specified per-point (the ones that are `arrayOk: true`)
-            are available. Finally, the template string has access
-            to variables `lat`, `lon` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
-        uid
-            Assign an id to this trace, Use this to provide object
-            constancy between traces during animations and
-            transitions.
-        uirevision
-            Controls persistence of some user-driven changes to the
-            trace: `constraintrange` in `parcoords` traces, as well
-            as some `editable: true` modifications such as `name`
-            and `colorbar.title`. Defaults to `layout.uirevision`.
-            Note that other user-driven trace attribute changes are
-            controlled by `layout` attributes: `trace.visible` is
-            controlled by `layout.legend.uirevision`,
-            `selectedpoints` is controlled by
-            `layout.selectionrevision`, and `colorbar.(x|y)`
-            (accessible with `config: {editable: true}`) is
-            controlled by `layout.editrevision`. Trace changes are
-            tracked by `uid`, which only falls back on trace index
-            if no `uid` is provided. So if your app can add/remove
-            traces before the end of the `data` array, such that
-            the same trace has a different index, you can still
-            preserve user-driven changes if you give each trace a
-            `uid` that stays with it as it moves.
-        unselected
-            :class:`plotly.graph_objects.scattermapbox.Unselected`
-            instance or dict with compatible properties
-        visible
-            Determines whether or not this trace is visible. If
-            "legendonly", the trace is not drawn, but can appear as
-            a legend item (provided that the legend itself is
-            visible).
-        row : 'all', int or None (default)
-            Subplot row index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            rows in the specified column(s).
-        col : 'all', int or None (default)
-            Subplot col index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            columns in the specified row(s).
-
-        Returns
-        -------
-        Figure
-        """
-        from plotly.graph_objs import Scattermapbox
-
-        new_trace = Scattermapbox(
-            below=below,
-            cluster=cluster,
-            connectgaps=connectgaps,
-            customdata=customdata,
-            customdatasrc=customdatasrc,
-            fill=fill,
-            fillcolor=fillcolor,
-            hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
-            hoverlabel=hoverlabel,
-            hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
-            hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
-            ids=ids,
-            idssrc=idssrc,
-            lat=lat,
-            latsrc=latsrc,
-            legend=legend,
-            legendgroup=legendgroup,
-            legendgrouptitle=legendgrouptitle,
-            legendrank=legendrank,
-            legendwidth=legendwidth,
-            line=line,
-            lon=lon,
-            lonsrc=lonsrc,
-            marker=marker,
-            meta=meta,
-            metasrc=metasrc,
-            mode=mode,
-            name=name,
-            opacity=opacity,
-            selected=selected,
-            selectedpoints=selectedpoints,
-            showlegend=showlegend,
-            stream=stream,
-            subplot=subplot,
-            text=text,
-            textfont=textfont,
-            textposition=textposition,
-            textsrc=textsrc,
-            texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -15977,21 +14021,17 @@ class Figure(BaseFigure):
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         dr=None,
         dtheta=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -16000,28 +14040,22 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         r=None,
         r0=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         subplot=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         theta=None,
         theta0=None,
-        thetasrc=None,
         thetaunit=None,
         uid=None,
         uirevision=None,
@@ -16058,9 +14092,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -16083,13 +14114,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterpolar.Hoverlabel`
             instance or dict with compatible properties
@@ -16117,20 +14145,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -16138,16 +14173,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -16194,9 +14223,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -16215,9 +14241,6 @@ class Figure(BaseFigure):
             Alternate to `r`. Builds a linear space of r
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for
-            `r`.
         selected
             :class:`plotly.graph_objects.scatterpolar.Selected`
             instance or dict with compatible properties
@@ -16231,9 +14254,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scatterpolar.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -16252,15 +14272,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -16271,22 +14285,26 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `r`, `theta` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         theta
             Sets the angular coordinates
         theta0
             Alternate to `theta`. Builds a linear space of theta
             coordinates. Use with `dtheta` where `theta0` is the
             starting coordinate and `dtheta` the step.
-        thetasrc
-            Sets the source reference on Chart Studio Cloud for
-            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -16341,21 +14359,17 @@ class Figure(BaseFigure):
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dr=dr,
             dtheta=dtheta,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -16364,28 +14378,22 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             r=r,
             r0=r0,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             subplot=subplot,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             theta=theta,
             theta0=theta0,
-            thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
             uirevision=uirevision,
@@ -16399,20 +14407,16 @@ class Figure(BaseFigure):
         self,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         dr=None,
         dtheta=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -16421,28 +14425,22 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         r=None,
         r0=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         subplot=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         theta=None,
         theta0=None,
-        thetasrc=None,
         thetaunit=None,
         uid=None,
         uirevision=None,
@@ -16472,9 +14470,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dr
             Sets the r coordinate step.
         dtheta
@@ -16509,13 +14504,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterpolargl.Hoverlabel`
             instance or dict with compatible properties
@@ -16537,20 +14529,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -16558,16 +14557,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -16614,9 +14607,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -16635,9 +14625,6 @@ class Figure(BaseFigure):
             Alternate to `r`. Builds a linear space of r
             coordinates. Use with `dr` where `r0` is the starting
             coordinate and `dr` the step.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for
-            `r`.
         selected
             :class:`plotly.graph_objects.scatterpolargl.Selected`
             instance or dict with compatible properties
@@ -16651,9 +14638,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scatterpolargl.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -16672,15 +14656,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -16691,22 +14669,26 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `r`, `theta` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         theta
             Sets the angular coordinates
         theta0
             Alternate to `theta`. Builds a linear space of theta
             coordinates. Use with `dtheta` where `theta0` is the
             starting coordinate and `dtheta` the step.
-        thetasrc
-            Sets the source reference on Chart Studio Cloud for
-            `theta`.
         thetaunit
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
@@ -16760,20 +14742,16 @@ class Figure(BaseFigure):
         new_trace = Scatterpolargl(
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             dr=dr,
             dtheta=dtheta,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -16782,28 +14760,22 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             r=r,
             r0=r0,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             subplot=subplot,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             theta=theta,
             theta0=theta0,
-            thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
             uirevision=uirevision,
@@ -16818,21 +14790,16 @@ class Figure(BaseFigure):
         cliponaxis=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         imag=None,
-        imagsrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -16841,24 +14808,19 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         real=None,
-        realsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         subplot=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -16894,9 +14856,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scattersmith has a subset of
@@ -16913,13 +14872,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattersmith.Hoverlabel`
             instance or dict with compatible properties
@@ -16947,20 +14903,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -16968,23 +14931,14 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         imag
             Sets the imaginary component of the data, in units of
             normalized impedance such that real=1, imag=0 is the
             center of the chart.
-        imagsrc
-            Sets the source reference on Chart Studio Cloud for
-            `imag`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -17031,9 +14985,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -17050,9 +15001,6 @@ class Figure(BaseFigure):
             Sets the real component of the data, in units of
             normalized impedance such that real=1, imag=0 is the
             center of the chart.
-        realsrc
-            Sets the source reference on Chart Studio Cloud for
-            `real`.
         selected
             :class:`plotly.graph_objects.scattersmith.Selected`
             instance or dict with compatible properties
@@ -17066,9 +15014,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattersmith.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a smith subplot. If "smith" (the default value),
@@ -17087,15 +15032,9 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -17106,13 +15045,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `real`, `imag` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -17164,21 +15110,16 @@ class Figure(BaseFigure):
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             imag=imag,
-            imagsrc=imagsrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -17187,24 +15128,19 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             real=real,
-            realsrc=realsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             subplot=subplot,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -17216,27 +15152,20 @@ class Figure(BaseFigure):
     def add_scatterternary(
         self,
         a=None,
-        asrc=None,
         b=None,
-        bsrc=None,
         c=None,
         cliponaxis=None,
         connectgaps=None,
-        csrc=None,
         customdata=None,
-        customdatasrc=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -17245,23 +15174,19 @@ class Figure(BaseFigure):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         subplot=None,
         sum=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -17285,18 +15210,12 @@ class Figure(BaseFigure):
             normalized, only the relative values matter. If only
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
-        asrc
-            Sets the source reference on Chart Studio Cloud for
-            `a`.
         b
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
             normalized, only the relative values matter. If only
             two arrays are provided they must be normalized to
             match `ternary<i>.sum`.
-        bsrc
-            Sets the source reference on Chart Studio Cloud for
-            `b`.
         c
             Sets the quantity of component `a` in each data point.
             If `a`, `b`, and `c` are all provided, they need not be
@@ -17312,17 +15231,11 @@ class Figure(BaseFigure):
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
-        csrc
-            Sets the source reference on Chart Studio Cloud for
-            `c`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". scatterternary has a subset
@@ -17339,13 +15252,10 @@ class Figure(BaseFigure):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scatterternary.Hoverlabel`
             instance or dict with compatible properties
@@ -17373,37 +15283,37 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
             all the data points. If an array of strings, the items
-            are mapped in order to the the data points in (a,b,c).
-            To be seen, trace `hoverinfo` must contain a "text"
-            flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
+            are mapped in order to the data points in (a,b,c). To
+            be seen, trace `hoverinfo` must contain a "text" flag.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -17450,9 +15360,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -17478,9 +15385,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scatterternary.Stream`
-            instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a ternary subplot. If "ternary" (the default
@@ -17497,24 +15401,18 @@ class Figure(BaseFigure):
             Sets text elements associated with each (a,b,c) point.
             If a single string, the same string appears over all
             the data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b,c). If
-            trace `hoverinfo` contains a "text" flag and
-            "hovertext" is not set, these elements will be seen in
-            the hover labels.
+            mapped in order to the data points in (a,b,c). If trace
+            `hoverinfo` contains a "text" flag and "hovertext" is
+            not set, these elements will be seen in the hover
+            labels.
         textfont
             Sets the text font.
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -17525,13 +15423,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `a`, `b`, `c` and `text`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -17581,27 +15486,20 @@ class Figure(BaseFigure):
 
         new_trace = Scatterternary(
             a=a,
-            asrc=asrc,
             b=b,
-            bsrc=bsrc,
             c=c,
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
-            csrc=csrc,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -17610,23 +15508,19 @@ class Figure(BaseFigure):
             line=line,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             mode=mode,
             name=name,
             opacity=opacity,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             subplot=subplot,
             sum=sum,
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -17638,19 +15532,15 @@ class Figure(BaseFigure):
     def add_splom(
         self,
         customdata=None,
-        customdatasrc=None,
         diagonal=None,
         dimensions=None,
         dimensiondefaults=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -17658,7 +15548,6 @@ class Figure(BaseFigure):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         selected=None,
@@ -17666,9 +15555,7 @@ class Figure(BaseFigure):
         showlegend=None,
         showlowerhalf=None,
         showupperhalf=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -17699,9 +15586,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         diagonal
             :class:`plotly.graph_objects.splom.Diagonal` instance
             or dict with compatible properties
@@ -17715,13 +15599,10 @@ class Figure(BaseFigure):
             default property values to use for elements of
             splom.dimensions
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.splom.Hoverlabel` instance
             or dict with compatible properties
@@ -17743,32 +15624,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -17812,9 +15694,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -17839,18 +15718,12 @@ class Figure(BaseFigure):
         showupperhalf
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
-        stream
-            :class:`plotly.graph_objects.splom.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair to
             appear on hover. If a single string, the same string
             appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (x,y) coordinates.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -17890,7 +15763,7 @@ class Figure(BaseFigure):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -17911,7 +15784,7 @@ class Figure(BaseFigure):
             false, this splom trace will generate one less x-axis
             and one less y-axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -17942,19 +15815,15 @@ class Figure(BaseFigure):
 
         new_trace = Splom(
             customdata=customdata,
-            customdatasrc=customdatasrc,
             diagonal=diagonal,
             dimensions=dimensions,
             dimensiondefaults=dimensiondefaults,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -17962,7 +15831,6 @@ class Figure(BaseFigure):
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             selected=selected,
@@ -17970,9 +15838,7 @@ class Figure(BaseFigure):
             showlegend=showlegend,
             showlowerhalf=showlowerhalf,
             showupperhalf=showupperhalf,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -17996,15 +15862,12 @@ class Figure(BaseFigure):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -18014,7 +15877,6 @@ class Figure(BaseFigure):
         lightposition=None,
         maxdisplayed=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -18023,29 +15885,22 @@ class Figure(BaseFigure):
         showscale=None,
         sizeref=None,
         starts=None,
-        stream=None,
         text=None,
         u=None,
         uhoverformat=None,
         uid=None,
         uirevision=None,
-        usrc=None,
         v=None,
         vhoverformat=None,
         visible=None,
-        vsrc=None,
         w=None,
         whoverformat=None,
-        wsrc=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -18103,31 +15958,25 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.streamtube.Hoverlabel`
             instance or dict with compatible properties
@@ -18149,11 +15998,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `tubex`, `tubey`, `tubez`, `tubeu`,
@@ -18163,18 +16017,17 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -18224,9 +16077,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -18261,9 +16111,6 @@ class Figure(BaseFigure):
         starts
             :class:`plotly.graph_objects.streamtube.Starts`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.streamtube.Stream`
-            instance or dict with compatible properties
         text
             Sets a text element associated with this trace. If
             trace `hoverinfo` contains a "text" flag, this text
@@ -18272,7 +16119,7 @@ class Figure(BaseFigure):
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rulefor `u`  using d3
+            Sets the hover text formatting rule for `u` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -18299,13 +16146,10 @@ class Figure(BaseFigure):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
-        usrc
-            Sets the source reference on Chart Studio Cloud for
-            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rulefor `v`  using d3
+            Sets the hover text formatting rule for `v` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -18315,24 +16159,18 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        vsrc
-            Sets the source reference on Chart Studio Cloud for
-            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rulefor `w`  using d3
+            Sets the hover text formatting rule for `w` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        wsrc
-            Sets the source reference on Chart Studio Cloud for
-            `w`.
         x
             Sets the x coordinates of the vector field.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -18344,13 +16182,10 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates of the vector field.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -18362,13 +16197,10 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates of the vector field.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -18380,9 +16212,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -18410,15 +16239,12 @@ class Figure(BaseFigure):
             colorbar=colorbar,
             colorscale=colorscale,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -18428,7 +16254,6 @@ class Figure(BaseFigure):
             lightposition=lightposition,
             maxdisplayed=maxdisplayed,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             reversescale=reversescale,
@@ -18437,29 +16262,22 @@ class Figure(BaseFigure):
             showscale=showscale,
             sizeref=sizeref,
             starts=starts,
-            stream=stream,
             text=text,
             u=u,
             uhoverformat=uhoverformat,
             uid=uid,
             uirevision=uirevision,
-            usrc=usrc,
             v=v,
             vhoverformat=vhoverformat,
             visible=visible,
-            vsrc=vsrc,
             w=w,
             whoverformat=whoverformat,
-            wsrc=wsrc,
             x=x,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -18469,21 +16287,16 @@ class Figure(BaseFigure):
         branchvalues=None,
         count=None,
         customdata=None,
-        customdatasrc=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         insidetextorientation=None,
         labels=None,
-        labelssrc=None,
         leaf=None,
         legend=None,
         legendgrouptitle=None,
@@ -18493,26 +16306,21 @@ class Figure(BaseFigure):
         marker=None,
         maxdepth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
         parents=None,
-        parentssrc=None,
         root=None,
         rotation=None,
         sort=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         row=None,
         col=None,
@@ -18543,20 +16351,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.sunburst.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.sunburst.Hoverlabel`
             instance or dict with compatible properties
@@ -18578,11 +16381,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
@@ -18592,25 +16400,21 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -18626,9 +16430,6 @@ class Figure(BaseFigure):
             perpendicular to the radius of the sector.
         labels
             Sets the labels of each of the sectors.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
@@ -18681,9 +16482,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -18703,9 +16501,6 @@ class Figure(BaseFigure):
             items are understood to be "ids" themselves. When `ids`
             is not set, plotly attempts to find matching items in
             `labels`, but beware they must be unique.
-        parentssrc
-            Sets the source reference on Chart Studio Cloud for
-            `parents`.
         root
             :class:`plotly.graph_objects.sunburst.Root` instance or
             dict with compatible properties
@@ -18715,9 +16510,6 @@ class Figure(BaseFigure):
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.sunburst.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -18727,13 +16519,13 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -18744,15 +16536,22 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
             `percentRoot`, `percentEntry`, `percentParent`, `label`
             and `value`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -18779,9 +16578,6 @@ class Figure(BaseFigure):
             Sets the values associated with each of the sectors.
             Use with `branchvalues` to determine how the values are
             summed.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -18808,21 +16604,16 @@ class Figure(BaseFigure):
             branchvalues=branchvalues,
             count=count,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             domain=domain,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextfont=insidetextfont,
             insidetextorientation=insidetextorientation,
             labels=labels,
-            labelssrc=labelssrc,
             leaf=leaf,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
@@ -18832,26 +16623,21 @@ class Figure(BaseFigure):
             marker=marker,
             maxdepth=maxdepth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             outsidetextfont=outsidetextfont,
             parents=parents,
-            parentssrc=parentssrc,
             root=root,
             rotation=rotation,
             sort=sort,
-            stream=stream,
             text=text,
             textfont=textfont,
             textinfo=textinfo,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             values=values,
-            valuessrc=valuessrc,
             visible=visible,
             **kwargs,
         )
@@ -18870,17 +16656,13 @@ class Figure(BaseFigure):
         connectgaps=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         hidesurface=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -18889,7 +16671,6 @@ class Figure(BaseFigure):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         opacityscale=None,
@@ -18897,26 +16678,20 @@ class Figure(BaseFigure):
         scene=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         surfacecolor=None,
-        surfacecolorsrc=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         visible=None,
         x=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zcalendar=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -18974,15 +16749,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
@@ -18994,22 +16769,16 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hidesurface
             Determines whether or not a surface is drawn. For
             example, set `hidesurface` to False `contours.x.show`
             to True and `contours.y.show` to True to draw a wire
             frame plot.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.surface.Hoverlabel`
             instance or dict with compatible properties
@@ -19031,32 +16800,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -19103,9 +16873,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -19144,23 +16911,14 @@ class Figure(BaseFigure):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.surface.Stream` instance
-            or dict with compatible properties
         surfacecolor
             Sets the surface color values, used for setting a color
             scale independent of `z`.
-        surfacecolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `surfacecolor`.
         text
             Sets the text elements associated with each z value. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -19193,7 +16951,7 @@ class Figure(BaseFigure):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -19205,15 +16963,12 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -19225,15 +16980,12 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates.
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -19245,9 +16997,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -19277,17 +17026,13 @@ class Figure(BaseFigure):
             connectgaps=connectgaps,
             contours=contours,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             hidesurface=hidesurface,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
@@ -19296,7 +17041,6 @@ class Figure(BaseFigure):
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             opacityscale=opacityscale,
@@ -19304,26 +17048,20 @@ class Figure(BaseFigure):
             scene=scene,
             showlegend=showlegend,
             showscale=showscale,
-            stream=stream,
             surfacecolor=surfacecolor,
-            surfacecolorsrc=surfacecolorsrc,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
             x=x,
             xcalendar=xcalendar,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             ycalendar=ycalendar,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zcalendar=zcalendar,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -19332,26 +17070,19 @@ class Figure(BaseFigure):
         self,
         cells=None,
         columnorder=None,
-        columnordersrc=None,
         columnwidth=None,
-        columnwidthsrc=None,
         customdata=None,
-        customdatasrc=None,
         domain=None,
         header=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         name=None,
-        stream=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -19378,24 +17109,15 @@ class Figure(BaseFigure):
             example, a value `2` at position `0` means that column
             index `0` in the data will be rendered as the third
             column, as columns have an index base of zero.
-        columnordersrc
-            Sets the source reference on Chart Studio Cloud for
-            `columnorder`.
         columnwidth
             The width of columns expressed as a ratio. Columns fill
             the available width in proportion of their specified
             column widths.
-        columnwidthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `columnwidth`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.table.Domain` instance or
             dict with compatible properties
@@ -19403,13 +17125,10 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.table.Header` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.table.Hoverlabel` instance
             or dict with compatible properties
@@ -19417,9 +17136,6 @@ class Figure(BaseFigure):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -19456,15 +17172,9 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
-        stream
-            :class:`plotly.graph_objects.table.Stream` instance or
-            dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -19512,26 +17222,19 @@ class Figure(BaseFigure):
         new_trace = Table(
             cells=cells,
             columnorder=columnorder,
-            columnordersrc=columnordersrc,
             columnwidth=columnwidth,
-            columnwidthsrc=columnwidthsrc,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             domain=domain,
             header=header,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             ids=ids,
-            idssrc=idssrc,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
             legendwidth=legendwidth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
-            stream=stream,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -19544,20 +17247,15 @@ class Figure(BaseFigure):
         branchvalues=None,
         count=None,
         customdata=None,
-        customdatasrc=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         labels=None,
-        labelssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
@@ -19566,28 +17264,23 @@ class Figure(BaseFigure):
         marker=None,
         maxdepth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
         parents=None,
-        parentssrc=None,
         pathbar=None,
         root=None,
         sort=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         tiling=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         row=None,
         col=None,
@@ -19619,20 +17312,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.treemap.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.treemap.Hoverlabel`
             instance or dict with compatible properties
@@ -19654,11 +17342,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
@@ -19668,33 +17361,26 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
         labels
             Sets the labels of each of the sectors.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -19744,9 +17430,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -19766,9 +17449,6 @@ class Figure(BaseFigure):
             items are understood to be "ids" themselves. When `ids`
             is not set, plotly attempts to find matching items in
             `labels`, but beware they must be unique.
-        parentssrc
-            Sets the source reference on Chart Studio Cloud for
-            `parents`.
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
@@ -19778,9 +17458,6 @@ class Figure(BaseFigure):
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.treemap.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -19790,15 +17467,15 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Sets the positions of the `text` elements.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -19809,15 +17486,22 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
             `percentRoot`, `percentEntry`, `percentParent`, `label`
             and `value`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         tiling
             :class:`plotly.graph_objects.treemap.Tiling` instance
             or dict with compatible properties
@@ -19847,9 +17531,6 @@ class Figure(BaseFigure):
             Sets the values associated with each of the sectors.
             Use with `branchvalues` to determine how the values are
             summed.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -19876,20 +17557,15 @@ class Figure(BaseFigure):
             branchvalues=branchvalues,
             count=count,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             domain=domain,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             insidetextfont=insidetextfont,
             labels=labels,
-            labelssrc=labelssrc,
             legend=legend,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
@@ -19898,28 +17574,23 @@ class Figure(BaseFigure):
             marker=marker,
             maxdepth=maxdepth,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             outsidetextfont=outsidetextfont,
             parents=parents,
-            parentssrc=parentssrc,
             pathbar=pathbar,
             root=root,
             sort=sort,
-            stream=stream,
             text=text,
             textfont=textfont,
             textinfo=textinfo,
             textposition=textposition,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             tiling=tiling,
             uid=uid,
             uirevision=uirevision,
             values=values,
-            valuessrc=valuessrc,
             visible=visible,
             **kwargs,
         )
@@ -19931,18 +17602,14 @@ class Figure(BaseFigure):
         bandwidth=None,
         box=None,
         customdata=None,
-        customdatasrc=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         jitter=None,
         legend=None,
         legendgroup=None,
@@ -19953,7 +17620,6 @@ class Figure(BaseFigure):
         marker=None,
         meanline=None,
         meta=None,
-        metasrc=None,
         name=None,
         offsetgroup=None,
         opacity=None,
@@ -19969,9 +17635,7 @@ class Figure(BaseFigure):
         side=None,
         span=None,
         spanmode=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -19981,12 +17645,10 @@ class Figure(BaseFigure):
         x0=None,
         xaxis=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         yhoverformat=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -20000,8 +17662,7 @@ class Figure(BaseFigure):
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
         violin per distinct x (y) value is drawn If no `x` (`y`) list
         is provided, a single violin is drawn. That violin position is
-        then positioned with with `name` or with `x0` (`y0`) if
-        provided.
+        then positioned with `name` or with `x0` (`y0`) if provided.
 
         Parameters
         ----------
@@ -20022,21 +17683,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.violin.Hoverlabel`
             instance or dict with compatible properties
@@ -20062,32 +17717,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         jitter
             Sets the amount of jitter in the sample points drawn.
             If 0, the sample points align along the distribution
@@ -20142,9 +17798,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover. For violin traces, the name
@@ -20197,9 +17850,9 @@ class Figure(BaseFigure):
             and Q3 the median of the upper half.
         scalegroup
             If there are multiple violins that should be sized
-            according to to some metric (see `scalemode`), link
-            them by providing a non-empty group id here shared by
-            every trace in the same group. If a violin's `width` is
+            according to some metric (see `scalemode`), link them
+            by providing a non-empty group id here shared by every
+            trace in the same group. If a violin's `width` is
             undefined, `scalegroup` will default to the trace's
             name. In this case, violins with the same names will be
             linked together
@@ -20240,9 +17893,6 @@ class Figure(BaseFigure):
             sample's minimum to its maximum value. For custom span
             settings, use mode "manual" and fill in the `span`
             attribute.
-        stream
-            :class:`plotly.graph_objects.violin.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -20250,9 +17900,6 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -20301,7 +17948,7 @@ class Figure(BaseFigure):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -20313,9 +17960,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y sample data or coordinates. See overview for
             more info.
@@ -20329,7 +17973,7 @@ class Figure(BaseFigure):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -20341,9 +17985,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -20381,18 +18022,14 @@ class Figure(BaseFigure):
             bandwidth=bandwidth,
             box=box,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             jitter=jitter,
             legend=legend,
             legendgroup=legendgroup,
@@ -20403,7 +18040,6 @@ class Figure(BaseFigure):
             marker=marker,
             meanline=meanline,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             offsetgroup=offsetgroup,
             opacity=opacity,
@@ -20419,9 +18055,7 @@ class Figure(BaseFigure):
             side=side,
             span=span,
             spanmode=spanmode,
-            stream=stream,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -20431,12 +18065,10 @@ class Figure(BaseFigure):
             x0=x0,
             xaxis=xaxis,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -20455,17 +18087,13 @@ class Figure(BaseFigure):
         colorscale=None,
         contour=None,
         customdata=None,
-        customdatasrc=None,
         flatshading=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         isomax=None,
         isomin=None,
         legend=None,
@@ -20476,7 +18104,6 @@ class Figure(BaseFigure):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         opacityscale=None,
@@ -20486,25 +18113,19 @@ class Figure(BaseFigure):
         showscale=None,
         slices=None,
         spaceframe=None,
-        stream=None,
         surface=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         value=None,
         valuehoverformat=None,
-        valuesrc=None,
         visible=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         row=None,
         col=None,
         **kwargs,
@@ -20562,15 +18183,15 @@ class Figure(BaseFigure):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.volume.Contour` instance
             or dict with compatible properties
@@ -20579,21 +18200,15 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.volume.Hoverlabel`
             instance or dict with compatible properties
@@ -20615,32 +18230,33 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         isomax
             Sets the maximum boundary for iso-surface plot.
         isomin
@@ -20691,9 +18307,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -20738,9 +18351,6 @@ class Figure(BaseFigure):
         spaceframe
             :class:`plotly.graph_objects.volume.Spaceframe`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.volume.Stream` instance or
-            dict with compatible properties
         surface
             :class:`plotly.graph_objects.volume.Surface` instance
             or dict with compatible properties
@@ -20749,9 +18359,6 @@ class Figure(BaseFigure):
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -20777,14 +18384,11 @@ class Figure(BaseFigure):
         value
             Sets the 4th dimension (value) of the vertices.
         valuehoverformat
-            Sets the hover text formatting rulefor `value`  using
+            Sets the hover text formatting rule for `value` using
             d3 formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        valuesrc
-            Sets the source reference on Chart Studio Cloud for
-            `value`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -20793,7 +18397,7 @@ class Figure(BaseFigure):
         x
             Sets the X coordinates of the vertices on X axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -20805,13 +18409,10 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -20823,13 +18424,10 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -20841,9 +18439,6 @@ class Figure(BaseFigure):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -20873,17 +18468,13 @@ class Figure(BaseFigure):
             colorscale=colorscale,
             contour=contour,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             flatshading=flatshading,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
             legend=legend,
@@ -20894,7 +18485,6 @@ class Figure(BaseFigure):
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             opacity=opacity,
             opacityscale=opacityscale,
@@ -20904,25 +18494,19 @@ class Figure(BaseFigure):
             showscale=showscale,
             slices=slices,
             spaceframe=spaceframe,
-            stream=stream,
             surface=surface,
             text=text,
-            textsrc=textsrc,
             uid=uid,
             uirevision=uirevision,
             value=value,
             valuehoverformat=valuehoverformat,
-            valuesrc=valuesrc,
             visible=visible,
             x=x,
             xhoverformat=xhoverformat,
-            xsrc=xsrc,
             y=y,
             yhoverformat=yhoverformat,
-            ysrc=ysrc,
             z=z,
             zhoverformat=zhoverformat,
-            zsrc=zsrc,
             **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -20935,19 +18519,15 @@ class Figure(BaseFigure):
         connector=None,
         constraintext=None,
         customdata=None,
-        customdatasrc=None,
         decreasing=None,
         dx=None,
         dy=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         increasing=None,
         insidetextanchor=None,
         insidetextfont=None,
@@ -20957,34 +18537,27 @@ class Figure(BaseFigure):
         legendrank=None,
         legendwidth=None,
         measure=None,
-        measuresrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         offset=None,
         offsetgroup=None,
-        offsetsrc=None,
         opacity=None,
         orientation=None,
         outsidetextfont=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textangle=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
-        texttemplatesrc=None,
+        texttemplatefallback=None,
         totals=None,
         uid=None,
         uirevision=None,
         visible=None,
         width=None,
-        widthsrc=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -20992,7 +18565,6 @@ class Figure(BaseFigure):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -21000,7 +18572,6 @@ class Figure(BaseFigure):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         row=None,
         col=None,
@@ -21043,9 +18614,6 @@ class Figure(BaseFigure):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         decreasing
             :class:`plotly.graph_objects.waterfall.Decreasing`
             instance or dict with compatible properties
@@ -21054,13 +18622,10 @@ class Figure(BaseFigure):
         dy
             Sets the y coordinate step. See `y0` for more info.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.waterfall.Hoverlabel`
             instance or dict with compatible properties
@@ -21082,11 +18647,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `initial`, `delta` and `final`. Anything
@@ -21095,9 +18665,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -21105,16 +18677,10 @@ class Figure(BaseFigure):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         increasing
             :class:`plotly.graph_objects.waterfall.Increasing`
             instance or dict with compatible properties
@@ -21156,9 +18722,6 @@ class Figure(BaseFigure):
             possible to use 'total' to compute the sums. Also
             'absolute' could be applied to reset the computed total
             or to declare an initial value where needed.
-        measuresrc
-            Sets the source reference on Chart Studio Cloud for
-            `measure`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -21172,9 +18735,6 @@ class Figure(BaseFigure):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -21187,9 +18747,6 @@ class Figure(BaseFigure):
             Set several traces linked to the same position axis or
             matching axes to the same offsetgroup where bars of the
             same position coordinate will line up.
-        offsetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -21208,9 +18765,6 @@ class Figure(BaseFigure):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.waterfall.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -21228,9 +18782,12 @@ class Figure(BaseFigure):
         textfont
             Sets the font used for `text`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
             In the case of having multiple waterfalls, totals are
-            computed separately (per trace).
+            computed separately (per trace). Flags are rendered in
+            a fixed order; use `texttemplate` if you need explicit
+            control over the rendered string, including the order
+            of fields and surrounding text.
         textposition
             Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
@@ -21241,15 +18798,9 @@ class Figure(BaseFigure):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -21260,13 +18811,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `initial`, `delta`, `final` and `label`.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         totals
             :class:`plotly.graph_objects.waterfall.Totals` instance
             or dict with compatible properties
@@ -21299,9 +18857,6 @@ class Figure(BaseFigure):
             visible).
         width
             Sets the bar width (in position axis units).
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         x
             Sets the x coordinates.
         x0
@@ -21314,7 +18869,7 @@ class Figure(BaseFigure):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -21342,9 +18897,6 @@ class Figure(BaseFigure):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -21357,7 +18909,7 @@ class Figure(BaseFigure):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -21385,9 +18937,6 @@ class Figure(BaseFigure):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -21427,19 +18976,15 @@ class Figure(BaseFigure):
             connector=connector,
             constraintext=constraintext,
             customdata=customdata,
-            customdatasrc=customdatasrc,
             decreasing=decreasing,
             dx=dx,
             dy=dy,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
-            hovertemplatesrc=hovertemplatesrc,
+            hovertemplatefallback=hovertemplatefallback,
             hovertext=hovertext,
-            hovertextsrc=hovertextsrc,
             ids=ids,
-            idssrc=idssrc,
             increasing=increasing,
             insidetextanchor=insidetextanchor,
             insidetextfont=insidetextfont,
@@ -21449,34 +18994,27 @@ class Figure(BaseFigure):
             legendrank=legendrank,
             legendwidth=legendwidth,
             measure=measure,
-            measuresrc=measuresrc,
             meta=meta,
-            metasrc=metasrc,
             name=name,
             offset=offset,
             offsetgroup=offsetgroup,
-            offsetsrc=offsetsrc,
             opacity=opacity,
             orientation=orientation,
             outsidetextfont=outsidetextfont,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
-            stream=stream,
             text=text,
             textangle=textangle,
             textfont=textfont,
             textinfo=textinfo,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
-            textsrc=textsrc,
             texttemplate=texttemplate,
-            texttemplatesrc=texttemplatesrc,
+            texttemplatefallback=texttemplatefallback,
             totals=totals,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
             width=width,
-            widthsrc=widthsrc,
             x=x,
             x0=x0,
             xaxis=xaxis,
@@ -21484,7 +19022,6 @@ class Figure(BaseFigure):
             xperiod=xperiod,
             xperiod0=xperiod0,
             xperiodalignment=xperiodalignment,
-            xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
@@ -21492,7 +19029,6 @@ class Figure(BaseFigure):
             yperiod=yperiod,
             yperiod0=yperiod0,
             yperiodalignment=yperiodalignment,
-            ysrc=ysrc,
             zorder=zorder,
             **kwargs,
         )
@@ -21942,118 +19478,6 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_maps(selector=selector, row=row, col=col):
-            obj.update(patch, overwrite=overwrite, **kwargs)
-
-        return self
-
-    def select_mapboxes(self, selector=None, row=None, col=None):
-        """
-        Select mapbox subplot objects from a particular subplot cell
-        and/or mapbox subplot objects that satisfy custom selection
-        criteria.
-
-        Parameters
-        ----------
-        selector: dict, function, or None (default None)
-            Dict to use as selection criteria.
-            mapbox objects will be selected if they contain
-            properties corresponding to all of the dictionary's keys, with
-            values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected. If a
-            function, it must be a function accepting a single argument and
-            returning a boolean. The function will be called on each
-            mapbox and those for which the function returned True will
-            be in the selection.
-        row, col: int or None (default None)
-            Subplot row and column index of mapbox objects to select.
-            To select mapbox objects by row and column, the Figure
-            must have been created using plotly.subplots.make_subplots.
-            If None (the default), all mapbox objects are selected.
-        Returns
-        -------
-        generator
-            Generator that iterates through all of the mapbox
-            objects that satisfy all of the specified selection criteria
-        """
-
-        return self._select_layout_subplots_by_prefix("mapbox", selector, row, col)
-
-    def for_each_mapbox(self, fn, selector=None, row=None, col=None) -> "Figure":
-        """
-        Apply a function to all mapbox objects that satisfy the
-        specified selection criteria
-
-        Parameters
-        ----------
-        fn:
-            Function that inputs a single mapbox object.
-        selector: dict, function, or None (default None)
-            Dict to use as selection criteria.
-            mapbox objects will be selected if they contain
-            properties corresponding to all of the dictionary's keys, with
-            values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected. If a
-            function, it must be a function accepting a single argument and
-            returning a boolean. The function will be called on each
-            mapbox and those for which the function returned True will
-            be in the selection.
-        row, col: int or None (default None)
-            Subplot row and column index of mapbox objects to select.
-            To select mapbox objects by row and column, the Figure
-            must have been created using plotly.subplots.make_subplots.
-            If None (the default), all mapbox objects are selected.
-        Returns
-        -------
-        self
-            Returns the Figure object that the method was called on
-        """
-        for obj in self.select_mapboxes(selector=selector, row=row, col=col):
-            fn(obj)
-
-        return self
-
-    def update_mapboxes(
-        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
-    ) -> "Figure":
-        """
-        Perform a property update operation on all mapbox objects
-        that satisfy the specified selection criteria
-
-        Parameters
-        ----------
-        patch: dict
-            Dictionary of property updates to be applied to all
-            mapbox objects that satisfy the selection criteria.
-        selector: dict, function, or None (default None)
-            Dict to use as selection criteria.
-            mapbox objects will be selected if they contain
-            properties corresponding to all of the dictionary's keys, with
-            values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected. If a
-            function, it must be a function accepting a single argument and
-            returning a boolean. The function will be called on each
-            mapbox and those for which the function returned True will
-            be in the selection.
-        overwrite: bool
-            If True, overwrite existing properties. If False, apply updates
-            to existing properties recursively, preserving existing
-            properties that are not specified in the update operation.
-        row, col: int or None (default None)
-            Subplot row and column index of mapbox objects to select.
-            To select mapbox objects by row and column, the Figure
-            must have been created using plotly.subplots.make_subplots.
-            If None (the default), all mapbox objects are selected.
-        **kwargs
-            Additional property updates to apply to each selected
-            mapbox object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
-            takes precedence.
-        Returns
-        -------
-        self
-            Returns the Figure object that the method was called on
-        """
-        for obj in self.select_mapboxes(selector=selector, row=row, col=col):
             obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
@@ -23043,7 +20467,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis. In order for absolute
             positioning of the arrow to work, "axref" must be
@@ -23076,7 +20500,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis. In order for absolute
             positioning of the arrow to work, "ayref" must be
@@ -23236,7 +20660,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         xshift
@@ -23278,7 +20702,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         yshift
@@ -23616,7 +21040,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         y
@@ -23636,7 +21060,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         row
@@ -23927,7 +21351,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         y0
@@ -23945,7 +21369,7 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         row
@@ -24350,9 +21774,14 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis.
+            the domain of the second x axis. If an array of axis
+            IDs is provided, each `x` value will refer to the
+            corresponding axis, e.g., ['x', 'x2'] for a rectangle,
+            line, or circle means `x0` uses the `x` axis and `x1`
+            uses the `x2` axis. Path shapes using an array should
+            have one entry for each x coordinate in the string.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -24362,7 +21791,9 @@ class Figure(BaseFigure):
             data or plot fraction but `x0`, `x1` and x coordinates
             within `path` are pixels relative to `xanchor`. This
             way, the shape can have a fixed width while maintaining
-            a position relative to data or plot fraction.
+            a position relative to data or plot fraction. Note:
+            `xsizemode` "pixel" is not supported when `xref` is an
+            array.
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
@@ -24397,9 +21828,14 @@ class Figure(BaseFigure):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second y axis.
+            the domain of the second y axis. If an array of axis
+            IDs is provided, each `y` value will refer to the
+            corresponding axis, e.g., ['y', 'y2'] for a rectangle,
+            line, or circle means `y0` uses the `y` axis and `y1`
+            uses the `y2` axis. Path shapes using an array should
+            have one entry for each y coordinate in the string.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -24410,7 +21846,8 @@ class Figure(BaseFigure):
             within `path` are pixels relative to `yanchor`. This
             way, the shape can have a fixed height while
             maintaining a position relative to data or plot
-            fraction.
+            fraction. Note: `ysizemode` "pixel" is not supported
+            when `yref` is an array.
         row
             Subplot row for shape. If 'all', addresses all rows in
             the specified column(s).

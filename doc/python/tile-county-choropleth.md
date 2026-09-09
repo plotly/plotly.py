@@ -107,13 +107,13 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
-IFrame(snippet_url + 'mapbox-county-choropleth', width='100%', height=1200)
+IFrame(snippet_url + 'map-county-choropleth', width='100%', height=1200)
 ```
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
@@ -122,7 +122,7 @@ IFrame(snippet_url + 'mapbox-county-choropleth', width='100%', height=1200)
 
 ### Indexing by GeoJSON Properties
 
-If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
+If the GeoJSON you are using either does not have an `id` field or you wish to use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
 
 In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
 
@@ -218,40 +218,7 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-### Mapbox Maps
-
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
-
-The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create tile-based choropleth maps. There are also choropleth traces that use [Mapbox](https://docs.mapbox.com): `px.choropleth_mapbox` and `go.Choroplethmapbox`
-
-To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
-
-Here's an exmaple of using the Mapbox Light base map, which requires a free token.
-
-```python
-token = open(".mapbox_token").read() # you will need your own token
-
-from urllib.request import urlopen
-import json
-with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
-    counties = json.load(response)
-
-import pandas as pd
-df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv",
-                   dtype={"fips": str})
-
-import plotly.graph_objects as go
-
-fig = go.Figure(go.Choroplethmapbox(geojson=counties, locations=df.fips, z=df.unemp,
-                                    colorscale="Viridis", zmin=0, zmax=12, marker_line_width=0))
-fig.update_layout(mapbox_style="light", mapbox_accesstoken=token,
-                  mapbox_zoom=3, mapbox_center = {"lat": 37.0902, "lon": -95.7129})
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.show()
-```
 
 #### Reference
 
 See [function reference for `px.choropleth_map`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_map) or https://plotly.com/python/reference/choroplethmap/ for more information about the attributes available.
-
-For (deprecated) Mapbox-based tile maps, see [function reference for `px.choropleth_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or https://plotly.com/python/reference/choroplethmapbox/.

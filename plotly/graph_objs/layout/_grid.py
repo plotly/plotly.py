@@ -33,7 +33,7 @@ class Grid(_BaseLayoutHierarchyType):
         if you want to leave a row at the end for non-cartesian
         subplots.
 
-        The 'columns' property is a integer and may be specified as:
+        The 'columns' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -118,7 +118,7 @@ class Grid(_BaseLayoutHierarchyType):
         But it's also possible to have a different length, if you want
         to leave a row at the end for non-cartesian subplots.
 
-        The 'rows' property is a integer and may be specified as:
+        The 'rows' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 

@@ -12,22 +12,20 @@ class Parcats(_BaseTraceType):
         "arrangement",
         "bundlecolors",
         "counts",
-        "countssrc",
         "dimensiondefaults",
         "dimensions",
         "domain",
         "hoverinfo",
         "hoveron",
         "hovertemplate",
+        "hovertemplatefallback",
         "labelfont",
         "legendgrouptitle",
         "legendwidth",
         "line",
         "meta",
-        "metasrc",
         "name",
         "sortpaths",
-        "stream",
         "tickfont",
         "type",
         "uid",
@@ -64,8 +62,8 @@ class Parcats(_BaseTraceType):
         Sort paths so that like colors are bundled together within each
         category.
 
-        The 'bundlecolors' property must be specified as a bool
-        (either True, or False)
+        The 'bundlecolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -96,24 +94,6 @@ class Parcats(_BaseTraceType):
     @counts.setter
     def counts(self, val):
         self["counts"] = val
-
-    @property
-    def countssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `counts`.
-
-        The 'countssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["countssrc"]
-
-    @countssrc.setter
-    def countssrc(self, val):
-        self["countssrc"] = val
 
     @property
     def dimensions(self):
@@ -182,7 +162,7 @@ class Parcats(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -243,15 +223,16 @@ class Parcats(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  This value
-        here applies when hovering over dimensions. Note that
-        "categorycount", "colorcount" and "bandcolorcount" are only
-        available when `hoveron` contains the "color" flag. Finally,
-        the template string has access to variables `count`,
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `count`,
         `probability`, `category`, `categorycount`, `colorcount` and
         `bandcolorcount`. Anything contained in tag `<extra>` is
         displayed in the secondary box, for example
@@ -271,6 +252,25 @@ class Parcats(_BaseTraceType):
     @hovertemplate.setter
     def hovertemplate(self, val):
         self["hovertemplate"] = val
+
+    @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def labelfont(self):
@@ -377,24 +377,6 @@ class Parcats(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -434,25 +416,6 @@ class Parcats(_BaseTraceType):
     @sortpaths.setter
     def sortpaths(self, val):
         self["sortpaths"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.parcats.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.parcats.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def tickfont(self):
@@ -568,9 +531,6 @@ class Parcats(_BaseTraceType):
             The number of observations represented by each state.
             Defaults to 1 so that each state represents one
             observation
-        countssrc
-            Sets the source reference on Chart Studio Cloud for
-            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -583,7 +543,7 @@ class Parcats(_BaseTraceType):
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
@@ -612,23 +572,30 @@ class Parcats(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over dimensions. Note that "categorycount",
-            "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flag. Finally, the
-            template string has access to variables `count`,
-            `probability`, `category`, `categorycount`,
-            `colorcount` and `bandcolorcount`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count`, `probability`, `category`,
+            `categorycount`, `colorcount` and `bandcolorcount`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -653,9 +620,6 @@ class Parcats(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -664,9 +628,6 @@ class Parcats(_BaseTraceType):
             paths based on dimension categories from left to right.
             If `backward`, sort paths based on dimensions
             categories from right to left.
-        stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -704,22 +665,20 @@ class Parcats(_BaseTraceType):
         arrangement=None,
         bundlecolors=None,
         counts=None,
-        countssrc=None,
         dimensions=None,
         dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         labelfont=None,
         legendgrouptitle=None,
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         sortpaths=None,
-        stream=None,
         tickfont=None,
         uid=None,
         uirevision=None,
@@ -751,9 +710,6 @@ class Parcats(_BaseTraceType):
             The number of observations represented by each state.
             Defaults to 1 so that each state represents one
             observation
-        countssrc
-            Sets the source reference on Chart Studio Cloud for
-            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -766,7 +722,7 @@ class Parcats(_BaseTraceType):
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
@@ -795,23 +751,30 @@ class Parcats(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over dimensions. Note that "categorycount",
-            "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flag. Finally, the
-            template string has access to variables `count`,
-            `probability`, `category`, `categorycount`,
-            `colorcount` and `bandcolorcount`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count`, `probability`, `category`,
+            `categorycount`, `colorcount` and `bandcolorcount`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -836,9 +799,6 @@ class Parcats(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -847,9 +807,6 @@ class Parcats(_BaseTraceType):
             paths based on dimension categories from left to right.
             If `backward`, sort paths based on dimensions
             categories from right to left.
-        stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -907,22 +864,20 @@ an instance of :class:`plotly.graph_objs.Parcats`""")
         self._set_property("arrangement", arg, arrangement)
         self._set_property("bundlecolors", arg, bundlecolors)
         self._set_property("counts", arg, counts)
-        self._set_property("countssrc", arg, countssrc)
         self._set_property("dimensions", arg, dimensions)
         self._set_property("dimensiondefaults", arg, dimensiondefaults)
         self._set_property("domain", arg, domain)
         self._set_property("hoverinfo", arg, hoverinfo)
         self._set_property("hoveron", arg, hoveron)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("labelfont", arg, labelfont)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("sortpaths", arg, sortpaths)
-        self._set_property("stream", arg, stream)
         self._set_property("tickfont", arg, tickfont)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)

@@ -8,14 +8,7 @@ import copy as _copy
 class Autorangeoptions(_BaseLayoutHierarchyType):
     _parent_path_str = "layout.polar.radialaxis"
     _path_str = "layout.polar.radialaxis.autorangeoptions"
-    _valid_props = {
-        "clipmax",
-        "clipmin",
-        "include",
-        "includesrc",
-        "maxallowed",
-        "minallowed",
-    }
+    _valid_props = {"clipmax", "clipmin", "include", "maxallowed", "minallowed"}
 
     @property
     def clipmax(self):
@@ -56,7 +49,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     @property
     def include(self):
         """
-        Ensure this value is included in autorange.
+        Extends the autorange to include this value or array of values,
+        even when they fall outside the data range. Has no effect on
+        endpoints set by `autorangeoptions.minallowed` or
+        `autorangeoptions.maxallowed`. Subject to
+        `autorangeoptions.clipmin` and `autorangeoptions.clipmax`.
 
         The 'include' property accepts values of any type
 
@@ -69,24 +66,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     @include.setter
     def include(self, val):
         self["include"] = val
-
-    @property
-    def includesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `include`.
-
-        The 'includesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["includesrc"]
-
-    @includesrc.setter
-    def includesrc(self, val):
-        self["includesrc"] = val
 
     @property
     def maxallowed(self):
@@ -134,10 +113,13 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
             Has no effect when `autorangeoptions.minallowed` is
             provided.
         include
-            Ensure this value is included in autorange.
-        includesrc
-            Sets the source reference on Chart Studio Cloud for
-            `include`.
+            Extends the autorange to include this value or array of
+            values, even when they fall outside the data range. Has
+            no effect on endpoints set by
+            `autorangeoptions.minallowed` or
+            `autorangeoptions.maxallowed`. Subject to
+            `autorangeoptions.clipmin` and
+            `autorangeoptions.clipmax`.
         maxallowed
             Use this value exactly as autorange maximum.
         minallowed
@@ -150,7 +132,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         clipmax=None,
         clipmin=None,
         include=None,
-        includesrc=None,
         maxallowed=None,
         minallowed=None,
         **kwargs,
@@ -173,10 +154,13 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
             Has no effect when `autorangeoptions.minallowed` is
             provided.
         include
-            Ensure this value is included in autorange.
-        includesrc
-            Sets the source reference on Chart Studio Cloud for
-            `include`.
+            Extends the autorange to include this value or array of
+            values, even when they fall outside the data range. Has
+            no effect on endpoints set by
+            `autorangeoptions.minallowed` or
+            `autorangeoptions.maxallowed`. Subject to
+            `autorangeoptions.clipmin` and
+            `autorangeoptions.clipmax`.
         maxallowed
             Use this value exactly as autorange maximum.
         minallowed
@@ -209,7 +193,6 @@ an instance of :class:`plotly.graph_objs.layout.polar.radialaxis.Autorangeoption
         self._set_property("clipmax", arg, clipmax)
         self._set_property("clipmin", arg, clipmin)
         self._set_property("include", arg, include)
-        self._set_property("includesrc", arg, includesrc)
         self._set_property("maxallowed", arg, maxallowed)
         self._set_property("minallowed", arg, minallowed)
         self._process_kwargs(**dict(arg, **kwargs))

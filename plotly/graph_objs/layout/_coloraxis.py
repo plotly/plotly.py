@@ -30,8 +30,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -51,8 +51,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         array(s)) or the bounds set in `cmin` and `cmax` Defaults to
         `false` when `cmin` and `cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -149,7 +149,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `cmin` and `cmax`.
@@ -202,8 +202,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -221,8 +221,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -269,15 +269,15 @@ class Coloraxis(_BaseLayoutHierarchyType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -342,15 +342,15 @@ class Coloraxis(_BaseLayoutHierarchyType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and

@@ -50,8 +50,8 @@ class Shape(_BaseLayoutHierarchyType):
         not. Has no effect when the older editable shapes mode is
         enabled via `config.editable` or `config.edits.shapePosition`.
 
-        The 'editable' property must be specified as a bool
-        (either True, or False)
+        The 'editable' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -69,12 +69,18 @@ class Shape(_BaseLayoutHierarchyType):
         Sets the color filling the shape's interior. Only applies to
         closed shapes.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -157,9 +163,9 @@ class Shape(_BaseLayoutHierarchyType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -359,8 +365,8 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Determines whether or not this shape is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -556,19 +562,25 @@ class Shape(_BaseLayoutHierarchyType):
         by "domain" (separated by a space), the position behaves like
         for "paper", but refers to the distance in fractions of the
         domain length from the left of the domain of that axis: e.g.,
-        *x2 domain* refers to the domain of the second x  axis and a x
+        *x2 domain* refers to the domain of the second x axis and a x
         position of 0.5 refers to the point between the left and the
-        right of the domain of the second x axis.
+        right of the domain of the second x axis. If an array of axis
+        IDs is provided, each `x` value will refer to the corresponding
+        axis, e.g., ['x', 'x2'] for a rectangle, line, or circle means
+        `x0` uses the `x` axis and `x1` uses the `x2` axis. Path shapes
+        using an array should have one entry for each x coordinate in
+        the string.
 
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
           - A string that matches one of the following regular expressions:
                 ['^x([2-9]|[1-9][0-9]+)?( domain)?$']
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any
+        Any|numpy.ndarray
         """
         return self["xref"]
 
@@ -586,7 +598,8 @@ class Shape(_BaseLayoutHierarchyType):
         specifies the x position in terms of data or plot fraction but
         `x0`, `x1` and x coordinates within `path` are pixels relative
         to `xanchor`. This way, the shape can have a fixed width while
-        maintaining a position relative to data or plot fraction.
+        maintaining a position relative to data or plot fraction. Note:
+        `xsizemode` "pixel" is not supported when `xref` is an array.
 
         The 'xsizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -713,18 +726,24 @@ class Shape(_BaseLayoutHierarchyType):
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the bottom of the domain of
         that axis: e.g., *y2 domain* refers to the domain of the second
-        y  axis and a y position of 0.5 refers to the point between the
-        bottom and the top of the domain of the second y axis.
+        y axis and a y position of 0.5 refers to the point between the
+        bottom and the top of the domain of the second y axis. If an
+        array of axis IDs is provided, each `y` value will refer to the
+        corresponding axis, e.g., ['y', 'y2'] for a rectangle, line, or
+        circle means `y0` uses the `y` axis and `y1` uses the `y2`
+        axis. Path shapes using an array should have one entry for each
+        y coordinate in the string.
 
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
           - A string that matches one of the following regular expressions:
                 ['^y([2-9]|[1-9][0-9]+)?( domain)?$']
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any
+        Any|numpy.ndarray
         """
         return self["yref"]
 
@@ -742,7 +761,8 @@ class Shape(_BaseLayoutHierarchyType):
         specifies the y position in terms of data or plot fraction but
         `y0`, `y1` and y coordinates within `path` are pixels relative
         to `yanchor`. This way, the shape can have a fixed height while
-        maintaining a position relative to data or plot fraction.
+        maintaining a position relative to data or plot fraction. Note:
+        `ysizemode` "pixel" is not supported when `yref` is an array.
 
         The 'ysizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -909,9 +929,14 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis.
+            the domain of the second x axis. If an array of axis
+            IDs is provided, each `x` value will refer to the
+            corresponding axis, e.g., ['x', 'x2'] for a rectangle,
+            line, or circle means `x0` uses the `x` axis and `x1`
+            uses the `x2` axis. Path shapes using an array should
+            have one entry for each x coordinate in the string.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -921,7 +946,9 @@ class Shape(_BaseLayoutHierarchyType):
             data or plot fraction but `x0`, `x1` and x coordinates
             within `path` are pixels relative to `xanchor`. This
             way, the shape can have a fixed width while maintaining
-            a position relative to data or plot fraction.
+            a position relative to data or plot fraction. Note:
+            `xsizemode` "pixel" is not supported when `xref` is an
+            array.
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
@@ -956,9 +983,14 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second y axis.
+            the domain of the second y axis. If an array of axis
+            IDs is provided, each `y` value will refer to the
+            corresponding axis, e.g., ['y', 'y2'] for a rectangle,
+            line, or circle means `y0` uses the `y` axis and `y1`
+            uses the `y2` axis. Path shapes using an array should
+            have one entry for each y coordinate in the string.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -969,7 +1001,8 @@ class Shape(_BaseLayoutHierarchyType):
             within `path` are pixels relative to `yanchor`. This
             way, the shape can have a fixed height while
             maintaining a position relative to data or plot
-            fraction.
+            fraction. Note: `ysizemode` "pixel" is not supported
+            when `yref` is an array.
         """
 
     def __init__(
@@ -1165,9 +1198,14 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis.
+            the domain of the second x axis. If an array of axis
+            IDs is provided, each `x` value will refer to the
+            corresponding axis, e.g., ['x', 'x2'] for a rectangle,
+            line, or circle means `x0` uses the `x` axis and `x1`
+            uses the `x2` axis. Path shapes using an array should
+            have one entry for each x coordinate in the string.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -1177,7 +1215,9 @@ class Shape(_BaseLayoutHierarchyType):
             data or plot fraction but `x0`, `x1` and x coordinates
             within `path` are pixels relative to `xanchor`. This
             way, the shape can have a fixed width while maintaining
-            a position relative to data or plot fraction.
+            a position relative to data or plot fraction. Note:
+            `xsizemode` "pixel" is not supported when `xref` is an
+            array.
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
@@ -1212,9 +1252,14 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second y axis.
+            the domain of the second y axis. If an array of axis
+            IDs is provided, each `y` value will refer to the
+            corresponding axis, e.g., ['y', 'y2'] for a rectangle,
+            line, or circle means `y0` uses the `y` axis and `y1`
+            uses the `y2` axis. Path shapes using an array should
+            have one entry for each y coordinate in the string.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -1225,7 +1270,8 @@ class Shape(_BaseLayoutHierarchyType):
             within `path` are pixels relative to `yanchor`. This
             way, the shape can have a fixed height while
             maintaining a position relative to data or plot
-            fraction.
+            fraction. Note: `ysizemode` "pixel" is not supported
+            when `yref` is an array.
 
         Returns
         -------

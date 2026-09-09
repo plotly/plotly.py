@@ -1,9 +1,4 @@
 {
-    "schemaVersion": 1,
-    "packageName": "jupyterlab-plotly",
-    "version": "6.0.1",
-    "packageManager": "python",
-    "jupyterlab": {
-      "mimeExtension": "lib/mimeExtension.js"
-    }
+    "packageName": "plotly",
+    "packageManager": "python"
 }

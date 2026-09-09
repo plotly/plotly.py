@@ -118,8 +118,7 @@ class Contours(_BaseTraceHierarchyType):
         "(]" keep regions inside `value[0]` to `value[1]` "][", ")(",
         "](", ")[" keep regions outside `value[0]` to value[1]` Open
         vs. closed intervals make no difference to constraint display,
-        but all versions are allowed for consistency with filter
-        transforms.
+        but all versions are allowed.
 
         The 'operation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -142,8 +141,8 @@ class Contours(_BaseTraceHierarchyType):
         Determines whether to label the contour lines with their
         values.
 
-        The 'showlabels' property must be specified as a bool
-        (either True, or False)
+        The 'showlabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -161,8 +160,8 @@ class Contours(_BaseTraceHierarchyType):
         Determines whether or not the contour lines are drawn. Has an
         effect only if `contours.coloring` is set to "fill".
 
-        The 'showlines' property must be specified as a bool
-        (either True, or False)
+        The 'showlines' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -286,7 +285,7 @@ class Contours(_BaseTraceHierarchyType):
             `value[1]` "][", ")(", "](", ")[" keep regions outside
             `value[0]` to value[1]` Open vs. closed intervals make
             no difference to constraint display, but all versions
-            are allowed for consistency with filter transforms.
+            are allowed.
         showlabels
             Determines whether to label the contour lines with
             their values.
@@ -368,7 +367,7 @@ class Contours(_BaseTraceHierarchyType):
             `value[1]` "][", ")(", "](", ")[" keep regions outside
             `value[0]` to value[1]` Open vs. closed intervals make
             no difference to constraint display, but all versions
-            are allowed for consistency with filter transforms.
+            are allowed.
         showlabels
             Determines whether to label the contour lines with
             their values.

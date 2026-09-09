@@ -77,8 +77,8 @@ class Button(_BaseLayoutHierarchyType):
         automatically binding to the state of the plot through the
         specification of `method` and `args`.
 
-        The 'execute' property must be specified as a bool
-        (either True, or False)
+        The 'execute' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -188,8 +188,8 @@ class Button(_BaseLayoutHierarchyType):
         """
         Determines whether or not this button is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

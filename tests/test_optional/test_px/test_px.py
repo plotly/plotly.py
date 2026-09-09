@@ -1,6 +1,7 @@
 from itertools import permutations
 import warnings
 
+import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 import narwhals.stable.v1 as nw
@@ -35,7 +36,7 @@ def test_custom_data_scatter(backend):
     )
     for data in fig.data:
         assert np.all(
-            np.in1d(data.customdata[:, 1], iris.get_column("petal_width").to_numpy())
+            np.isin(data.customdata[:, 1], iris.get_column("petal_width").to_numpy())
         )
     # Hover and custom data, no repeated arguments
     fig = px.scatter(
@@ -226,6 +227,54 @@ def test_px_templates(backend):
         pio.templates.default = "plotly"
 
 
+def test_px_templates_trace_specific_colors(backend):
+    tips = px.data.tips(return_type=backend)
+
+    # trace-specific colors: each trace type uses its own template colors
+    template = {
+        "data": {
+            "histogram": [
+                {"marker": {"color": "orange"}},
+                {"marker": {"color": "purple"}},
+            ],
+            "bar": [
+                {"marker": {"color": "red"}},
+                {"marker": {"color": "blue"}},
+            ],
+        },
+        "layout": {
+            "colorway": ["yellow", "green"],
+        },
+    }
+    # histogram uses histogram colors
+    fig = px.histogram(tips, x="total_bill", color="sex", template=template)
+    assert fig.data[0].marker.color == "orange"
+    assert fig.data[1].marker.color == "purple"
+    # fallback to layout.colorway when trace-specific colors don't exist
+    fig = px.box(tips, x="day", y="total_bill", color="sex", template=template)
+    assert fig.data[0].marker.color == "yellow"
+    assert fig.data[1].marker.color == "green"
+    # timeline special case (maps to bar)
+    df_timeline = pd.DataFrame(
+        {
+            "Task": ["Job A", "Job B"],
+            "Start": ["2009-01-01", "2009-03-05"],
+            "Finish": ["2009-02-28", "2009-04-15"],
+            "Resource": ["Alex", "Max"],
+        }
+    )
+    fig = px.timeline(
+        df_timeline,
+        x_start="Start",
+        x_end="Finish",
+        y="Task",
+        color="Resource",
+        template=template,
+    )
+    assert fig.data[0].marker.color == "red"
+    assert fig.data[1].marker.color == "blue"
+
+
 def test_px_defaults():
     px.defaults.labels = dict(x="hey x")
     px.defaults.category_orders = dict(color=["b", "a"])
@@ -396,24 +445,6 @@ def test_load_px_data(return_type):
         else:
             df = getattr(px.data, fname)(return_type=return_type)
         assert len(df) > 0
-
-
-def test_warn_on_deprecated_mapbox_px_constructors():
-    # This test will fail if any of the following px constructors
-    # fails to emit a DeprecationWarning
-    for fig_constructor in [
-        px.line_mapbox,
-        px.scatter_mapbox,
-        px.density_mapbox,
-        px.choropleth_mapbox,
-    ]:
-        # Look for warnings with the string "_mapbox" in them
-        # to make sure the warning is coming from px rather than go
-        with pytest.warns(DeprecationWarning, match="_mapbox"):
-            if fig_constructor == px.choropleth_mapbox:
-                fig_constructor(locations=["CA", "TX", "NY"])
-            else:
-                fig_constructor(lat=[10, 20, 30], lon=[10, 20, 30])
 
 
 def test_no_warn_on_non_deprecated_px_constructors():

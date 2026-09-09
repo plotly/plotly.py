@@ -89,7 +89,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -284,7 +284,7 @@ fig.update_traces(textposition="bottom right")
 fig.show()
 ```
 
-### Swarm (or Beeswarm) Plots 
+### Swarm (or Beeswarm) Plots
 
 Swarm plots show the distribution of values in a column by giving each entry one dot and adjusting the y-value so that dots do not overlap and appear symmetrically around the y=0 line. They complement [histograms](https://plotly.com/python/histograms/), [box plots](https://plotly.com/python/box-plots/), and [violin plots](https://plotly.com/python/violin/). This example could be generalized to implement a swarm plot for multiple categories by adjusting the y-coordinate for each category.
 
@@ -296,7 +296,7 @@ import collections
 
 def negative_1_if_count_is_odd(count):
     # if this is an odd numbered entry in its bin, make its y coordinate negative
-    # the y coordinate of the first entry is 0, so entries 3, 5, and 7 get 
+    # the y coordinate of the first entry is 0, so entries 3, 5, and 7 get
     # negative y coordinates
     if count % 2 == 1:
         return -1
@@ -312,9 +312,9 @@ def swarm(
     gap_multiplier=1.2,
     bin_fraction=0.95,  # slightly undersizes the bins to avoid collisions
 ):
-    # sorting will align columns in attractive c-shaped arcs rather than having 
+    # sorting will align columns in attractive c-shaped arcs rather than having
     # columns that vary unpredictably in the x-dimension.
-    # We also exploit the fact that sorting means we see bins sequentially when 
+    # We also exploit the fact that sorting means we see bins sequentially when
     # we add collision prevention offsets.
     X_series = X_series.copy().sort_values()
 
@@ -341,9 +341,9 @@ def swarm(
         list_of_rows.append(
             {"x": x_val, "y_slot": bin_counter[bin], "bin": bin})
 
-    # iterate through the points and "offset" any that are colliding with a 
+    # iterate through the points and "offset" any that are colliding with a
     # point to their left apply the offsets to all subsequent points in the same bin.
-    # this arranges points in an attractive swarm c-curve where the points 
+    # this arranges points in an attractive swarm c-curve where the points
     # toward the edges are (weakly) further right.
     bin = 0
     offset = 0
@@ -360,21 +360,21 @@ def swarm(
                        and (((fig_width*(row["x"]-other_row["x"]))/(max_x-min_x)
                               // point_size) < 1)):
                     offset += 1
-                    # update the bin count so we know whether the number of 
+                    # update the bin count so we know whether the number of
                     # *used* slots is even or odd
                     bin_counter.update([bin])
 
         row["y_slot"] += offset
         # The collision free y coordinate gives the items in a vertical bin
-        # y-coordinates to evenly spread their locations above and below the 
-        # y-axis (we'll make a correction below to deal with even numbers of 
+        # y-coordinates to evenly spread their locations above and below the
+        # y-axis (we'll make a correction below to deal with even numbers of
         # entries).  For now, we'll assign 0, 1, -1, 2, -2, 3, -3 ... and so on.
-        # We scale this by the point_size*gap_multiplier to get a y coordinate 
+        # We scale this by the point_size*gap_multiplier to get a y coordinate
         # in px.
         row["y"] = (row["y_slot"]//2) * \
             negative_1_if_count_is_odd(row["y_slot"])*point_size*gap_multiplier
 
-    # if the number of points is even, move y-coordinates down to put an equal 
+    # if the number of points is even, move y-coordinates down to put an equal
     # number of entries above and below the axis
     for row in list_of_rows:
         if bin_counter[row["bin"]] % 2 == 0:
@@ -384,8 +384,8 @@ def swarm(
     # One way to make this code more flexible to e.g. handle multiple categories
     # would be to return a list of "swarmified" y coordinates here and then plot
     # outside the function.
-    # That generalization would let you "swarmify" y coordinates for each 
-    # category and add category specific offsets to put the each category in its 
+    # That generalization would let you "swarmify" y coordinates for each
+    # category and add category specific offsets to put the each category in its
     # own row
 
     fig = px.scatter(
@@ -394,7 +394,7 @@ def swarm(
         y="y",
         title=fig_title,
     )
-    # we want to suppress the y coordinate in the hover value because the 
+    # we want to suppress the y coordinate in the hover value because the
     # y-coordinate is irrelevant/misleading
     fig.update_traces(
         marker_size=point_size,

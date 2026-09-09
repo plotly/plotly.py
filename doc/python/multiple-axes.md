@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Multiple Axes
-    order: 16
+    order: 17
     permalink: python/multiple-axes/
     thumbnail: thumbnail/multiple-axes.jpg
 ---
@@ -79,7 +79,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -383,7 +383,9 @@ fig.show()
 
 *New in 5.13*
 
-With overlayed axes, each axis by default has its own number of ticks. You can sync the number of ticks on a cartesian axis with another one it overlays by setting `tickmode="sync"`. In this example, we sync the ticks on the `"Total bill amount"` axis with the `"Total number of diners"` axis that it overlays.
+Set `tickmode="sync"` on an overlaying cartesian axis to draw its ticks and gridlines at the positions of the axis it overlays, labeled from its own range. The two axes then share one grid. In this example, the `"Total bill amount"` axis syncs its ticks with the `"Total number of diners"` axis that it overlays.
+
+*Changed in 7.0*: `tickmode` defaults to `"sync"` on an overlaying axis. Earlier versions gave each axis its own independent grid. Set `tickmode="auto"` on the overlaying axis for that behavior.
 
 ```python
 import plotly.graph_objects as go

@@ -22,6 +22,20 @@ def fullmatch(regex, string, flags=0):
     return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
 
 
+def to_non_numpy_type(np, v):
+    """
+    Convert a numpy scalar value to a native Python type.
+    Calling .item() on a datetime64[ns] value returns an integer, since
+    Python datetimes only support microsecond precision. So we cast
+    datetime64[ns] to datetime64[us] to ensure it remains a datetime.
+
+    Should only be used in contexts where we already know `np` is defined.
+    """
+    if hasattr(v, "dtype") and v.dtype == np.dtype("datetime64[ns]"):
+        return v.astype("datetime64[us]").item()
+    return v.item()
+
+
 # Utility functions
 # -----------------
 def to_scalar_or_list(v):
@@ -35,12 +49,12 @@ def to_scalar_or_list(v):
     np = get_module("numpy", should_load=False)
     pd = get_module("pandas", should_load=False)
     if np and np.isscalar(v) and hasattr(v, "item"):
-        return v.item()
+        return to_non_numpy_type(np, v)
     if isinstance(v, (list, tuple)):
         return [to_scalar_or_list(e) for e in v]
     elif np and isinstance(v, np.ndarray):
         if v.ndim == 0:
-            return v.item()
+            return to_non_numpy_type(np, v)
         return [to_scalar_or_list(e) for e in v]
     elif pd and isinstance(v, (pd.Series, pd.Index)):
         return [to_scalar_or_list(e) for e in v]
@@ -618,52 +632,36 @@ class BooleanValidator(BaseValidator):
         "description": "A boolean (true/false) value.",
         "requiredOpts": [],
         "otherOpts": [
+            "arrayOk",
             "dflt"
         ]
     },
     """
 
-    def __init__(self, plotly_name, parent_name, **kwargs):
+    def __init__(self, plotly_name, parent_name, array_ok=False, **kwargs):
         super(BooleanValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
+        self.array_ok = array_ok
 
     def description(self):
-        return """\
-    The '{plotly_name}' property must be specified as a bool
-    (either True, or False)""".format(plotly_name=self.plotly_name)
+        desc = """\
+    The '{plotly_name}' property is a boolean and must be specified as:
+      - A boolean value: True or False""".format(plotly_name=self.plotly_name)
+        if self.array_ok:
+            desc += """
+      - A tuple or list of the above"""
+        return desc
 
     def validate_coerce(self, v):
         if is_none_or_typed_array_spec(v):
             pass
+        elif self.array_ok and is_simple_array(v):
+            invalid_els = [e for e in v if not isinstance(e, bool)]
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+            v = to_scalar_or_list(v)
         elif not isinstance(v, bool):
-            self.raise_invalid_val(v)
-
-        return v
-
-
-class SrcValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, **kwargs):
-        super(SrcValidator, self).__init__(
-            plotly_name=plotly_name, parent_name=parent_name, **kwargs
-        )
-
-        self.chart_studio = get_module("chart_studio")
-
-    def description(self):
-        return """\
-    The '{plotly_name}' property must be specified as a string or
-    as a plotly.grid_objs.Column object""".format(plotly_name=self.plotly_name)
-
-    def validate_coerce(self, v):
-        if is_none_or_typed_array_spec(v):
-            pass
-        elif isinstance(v, str):
-            pass
-        elif self.chart_studio and isinstance(v, self.chart_studio.grid_objs.Column):
-            # Convert to id string
-            v = v.id
-        else:
             self.raise_invalid_val(v)
 
         return v
@@ -853,7 +851,7 @@ class IntegerValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a integer and may be specified as:""".format(
+    The '{plotly_name}' property is an integer and may be specified as:""".format(
             plotly_name=self.plotly_name
         )
 
@@ -1120,14 +1118,18 @@ class StringValidator(BaseValidator):
 class ColorValidator(BaseValidator):
     """
     "color": {
-        "description": "A string describing color. Supported formats:
-                        - hex (e.g. '#d3d3d3')
-                        - rgb (e.g. 'rgb(255, 0, 0)')
-                        - rgba (e.g. 'rgb(255, 0, 0, 0.5)')
-                        - hsl (e.g. 'hsl(0, 100%, 50%)')
-                        - hsv (e.g. 'hsv(0, 100%, 100%)')
-                        - named colors(full list:
-                          http://www.w3.org/TR/css3-color/#svg-color)",
+        "description": "A string describing color. All CSS 4 color formats are supported, including:
+                        - hex or short hex (e.g. '#d3d3d3', '#d3d')
+                        - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+                        - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+                        - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+                        - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+                        - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+                        - hwb (e.g. 'hwb(0 0% 100%)')
+                        - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+                        - color (e.g. 'color(display-p3 1 0 0)')
+                        - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+                        - See full CSS 4 color spec: https://www.w3.org/TR/css-color-4/",
         "requiredOpts": [],
         "otherOpts": [
             "dflt",
@@ -1136,8 +1138,14 @@ class ColorValidator(BaseValidator):
     },
     """
 
-    re_hex = re.compile(r"#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})")
-    re_rgb_etc = re.compile(r"(rgb|hsl|hsv)a?\([\d.]+%?(,[\d.]+%?){2,3}\)")
+    re_spaces_to_remove = re.compile(r"(?<!(\d|%|g)) | (?!\d)")
+
+    re_hex = re.compile(
+        r"#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})"
+    )
+    re_rgb_etc = re.compile(
+        r"((rgb|hsl)a?|hwb|(ok)?(lab|lch))\([\d.]+(%|deg)?([ ,] ?[\d.]+%?){2}([ /,] ?[\d.]+%?)?\)|color\([\w-]+([ ,] ?[\d.]+){3,4}\)"
+    )
     re_ddk = re.compile(r"var\(\-\-.*\)")
 
     named_colors = [
@@ -1310,12 +1318,18 @@ class ColorValidator(BaseValidator):
 
     def description(self):
         valid_color_description = """\
-    The '{plotly_name}' property is a color and may be specified as:
-      - A hex string (e.g. '#ff0000')
-      - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-      - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-      - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-      - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
+    The '{plotly_name}' property is a color and may be specified as a string in the following formats:
+      - hex or short hex (e.g. '#d3d3d3', '#d3d')
+      - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+      - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+      - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+      - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+      - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+      - hwb (e.g. 'hwb(0 0% 100%)')
+      - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+      - color (e.g. 'color(display-p3 1 0 0)')
+      - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+      - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/""".format(
             plotly_name=self.plotly_name
         )
 
@@ -1430,7 +1444,11 @@ class ColorValidator(BaseValidator):
             return None
         else:
             # Remove spaces so regexes don't need to bother with them.
-            v_normalized = v.replace(" ", "").lower()
+            # Don't remove spaces between two digits, though.
+            v_normalized = v.strip()
+            v_normalized = re.sub(" +", " ", v_normalized)
+            v_normalized = re.sub(ColorValidator.re_spaces_to_remove, "", v_normalized)
+            v_normalized = v_normalized.lower()
 
             # if ColorValidator.re_hex.fullmatch(v_normalized):
             if fullmatch(ColorValidator.re_hex, v_normalized):
@@ -1721,12 +1739,15 @@ class SubplotidValidator(BaseValidator):
             "dflt"
         ],
         "otherOpts": [
+            "arrayOk",
             "regex"
         ]
     }
     """
 
-    def __init__(self, plotly_name, parent_name, dflt=None, regex=None, **kwargs):
+    def __init__(
+        self, plotly_name, parent_name, dflt=None, regex=None, array_ok=False, **kwargs
+    ):
         if dflt is None and regex is None:
             raise ValueError("One or both of regex and deflt must be specified")
 
@@ -1741,40 +1762,55 @@ class SubplotidValidator(BaseValidator):
             self.base = re.match(r"/\^(\w+)", regex).group(1)
 
         self.regex = self.base + r"(\d*)"
+        self.array_ok = array_ok
 
     def description(self):
         desc = """\
     The '{plotly_name}' property is an identifier of a particular
-    subplot, of type '{base}', that may be specified as the string '{base}'
-    optionally followed by an integer >= 1
-    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)
-        """.format(plotly_name=self.plotly_name, base=self.base)
+    subplot, of type '{base}', that may be specified as:
+      - the string '{base}' optionally followed by an integer >= 1
+        (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(
+            plotly_name=self.plotly_name, base=self.base
+        )
+        if self.array_ok:
+            desc += """
+      - A tuple or list of the above"""
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            pass
-        elif not isinstance(v, str):
-            self.raise_invalid_val(v)
-        else:
-            # match = re.fullmatch(self.regex, v)
-            match = fullmatch(self.regex, v)
+        def coerce(value):
+            if not isinstance(value, str):
+                return value, False
+            match = fullmatch(self.regex, value)
             if not match:
-                is_valid = False
+                return value, False
             else:
                 digit_str = match.group(1)
                 if len(digit_str) > 0 and int(digit_str) == 0:
-                    is_valid = False
+                    return value, False
                 elif len(digit_str) > 0 and int(digit_str) == 1:
-                    # Remove 1 suffix (e.g. x1 -> x)
-                    v = self.base
-                    is_valid = True
+                    return self.base, True
                 else:
-                    is_valid = True
+                    return value, True
 
-            if not is_valid:
-                self.raise_invalid_val(v)
-        return v
+        if v is None:
+            pass
+        elif self.array_ok and is_simple_array(v):
+            values = []
+            invalid_els = []
+            for e in v:
+                coerced_e, success = coerce(e)
+                values.append(coerced_e)
+                if not success:
+                    invalid_els.append(coerced_e)
+            if len(invalid_els) > 0:
+                self.raise_invalid_elements(invalid_els[:10])
+            return values
+        else:
+            v, success = coerce(v)
+            if not success:
+                self.raise_invalid_val(self.base)
+            return v
 
 
 class FlaglistValidator(BaseValidator):

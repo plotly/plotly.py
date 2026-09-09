@@ -68,9 +68,9 @@ The inside of the `__init__.py` looks like:
 # Require that numpy exists for figure_factory
 import numpy
 
-from plotly.figure_factory._2d_density import create_2d_density
-from plotly.figure_factory._annotated_heatmap import create_annotated_heatmap
-from plotly.figure_factory._candlestick import create_candlestick
+from plotly.figure_factory._dendrogram import create_dendrogram
+from plotly.figure_factory._quiver import create_quiver
+from plotly.figure_factory._streamline import create_streamline
 ...
 ```
 
@@ -166,17 +166,10 @@ Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If
 ### Table of Current Figure Factories
 | Name              | Documentation                             | In GitHub     |
 | ----------------- | ----------------------------------------- | ------------- |
-| 2D Density        | https://plot.ly/python/density-plots/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_2d_density.py|
-| Annotated Heatmap | https://plot.ly/python/annotated_heatmap/ |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_annotated_heatmap.py|
-| Candlestick       | https://plot.ly/python/candlestick-charts/|https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_candlestick.py|
 | Dendrogram        | https://plot.ly/python/dendrogram/        |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_dendrogram.py|
-| Distplot          | https://plot.ly/python/distplot/          |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_distplot.py|
-| Facet Grid        | https://plot.ly/python/facet-plots/       |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_facet_grid.py|
-| Gantt             | https://plot.ly/python/gantt/             |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_gantt.py|
-| Ohlc              | https://plot.ly/python/ohlc-charts/       |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_ohlc.py|
+| Hexbin Map        | https://plot.ly/python/hexbin-map/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_hexbin_map.py|
 | Quiver            | https://plot.ly/python/quiver-plots/      |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_quiver.py|
-| Scatterplot Matrix| https://plot.ly/python/scatterplot-matrix/|https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_scatterplot.py|
 | Streamline        | https://plot.ly/python/streamline-plots/  |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_streamline.py|
 | Table             | https://plot.ly/python/table/             |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_table.py|
+| Ternary Contour   | https://plot.ly/python/ternary-contour/   |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_ternary_contour.py|
 | Trisurf           | https://plot.ly/python/trisurf/           |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_trisurf.py|
-| Violin            | https://plot.ly/python/violin-plot/       |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_violin.py|

@@ -39,8 +39,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         Determines whether or not this stop is used. If `false`, this
         stop is ignored even within its `dtickrange`.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

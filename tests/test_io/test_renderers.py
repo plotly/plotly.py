@@ -1,4 +1,5 @@
 import json
+import os
 import threading
 import time
 
@@ -95,8 +96,6 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
     pio.renderers.default = renderer
     expected = {plotly_mimetype: json.loads(pio.to_json(fig1, remove_uids=False))}
 
-    expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
-
     pio.renderers.render_on_display = False
 
     with mock.patch("IPython.display.display") as mock_display:
@@ -116,27 +115,20 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
     pio.renderers.default = renderer
     expected = {plotly_mimetype: json.loads(pio.to_json(fig1, remove_uids=False))}
 
-    expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
-
     with mock.patch("IPython.display.display") as mock_display:
         pio.show(fig1)
 
     mock_display.assert_called_once_with(expected, raw=True)
 
 
-# Static Image
-# ------------
-# See tests/test_orca/test_image_renderers.py
-
-
 # HTML
 # ----
 def assert_full_html(html):
-    assert html.startswith("<html")
+    assert html.startswith("<!doctype html")
 
 
 def assert_not_full_html(html):
-    assert not html.startswith("<html")
+    assert not html.startswith("<!doctype html") and not html.startswith("<html")
 
 
 def assert_html_renderer_connected(html):
@@ -162,7 +154,7 @@ def test_colab_renderer_show(fig1):
 
     # Check html contents
     html = mock_arg1["text/html"]
-    assert_full_html(html)
+    assert_not_full_html(html)
     assert_html_renderer_connected(html)
 
     # check kwargs
@@ -306,7 +298,7 @@ def test_repr_html(renderer):
     sri_hash = _generate_sri_hash(plotlyjs_content)
 
     template = (
-        '<div>                        <script type="text/javascript">'
+        '<div style="height:100%; width:100%;">                        <script>'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()
@@ -314,7 +306,7 @@ def test_repr_html(renderer):
         + sri_hash
         + '" crossorigin="anonymous"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
-        'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
+        'style="height:100%; width:100%;"></div>            <script>'
         "                window.PLOTLYENV=window.PLOTLYENV || {};"
         '                                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
         ' {                    Plotly.newPlot(                        "cd462b94-79ce-42a2-887f-2650a761a144",'
@@ -330,7 +322,7 @@ def test_repr_html(renderer):
         assert str_html.replace(id_html, "") == template.replace(id_pattern, "")
 
 
-all_renderers_without_orca = [
+all_renderers = [
     "plotly_mimetype",
     "jupyterlab",
     "nteract",
@@ -353,7 +345,7 @@ all_renderers_without_orca = [
 ]
 
 
-@pytest.mark.parametrize("renderer_str", all_renderers_without_orca)
+@pytest.mark.parametrize("renderer_str", all_renderers)
 def test_repr_mimebundle(renderer_str):
     pio.renderers.default = renderer_str
     fig = go.Figure()
@@ -418,3 +410,75 @@ def test_missing_webbrowser_methods(fig1):
     finally:
         # restore everything after this test
         webbrowser.get = removed_webbrowser_get_method
+
+
+def test_colab_renderer_when_env_var_is_set():
+    """
+    When COLAB_NOTEBOOK_ID is present the default renderer should be 'colab'.
+    """
+    import importlib
+    import plotly.io._renderers as _renderers_mod
+    from plotly import optional_imports
+
+    fake_ipython = MagicMock()
+    original_get_module = optional_imports.get_module
+
+    def patched_get_module(name, *args, **kwargs):
+        if name in ("IPython", "IPython.display"):
+            return fake_ipython
+        return original_get_module(name, *args, **kwargs)
+
+    original_default = pio.renderers.default
+    try:
+        with mock.patch.dict(os.environ, {"COLAB_NOTEBOOK_ID": "fake-id"}, clear=True):
+            with mock.patch.object(
+                optional_imports, "get_module", side_effect=patched_get_module
+            ):
+                importlib.reload(_renderers_mod)
+                assert _renderers_mod.renderers.default == "colab"
+    finally:
+        importlib.reload(_renderers_mod)
+        pio.renderers.default = original_default
+
+
+def test_colab_renderer_when_env_var_is_absent():
+    """
+    Without COLAB_NOTEBOOK_ID the default renderer must not be 'colab',
+    even when ``google.colab`` is importable.
+
+    Regression test for https://github.com/plotly/plotly.py/pull/5473.
+    """
+    import sys
+    import types
+    import importlib
+    import plotly.io._renderers as _renderers_mod
+    from plotly import optional_imports
+
+    fake_ipython = MagicMock()
+    original_get_module = optional_imports.get_module
+
+    def patched_get_module(name, *args, **kwargs):
+        if name in ("IPython", "IPython.display"):
+            return fake_ipython
+        return original_get_module(name, *args, **kwargs)
+
+    # Make google.colab importable so the old ``import google.colab``
+    # approach would have chosen the colab renderer here.
+    fake_google = types.ModuleType("google")
+    fake_google_colab = types.ModuleType("google.colab")
+
+    original_default = pio.renderers.default
+    try:
+        with mock.patch.dict(os.environ, {}, clear=True):
+            with mock.patch.dict(
+                sys.modules,
+                {"google": fake_google, "google.colab": fake_google_colab},
+            ):
+                with mock.patch.object(
+                    optional_imports, "get_module", side_effect=patched_get_module
+                ):
+                    importlib.reload(_renderers_mod)
+                    assert _renderers_mod.renderers.default != "colab"
+    finally:
+        importlib.reload(_renderers_mod)
+        pio.renderers.default = original_default

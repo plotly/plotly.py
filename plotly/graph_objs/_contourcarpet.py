@@ -11,13 +11,11 @@ class Contourcarpet(_BaseTraceType):
     _valid_props = {
         "a",
         "a0",
-        "asrc",
         "atype",
         "autocolorscale",
         "autocontour",
         "b",
         "b0",
-        "bsrc",
         "btype",
         "carpet",
         "coloraxis",
@@ -25,14 +23,11 @@ class Contourcarpet(_BaseTraceType):
         "colorscale",
         "contours",
         "customdata",
-        "customdatasrc",
         "da",
         "db",
         "fillcolor",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -40,16 +35,13 @@ class Contourcarpet(_BaseTraceType):
         "legendwidth",
         "line",
         "meta",
-        "metasrc",
         "name",
         "ncontours",
         "opacity",
         "reversescale",
         "showlegend",
         "showscale",
-        "stream",
         "text",
-        "textsrc",
         "transpose",
         "type",
         "uid",
@@ -63,7 +55,6 @@ class Contourcarpet(_BaseTraceType):
         "zmid",
         "zmin",
         "zorder",
-        "zsrc",
     }
 
     @property
@@ -104,24 +95,6 @@ class Contourcarpet(_BaseTraceType):
         self["a0"] = val
 
     @property
-    def asrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `a`.
-
-        The 'asrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["asrc"]
-
-    @asrc.setter
-    def asrc(self, val):
-        self["asrc"] = val
-
-    @property
     def atype(self):
         """
         If "array", the heatmap's x coordinates are given by "x" (the
@@ -153,8 +126,8 @@ class Contourcarpet(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -174,8 +147,8 @@ class Contourcarpet(_BaseTraceType):
         can be set in `ncontours`. If False, set the contour level
         attributes in `contours`.
 
-        The 'autocontour' property must be specified as a bool
-        (either True, or False)
+        The 'autocontour' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -223,24 +196,6 @@ class Contourcarpet(_BaseTraceType):
     @b0.setter
     def b0(self, val):
         self["b0"] = val
-
-    @property
-    def bsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `b`.
-
-        The 'bsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["bsrc"]
-
-    @bsrc.setter
-    def bsrc(self, val):
-        self["bsrc"] = val
 
     @property
     def btype(self):
@@ -295,9 +250,9 @@ class Contourcarpet(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -333,7 +288,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `zmin` and `zmax`.
@@ -420,25 +375,6 @@ class Contourcarpet(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def da(self):
         """
         Sets the x coordinate step. See `x0` for more info.
@@ -481,12 +417,18 @@ class Contourcarpet(_BaseTraceType):
         Defaults to a half-transparent variant of the line color,
         marker color, or marker line color, whichever is available.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A number that will be interpreted as a color
             according to contourcarpet.colorscale
 
@@ -519,25 +461,6 @@ class Contourcarpet(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -558,24 +481,6 @@ class Contourcarpet(_BaseTraceType):
         self["ids"] = val
 
     @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
-
-    @property
     def legend(self):
         """
         Sets the reference to a legend to show this trace in.
@@ -584,9 +489,9 @@ class Contourcarpet(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -728,24 +633,6 @@ class Contourcarpet(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -773,7 +660,7 @@ class Contourcarpet(_BaseTraceType):
         to the value of `ncontours`. Has an effect only if
         `autocontour` is True or if `contours.size` is missing.
 
-        The 'ncontours' property is a integer and may be specified as:
+        The 'ncontours' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -812,8 +699,8 @@ class Contourcarpet(_BaseTraceType):
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -831,8 +718,8 @@ class Contourcarpet(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -850,8 +737,8 @@ class Contourcarpet(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -862,25 +749,6 @@ class Contourcarpet(_BaseTraceType):
     @showscale.setter
     def showscale(self, val):
         self["showscale"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.contourcarpet.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.contourcarpet.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def text(self):
@@ -901,30 +769,12 @@ class Contourcarpet(_BaseTraceType):
         self["text"] = val
 
     @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
-
-    @property
     def transpose(self):
         """
         Transposes the z data.
 
-        The 'transpose' property must be specified as a bool
-        (either True, or False)
+        The 'transpose' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1017,9 +867,9 @@ class Contourcarpet(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1040,9 +890,9 @@ class Contourcarpet(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -1080,8 +930,8 @@ class Contourcarpet(_BaseTraceType):
         `zmin` and `zmax` Defaults to `false` when `zmin` and `zmax`
         are set by the user.
 
-        The 'zauto' property must be specified as a bool
-        (either True, or False)
+        The 'zauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1158,7 +1008,7 @@ class Contourcarpet(_BaseTraceType):
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1170,24 +1020,6 @@ class Contourcarpet(_BaseTraceType):
     @zorder.setter
     def zorder(self, val):
         self["zorder"] = val
-
-    @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
 
     @property
     def type(self):
@@ -1202,9 +1034,6 @@ class Contourcarpet(_BaseTraceType):
             Alternate to `x`. Builds a linear space of x
             coordinates. Use with `dx` where `x0` is the starting
             coordinate and `dx` the step.
-        asrc
-            Sets the source reference on Chart Studio Cloud for
-            `a`.
         atype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1229,9 +1058,6 @@ class Contourcarpet(_BaseTraceType):
             Alternate to `y`. Builds a linear space of y
             coordinates. Use with `dy` where `y0` is the starting
             coordinate and `dy` the step.
-        bsrc
-            Sets the source reference on Chart Studio Cloud for
-            `b`.
         btype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1254,15 +1080,15 @@ class Contourcarpet(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
             :class:`plotly.graph_objects.contourcarpet.Contours`
             instance or dict with compatible properties
@@ -1271,9 +1097,6 @@ class Contourcarpet(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         da
             Sets the x coordinate step. See `x0` for more info.
         db
@@ -1285,16 +1108,10 @@ class Contourcarpet(_BaseTraceType):
             available.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1338,9 +1155,6 @@ class Contourcarpet(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1362,14 +1176,8 @@ class Contourcarpet(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.contourcarpet.Stream`
-            instance or dict with compatible properties
         text
             Sets the text elements associated with each z value.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1434,9 +1242,6 @@ class Contourcarpet(_BaseTraceType):
             relative to other SVG traces on the same subplot. SVG
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1444,13 +1249,11 @@ class Contourcarpet(_BaseTraceType):
         arg=None,
         a=None,
         a0=None,
-        asrc=None,
         atype=None,
         autocolorscale=None,
         autocontour=None,
         b=None,
         b0=None,
-        bsrc=None,
         btype=None,
         carpet=None,
         coloraxis=None,
@@ -1458,14 +1261,11 @@ class Contourcarpet(_BaseTraceType):
         colorscale=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         da=None,
         db=None,
         fillcolor=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1473,16 +1273,13 @@ class Contourcarpet(_BaseTraceType):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         ncontours=None,
         opacity=None,
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
-        textsrc=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -1495,7 +1292,6 @@ class Contourcarpet(_BaseTraceType):
         zmid=None,
         zmin=None,
         zorder=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -1516,9 +1312,6 @@ class Contourcarpet(_BaseTraceType):
             Alternate to `x`. Builds a linear space of x
             coordinates. Use with `dx` where `x0` is the starting
             coordinate and `dx` the step.
-        asrc
-            Sets the source reference on Chart Studio Cloud for
-            `a`.
         atype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -1543,9 +1336,6 @@ class Contourcarpet(_BaseTraceType):
             Alternate to `y`. Builds a linear space of y
             coordinates. Use with `dy` where `y0` is the starting
             coordinate and `dy` the step.
-        bsrc
-            Sets the source reference on Chart Studio Cloud for
-            `b`.
         btype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -1568,15 +1358,15 @@ class Contourcarpet(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
             :class:`plotly.graph_objects.contourcarpet.Contours`
             instance or dict with compatible properties
@@ -1585,9 +1375,6 @@ class Contourcarpet(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         da
             Sets the x coordinate step. See `x0` for more info.
         db
@@ -1599,16 +1386,10 @@ class Contourcarpet(_BaseTraceType):
             available.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1652,9 +1433,6 @@ class Contourcarpet(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1676,14 +1454,8 @@ class Contourcarpet(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.contourcarpet.Stream`
-            instance or dict with compatible properties
         text
             Sets the text elements associated with each z value.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         transpose
             Transposes the z data.
         uid
@@ -1748,9 +1520,6 @@ class Contourcarpet(_BaseTraceType):
             relative to other SVG traces on the same subplot. SVG
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -1778,13 +1547,11 @@ an instance of :class:`plotly.graph_objs.Contourcarpet`""")
 
         self._set_property("a", arg, a)
         self._set_property("a0", arg, a0)
-        self._set_property("asrc", arg, asrc)
         self._set_property("atype", arg, atype)
         self._set_property("autocolorscale", arg, autocolorscale)
         self._set_property("autocontour", arg, autocontour)
         self._set_property("b", arg, b)
         self._set_property("b0", arg, b0)
-        self._set_property("bsrc", arg, bsrc)
         self._set_property("btype", arg, btype)
         self._set_property("carpet", arg, carpet)
         self._set_property("coloraxis", arg, coloraxis)
@@ -1792,14 +1559,11 @@ an instance of :class:`plotly.graph_objs.Contourcarpet`""")
         self._set_property("colorscale", arg, colorscale)
         self._set_property("contours", arg, contours)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("da", arg, da)
         self._set_property("db", arg, db)
         self._set_property("fillcolor", arg, fillcolor)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -1807,16 +1571,13 @@ an instance of :class:`plotly.graph_objs.Contourcarpet`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("ncontours", arg, ncontours)
         self._set_property("opacity", arg, opacity)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showscale", arg, showscale)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("transpose", arg, transpose)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
@@ -1829,7 +1590,6 @@ an instance of :class:`plotly.graph_objs.Contourcarpet`""")
         self._set_property("zmid", arg, zmid)
         self._set_property("zmin", arg, zmin)
         self._set_property("zorder", arg, zorder)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "contourcarpet"
         arg.pop("type", None)

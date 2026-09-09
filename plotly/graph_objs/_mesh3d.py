@@ -21,29 +21,20 @@ class Mesh3d(_BaseTraceType):
         "colorscale",
         "contour",
         "customdata",
-        "customdatasrc",
         "delaunayaxis",
         "facecolor",
-        "facecolorsrc",
         "flatshading",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
-        "hovertemplatesrc",
+        "hovertemplatefallback",
         "hovertext",
-        "hovertextsrc",
         "i",
         "ids",
-        "idssrc",
         "intensity",
         "intensitymode",
-        "intensitysrc",
-        "isrc",
         "j",
-        "jsrc",
         "k",
-        "ksrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -52,34 +43,27 @@ class Mesh3d(_BaseTraceType):
         "lighting",
         "lightposition",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "reversescale",
         "scene",
         "showlegend",
         "showscale",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
         "vertexcolor",
-        "vertexcolorsrc",
         "visible",
         "x",
         "xcalendar",
         "xhoverformat",
-        "xsrc",
         "y",
         "ycalendar",
         "yhoverformat",
-        "ysrc",
         "z",
         "zcalendar",
         "zhoverformat",
-        "zsrc",
     }
 
     @property
@@ -125,8 +109,8 @@ class Mesh3d(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -146,8 +130,8 @@ class Mesh3d(_BaseTraceType):
         in `cmin` and `cmax` Defaults to `false` when `cmin` and `cmax`
         are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -225,12 +209,18 @@ class Mesh3d(_BaseTraceType):
         """
         Sets the color of the whole mesh
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A number that will be interpreted as a color
             according to mesh3d.colorscale
 
@@ -255,9 +245,9 @@ class Mesh3d(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -293,7 +283,7 @@ class Mesh3d(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `cmin` and `cmax`.
@@ -380,25 +370,6 @@ class Mesh3d(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def delaunayaxis(self):
         """
         Sets the Delaunay axis, which is the axis that is perpendicular
@@ -440,33 +411,14 @@ class Mesh3d(_BaseTraceType):
         self["facecolor"] = val
 
     @property
-    def facecolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `facecolor`.
-
-        The 'facecolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["facecolorsrc"]
-
-    @facecolorsrc.setter
-    def facecolorsrc(self, val):
-        self["facecolorsrc"] = val
-
-    @property
     def flatshading(self):
         """
         Determines whether or not normal smoothing is applied to the
         meshes, creating meshes with an angular, low-poly look via flat
         reflections.
 
-        The 'flatshading' property must be specified as a bool
-        (either True, or False)
+        The 'flatshading' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -481,7 +433,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -501,25 +453,6 @@ class Mesh3d(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -558,14 +491,19 @@ class Mesh3d(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example `<extra>%{fullData.name}</extra>`. To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -583,23 +521,23 @@ class Mesh3d(_BaseTraceType):
         self["hovertemplate"] = val
 
     @property
-    def hovertemplatesrc(self):
+    def hovertemplatefallback(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
 
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'hovertemplatefallback' property accepts values of any type
 
         Returns
         -------
-        str
+        Any
         """
-        return self["hovertemplatesrc"]
+        return self["hovertemplatefallback"]
 
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertext(self):
@@ -620,25 +558,6 @@ class Mesh3d(_BaseTraceType):
     @hovertext.setter
     def hovertext(self, val):
         self["hovertext"] = val
-
-    @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
 
     @property
     def i(self):
@@ -685,24 +604,6 @@ class Mesh3d(_BaseTraceType):
         self["ids"] = val
 
     @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
-
-    @property
     def intensity(self):
         """
         Sets the intensity values for vertices or cells as defined by
@@ -741,43 +642,6 @@ class Mesh3d(_BaseTraceType):
         self["intensitymode"] = val
 
     @property
-    def intensitysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `intensity`.
-
-        The 'intensitysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["intensitysrc"]
-
-    @intensitysrc.setter
-    def intensitysrc(self, val):
-        self["intensitysrc"] = val
-
-    @property
-    def isrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `i`.
-
-        The 'isrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["isrc"]
-
-    @isrc.setter
-    def isrc(self, val):
-        self["isrc"] = val
-
-    @property
     def j(self):
         """
         A vector of vertex indices, i.e. integer values between 0 and
@@ -802,31 +666,13 @@ class Mesh3d(_BaseTraceType):
         self["j"] = val
 
     @property
-    def jsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `j`.
-
-        The 'jsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["jsrc"]
-
-    @jsrc.setter
-    def jsrc(self, val):
-        self["jsrc"] = val
-
-    @property
     def k(self):
         """
         A vector of vertex indices, i.e. integer values between 0 and
         the length of the vertex vectors, representing the "third"
         vertex of a triangle. For example, `{i[m], j[m], k[m]}`
         together represent face m (triangle m) in the mesh, where `k[m]
-        = n` points to the triplet  `{x[n], y[n], z[n]}` in the vertex
+        = n` points to the triplet `{x[n], y[n], z[n]}` in the vertex
         arrays. Therefore, each element in `k` represents a point in
         space, which is the third vertex of a triangle.
 
@@ -844,24 +690,6 @@ class Mesh3d(_BaseTraceType):
         self["k"] = val
 
     @property
-    def ksrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `k`.
-
-        The 'ksrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ksrc"]
-
-    @ksrc.setter
-    def ksrc(self, val):
-        self["ksrc"] = val
-
-    @property
     def legend(self):
         """
         Sets the reference to a legend to show this trace in.
@@ -870,9 +698,9 @@ class Mesh3d(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -1033,24 +861,6 @@ class Mesh3d(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -1100,8 +910,8 @@ class Mesh3d(_BaseTraceType):
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1122,9 +932,9 @@ class Mesh3d(_BaseTraceType):
         coordinates refer to `layout.scene2`, and so on.
 
         The 'scene' property is an identifier of a particular
-        subplot, of type 'scene', that may be specified as the string 'scene'
-        optionally followed by an integer >= 1
-        (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
+        subplot, of type 'scene', that may be specified as:
+          - the string 'scene' optionally followed by an integer >= 1
+            (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
 
         Returns
         -------
@@ -1142,8 +952,8 @@ class Mesh3d(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1161,8 +971,8 @@ class Mesh3d(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1173,25 +983,6 @@ class Mesh3d(_BaseTraceType):
     @showscale.setter
     def showscale(self, val):
         self["showscale"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.mesh3d.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.mesh3d.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def text(self):
@@ -1214,24 +1005,6 @@ class Mesh3d(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -1306,25 +1079,6 @@ class Mesh3d(_BaseTraceType):
         self["vertexcolor"] = val
 
     @property
-    def vertexcolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `vertexcolor`.
-
-        The 'vertexcolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["vertexcolorsrc"]
-
-    @vertexcolorsrc.setter
-    def vertexcolorsrc(self, val):
-        self["vertexcolorsrc"] = val
-
-    @property
     def visible(self):
         """
         Determines whether or not this trace is visible. If
@@ -1390,7 +1144,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1415,24 +1169,6 @@ class Mesh3d(_BaseTraceType):
     @xhoverformat.setter
     def xhoverformat(self, val):
         self["xhoverformat"] = val
-
-    @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
 
     @property
     def y(self):
@@ -1479,7 +1215,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1504,24 +1240,6 @@ class Mesh3d(_BaseTraceType):
     @yhoverformat.setter
     def yhoverformat(self, val):
         self["yhoverformat"] = val
-
-    @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
 
     @property
     def z(self):
@@ -1568,7 +1286,7 @@ class Mesh3d(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rulefor `z`  using d3 formatting
+        Sets the hover text formatting rule for `z` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1593,24 +1311,6 @@ class Mesh3d(_BaseTraceType):
     @zhoverformat.setter
     def zhoverformat(self, val):
         self["zhoverformat"] = val
-
-    @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
 
     @property
     def type(self):
@@ -1678,15 +1378,15 @@ class Mesh3d(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.mesh3d.Contour` instance
             or dict with compatible properties
@@ -1695,9 +1395,6 @@ class Mesh3d(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         delaunayaxis
             Sets the Delaunay axis, which is the axis that is
             perpendicular to the surface of the Delaunay
@@ -1707,21 +1404,15 @@ class Mesh3d(_BaseTraceType):
         facecolor
             Sets the color of each face Overrides "color" and
             "vertexcolor".
-        facecolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `facecolor`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.mesh3d.Hoverlabel`
             instance or dict with compatible properties
@@ -1743,25 +1434,29 @@ class Mesh3d(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -1775,33 +1470,21 @@ class Mesh3d(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         intensity
             Sets the intensity values for vertices or cells as
             defined by `intensitymode`. It can be used for plotting
             fields on meshes.
         intensitymode
             Determines the source of `intensity` values.
-        intensitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `intensity`.
-        isrc
-            Sets the source reference on Chart Studio Cloud for
-            `i`.
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
             the "second" vertex of a triangle. For example, `{i[m],
-            j[m], k[m]}`  together represent face m (triangle m) in
+            j[m], k[m]}` together represent face m (triangle m) in
             the mesh, where `j[m] = n` points to the triplet
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
             each element in `j` represents a point in space, which
             is the second vertex of a triangle.
-        jsrc
-            Sets the source reference on Chart Studio Cloud for
-            `j`.
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -1811,9 +1494,6 @@ class Mesh3d(_BaseTraceType):
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
             each element in `k` represents a point in space, which
             is the third vertex of a triangle.
-        ksrc
-            Sets the source reference on Chart Studio Cloud for
-            `k`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1860,9 +1540,6 @@ class Mesh3d(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1890,17 +1567,11 @@ class Mesh3d(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.mesh3d.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1929,9 +1600,6 @@ class Mesh3d(_BaseTraceType):
             255; in the case of having vertex color data in RGBA
             format, the alpha color should be normalized to be
             between 0 and 1.
-        vertexcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `vertexcolor`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1944,7 +1612,7 @@ class Mesh3d(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1956,9 +1624,6 @@ class Mesh3d(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -1966,7 +1631,7 @@ class Mesh3d(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1978,9 +1643,6 @@ class Mesh3d(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -1988,7 +1650,7 @@ class Mesh3d(_BaseTraceType):
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2000,9 +1662,6 @@ class Mesh3d(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -2020,29 +1679,20 @@ class Mesh3d(_BaseTraceType):
         colorscale=None,
         contour=None,
         customdata=None,
-        customdatasrc=None,
         delaunayaxis=None,
         facecolor=None,
-        facecolorsrc=None,
         flatshading=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
-        hovertemplatesrc=None,
+        hovertemplatefallback=None,
         hovertext=None,
-        hovertextsrc=None,
         i=None,
         ids=None,
-        idssrc=None,
         intensity=None,
         intensitymode=None,
-        intensitysrc=None,
-        isrc=None,
         j=None,
-        jsrc=None,
         k=None,
-        ksrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -2051,33 +1701,26 @@ class Mesh3d(_BaseTraceType):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
         scene=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         vertexcolor=None,
-        vertexcolorsrc=None,
         visible=None,
         x=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zcalendar=None,
         zhoverformat=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -2152,15 +1795,15 @@ class Mesh3d(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.mesh3d.Contour` instance
             or dict with compatible properties
@@ -2169,9 +1812,6 @@ class Mesh3d(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         delaunayaxis
             Sets the Delaunay axis, which is the axis that is
             perpendicular to the surface of the Delaunay
@@ -2181,21 +1821,15 @@ class Mesh3d(_BaseTraceType):
         facecolor
             Sets the color of each face Overrides "color" and
             "vertexcolor".
-        facecolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `facecolor`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.mesh3d.Hoverlabel`
             instance or dict with compatible properties
@@ -2217,25 +1851,29 @@ class Mesh3d(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2249,33 +1887,21 @@ class Mesh3d(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         intensity
             Sets the intensity values for vertices or cells as
             defined by `intensitymode`. It can be used for plotting
             fields on meshes.
         intensitymode
             Determines the source of `intensity` values.
-        intensitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `intensity`.
-        isrc
-            Sets the source reference on Chart Studio Cloud for
-            `i`.
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
             the "second" vertex of a triangle. For example, `{i[m],
-            j[m], k[m]}`  together represent face m (triangle m) in
+            j[m], k[m]}` together represent face m (triangle m) in
             the mesh, where `j[m] = n` points to the triplet
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
             each element in `j` represents a point in space, which
             is the second vertex of a triangle.
-        jsrc
-            Sets the source reference on Chart Studio Cloud for
-            `j`.
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2285,9 +1911,6 @@ class Mesh3d(_BaseTraceType):
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
             each element in `k` represents a point in space, which
             is the third vertex of a triangle.
-        ksrc
-            Sets the source reference on Chart Studio Cloud for
-            `k`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -2334,9 +1957,6 @@ class Mesh3d(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2364,17 +1984,11 @@ class Mesh3d(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.mesh3d.Stream` instance or
-            dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2403,9 +2017,6 @@ class Mesh3d(_BaseTraceType):
             255; in the case of having vertex color data in RGBA
             format, the alpha color should be normalized to be
             between 0 and 1.
-        vertexcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `vertexcolor`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2418,7 +2029,7 @@ class Mesh3d(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2430,9 +2041,6 @@ class Mesh3d(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -2440,7 +2048,7 @@ class Mesh3d(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2452,9 +2060,6 @@ class Mesh3d(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices. The nth element
             of vectors `x`, `y` and `z` jointly represent the X, Y
@@ -2462,7 +2067,7 @@ class Mesh3d(_BaseTraceType):
         zcalendar
             Sets the calendar system to use with `z` date data.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2474,9 +2079,6 @@ class Mesh3d(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -2514,29 +2116,20 @@ an instance of :class:`plotly.graph_objs.Mesh3d`""")
         self._set_property("colorscale", arg, colorscale)
         self._set_property("contour", arg, contour)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("delaunayaxis", arg, delaunayaxis)
         self._set_property("facecolor", arg, facecolor)
-        self._set_property("facecolorsrc", arg, facecolorsrc)
         self._set_property("flatshading", arg, flatshading)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("i", arg, i)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("intensity", arg, intensity)
         self._set_property("intensitymode", arg, intensitymode)
-        self._set_property("intensitysrc", arg, intensitysrc)
-        self._set_property("isrc", arg, isrc)
         self._set_property("j", arg, j)
-        self._set_property("jsrc", arg, jsrc)
         self._set_property("k", arg, k)
-        self._set_property("ksrc", arg, ksrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -2545,33 +2138,26 @@ an instance of :class:`plotly.graph_objs.Mesh3d`""")
         self._set_property("lighting", arg, lighting)
         self._set_property("lightposition", arg, lightposition)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("scene", arg, scene)
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showscale", arg, showscale)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("vertexcolor", arg, vertexcolor)
-        self._set_property("vertexcolorsrc", arg, vertexcolorsrc)
         self._set_property("visible", arg, visible)
         self._set_property("x", arg, x)
         self._set_property("xcalendar", arg, xcalendar)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("ycalendar", arg, ycalendar)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("z", arg, z)
         self._set_property("zcalendar", arg, zcalendar)
         self._set_property("zhoverformat", arg, zhoverformat)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "mesh3d"
         arg.pop("type", None)

@@ -27,7 +27,6 @@ DEPRECATED_DATATYPES = {
     "Marker": {"base_type": dict, "new": ["scatter", "histogram.selected", "etc."]},
     "RadialAxis": {"base_type": dict, "new": ["layout", "layout.polar"]},
     "Scene": {"base_type": dict, "new": ["layout"]},
-    "Stream": {"base_type": dict, "new": ["scatter", "area"]},
     "XAxis": {"base_type": dict, "new": ["layout", "layout.scene"]},
     "YAxis": {"base_type": dict, "new": ["layout", "layout.scene"]},
     "ZAxis": {"base_type": dict, "new": ["layout.scene"]},

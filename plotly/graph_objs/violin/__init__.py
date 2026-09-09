@@ -9,7 +9,6 @@ if TYPE_CHECKING:
     from ._marker import Marker
     from ._meanline import Meanline
     from ._selected import Selected
-    from ._stream import Stream
     from ._unselected import Unselected
     from . import box
     from . import hoverlabel
@@ -38,7 +37,6 @@ else:
             "._marker.Marker",
             "._meanline.Meanline",
             "._selected.Selected",
-            "._stream.Stream",
             "._unselected.Unselected",
         ],
     )
