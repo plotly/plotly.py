@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+Adding a line here for demonstration purposes
+
 ### Added
 - Support `marginal_x`/`marginal_y="heatmap"` in `density_heatmap`, drawing a single-row/column heatmap strip in the margin colored by the same `z`/`histfunc` aggregate as the main plot and sharing its color scale [[#5706](https://github.com/plotly/plotly.py/issues/5706)], with thanks to @lucasjamar for the contribution!
 - Add support for custom tick values in `mpl_to_plotly` when the matplotlib tick positions don't follow an arithmetic progression, including custom tick labels and tick values on date axes [[#5262](https://github.com/plotly/plotly.py/pull/5262)], with thanks to @robertoffmoura for the contribution!
