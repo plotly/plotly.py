@@ -142,7 +142,7 @@
     },
     "doubleClickDelay": {
       "description": "Sets the delay for registering a double-click in ms. This is the time interval (in ms) between first mousedown and 2nd mouseup to constitute a double-click. This setting propagates to all on-subplot double clicks (except for geo and map) and on-legend double clicks.",
-      "dflt": 300,
+      "dflt": 500,
       "min": 0,
       "valType": "number"
     },
@@ -244,7 +244,7 @@
       "valType": "any"
     },
     "modeBarButtonsToAdd": {
-      "description": "Add mode bar button using config objects See ./components/modebar/buttons.js for list of arguments. To enable predefined modebar buttons e.g. shape drawing, hover and spikelines, simply provide their string name(s). This could include: *v1hovermode*, *hoverclosest*, *hovercompare*, *togglehover*, *togglespikelines*, *drawline*, *drawopenpath*, *drawclosedpath*, *drawcircle*, *drawrect* and *eraseshape*. Please note that these predefined buttons will only be shown if they are compatible with all trace types used in a graph.",
+      "description": "Add mode bar button using config objects See ./components/modebar/buttons.js for list of arguments. To enable predefined modebar buttons e.g. shape drawing, hover and spikelines, simply provide their string name(s). This could include: *v1hovermode*, *hoverclosest*, *hovercompare*, *togglehover*, *togglespikelines*, *drawline*, *drawopenpath*, *drawclosedpath*, *drawcircle*, *drawrect*, *eraseshape* and *downloadJson*. Please note that these predefined buttons will only be shown if they are compatible with all trace types used in a graph.",
       "dflt": [],
       "valType": "any"
     },
@@ -3312,6 +3312,15 @@
             "togglegroup"
           ]
         },
+        "groupdoubleclick": {
+          "description": "Determines the behavior on legend group item double-click. *toggleitem* toggles the visibility of the individual item clicked on the graph. *togglegroup* toggles the visibility of all items in the same legendgroup as the item clicked on the graph. Defaults to the value of `groupclick`.",
+          "editType": "legend",
+          "valType": "enumerated",
+          "values": [
+            "toggleitem",
+            "togglegroup"
+          ]
+        },
         "grouptitlefont": {
           "color": {
             "editType": "legend",
@@ -4167,7 +4176,7 @@
         },
         "add": {
           "arrayOk": true,
-          "description": "Determines which predefined modebar buttons to add. Please note that these buttons will only be shown if they are compatible with all trace types used in a graph. Similar to `config.modeBarButtonsToAdd` option. This may include *v1hovermode*, *hoverclosest*, *hovercompare*, *togglehover*, *togglespikelines*, *drawline*, *drawopenpath*, *drawclosedpath*, *drawcircle*, *drawrect*, *eraseshape*.",
+          "description": "Determines which predefined modebar buttons to add. Please note that these buttons will only be shown if they are compatible with all trace types used in a graph. Similar to `config.modeBarButtonsToAdd` option. This may include *v1hovermode*, *hoverclosest*, *hovercompare*, *togglehover*, *togglespikelines*, *drawline*, *drawopenpath*, *drawclosedpath*, *drawcircle*, *drawrect*, *eraseshape*, *downloadJson*.",
           "dflt": "",
           "editType": "modebar",
           "valType": "string"
@@ -13953,7 +13962,7 @@
           "valType": "boolean"
         },
         "showspikes": {
-          "description": "Determines whether or not spikes (aka droplines) are drawn for this axis. Note: This only takes affect when hovermode = closest",
+          "description": "Determines whether or not spikes (aka droplines) are drawn for this axis. Note that spikes will never be drawn when `hovermode` is *false*.",
           "dflt": false,
           "editType": "modebar",
           "valType": "boolean"
@@ -15202,7 +15211,7 @@
           "valType": "boolean"
         },
         "showspikes": {
-          "description": "Determines whether or not spikes (aka droplines) are drawn for this axis. Note: This only takes affect when hovermode = closest",
+          "description": "Determines whether or not spikes (aka droplines) are drawn for this axis. Note that spikes will never be drawn when `hovermode` is *false*.",
           "dflt": false,
           "editType": "modebar",
           "valType": "boolean"
