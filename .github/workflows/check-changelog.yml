@@ -2,7 +2,15 @@ name: Check changelog
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize, labeled, unlabeled]
+    types: [opened, reopened, synchronize, labeled, unlabeled, ready_for_review]
+
+concurrency:
+  group: check-changelog-${{ github.event.pull_request.number }}
+  cancel-in-progress: true  
+
+permissions:
+  contents: read
+  pull-requests: read
 
 jobs:
   check-changelog:
