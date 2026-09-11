@@ -170,15 +170,15 @@ def _start_export_server():
         _export_server_state = "running"
 
 
-def _warn(msg, *args):
+def _warn(subtype, msg, *args):
     """Log a warning, through Sphinx if possible so that builds can suppress
-    it with ``suppress_warnings = ["plotly.sg_scraper"]``."""
+    it with ``suppress_warnings = ["plotly.<subtype>"]``."""
     try:
         from sphinx.util.logging import getLogger
     except Exception:
         logging.getLogger(__name__).warning(msg, *args)
     else:
-        getLogger(__name__).warning(msg, *args, type="plotly", subtype="sg_scraper")
+        getLogger(__name__).warning(msg, *args, type="plotly", subtype=subtype)
 
 
 def _abandon_export_server(exc):
@@ -187,7 +187,9 @@ def _abandon_export_server(exc):
     if _export_server_state != "running":
         return False
     _export_server_state = "disabled"
+    # Recovered from, so separately suppressible from the warning below
     _warn(
+        "sg_scraper_fallback",
         "The shared plotly static image export browser failed with '%s: %s'; "
         "falling back to one browser per exported figure.",
         type(exc).__name__,
@@ -214,6 +216,7 @@ def _static_export_available():
         _export_image({"data": []}, None, "png")
     except Exception as exc:
         _warn(
+            "sg_scraper",
             "plotly static image export is unavailable, so example "
             "thumbnails will fall back to a placeholder image. Static "
             "export requires Kaleido and a Chromium-based browser "
