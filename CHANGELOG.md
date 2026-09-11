@@ -4,9 +4,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Support `marginal_x`/`marginal_y="heatmap"` in `density_heatmap`, drawing a single-row/column heatmap strip in the margin colored by the same `z`/`histfunc` aggregate as the main plot and sharing its color scale [[#5706](https://github.com/plotly/plotly.py/issues/5706)], with thanks to @lucasjamar for the contribution!
+- Add support for custom tick values in `mpl_to_plotly` when the matplotlib tick positions don't follow an arithmetic progression, including custom tick labels and tick values on date axes [[#5262](https://github.com/plotly/plotly.py/pull/5262)], with thanks to @robertoffmoura for the contribution!
+
 ### Fixed
+- Fix `mpl_to_plotly` not setting `paper_bgcolor` and `plot_bgcolor` from the matplotlib figure and axes backgrounds, so converted figures match the source figure's background colors [[#5285](https://github.com/plotly/plotly.py/pull/5285)], with thanks to @robertoffmoura for the contribution!
+- Fix rendering issue causing a too-large div when calling `Figure.show()` in Google Colab [[#5718](https://github.com/plotly/plotly.py/pull/5718)]
 - Fix the sphinx-gallery scraper so that it generates thumbnails for figures shown with `fig.show()` or displayed as the last expression of a code block, warns once (instead of failing the build) when static image export is unavailable, and no longer scrapes files belonging to other examples during parallel builds [[#4722](https://github.com/plotly/plotly.py/issues/4722), [#4959](https://github.com/plotly/plotly.py/issues/4959)], with thanks to @larsoner for the contribution!
 
+### Updated
+- Update plotly.js from version 4.0.0 to version 4.1.0 [[#5722](https://github.com/plotly/plotly.py/pull/5722)]. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.1.0) for details. Notable changes include:
+  - Add an opt-in modebar button for downloading Plotly figures as JSON [[#7990](https://github.com/plotly/plotly.js/pull/7990), [#8022](https://github.com/plotly/plotly.js/pull/8022)]
+  - Add `legend.groupdoubleclick` to set the group behavior for a legend double-click [[#7997](https://github.com/plotly/plotly.js/pull/7997)]
+  - Increase default double-click delay threshold to 500ms (from 300) [[#8014](https://github.com/plotly/plotly.js/pull/8014)]
+  - Fix issue with per-point marker color for hover labels in `scattergl`, `quiver` traces [[#8027](https://github.com/plotly/plotly.js/pull/8027)]
 
 ## [7.0.0] - 2026-08-25
 

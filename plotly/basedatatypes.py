@@ -825,14 +825,7 @@ class BaseFigure(object):
         if "text/html" in bundle:
             return bundle["text/html"]
         else:
-            # Size like the html renderers do: "100%" height collapses or
-            # overflows in plain-HTML consumers such as sphinx-gallery.
-            return self.to_html(
-                full_html=False,
-                include_plotlyjs="cdn",
-                default_width="100%",
-                default_height=525,
-            )
+            return self.to_html(full_html=False, include_plotlyjs="cdn")
 
     def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
         """

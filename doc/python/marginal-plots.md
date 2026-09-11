@@ -39,7 +39,7 @@ Marginal distribution plots are small subplots above or to the right of a main p
 
 ### Scatter Plot Marginals
 
-The `marginal_x` and `marginal_y` arguments accept one of `"histogram"`, `"rug"`, `"box"`, or `"violin"` (see also how to create [histograms](/python/histograms/), [box plots](/python/box-plots/) and [violin plots](/python/violin-plots/) as the main figure). 
+The `marginal_x` and `marginal_y` arguments accept one of `"histogram"`, `"rug"`, `"box"`, or `"violin"` (see also how to create [histograms](/python/histograms/), [box plots](/python/box-plots/) and [violin plots](/python/violin-plots/) as the main figure), plus `"heatmap"` for `density_heatmap` (see below).
 
 Marginal plots are linked to the main plot: try zooming or panning on the main plot.
 
@@ -56,6 +56,27 @@ fig.show()
 import plotly.express as px
 df = px.data.iris()
 fig = px.density_heatmap(df, x="sepal_length", y="sepal_width", marginal_x="box", marginal_y="violin")
+fig.show()
+```
+
+### Marginal Heatmaps on Density Heatmaps
+
+`marginal_x` and `marginal_y` also accept `"heatmap"` for [`density_heatmap`](/python/2D-Histogram/). This draws a single-row or single-column heatmap strip, colored by the same aggregate (`histfunc` of `z`, or count by default) as the main plot, and sharing its color scale. This is not supported for `density_contour`, since a contour plot's colorbar is discrete and not compatible with the continuous colorbar used by the marginal heatmap.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.density_heatmap(df, x="total_bill", y="tip", marginal_x="heatmap", marginal_y="heatmap")
+fig.show()
+```
+
+Set `text_auto=True` to display the aggregate value as text on both the main plot and the marginal heatmap strips, or pass a [d3-format](https://github.com/d3/d3-format) string such as `".2f"` to control the number of decimal places:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.density_heatmap(df, x="total_bill", y="tip", z="size", histfunc="avg",
+                          marginal_x="heatmap", marginal_y="heatmap", text_auto=".1f")
 fig.show()
 ```
 

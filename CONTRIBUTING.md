@@ -181,7 +181,8 @@ When creating your pull request, please follow the guidelines below.
 - If your PR modifies code of `plotly.graph_objects`, the modifications should be made to the code generator, *not* the generated files.
 - You have added tests or modified existing tests, as needed.
 - For a new feature, you have added documentation examples (please see the doc checklist as well).
-- You have added a CHANGELOG entry if changing anything substantial.
+- You have added a changelog entry to `CHANGELOG.md` if changing anything substantial.
+  - The CI job "Check changelog" will fail if the PR does not update `CHANGELOG.md`. To bypass this check for PRs which don't require a changelog entry (e.g. docs updates), add the `no-changelog` label to the PR.
 - For a new feature or a change in behavior, you have updated the relevant docstrings in the code.
 
 ### Documentation pull request
@@ -264,39 +265,58 @@ Two kinds of Jupyter support are included:
 
 ### Updating to a New Version of plotly.js
 
-First, update the version of the `plotly.js` dependency in `js/package.json`.
-Once you have done that,
-run the `updateplotlyjs` command:
+We typically update the plotly.js version in plotly.py after every new plotly.js release.
 
-```bash
-python commands.py updateplotlyjs
-```
+_Usually, the mostly-automated steps below are sufficient. However, in some cases, manual changes may be needed. For example, [plotly.js/#7580](https://github.com/plotly/plotly.js/pull/7580) required [#5464](https://github.com/plotly/plotly.py/pull/5464) and [#5465](https://github.com/plotly/plotly.py/pull/5465). This is most often the case when plotly.js is updated to accept additional value types for an attribute; plotly.py has its own validation layer which may need to be updated. When in doubt, test out a new plotly.js feature in plotly.py to verify that everything works._
 
-This downloads new versions of `plot-schema.json` and `plotly.min.js` from the `plotly/plotly.js` GitHub repository
+Steps to update plotly.js:
+
+1. Create a new branch off of `main`.
+
+2. Manually update the version of the `plotly.js` dependency in `js/package.json`.
+
+3. Run the `updateplotlyjs` command:
+
+    ```bash
+    python commands.py updateplotlyjs
+    ```
+
+    This command does the following:
+
+    - Downloads new versions of `plot-schema.json` and `plotly.min.js` from the [plotly.js GitHub repository](https://github.com/plotly/plotly.js)
 and places them in `codegen/resources/` and `plotly/package_data/`, respectively.
+    - Updates `plotly/offline/_plotlyjs_version.py` with the new version
+    - Regenerates all of the classes under `graph_objs/` (`go.Figure`, `go.Layout`, etc.), and `plotly/validators/_validators.json`, based on the new schema 
+    - Runs `npm install` in `js/` to update `js/package-lock.json`
+    - Runs `npm run build` in `js/` to rebuild the JupyterLab extension and FigureWidget bundles, which updates the artifacts in `plotly/labextension` and `plotly/package_data/widgetbundle.js`.
 
-It then does the following:
- - Regenerates all of the `graph_objs` classes based on the new schema
- - Runs `npm install` in `js/` to refresh `js/package-lock.json` against the new `plotly.js`
- - Runs `npm run build` to rebuild the JupyterLab extension and FigureWidget bundles in `plotly/labextension` and `plotly/package_data/widgetbundle.js`.
+    > Note: To skip the `npm` steps entirely (e.g. if `npm` isn't available), you can set the `SKIP_NPM=1` environment variable:
+    >
+    > ```bash
+    > SKIP_NPM=1 python commands.py updateplotlyjs
+    > ```
+    >
+    > However, before proceeding further, you'll still need to somehow run `npm install && npm run build` in `js/` before committing, so that the lockfile and build artifacts stay in sync with `js/package.json`.
 
-Commit the updated files under:
- - `codegen/resources/`
- - `js/`
- - `plotly/graph_objs/`
- - `plotly/labextension/`
- - `plotly/offline/`
- - `plotly/package_data/`
+4. Commit the updated files under:
+    - `codegen/resources/`
+    - `js/`
+    - `plotly/graph_objs/`
+    - `plotly/labextension/`
+    - `plotly/offline/`
+    - `plotly/package_data/`
 
-If you need to skip the `npm` steps entirely (e.g. `npm` isn't available),
-set the `SKIP_NPM=1` environment variable:
+5. To double-check that the update worked properly, you can use this one-liner:
 
-```bash
-SKIP_NPM=1 python commands.py updateplotlyjs
-```
+    ```bash
+    pip install -e . && python -c "import plotly.graph_objects as go; fig = go.Figure([go.Scatter(y=[2,1,3])]); fig.show()"
+    ```
 
-If you do skip it, you'll need to find a way to manually run `npm install && npm run build` in `js/` before committing,
-so that the lockfile and build artifacts stay in sync with `js/package.json`.
+    The plot will open in a browser window; hover over the Plotly logo in the modebar in the upper-right corner to verify that the plotly.js version is correct.
+
+6. Open a PR into `main`.
+
+7. Add a changelog entry to `CHANGELOG.md` with a link to the PR. We typically mention the version update, link to the plotly.js GitHub release page, and list out the most important changes. Follow the format of previous plotly.js version bump changelog updates.
 
 ### Using a Development Branch of Plotly.js
 

@@ -944,12 +944,55 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
                     ),
                     marginal=letter,
                 )
+            elif args["marginal_" + letter] == "heatmap":
+                if constructor != go.Histogram2d:
+                    raise ValueError(
+                        "`marginal_x`/`marginal_y` value `'heatmap'` is only supported "
+                        "for `density_heatmap`."
+                    )
+                other_letter = "y" if letter == "x" else "x"
+                heatmap_trace_patch = dict(
+                    coloraxis="coloraxis1", histfunc=args.get("histfunc"), **axis_map
+                )
+                # `nbinsx`/`nbinsy` are only a target bin count -- plotly.js's "nice
+                # number" bin-sizing can still round to more than one bin. Force
+                # exactly one bin by setting explicit bin edges covering the data.
+                other_col = args["data_frame"].get_column(args[other_letter])
+                other_min = nw.to_py_scalar(other_col.min())
+                other_max = nw.to_py_scalar(other_col.max())
+                span = (other_max - other_min) or 1
+                pad = span * 0.001
+                other_bins = dict(
+                    start=other_min - pad, end=other_max + pad, size=span + 2 * pad
+                )
+                if letter == "x":
+                    heatmap_trace_patch["xbingroup"] = "x"
+                    heatmap_trace_patch["ybins"] = other_bins
+                else:
+                    heatmap_trace_patch["ybingroup"] = "y"
+                    heatmap_trace_patch["xbins"] = other_bins
+                if args.get("text_auto", False) is not False:
+                    if args["text_auto"] is True:
+                        heatmap_trace_patch["texttemplate"] = "%{z}"
+                    else:
+                        heatmap_trace_patch["texttemplate"] = (
+                            "%{z:" + args["text_auto"] + "}"
+                        )
+                trace_spec = TraceSpec(
+                    constructor=go.Histogram2d,
+                    attrs=[letter, other_letter, "z"],
+                    trace_patch=heatmap_trace_patch,
+                    marginal=letter,
+                )
             else:
                 raise ValueError(
                     f"Invalid value '{args['marginal_' + letter]}' for `marginal_{letter}`. "
-                    "Supported marginal plot types are: 'rug', 'box', 'violin', 'histogram'."
+                    "Supported marginal plot types are: "
+                    "'rug', 'box', 'violin', 'histogram', 'heatmap'."
                 )
-            if "color" in attrs or "color" not in args:
+            if trace_spec.constructor != go.Histogram2d and (
+                "color" in attrs or "color" not in args
+            ):
                 if "marker" not in trace_spec.trace_patch:
                     trace_spec.trace_patch["marker"] = dict()
                 first_default_color = args["color_continuous_scale"][0]
