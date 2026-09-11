@@ -81,10 +81,7 @@ The situation is similar for environments like Nteract and Streamlit: in these e
 
 ### Jupyter and JupyterLab Problems
 
-If a figure appears blank in JupyterLab, first check that the Jupyter server
-environment and the environment used by the notebook kernel can both access the
-Plotly packages they need. This is especially important when JupyterLab and
-`plotly` are installed in separate virtual environments.
+If a figure appears blank in JupyterLab, first check that the Jupyter server environment and the environment used by the notebook kernel can both access the Plotly packages they need. This is especially important when JupyterLab and `plotly` are installed in separate virtual environments.
 
 As a workaround, try the `notebook` renderer explicitly:
 
