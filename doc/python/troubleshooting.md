@@ -85,8 +85,8 @@ If a figure appears blank in JupyterLab, first check that the Jupyter server env
 
 As a workaround, try the `notebook` renderer explicitly:
 
-```python
+~~~python
 fig.show(renderer="notebook")
-```
+~~~
 
 This can help when the default renderer does not display the figure correctly.
