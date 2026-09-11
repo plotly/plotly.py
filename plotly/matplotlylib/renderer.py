@@ -9,6 +9,7 @@ with the matplotlylib package.
 
 import warnings
 
+import matplotlib.patches as mpatches
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -602,12 +603,47 @@ class PlotlyRenderer(Renderer):
         is_bar = mpltools.is_bar(self.current_mpl_ax.containers, **props)
         if is_bar:
             self.current_bars += [props]
+        elif isinstance(props["mplobj"], mpatches.StepPatch):
+            self.msg += "    Drawing a step path\n"
+            self._draw_step_path(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
                 "I found a path object that I don't think is part "
                 "of a bar chart. Ignoring."
             )
+
+    def _draw_step_path(self, props):
+        """Draw a matplotlib StepPatch as a step line trace."""
+        if props["coordinates"] != "data":
+            self.msg += "    Step path is not in data coordinates, not drawing\n"
+            return
+        style = props["style"]
+        x = []
+        y = []
+        for x0, y0 in props["data"]:
+            if not x or x0 != x[-1] or y0 != y[-1]:
+                x.append(x0)
+                y.append(y0)
+        if len(x) < 2:
+            self.msg += "    Step path has fewer than 2 points, not drawing\n"
+            return
+        self.plotly_fig.add_trace(
+            go.Scatter(
+                x=x,
+                y=y,
+                mode="lines",
+                line=go.scatter.Line(
+                    color=mpltools.merge_color_and_opacity(
+                        style["edgecolor"], style["alpha"]
+                    ),
+                    width=style["edgewidth"],
+                    dash=mpltools.convert_dash(style["dasharray"]),
+                ),
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
+            )
+        )
 
     def draw_text(self, **props):
         """Create an annotation dict for a text obj.
