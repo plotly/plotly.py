@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix `mpl_to_plotly` not setting `paper_bgcolor` and `plot_bgcolor` from the matplotlib figure and axes backgrounds, so converted figures match the source figure's background colors [[#5285](https://github.com/plotly/plotly.py/pull/5285)], with thanks to @robertoffmoura for the contribution!
 - Fix rendering issue causing a too-large div when calling `Figure.show()` in Google Colab [[#5718](https://github.com/plotly/plotly.py/pull/5718)]
+- Fix the sphinx-gallery scraper so that it generates thumbnails for figures shown with `fig.show()` or displayed as the last expression of a code block, warns once (instead of failing the build) when static image export is unavailable, and no longer scrapes files belonging to other examples during parallel builds [[#4722](https://github.com/plotly/plotly.py/issues/4722), [#4959](https://github.com/plotly/plotly.py/issues/4959)], with thanks to @larsoner for the contribution!
 
 ### Updated
 - Update plotly.js from version 4.0.0 to version 4.1.0 [[#5722](https://github.com/plotly/plotly.py/pull/5722)]. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.1.0) for details. Notable changes include:

@@ -261,6 +261,22 @@ def test_browser_renderer_show(fig1, renderer):
     assert_offline(html)
 
 
+# Sphinx-Gallery
+# --------------
+@pytest.mark.parametrize("show", [lambda fig: pio.show(fig), lambda fig: fig.show()])
+def test_sphinx_gallery_png_renderer_show(fig1, show):
+    """Figures must be queued for the scraper however `show` was called."""
+    from plotly.io._base_renderers import sphinx_gallery_figures
+
+    pio.renderers.default = "sphinx_gallery_png"
+    del sphinx_gallery_figures[:]
+    try:
+        show(fig1)
+        assert sphinx_gallery_figures == [fig1.to_dict()]
+    finally:
+        del sphinx_gallery_figures[:]
+
+
 # Validation
 # ----------
 @pytest.mark.parametrize("renderer", ["bogus", "json+bogus", "bogus+chrome"])
