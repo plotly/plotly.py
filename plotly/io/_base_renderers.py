@@ -820,11 +820,10 @@ sphinx_gallery_figures = []
 class SphinxGalleryPngRenderer(ExternalRenderer):
     """Renderer used together with the sphinx-gallery image scraper.
 
-    Instead of displaying the figure, this renderer queues it in
-    ``plotly.io._base_renderers.sphinx_gallery_figures``;
-    :func:`plotly.io._sg_scraper.plotly_sg_scraper` then writes each queued
-    figure to the gallery's image directory, both as an interactive HTML file
-    and as a static image used for the gallery thumbnail.
+    Rather than displaying the figure, this renderer queues it for
+    ``plotly.io.sg_scraper.plotly_sg_scraper``, which embeds it in the example
+    page as interactive HTML and, when static image export is available,
+    saves a static image of it for the gallery thumbnail.
     """
 
     def render(self, fig_dict):

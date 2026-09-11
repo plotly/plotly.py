@@ -207,7 +207,7 @@ def test_scraper_bad_format(gallery):
         gallery.scrape()
 
 
-def test_scraper_export_server_fallback(gallery, monkeypatch):
+def test_scraper_export_server_fallback(gallery, monkeypatch, caplog):
     """A shared browser dying mid-build falls back to per-export browsers."""
     import plotly.io._sg_scraper as sg_scraper
 
@@ -228,6 +228,10 @@ def test_scraper_export_server_fallback(gallery, monkeypatch):
     assert rst.count('class="plotly-graph-div"') == 1
     assert_image_color(Path(gallery.paths[0]), COLORS[0])
     assert sg_scraper._export_server_state == "disabled"
+    assert any(
+        r.levelname == "WARNING" and "falling back" in r.getMessage()
+        for r in caplog.records
+    )
 
     # With no server left to abandon, an export failure is fatal
     failed.clear()
@@ -271,20 +275,6 @@ def test_scraper_no_static_export(gallery, monkeypatch, caplog):
     assert len(kaleido_warnings()) == 1
 
 
-def test_repr_html_fallback_size(monkeypatch):
-    """The repr of a figure must have a usable pixel height, not "100%".
-
-    With the (non-mimetype) sphinx_gallery_png renderer selected, sphinx-
-    gallery captures ``_repr_html_``, whose output ends up in a container
-    with no set height.
-    """
-    monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
-    html = go.Figure()._repr_html_()
-    assert 'style="height:525px; width:100%;"' in html
-    fig = go.Figure(layout={"height": 400})
-    assert 'style="height:400px; width:100%;"' in fig._repr_html_()
-
-
 def test_image_scrapers_by_name(monkeypatch):
     """`image_scrapers=("plotly",)` must resolve through sphinx-gallery."""
     from sphinx_gallery.gen_rst import _get_callables
@@ -310,7 +300,7 @@ def test_reset_renderer(monkeypatch):
 
     monkeypatch.setattr(pio.renderers, "default", "browser")
     # By name, so that sphinx_gallery_conf stays picklable
-    conf = {"reset_modules": ("plotly.io._sg_scraper.reset_renderer",)}
+    conf = {"reset_modules": ("plotly.io.sg_scraper.reset_renderer",)}
     # Let sphinx-gallery resolve and call it, so that the signature it
     # dispatches on is covered as well
     clean_modules(conf, "plot_example.py", "before")

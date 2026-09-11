@@ -43,52 +43,32 @@ _FIXUP_HTML = (
 
 
 def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
-    """Scrape Plotly figures for galleries of examples using
-    sphinx-gallery.
+    """Scrape Plotly figures for sphinx-gallery.
 
-    Examples should use ``plotly.io.show()`` (or the equivalent
-    ``fig.show()``) to display the figure with the custom
-    ``sphinx_gallery_png`` renderer, which is made the default renderer as a
-    side effect of importing this module. Parallel builds on sphinx-gallery
-    0.21 and earlier also need :func:`reset_renderer`, since their worker
-    processes never import it.
-
-    Every figure shown that way is embedded in the page as interactive HTML,
-    and written to the gallery image directory as a static image, which
-    sphinx-gallery uses to generate the thumbnail of the example.
-
-    A figure that is instead displayed by making it the last expression of a
-    code block (sphinx-gallery's repr capture) gets a static image too, so
-    that it can also serve as the thumbnail; its HTML is embedded by
-    sphinx-gallery itself.
-
-    Static image export requires Kaleido and a Chromium-based browser (the
-    ``plotly_get_chrome`` command installs one); when unavailable, a warning
-    is emitted once per build and the examples fall back to placeholder
-    thumbnails, with the interactive figures unaffected.
+    Figures shown with ``fig.show()`` (using the ``sphinx_gallery_png``
+    renderer, which importing this module selects) are embedded in the page
+    as interactive HTML. Those figures, and ones displayed as the last
+    expression of a code block, are also saved as static images for the
+    gallery thumbnail when Kaleido is available. For parallel builds, see
+    ``reset_renderer``.
 
     Parameters
     ----------
     block : tuple
-        A tuple containing the (label, content, line_number) of the block.
+        The (label, content, line_number) of the code block.
     block_vars : dict
         Dict of block variables.
     gallery_conf : dict
-        Contains the configuration of Sphinx-Gallery
+        Configuration of Sphinx-Gallery (unused, but part of the scraper
+        interface).
     **kwargs : dict
-        Additional keyword arguments.
-        The ``format`` kwarg is used to set the file extension
-        of the static images (currently only 'png' and 'svg' are supported).
+        ``format`` sets the static image format, ``"png"`` (default) or
+        ``"svg"``.
 
     Returns
     -------
     rst : str
-        The ReSTructuredText that will be rendered to HTML containing
-        the images.
-
-    Notes
-    -----
-    Add this function to the image scrapers
+        The reStructuredText embedding the figures.
     """
     image_format = kwargs.get("format", "png")
     if image_format not in ("png", "svg"):
@@ -124,44 +104,12 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
 
 
 def reset_renderer(gallery_conf, fname, *, when=None):
-    """Select the ``sphinx_gallery_png`` renderer, as a sphinx-gallery resetter.
+    """Select the ``sphinx_gallery_png`` renderer before each example.
 
-    Importing this module selects that renderer too, but the worker processes
-    of a parallel build never import it: ``conf.py`` is read only in the
-    parent process, and ``image_scrapers=("plotly",)`` reaches a worker as a
-    plain string that sphinx-gallery resolves only after the example has run.
-    The example therefore executes with the default ``browser`` renderer,
-    whose ``fig.show()`` serves the figure from a local web server and waits
-    for a browser that a worker does not have, hanging the build.
-
-    Naming this function in ``reset_modules`` runs it in every worker, before
-    each example::
-
-        sphinx_gallery_conf = {
-            ...
-            "image_scrapers": ("plotly",),
-            "reset_modules": ("matplotlib", "plotly.io._sg_scraper.reset_renderer"),
-        }
-
-    Passing it by name rather than importing it keeps ``sphinx_gallery_conf``
-    picklable, which Sphinx needs in order to cache the environment.
-
-    Up to and including sphinx-gallery 0.21, ``image_scrapers`` is resolved
-    only after an example has run, which is what makes this necessary. From
-    0.22 it is resolved beforehand and selects the renderer itself, so this
-    resetter is redundant there -- but harmless, and still worth configuring
-    if the documentation is also built against older sphinx-gallery.
-
-    Parameters
-    ----------
-    gallery_conf : dict
-        Contains the configuration of Sphinx-Gallery (unused).
-    fname : str
-        Name of the example file about to be executed (unused).
-    when : str or None
-        Whether sphinx-gallery is resetting before or after the example
-        (unused). Sphinx-gallery passes it by keyword, and only to resetters
-        that accept it.
+    Parallel builds with sphinx-gallery < 0.22 need this, as their worker
+    processes never import this module: add
+    ``"plotly.io.sg_scraper.reset_renderer"`` to ``reset_modules`` in
+    ``sphinx_gallery_conf``.
     """
     plotly.io.renderers.default = "sphinx_gallery_png"
 
@@ -222,19 +170,24 @@ def _start_export_server():
         _export_server_state = "running"
 
 
+def _warn(msg, *args):
+    """Log a warning, through Sphinx if possible so that builds can suppress
+    it with ``suppress_warnings = ["plotly.sg_scraper"]``."""
+    try:
+        from sphinx.util.logging import getLogger
+    except Exception:
+        logging.getLogger(__name__).warning(msg, *args)
+    else:
+        getLogger(__name__).warning(msg, *args, type="plotly", subtype="sg_scraper")
+
+
 def _abandon_export_server(exc):
     """Stop using the shared browser; return whether a retry makes sense."""
     global _export_server_state
     if _export_server_state != "running":
         return False
     _export_server_state = "disabled"
-    try:
-        from sphinx.util.logging import getLogger
-
-        log = getLogger(__name__).info
-    except Exception:
-        log = logging.getLogger(__name__).info
-    log(
+    _warn(
         "The shared plotly static image export browser failed with '%s: %s'; "
         "falling back to one browser per exported figure.",
         type(exc).__name__,
@@ -260,15 +213,7 @@ def _static_export_available():
     try:
         _export_image({"data": []}, None, "png")
     except Exception as exc:
-        try:
-            from sphinx.util.logging import getLogger
-
-            warn = functools.partial(
-                getLogger(__name__).warning, type="plotly", subtype="sg_scraper"
-            )
-        except Exception:
-            warn = logging.getLogger(__name__).warning
-        warn(
+        _warn(
             "plotly static image export is unavailable, so example "
             "thumbnails will fall back to a placeholder image. Static "
             "export requires Kaleido and a Chromium-based browser "

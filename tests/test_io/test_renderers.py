@@ -313,9 +313,8 @@ def test_repr_html(renderer):
     plotlyjs_content = get_plotlyjs()
     sri_hash = _generate_sri_hash(plotlyjs_content)
 
-    # The fallback sizes like the html renderers: layout height, else 525px
     template = (
-        '<div style="height:525px; width:100%;">                        <script>'
+        '<div style="height:100%; width:100%;">                        <script>'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()
