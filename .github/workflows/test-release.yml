@@ -3,6 +3,9 @@ name: Test release
 on:
   workflow_dispatch
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Full prod build

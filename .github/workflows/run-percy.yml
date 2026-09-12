@@ -8,6 +8,9 @@ on:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   python-311-percy:
     name: Run Percy
