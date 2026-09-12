@@ -19,6 +19,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Increase default double-click delay threshold to 500ms (from 300) [[#8014](https://github.com/plotly/plotly.js/pull/8014)]
   - Fix issue with per-point marker color for hover labels in `scattergl`, `quiver` traces [[#8027](https://github.com/plotly/plotly.js/pull/8027)]
 
+### Fixed
+- Fix `FigureWidget` state synchronization bug where frontend modifications to array properties (like `layout.shapes`) failed to properly update the Python property cache and occasionally surfaced `Undefined` objects [[#5689](https://github.com/plotly/plotly.py/issues/5689)]
+
 ## [7.0.0] - 2026-08-25
 
 ### Fixed
