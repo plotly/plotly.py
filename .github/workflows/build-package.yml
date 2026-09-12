@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+permissions:
+  contents: read
+
 jobs:
   plotlyjs-dev-build:
     name: plotly.js dev build

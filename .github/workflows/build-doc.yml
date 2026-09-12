@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+permissions:
+  contents: read
+
 jobs:
   build-doc:
     runs-on: ubuntu-latest
