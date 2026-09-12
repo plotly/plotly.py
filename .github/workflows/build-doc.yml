@@ -45,8 +45,13 @@ jobs:
           cd doc
           source .venv/bin/activate
           make -kj8 || make -kj8
-          curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
-          curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
+          # Fetch scripts from plotly/graphing-library-docs, pinned to a specific commit SHA 
+          # to guard against unauthorized changes in that repo. If changes are made to the
+          # below-referenced scripts in plotly/graphing-library-docs, update DOCS_CI_REF
+          # accordingly to point to the latest commit SHA.
+          DOCS_CI_REF=e05eaed1ae800139df084e0587762aa273a4f19d
+          curl -fsSL https://raw.githubusercontent.com/plotly/graphing-library-docs/$DOCS_CI_REF/front-matter-ci.py > front-matter-ci.py
+          curl -fsSL https://raw.githubusercontent.com/plotly/graphing-library-docs/$DOCS_CI_REF/check-or-enforce-order.py > check-or-enforce-order.py
           python front-matter-ci.py build/html
           python check-or-enforce-order.py build/html
 
