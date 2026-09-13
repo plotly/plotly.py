@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix the sphinx-gallery scraper so that it generates thumbnails for figures shown with `fig.show()` or displayed as the last expression of a code block [[#5701](https://github.com/plotly/plotly.py/pull/5701)], with thanks to @larsoner for the contribution!
   - The scaper now warns once (instead of failing the build) when static image export is unavailable
 - The sphinx-gallery scraper no longer scrapes files belonging to other examples during parallel builds [[#5701](https://github.com/plotly/plotly.py/pull/5701)], with thanks to @larsoner for the contribution!
+- Fix Plotly Express mutating lists passed to the `x` or `y` arguments in wide mode [[#4117](https://github.com/plotly/plotly.py/issues/4117)]
 
 ### Updated
 - Update plotly.js from version 4.0.0 to version 4.1.1 [[#5722](https://github.com/plotly/plotly.py/pull/5722), [#5730](https://github.com/plotly/plotly.py/pull/5730)]. See the plotly.js release notes for [v4.1.0](https://github.com/plotly/plotly.js/releases/tag/v4.1.0) and [v4.1.1](https://github.com/plotly/plotly.js/releases/tag/v4.1.1) for details. Notable changes include:
