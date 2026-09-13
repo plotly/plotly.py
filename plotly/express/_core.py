@@ -149,7 +149,7 @@ def _is_continuous(df: nw.DataFrame, col_name: str) -> bool:
         # fastpath for pandas: Narwhals' Series.dtype has a bit of overhead, as it
         # tries to distinguish between true "object" columns, and "string" columns
         # disguised as "object". But here, we deal with neither.
-        return df_native[col_name].dtype.kind in "ifc"
+        return df_native[col_name].dtype.kind in "iufc"
     return df.get_column(col_name).dtype.is_numeric()
 
 
