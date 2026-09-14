@@ -1515,7 +1515,7 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def spikethickness(self):
         """
-        Sets the width (in px) of the zero line.
+        Sets the spike line width in pixels.
 
         The 'spikethickness' property is a number and may be specified as:
           - An int or float
@@ -2606,7 +2606,7 @@ class YAxis(_BaseLayoutHierarchyType):
             Determines whether spikelines are stuck to the cursor
             or to the closest datapoints.
         spikethickness
-            Sets the width (in px) of the zero line.
+            Sets the spike line width in pixels.
         tick0
             Sets the placement of the first tick on this axis. Use
             with `dtick`. If the axis `type` is "log", then you
@@ -3248,7 +3248,7 @@ class YAxis(_BaseLayoutHierarchyType):
             Determines whether spikelines are stuck to the cursor
             or to the closest datapoints.
         spikethickness
-            Sets the width (in px) of the zero line.
+            Sets the spike line width in pixels.
         tick0
             Sets the placement of the first tick on this axis. Use
             with `dtick`. If the axis `type` is "log", then you
