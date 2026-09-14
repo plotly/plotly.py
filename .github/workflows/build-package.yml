@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+permissions:
+  contents: read
+
 jobs:
   plotlyjs-dev-build:
     name: plotly.js dev build
@@ -27,7 +30,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_optional
+          uv sync --locked --extra dev_optional
       - name: Update plotly.js to dev
         run: |
           source .venv/bin/activate
@@ -39,7 +42,7 @@ jobs:
       - name: Build source distribution packages
         run: |
           source .venv/bin/activate
-          uv sync --extra dev_build
+          uv sync --locked --extra dev_build
           python -m build --sdist --wheel -o dist
       - name: Upload dist artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
@@ -67,7 +70,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_build
+          uv sync --locked --extra dev_build
           cd js
           npm ci
           npm run build

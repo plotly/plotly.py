@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+permissions:
+  contents: read
+
 jobs:
   check-code-formatting:
     name: Run ruff check
@@ -23,7 +26,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_core
+          uv sync --locked --extra dev_core
       - name: Check handwritten code with ruff
         run: |
           source .venv/bin/activate

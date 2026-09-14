@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+permissions:
+  contents: read
+
 jobs:
   check-python-codegen:
     name: Check Python codegen
@@ -26,7 +29,7 @@ jobs:
         uv venv
         source .venv/bin/activate
         uv lock --check
-        uv sync --extra dev_codegen
+        uv sync --locked --extra dev_codegen
     - name: Run codegen
       run: |
         source .venv/bin/activate
