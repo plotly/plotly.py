@@ -13,11 +13,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix rendering issue causing a too-large div when calling `Figure.show()` in Google Colab [[#5718](https://github.com/plotly/plotly.py/pull/5718)]
 
 ### Updated
-- Update plotly.js from version 4.0.0 to version 4.1.0 [[#5722](https://github.com/plotly/plotly.py/pull/5722)]. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.1.0) for details. Notable changes include:
+- Update plotly.js from version 4.0.0 to version 4.1.1 [[#5722](https://github.com/plotly/plotly.py/pull/5722), [#5730](https://github.com/plotly/plotly.py/pull/5730)]. See the plotly.js release notes for [v4.1.0](https://github.com/plotly/plotly.js/releases/tag/v4.1.0) and [v4.1.1](https://github.com/plotly/plotly.js/releases/tag/v4.1.1) for details. Notable changes include:
   - Add an opt-in modebar button for downloading Plotly figures as JSON [[#7990](https://github.com/plotly/plotly.js/pull/7990), [#8022](https://github.com/plotly/plotly.js/pull/8022)]
   - Add `legend.groupdoubleclick` to set the group behavior for a legend double-click [[#7997](https://github.com/plotly/plotly.js/pull/7997)]
   - Increase default double-click delay threshold to 500ms (from 300) [[#8014](https://github.com/plotly/plotly.js/pull/8014)]
   - Fix issue with per-point marker color for hover labels in `scattergl`, `quiver` traces [[#8027](https://github.com/plotly/plotly.js/pull/8027)]
+  - Update `maplibre-gl` to v6 to address [CVE-2026-85061](https://github.com/advisories/GHSA-jrc7-96c5-q579) [[#8035](https://github.com/plotly/plotly.js/pull/8035)]
+    - Note: Safari 15, Chrome 56, Firefox 51 and later are now required for map traces
 
 ## [7.0.0] - 2026-08-25
 
