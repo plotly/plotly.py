@@ -766,12 +766,14 @@ def hex_to_rgb(value):
     value = value.lstrip("#")
     if len(value) == 3:
         value = "".join(c * 2 for c in value)
-    hex_total_length = len(value)
-    rgb_section_length = hex_total_length // 3
-    return tuple(
-        int(value[i : i + rgb_section_length], 16)
-        for i in range(0, hex_total_length, rgb_section_length)
-    )
+    elif len(value) != 6:
+        # Any other length silently produced a tuple of the wrong size: the
+        # section width is len // 3, so "#12345" returned a 5-tuple.
+        raise ValueError(
+            "hex color must be 3 or 6 hex digits, optionally prefixed with "
+            "'#'; got {!r}".format(value)
+        )
+    return tuple(int(value[i : i + 2], 16) for i in range(0, 6, 2))
 
 
 def colorscale_to_colors(colorscale):
