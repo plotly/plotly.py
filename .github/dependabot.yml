@@ -32,3 +32,22 @@ updates:
     labels: ["no-changelog"]
     cooldown:
       default-days: 3
+
+  # Update version for JavaScript dependencies for Jupyter widget.
+  # Note: If the dependency update results in a changed build artifact,
+  # the `check-js-build` workflow will fail on the resulting PR.
+  # As currently configured, this will require a manual push of the
+  # updated build artifacts to resolve.
+  - package-ecosystem: "npm"
+    directory: "/js"
+    schedule:
+      interval: "monthly"
+    groups:
+      javascript-dependencies:
+        patterns:
+          - "*"
+    labels: ["no-changelog"]
+    cooldown:
+      default-days: 3
+    ignore:
+      - dependency-name: "plotly.js"  # We want to handle plotly.js updates manually
