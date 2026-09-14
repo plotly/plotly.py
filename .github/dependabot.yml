@@ -49,3 +49,5 @@ updates:
     labels: ["no-changelog"]
     cooldown:
       default-days: 3
+    ignore:
+      - dependency-name: "plotly.js"  # We want to handle plotly.js updates manually
