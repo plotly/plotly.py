@@ -39,7 +39,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_optional
+          uv sync --locked --extra dev_optional
       - name: Build HTML figures (Pandas 2)
         run: |
           source .venv/bin/activate

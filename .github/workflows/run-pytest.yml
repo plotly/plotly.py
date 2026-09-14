@@ -31,7 +31,7 @@ jobs:
           uv venv
           source .venv/bin/activate
           uv lock --check
-          uv sync --extra dev_core
+          uv sync --locked --extra dev_core
           python --version
       - name: Test core
         run: |
@@ -59,7 +59,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_optional --extra dev_pandas3
+          uv sync --locked --extra dev_optional --extra dev_pandas3
           python --version
       - name: Test core
         run: |
@@ -111,7 +111,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_optional --extra dev_pandas${{ matrix.pandas-version }}
+          uv sync --locked --extra dev_optional --extra dev_pandas${{ matrix.pandas-version }}
       - name: Test core
         run: |
           source .venv/bin/activate
@@ -156,7 +156,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_optional
+          uv sync --locked --extra dev_optional
           uv pip uninstall kaleido
           uv pip install kaleido==0.2.1
           python --version

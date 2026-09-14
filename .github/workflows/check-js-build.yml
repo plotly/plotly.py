@@ -54,7 +54,7 @@ jobs:
         source .venv/bin/activate
         # Technically, we only need the `jupyter-builder` package, but using the dev_build extra
         # keeps build behavior consistent across all CI jobs
-        uv sync --extra dev_build
+        uv sync --locked --extra dev_build
         cd js
         npm ci
         npm run build
