@@ -16,9 +16,9 @@ Ensure you have the following installed:
 ### Prepare local environment
 
 * `git switch main && git pull`
-3. `git status`: ensure your working tree is clean
-4. `uv pip install -e ".[dev_optional]"`
-5. `cd js && npm ci && cd ..`
+* `git status`: ensure your working tree is clean
+* `uv pip install -e ".[dev_optional]"`
+* `cd js && npm ci && cd ..`
 
 ### Finalize changelog
 
