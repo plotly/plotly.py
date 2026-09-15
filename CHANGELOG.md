@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Fix issue with per-point marker color for hover labels in `scattergl`, `quiver` traces [[#8027](https://github.com/plotly/plotly.js/pull/8027)]
   - Update `maplibre-gl` to v6 to address [CVE-2026-85061](https://github.com/advisories/GHSA-jrc7-96c5-q579) [[#8035](https://github.com/plotly/plotly.js/pull/8035)]
     - Note: Safari 15, Chrome 56, Firefox 51 and later are now required for map traces
+- Update `hex_to_rgb` function to raise error for invalid-length hex codes, and emit warning for hex codes containing alpha [[#5729](https://github.com/plotly/plotly.py/pull/5729)], with thanks to @dylanpulver for the contribution!
 
 ## [7.0.0] - 2026-08-25
 
