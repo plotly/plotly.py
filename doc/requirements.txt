@@ -13,7 +13,7 @@ jupyter
 jupyter-client<7
 jupytext==1.16.4
 kaleido
-nbconvert==5.6.1
+nbconvert==7.17.1
 networkx==2.8.0
 notebook
 numpy==1.22.4
