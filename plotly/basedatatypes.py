@@ -5458,6 +5458,16 @@ class BasePlotlyType(object):
         -------
         None
         """
+        # Invalidate cache for changed compound array properties so that they are 
+        # reconstructed from the underlying properties dictionary on the next access.
+        # We only pop from _compound_array_props because compound arrays are immutable 
+        # tuples that must be rebuilt to reflect added or removed elements.
+        for path in changed_paths:
+            if len(path) > 0:
+                prop = path[0]
+                if prop in self._compound_array_props:
+                    self._compound_array_props.pop(prop, None)
+
         # Loop over registered callbacks
         # ------------------------------
         for prop_path_tuples, callbacks in self._change_callbacks.items():
