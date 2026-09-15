@@ -181,7 +181,8 @@ When creating your pull request, please follow the guidelines below.
 - If your PR modifies code of `plotly.graph_objects`, the modifications should be made to the code generator, *not* the generated files.
 - You have added tests or modified existing tests, as needed.
 - For a new feature, you have added documentation examples (please see the doc checklist as well).
-- You have added a CHANGELOG entry if changing anything substantial.
+- You have added a changelog entry to `CHANGELOG.md` if changing anything substantial.
+  - The CI job "Check changelog" will fail if the PR does not update `CHANGELOG.md`. To bypass this check for PRs which don't require a changelog entry (e.g. docs updates), add the `no-changelog` label to the PR.
 - For a new feature or a change in behavior, you have updated the relevant docstrings in the code.
 
 ### Documentation pull request

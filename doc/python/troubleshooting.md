@@ -78,3 +78,15 @@ The situation is similar for environments like Nteract and Streamlit: in these e
 ### Orca Problems
 
 > The Orca image-generation utility is no longer supported in Plotly.py as of version 7.0.0. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
+
+### Jupyter and JupyterLab Problems
+
+If a figure appears blank in JupyterLab, first check that the Jupyter server environment and the environment used by the notebook kernel can both access the Plotly packages they need. This is especially important when JupyterLab and `plotly` are installed in separate virtual environments.
+
+As a workaround, try the `notebook` renderer explicitly:
+
+~~~python
+fig.show(renderer="notebook")
+~~~
+
+This can help when the default renderer does not display the figure correctly.

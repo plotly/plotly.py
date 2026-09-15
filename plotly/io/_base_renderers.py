@@ -6,10 +6,9 @@ import os
 from os.path import isdir
 
 from plotly import optional_imports
-from plotly.io import to_json, to_image, write_image, write_html
+from plotly.io import to_json, to_image, write_html
 from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly.tools import return_figure_from_figure_or_data
 
 ipython_display = optional_imports.get_module("IPython.display")
 IPython = optional_imports.get_module("IPython")
@@ -812,29 +811,20 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         return {"text/html": html}
 
 
+# Figures shown with the "sphinx_gallery_png" renderer are queued here until
+# plotly.io._sg_scraper.plotly_sg_scraper collects them, so the renderer itself
+# does not need to know where sphinx-gallery wants the files to be written.
+sphinx_gallery_figures = []
+
+
 class SphinxGalleryPngRenderer(ExternalRenderer):
-    # Note: This renderer was originally designed for use with the orca image generation utility
-    # before the introduction of kaleido. It has not been tested with kaleido, but I'm not aware
-    # of any reason why it shouldn't work.
+    """Renderer used together with the sphinx-gallery image scraper.
+
+    Rather than displaying the figure, this renderer queues it for
+    ``plotly.io.sg_scraper.plotly_sg_scraper``, which embeds it in the example
+    page as interactive HTML and, when static image export is available,
+    saves a static image of it for the gallery thumbnail.
+    """
+
     def render(self, fig_dict):
-        stack = inspect.stack()
-        # Name of script from which plot function was called is retrieved
-        try:
-            filename = stack[3].filename  # let's hope this is robust...
-        except Exception:  # python 2
-            filename = stack[3][1]
-        filename_root, _ = os.path.splitext(filename)
-        filename_html = filename_root + ".html"
-        filename_png = filename_root + ".png"
-        figure = return_figure_from_figure_or_data(fig_dict, True)
-        _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
-        try:
-            write_image(figure, filename_png)
-        except (ValueError, ImportError, RuntimeError) as e:
-            raise RuntimeError(
-                "kaleido and psutil are required to use the `sphinx_gallery_png` renderer. "
-                "See https://plotly.com/python/static-image-export/ for instructions on "
-                "how to install kaleido. Alternatively, you can use the `sphinx_gallery` "
-                "renderer (note that png thumbnails can only be generated with "
-                "the `sphinx_gallery_png` renderer)."
-            ) from e
+        sphinx_gallery_figures.append(fig_dict)
