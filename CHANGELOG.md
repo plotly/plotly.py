@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix default `histfunc` value for `px.Histogram2dContour` when no arguments are provided; it now correctly defaults to `'sum'`, matching the behavior of `px.Histogram2d()` [[#5342](https://github.com/plotly/plotly.py/pull/5342)], with thanks to @gmjw for the contribution!
 
 ## [7.1.0] - 2026-09-15
 
