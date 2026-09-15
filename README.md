@@ -130,7 +130,7 @@ on your command line.
 
 ## Copyright and Licenses
 
-Code and documentation copyright 2019 Plotly, Inc.
+Code and documentation copyright 2026 Plotly, Inc.
 
 Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt).
 

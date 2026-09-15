@@ -19,21 +19,21 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "plotly.js": "4.0.0",
-    "@lumino/widgets": "~2.4.0"
+    "plotly.js": "4.1.1",
+    "@lumino/widgets": "~2.9.0"
   },
   "devDependencies": {
     "@jupyter/builder": "^1.2.2",
-    "@types/plotly.js": "^2.33.4",
-    "esbuild": "^0.23.1",
-    "typescript": "^5.6.2"
+    "@types/plotly.js": "^3.0.13",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
   },
   "jupyterlab": {
     "mimeExtension": true,
     "outputDir": "../plotly/labextension",
     "webpackConfig": "./webpack.config.js",
     "_build": {
-      "load": "static/remoteEntry.6f1030bf65ead662.js",
+      "load": "static/remoteEntry.9e3b944395b758da.js",
       "mimeExtension": "./mimeExtension"
     }
   }

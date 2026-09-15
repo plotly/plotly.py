@@ -16,6 +16,7 @@ class Legend(_BaseLayoutHierarchyType):
         "entrywidthmode",
         "font",
         "groupclick",
+        "groupdoubleclick",
         "grouptitlefont",
         "indentation",
         "itemclick",
@@ -197,6 +198,29 @@ class Legend(_BaseLayoutHierarchyType):
     @groupclick.setter
     def groupclick(self, val):
         self["groupclick"] = val
+
+    @property
+    def groupdoubleclick(self):
+        """
+        Determines the behavior on legend group item double-click.
+        "toggleitem" toggles the visibility of the individual item
+        clicked on the graph. "togglegroup" toggles the visibility of
+        all items in the same legendgroup as the item clicked on the
+        graph. Defaults to the value of `groupclick`.
+
+        The 'groupdoubleclick' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['toggleitem', 'togglegroup']
+
+        Returns
+        -------
+        Any
+        """
+        return self["groupdoubleclick"]
+
+    @groupdoubleclick.setter
+    def groupdoubleclick(self, val):
+        self["groupdoubleclick"] = val
 
     @property
     def grouptitlefont(self):
@@ -702,6 +726,13 @@ class Legend(_BaseLayoutHierarchyType):
             item clicked on the graph. "togglegroup" toggles the
             visibility of all items in the same legendgroup as the
             item clicked on the graph.
+        groupdoubleclick
+            Determines the behavior on legend group item double-
+            click. "toggleitem" toggles the visibility of the
+            individual item clicked on the graph. "togglegroup"
+            toggles the visibility of all items in the same
+            legendgroup as the item clicked on the graph. Defaults
+            to the value of `groupclick`.
         grouptitlefont
             Sets the font for group titles in legend. Defaults to
             `legend.font` with its size increased about 10%.
@@ -835,6 +866,7 @@ class Legend(_BaseLayoutHierarchyType):
         entrywidthmode=None,
         font=None,
         groupclick=None,
+        groupdoubleclick=None,
         grouptitlefont=None,
         indentation=None,
         itemclick=None,
@@ -889,6 +921,13 @@ class Legend(_BaseLayoutHierarchyType):
             item clicked on the graph. "togglegroup" toggles the
             visibility of all items in the same legendgroup as the
             item clicked on the graph.
+        groupdoubleclick
+            Determines the behavior on legend group item double-
+            click. "toggleitem" toggles the visibility of the
+            individual item clicked on the graph. "togglegroup"
+            toggles the visibility of all items in the same
+            legendgroup as the item clicked on the graph. Defaults
+            to the value of `groupclick`.
         grouptitlefont
             Sets the font for group titles in legend. Defaults to
             `legend.font` with its size increased about 10%.
@@ -1042,6 +1081,7 @@ an instance of :class:`plotly.graph_objs.layout.Legend`""")
         self._set_property("entrywidthmode", arg, entrywidthmode)
         self._set_property("font", arg, font)
         self._set_property("groupclick", arg, groupclick)
+        self._set_property("groupdoubleclick", arg, groupdoubleclick)
         self._set_property("grouptitlefont", arg, grouptitlefont)
         self._set_property("indentation", arg, indentation)
         self._set_property("itemclick", arg, itemclick)

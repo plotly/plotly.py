@@ -101,6 +101,7 @@ class PlotlyRenderer(Renderer):
             autosize=False,
             hovermode="closest",
         )
+        self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
         margin = go.layout.Margin(
             l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
@@ -166,6 +167,8 @@ class PlotlyRenderer(Renderer):
         ]
         self.current_bars = []
         self.axis_ct += 1
+        # update plot background with the axes background from mpl
+        self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
             anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"

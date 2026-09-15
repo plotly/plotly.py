@@ -1313,8 +1313,8 @@ class XAxis(_BaseLayoutHierarchyType):
     def showspikes(self):
         """
         Determines whether or not spikes (aka droplines) are drawn for
-        this axis. Note: This only takes affect when hovermode =
-        closest
+        this axis. Note that spikes will never be drawn when
+        `hovermode` is False.
 
         The 'showspikes' property is a boolean and must be specified as:
           - A boolean value: True or False
@@ -1507,7 +1507,7 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def spikethickness(self):
         """
-        Sets the width (in px) of the zero line.
+        Sets the spike line width in pixels.
 
         The 'spikethickness' property is a number and may be specified as:
           - An int or float
@@ -2554,8 +2554,8 @@ class XAxis(_BaseLayoutHierarchyType):
             drawn.
         showspikes
             Determines whether or not spikes (aka droplines) are
-            drawn for this axis. Note: This only takes affect when
-            hovermode = closest
+            drawn for this axis. Note that spikes will never be
+            drawn when `hovermode` is False.
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
@@ -2588,7 +2588,7 @@ class XAxis(_BaseLayoutHierarchyType):
             Determines whether spikelines are stuck to the cursor
             or to the closest datapoints.
         spikethickness
-            Sets the width (in px) of the zero line.
+            Sets the spike line width in pixels.
         tick0
             Sets the placement of the first tick on this axis. Use
             with `dtick`. If the axis `type` is "log", then you
@@ -3186,8 +3186,8 @@ class XAxis(_BaseLayoutHierarchyType):
             drawn.
         showspikes
             Determines whether or not spikes (aka droplines) are
-            drawn for this axis. Note: This only takes affect when
-            hovermode = closest
+            drawn for this axis. Note that spikes will never be
+            drawn when `hovermode` is False.
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
@@ -3220,7 +3220,7 @@ class XAxis(_BaseLayoutHierarchyType):
             Determines whether spikelines are stuck to the cursor
             or to the closest datapoints.
         spikethickness
-            Sets the width (in px) of the zero line.
+            Sets the spike line width in pixels.
         tick0
             Sets the placement of the first tick on this axis. Use
             with `dtick`. If the axis `type` is "log", then you

@@ -271,6 +271,7 @@ def get_figure_properties(fig):
         "figwidth": fig.get_figwidth(),
         "figheight": fig.get_figheight(),
         "dpi": fig.dpi,
+        "figbg": export_color(fig.patch.get_facecolor()),
     }
 
 
