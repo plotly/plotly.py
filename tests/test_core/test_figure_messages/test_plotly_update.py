@@ -57,6 +57,32 @@ class TestBatchUpdateMessage(TestCase):
             trace_indexes=[0, 1],
         )
 
+    def test_add_layout_objects_in_batch_update(self):
+        self.figure._send_relayout_msg = MagicMock()
+
+        with self.figure.batch_update():
+            self.figure.add_shape(type="line", x0=0, x1=1, y0=0, y1=1)
+            self.figure.add_shape(type="rect", x0=1, x1=2, y0=1, y1=2)
+            self.figure.add_annotation(text="a", x=0, y=0)
+            self.figure.layout.xaxis.range = [10, 20]
+
+            # Like traces, layout objects are added right away
+            self.assertEqual(
+                [s.type for s in self.figure.layout.shapes], ["line", "rect"]
+            )
+            self.assertEqual(self.figure.layout.annotations[0].text, "a")
+            self.assertEqual(self.figure._send_relayout_msg.call_count, 3)
+
+            # while property assignments still wait for the context to exit
+            self.assertEqual(self.figure.layout.xaxis.range, (-1, 4))
+
+        self.assertEqual(self.figure.layout.xaxis.range, (10, 20))
+        self.figure._send_update_msg.assert_called_once()
+        self.assertEqual(
+            self.figure._send_update_msg.call_args.kwargs["relayout_data"],
+            {"xaxis.range": [10, 20]},
+        )
+
     def test_plotly_update(self):
         self.figure.plotly_update(
             restyle_data={
