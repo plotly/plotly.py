@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix stacked bar charts starting over from zero and `scattergl` traces not drawing a line when a one-dimensional numeric array contains `NaN` or infinite values: such arrays are now sent to plotly.js as plain lists with `null` entries instead of base64-encoded typed arrays, which plotly.js does not clean of non-finite values [[#5324](https://github.com/plotly/plotly.py/issues/5324), [#5428](https://github.com/plotly/plotly.py/issues/5428), [#5228](https://github.com/plotly/plotly.py/issues/5228)]
 
 ## [7.1.0] - 2026-09-15
 
