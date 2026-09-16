@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix `add_vline`, `add_hline`, `add_vrect` and `add_hrect` raising a `TypeError` inside `batch_update()`, and `add_shape`/`add_annotation` losing previously added objects there [[#4742](https://github.com/plotly/plotly.py/issues/4742)]
 
 ## [7.1.0] - 2026-09-15
 

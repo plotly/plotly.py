@@ -1627,7 +1627,8 @@ is of type {subplot_type}.""".format(
             xref, yref = map(lambda t: _add_domain(*t), zip(["x", "y"], [xref, yref]))
             new_obj.update(xref=xref, yref=yref)
 
-        self.layout[prop_plural] += (new_obj,)
+        with self._batch_mode_disabled():
+            self.layout[prop_plural] += (new_obj,)
         # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
         # will appear as if user supplied yref params when looping through subplots and
         # will force annotation to be on the axis of the last drawn annotation
@@ -3077,6 +3078,24 @@ Invalid property path '{key_path_str}' for layout
                 self._batch_layout_edits.clear()
                 self._batch_trace_edits.clear()
 
+    @contextmanager
+    def _batch_mode_disabled(self):
+        """
+        Temporarily leave batch mode.
+
+        Adding layout objects (shapes, annotations, images, selections)
+        rebuilds the whole compound array property and, for the axis
+        spanning shapes, reads the new objects back. Neither works while
+        `batch_update()` is deferring property edits, so like `add_traces()`
+        these structural changes are applied immediately.
+        """
+        in_batch_mode = self._in_batch_mode
+        self._in_batch_mode = False
+        try:
+            yield
+        finally:
+            self._in_batch_mode = in_batch_mode
+
     def _build_update_params_from_batch(self):
         """
         Convert `_batch_trace_edits` and `_batch_layout_edits` into the
@@ -4003,52 +4022,53 @@ Invalid property path '{key_path_str}' for layout
         augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
             annotation, shape_type, shape_args, annotation_kwargs
         )
-        self.add_shape(
-            row=row,
-            col=col,
-            exclude_empty_subplots=exclude_empty_subplots,
-            **_combine_dicts([shape_args, shape_kwargs]),
-        )
-        if augmented_annotation is not None:
-            self.add_annotation(
-                augmented_annotation,
+        with self._batch_mode_disabled():
+            self.add_shape(
                 row=row,
                 col=col,
                 exclude_empty_subplots=exclude_empty_subplots,
-                yref=shape_kwargs.get("yref", "y"),
+                **_combine_dicts([shape_args, shape_kwargs]),
             )
-        # update xref and yref for the new shapes and annotations
-        for layout_obj, n_layout_objs_before in zip(
-            ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
-        ):
-            n_layout_objs_after = len(self.layout[layout_obj])
-            if (n_layout_objs_after > n_layout_objs_before) and (
-                row is None and col is None
-            ):
-                # this was called intending to add to a single plot (and
-                # self.add_{layout_obj} succeeded)
-                # however, in the case of a single plot, xref and yref MAY not be
-                # specified, IF they are not specified we specify them here so the following routines can work
-                # (they need to append " domain" to xref or yref). If they are specified, we leave them alone.
-                if self.layout[layout_obj][-1].xref is None:
-                    self.layout[layout_obj][-1].update(xref="x")
-                if self.layout[layout_obj][-1].yref is None:
-                    self.layout[layout_obj][-1].update(yref="y")
-            new_layout_objs = tuple(
-                filter(
-                    lambda x: x is not None,
-                    [
-                        self._make_axis_spanning_layout_object(
-                            direction,
-                            self.layout[layout_obj][n],
-                        )
-                        for n in range(n_layout_objs_before, n_layout_objs_after)
-                    ],
+            if augmented_annotation is not None:
+                self.add_annotation(
+                    augmented_annotation,
+                    row=row,
+                    col=col,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                    yref=shape_kwargs.get("yref", "y"),
                 )
-            )
-            self.layout[layout_obj] = (
-                self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
-            )
+            # update xref and yref for the new shapes and annotations
+            for layout_obj, n_layout_objs_before in zip(
+                ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
+            ):
+                n_layout_objs_after = len(self.layout[layout_obj])
+                if (n_layout_objs_after > n_layout_objs_before) and (
+                    row is None and col is None
+                ):
+                    # this was called intending to add to a single plot (and
+                    # self.add_{layout_obj} succeeded)
+                    # however, in the case of a single plot, xref and yref MAY not be
+                    # specified, IF they are not specified we specify them here so the following routines can work
+                    # (they need to append " domain" to xref or yref). If they are specified, we leave them alone.
+                    if self.layout[layout_obj][-1].xref is None:
+                        self.layout[layout_obj][-1].update(xref="x")
+                    if self.layout[layout_obj][-1].yref is None:
+                        self.layout[layout_obj][-1].update(yref="y")
+                new_layout_objs = tuple(
+                    filter(
+                        lambda x: x is not None,
+                        [
+                            self._make_axis_spanning_layout_object(
+                                direction,
+                                self.layout[layout_obj][n],
+                            )
+                            for n in range(n_layout_objs_before, n_layout_objs_after)
+                        ],
+                    )
+                )
+                self.layout[layout_obj] = (
+                    self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
+                )
 
     def add_vline(
         self,

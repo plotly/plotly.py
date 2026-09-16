@@ -473,3 +473,35 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
 )
 def test_custom_sized_subplots(test_input, expected, custom_sized_subplots):
     _check_figure_shapes_custom_sized(test_input, expected, custom_sized_subplots)
+
+
+@pytest.mark.parametrize(
+    "f,kwargs",
+    [
+        (go.Figure.add_vline, dict(x=20)),
+        (go.Figure.add_hline, dict(y=6, annotation_text="six")),
+        (go.Figure.add_vrect, dict(x0=20, x1=30, annotation_text="twenties")),
+        (go.Figure.add_hrect, dict(y0=6, y1=8)),
+    ],
+)
+@pytest.mark.parametrize(
+    "fixture_name,row_col",
+    [
+        ("non_subplot_fig_fixture", dict()),
+        ("subplot_fig_fixture", dict(row=2, col=2)),
+        ("subplot_fig_fixture", dict(row="all", col="all")),
+    ],
+)
+def test_add_axis_spanning_shape_in_batch_update(
+    request, f, kwargs, fixture_name, row_col
+):
+    fig = request.getfixturevalue(fixture_name)
+    fig_batch = go.Figure(fig)
+
+    f(fig, **kwargs, **row_col)
+    with fig_batch.batch_update():
+        f(fig_batch, **kwargs, **row_col)
+
+    assert len(fig.layout.shapes) > 0
+    assert fig_batch.layout.shapes == fig.layout.shapes
+    assert fig_batch.layout.annotations == fig.layout.annotations
