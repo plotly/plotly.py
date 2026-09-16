@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix `create_hexbin_map` truncating aggregated values to integers, which made `agg_func` results such as the mean of a float column come out wrong [[#4632](https://github.com/plotly/plotly.py/issues/4632)], with thanks to @Belagum for the contribution!
 
 ## [7.1.0] - 2026-09-15
 

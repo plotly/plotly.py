@@ -437,9 +437,7 @@ def create_hexbin_map(
             )
         )
 
-    agg_data_frame = nw.concat(agg_data_frame_list, how="vertical").with_columns(
-        color=nw.col("color").cast(nw.Int64)
-    )
+    agg_data_frame = nw.concat(agg_data_frame_list, how="vertical")
 
     if range_color is None:
         range_color = [
