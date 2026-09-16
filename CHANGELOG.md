@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix `validate_colorscale` and `sample_colorscale` rejecting colorscales read back from a figure or template, which are tuples of tuples rather than lists of lists [[#4808](https://github.com/plotly/plotly.py/issues/4808)]
 
 ## [7.1.0] - 2026-09-15
 

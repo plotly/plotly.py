@@ -550,11 +550,12 @@ def validate_scale_values(scale):
 
 def validate_colorscale(colorscale):
     """Validate the structure, scale values and colors of colorscale."""
-    if not isinstance(colorscale, list):
-        # TODO Write tests for these exceptions
-        raise exceptions.PlotlyError("A valid colorscale must be a list.")
-    if not all(isinstance(innerlist, list) for innerlist in colorscale):
-        raise exceptions.PlotlyError("A valid colorscale must be a list of lists.")
+    if not isinstance(colorscale, (list, tuple)):
+        raise exceptions.PlotlyError("A valid colorscale must be a list or a tuple.")
+    if not all(isinstance(pair, (list, tuple)) for pair in colorscale):
+        raise exceptions.PlotlyError(
+            "A valid colorscale must be a list of [scale, color] pairs."
+        )
     colorscale_colors = colorscale_to_colors(colorscale)
     scale_values = colorscale_to_scale(colorscale)
 
