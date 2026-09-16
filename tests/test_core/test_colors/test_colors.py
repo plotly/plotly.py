@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from plotly.exceptions import PlotlyError
 import plotly.colors as colors
+import plotly.io as pio
 
 
 class TestColors(TestCase):
@@ -196,6 +197,31 @@ class TestColors(TestCase):
         self.assertEqual(
             colors.sample_colorscale("TuRbId_r", 12),
             colors.sequential.turbid_r,
+        )
+
+        # colorscales read back from a figure or template are tuples of tuples
+        colorscale = pio.templates["plotly"].layout.colorscale.diverging
+        self.assertEqual(
+            colors.sample_colorscale(colorscale, 3),
+            colors.sample_colorscale([list(pair) for pair in colorscale], 3),
+        )
+
+    def test_validate_colorscale(self):
+        colors.validate_colorscale([[0, "rgb(0, 0, 0)"], [1, "rgb(255, 255, 255)"]])
+        colors.validate_colorscale(((0, "rgb(0, 0, 0)"), (1, "rgb(255, 255, 255)")))
+        colors.validate_colorscale(pio.templates["plotly"].layout.colorscale.diverging)
+
+        pattern = "A valid colorscale must be a list or a tuple."
+        self.assertRaisesRegex(
+            PlotlyError, pattern, colors.validate_colorscale, "Viridis"
+        )
+
+        pattern = r"A valid colorscale must be a list of \[scale, color\] pairs."
+        self.assertRaisesRegex(
+            PlotlyError,
+            pattern,
+            colors.validate_colorscale,
+            ["rgb(0, 0, 0)", "rgb(255, 255, 255)"],
         )
 
     def test_n_colors(self):
