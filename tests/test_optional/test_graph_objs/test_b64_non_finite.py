@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 from _plotly_utils.utils import to_typed_array_spec
+from plotly.serializers import _py_to_js
 
 try:
     import orjson  # noqa: F401
@@ -73,3 +74,23 @@ def test_to_typed_array_spec_finite():
         "dtype": "f8",
         "bdata": "AAAAAAAA8D8AAAAAAAAAQA==",
     }
+
+
+def test_widget_serializer_non_finite():
+    assert _py_to_js(np.array([1.0, np.nan, np.inf]), None) == [1.0, None, None]
+    assert _py_to_js(np.array([[1.0, np.nan], [2.0, 3.0]]), None) == [
+        [1.0, None],
+        [2.0, 3.0],
+    ]
+    assert _py_to_js({"y": [1.0, float("nan"), -float("inf")]}, None) == {
+        "y": [1.0, None, None]
+    }
+
+
+def test_widget_serializer_finite_array_as_buffer():
+    v = np.array([1.0, 2.0])
+
+    result = _py_to_js(v, None)
+    assert result["dtype"] == "float64"
+    assert result["shape"] == (2,)
+    assert bytes(result["buffer"]) == v.tobytes()

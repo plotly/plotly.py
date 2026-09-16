@@ -1,3 +1,5 @@
+import math
+
 from .basedatatypes import Undefined
 from .optional_imports import get_module
 
@@ -38,6 +40,11 @@ def _py_to_js(v, widget_manager):
     # Handle numpy array
     # ------------------
     elif np is not None and isinstance(v, np.ndarray):
+        # NaN/inf can't go out as JSON and plotly.js does not clean them out
+        # of typed arrays, so send them as null like the JSON encoders do
+        if v.dtype.kind == "f" and not np.isfinite(v).all():
+            return np.where(np.isfinite(v), v.astype(object), None).tolist()
+
         # Convert 1D numpy arrays with numeric types to memoryviews with
         # datatype and shape metadata.
         if (
@@ -52,6 +59,11 @@ def _py_to_js(v, widget_manager):
         else:
             # Convert all other numpy arrays to lists
             return v.tolist()
+
+    # Handle non-finite floats
+    # ------------------------
+    elif isinstance(v, float) and not math.isfinite(v):
+        return None
 
     # Handle Undefined
     # ----------------
