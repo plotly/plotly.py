@@ -1958,7 +1958,10 @@ def process_dataframe_hierarchy(args):
     _check_dataframe_all_leaves(df[path[::-1]])
     discrete_color = not _is_continuous(df, args["color"]) if args["color"] else False
 
-    df = df.lazy()
+    # Keep track of the original row order, so that the sectors can be sorted by
+    # first appearance after each group_by (Polars' group_by does not keep order).
+    row_index_colname = _generate_temporary_column_name(n_bytes=16, columns=df.columns)
+    df = df.with_row_index(row_index_colname).lazy()
 
     new_path = [col_name + "_path_copy" for col_name in path]
     df = df.with_columns(
@@ -1997,6 +2000,7 @@ def process_dataframe_hierarchy(args):
     # Since count_colname is always in agg_f, it can be used later to normalize color
     # in the continuous case after some gymnastic
     agg_f[count_colname] = nw.sum(count_colname)
+    agg_f[row_index_colname] = nw.min(row_index_colname)
 
     discrete_aggs = []
     continuous_aggs = []
@@ -2049,7 +2053,7 @@ def process_dataframe_hierarchy(args):
             agg_f[args["color"]] = nw.sum(args["color"])
 
     #  Other columns (for color, hover_data, custom_data etc.)
-    cols = list(set(df.collect_schema().names()).difference(path))
+    cols = list(set(df.collect_schema().names()).difference([*path, row_index_colname]))
     df = df.with_columns(nw.col(c).cast(nw.String()) for c in cols if c not in agg_f)
 
     for col in cols:  # for hover_data, custom_data etc.
@@ -2092,6 +2096,7 @@ def process_dataframe_hierarchy(args):
         dfg = (
             df.group_by(path[i:], drop_null_keys=True)
             .agg(**agg_f)
+            .sort(row_index_colname)
             .pipe(post_agg, continuous_aggs, discrete_aggs)
         )
 

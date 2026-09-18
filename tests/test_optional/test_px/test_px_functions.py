@@ -233,6 +233,32 @@ def test_sunburst_treemap_with_path(constructor):
     assert fig.data[0].values[-1] == 8
 
 
+@pytest.mark.parametrize("px_fn", [px.sunburst, px.treemap, px.icicle])
+def test_sunburst_treemap_with_path_order(constructor, px_fn):
+    # Sectors should follow the order of first appearance in the data, whatever
+    # the dataframe backend (Polars' group_by does not keep the row order).
+    df = constructor(
+        dict(
+            regions=["South", "North", "South", "West", "North", "West"],
+            sectors=["Tech", "Finance", "Finance", "Tech", "Tech", "Finance"],
+            values=[1, 2, 3, 4, 5, 6],
+        )
+    )
+    fig = px_fn(df, path=["regions", "sectors"], values="values")
+    assert list(fig.data[0].ids) == [
+        "South/Tech",
+        "North/Finance",
+        "South/Finance",
+        "West/Tech",
+        "North/Tech",
+        "West/Finance",
+        "South",
+        "North",
+        "West",
+    ]
+    assert list(fig.data[0].values) == [1, 2, 3, 4, 5, 6, 4, 7, 10]
+
+
 def test_sunburst_treemap_with_path_and_hover(backend):
     df = px.data.tips(return_type=backend)
     fig = px.sunburst(
