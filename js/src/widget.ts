@@ -1,8 +1,17 @@
 import _ from "lodash-es";
 import Plotly from "plotly.js";
+import type { PlotlyHTMLElement } from "plotly.js";
 
 // @ts-ignore
 window.PlotlyConfig = { MathJaxConfig: "local" };
+
+// The graph div also carries the fully computed figure and emits
+// "plotly_update"; neither is part of plotly.js's type declarations.
+type PlotlyGraphDiv = PlotlyHTMLElement & {
+  _fullData: any[];
+  _fullLayout: any;
+  on(event: "plotly_update", callback: (update: any) => void): void;
+};
 
 type InputDeviceState = {
   alt: any;
@@ -883,32 +892,32 @@ export class FigureView {
         that._sendLayoutDelta(layout_edit_id);
 
         // Wire up plotly event callbacks
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_restyle", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_restyle", function (update: any) {
           that.handle_plotly_restyle(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_relayout", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_relayout", function (update: any) {
           that.handle_plotly_relayout(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_update", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_update", function (update: any) {
           that.handle_plotly_update(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_click", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_click", function (update: any) {
           that.handle_plotly_click(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_hover", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_hover", function (update: any) {
           that.handle_plotly_hover(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_unhover", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_unhover", function (update: any) {
           that.handle_plotly_unhover(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_selected", function (update: any) {
+        (<PlotlyGraphDiv>that.el).on("plotly_selected", function (update: any) {
           that.handle_plotly_selected(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_deselect", function (update: any) {
-          that.handle_plotly_deselect(update);
+        (<PlotlyGraphDiv>that.el).on("plotly_deselect", function () {
+          that.handle_plotly_deselect();
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_doubleclick", function (update: any) {
-          that.handle_plotly_doubleclick(update);
+        (<PlotlyGraphDiv>that.el).on("plotly_doubleclick", function () {
+          that.handle_plotly_doubleclick();
         });
 
         // Emit event indicating that the widget has finished
@@ -1003,8 +1012,8 @@ export class FigureView {
   getFullData() {
     return _.mergeWith(
       {},
-      (<Plotly.PlotlyHTMLElement>this.el)._fullData,
-      (<Plotly.PlotlyHTMLElement>this.el).data,
+      (<PlotlyGraphDiv>this.el)._fullData,
+      (<PlotlyGraphDiv>this.el).data,
       fullMergeCustomizer
     );
   }
@@ -1018,8 +1027,8 @@ export class FigureView {
   getFullLayout() {
     return _.mergeWith(
       {},
-      (<Plotly.PlotlyHTMLElement>this.el)._fullLayout,
-      (<Plotly.PlotlyHTMLElement>this.el).layout,
+      (<PlotlyGraphDiv>this.el)._fullLayout,
+      (<PlotlyGraphDiv>this.el).layout,
       fullMergeCustomizer
     );
   }
@@ -1296,8 +1305,8 @@ export class FigureView {
    * Handle plotly_deselect events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_deselect(data: any) {
-    data = {
+  handle_plotly_deselect() {
+    var data = {
       points: [],
     };
     this._send_points_callback_message(data, "plotly_deselect");
@@ -1338,7 +1347,7 @@ export class FigureView {
    * Stub for future handling of plotly_doubleclick
    * @param data
    */
-  handle_plotly_doubleclick(data: any) {}
+  handle_plotly_doubleclick() {}
 
   /**
    * Handle Plotly.addTraces request
