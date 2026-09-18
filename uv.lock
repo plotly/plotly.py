@@ -664,10 +664,8 @@ name = "beautifulsoup4"
 version = "4.14.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "soupsieve", version = "2.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "soupsieve", version = "2.8.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "typing-extensions", version = "4.13.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "typing-extensions", version = "4.15.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "soupsieve", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "typing-extensions", version = "4.15.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c3/b0/1c6a16426d389813b48d95e26898aff79abbde42ad353958ad95cc8c9b21/beautifulsoup4-4.14.3.tar.gz", hash = "sha256:6292b1c5186d356bba669ef9f7f051757099565ad9ada5dd630bd9de5fa7fb86", size = 627737, upload-time = "2025-11-30T15:08:26.084Z" }
 wheels = [
@@ -796,94 +794,19 @@ wheels = [
 
 [[package]]
 name = "bleach"
-version = "6.1.0"
+version = "6.4.0"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.8.1' and python_full_version < '3.9' and sys_platform != 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.9' and sys_platform == 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.8.1' and sys_platform != 'win32'",
-    "python_full_version <= '3.8' and sys_platform == 'win32'",
-    "python_full_version <= '3.8' and sys_platform != 'win32'",
-]
-dependencies = [
-    { name = "six", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "webencodings", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6d/10/77f32b088738f40d4f5be801daa5f327879eadd4562f36a2b5ab975ae571/bleach-6.1.0.tar.gz", hash = "sha256:0a31f1837963c41d46bbf1331b8778e1308ea0791db03cc4e7357b97cf42a8fe", size = 202119, upload-time = "2023-10-06T19:30:51.304Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/63/da7237f805089ecc28a3f36bca6a21c31fcbc2eb380f3b8f1be3312abd14/bleach-6.1.0-py3-none-any.whl", hash = "sha256:3225f354cfc436b9789c66c4ee030194bee0568fbf9cbdad3bc8b5c26c5f12b6", size = 162750, upload-time = "2023-10-06T19:30:49.408Z" },
-]
-
-[package.optional-dependencies]
-css = [
-    { name = "tinycss2", version = "1.2.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-
-[[package]]
-name = "bleach"
-version = "6.2.0"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version == '3.9.*' and sys_platform == 'win32'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32'",
-]
-dependencies = [
-    { name = "webencodings", marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/76/9a/0e33f5054c54d349ea62c277191c020c2d6ef1d65ab2cb1993f91ec846d1/bleach-6.2.0.tar.gz", hash = "sha256:123e894118b8a599fd80d3ec1a6d4cc7ce4e5882b1317a7e1ba69b56e95f991f", size = 203083, upload-time = "2024-10-29T18:30:40.477Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fc/55/96142937f66150805c25c4d0f31ee4132fd33497753400734f9dfdcbdc66/bleach-6.2.0-py3-none-any.whl", hash = "sha256:117d9c6097a7c3d22fd578fcd8d35ff1e125df6736f554da4e432fdd63f31e5e", size = 163406, upload-time = "2024-10-29T18:30:38.186Z" },
-]
-
-[package.optional-dependencies]
-css = [
-    { name = "tinycss2", version = "1.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-
-[[package]]
-name = "bleach"
-version = "6.3.0"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-]
 dependencies = [
     { name = "webencodings", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/07/18/3c8523962314be6bf4c8989c79ad9531c825210dd13a8669f6b84336e8bd/bleach-6.3.0.tar.gz", hash = "sha256:6f3b91b1c0a02bb9a78b5a454c92506aa0fdf197e1d5e114d2e00c6f64306d22", size = 203533, upload-time = "2025-10-27T17:57:39.211Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/48/3c/e12ac860709702bd5ebeb9b56a4fe334f1001246ee1b8f2b7ee28912df7d/bleach-6.4.0.tar.gz", hash = "sha256:4202482733d85cedd04e59fcb2f89f4e4c7c385a78d3c3c23c30446843a37452", size = 204857, upload-time = "2026-06-05T13:01:13.734Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cd/3a/577b549de0cc09d95f11087ee63c739bba856cd3952697eec4c4bb91350a/bleach-6.3.0-py3-none-any.whl", hash = "sha256:fe10ec77c93ddf3d13a73b035abaac7a9f5e436513864ccdad516693213c65d6", size = 164437, upload-time = "2025-10-27T17:57:37.538Z" },
+    { url = "https://files.pythonhosted.org/packages/58/9d/40b6267367182187139a4000b82a3b287d84d745bccd808e75d916920e9d/bleach-6.4.0-py3-none-any.whl", hash = "sha256:4b6b6a54fff2e69a3dde9d21cc6301220bee3c3cb792187d11403fd795031081", size = 165109, upload-time = "2026-06-05T13:01:12.504Z" },
 ]
 
 [package.optional-dependencies]
 css = [
-    { name = "tinycss2", version = "1.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "tinycss2", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
 
 [[package]]
@@ -1791,6 +1714,15 @@ resolution-markers = [
 sdist = { url = "https://files.pythonhosted.org/packages/ae/b6/03bb70946330e88ffec97aefd3ea75ba575cb2e762061e0e62a213befee8/docutils-0.22.4.tar.gz", hash = "sha256:4db53b1fde9abecbb74d91230d32ab626d94f6badfc575d6db9194a49df29968", size = 2291750, upload-time = "2025-12-18T19:00:26.443Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/02/10/5da547df7a391dcde17f59520a231527b8571e6f46fc8efb02ccb370ab12/docutils-0.22.4-py3-none-any.whl", hash = "sha256:d0013f540772d1420576855455d050a2180186c91c15779301ac2ccb3eeb68de", size = 633196, upload-time = "2025-12-18T19:00:18.077Z" },
+]
+
+[[package]]
+name = "entrypoints"
+version = "0.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/8d/a7121ffe5f402dc015277d2d31eb82d2187334503a011c18f2e78ecbb9b2/entrypoints-0.4.tar.gz", hash = "sha256:b706eddaa9218a19ebcd67b56818f05bb27589b1ca9e8d797b74affad4ccacd4", size = 13974, upload-time = "2022-02-02T21:30:28.172Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/35/a8/365059bbcd4572cbc41de17fd5b682be5868b218c3c5479071865cab9078/entrypoints-0.4-py3-none-any.whl", hash = "sha256:f174b5ff827504fd3cd97cc3f8649f3693f51538c7e4bdf3ef002c8429d42f9f", size = 5294, upload-time = "2022-02-02T21:30:26.024Z" },
 ]
 
 [[package]]
@@ -4829,78 +4761,8 @@ wheels = [
 
 [[package]]
 name = "nbclient"
-version = "0.10.1"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.8.1' and python_full_version < '3.9' and sys_platform != 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.9' and sys_platform == 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.8.1' and sys_platform != 'win32'",
-    "python_full_version <= '3.8' and sys_platform == 'win32'",
-    "python_full_version <= '3.8' and sys_platform != 'win32'",
-]
-dependencies = [
-    { name = "jupyter-client", version = "8.6.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jupyter-core", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbformat", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "traitlets", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/06/db/25929926860ba8a3f6123d2d0a235e558e0e4be7b46e9db063a7dfefa0a2/nbclient-0.10.1.tar.gz", hash = "sha256:3e93e348ab27e712acd46fccd809139e356eb9a31aab641d1a7991a6eb4e6f68", size = 62273, upload-time = "2024-11-29T08:28:38.47Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/26/1a/ed6d1299b1a00c1af4a033fdee565f533926d819e084caf0d2832f6f87c6/nbclient-0.10.1-py3-none-any.whl", hash = "sha256:949019b9240d66897e442888cfb618f69ef23dc71c01cb5fced8499c2cfc084d", size = 25344, upload-time = "2024-11-29T08:28:21.844Z" },
-]
-
-[[package]]
-name = "nbclient"
-version = "0.10.2"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version == '3.9.*' and sys_platform == 'win32'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32'",
-]
-dependencies = [
-    { name = "jupyter-client", version = "8.6.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jupyter-core", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbformat", marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "traitlets", marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/87/66/7ffd18d58eae90d5721f9f39212327695b749e23ad44b3881744eaf4d9e8/nbclient-0.10.2.tar.gz", hash = "sha256:90b7fc6b810630db87a6d0c2250b1f0ab4cf4d3c27a299b0cde78a4ed3fd9193", size = 62424, upload-time = "2024-12-19T10:32:27.164Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/34/6d/e7fa07f03a4a7b221d94b4d586edb754a9b0dc3c9e2c93353e9fa4e0d117/nbclient-0.10.2-py3-none-any.whl", hash = "sha256:4ffee11e788b4a27fabeb7955547e4318a5298f34342a4bfd01f2e1faaeadc3d", size = 25434, upload-time = "2024-12-19T10:32:24.139Z" },
-]
-
-[[package]]
-name = "nbclient"
 version = "0.10.4"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-]
 dependencies = [
     { name = "jupyter-client", version = "8.8.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "jupyter-core", version = "5.9.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
@@ -4914,9 +4776,11 @@ wheels = [
 
 [[package]]
 name = "nbconvert"
-version = "7.16.6"
+version = "4.3.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
+    "python_full_version == '3.9.*' and sys_platform == 'win32'",
+    "python_full_version == '3.9.*' and sys_platform != 'win32'",
     "python_full_version >= '3.8.1' and python_full_version < '3.9' and sys_platform != 'win32'",
     "python_full_version > '3.8' and python_full_version < '3.9' and sys_platform == 'win32'",
     "python_full_version > '3.8' and python_full_version < '3.8.1' and sys_platform != 'win32'",
@@ -4924,25 +4788,18 @@ resolution-markers = [
     "python_full_version <= '3.8' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "beautifulsoup4", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "bleach", version = "6.1.0", source = { registry = "https://pypi.org/simple" }, extra = ["css"], marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "defusedxml", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "importlib-metadata", version = "8.5.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jinja2", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jupyter-core", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jupyterlab-pygments", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "markupsafe", version = "2.1.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "mistune", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbclient", version = "0.10.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbformat", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "packaging", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "pandocfilters", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "entrypoints", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "jinja2", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "jupyter-core", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "mistune", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "nbformat", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "pygments", version = "2.19.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "traitlets", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "traitlets", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a3/59/f28e15fc47ffb73af68a8d9b47367a8630d76e97ae85ad18271b9db96fdf/nbconvert-7.16.6.tar.gz", hash = "sha256:576a7e37c6480da7b8465eefa66c17844243816ce1ccc372633c6b71c3c0f582", size = 857715, upload-time = "2025-01-28T09:29:14.724Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cb/4e/b4088742e3f8c47ed708b094a3ae98732d6b1f1b532d12d18fe06b544c12/nbconvert-4.3.0.tar.gz", hash = "sha256:d967ec588ffd1ad7336163f1ac8957a348b5c4bce4465632db4cf684ffe4b718", size = 377486, upload-time = "2016-12-14T00:48:12.257Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cc/9a/cd673b2f773a12c992f41309ef81b99da1690426bd2f96957a7ade0d3ed7/nbconvert-7.16.6-py3-none-any.whl", hash = "sha256:1375a7b67e0c2883678c48e506dc320febb57685e5ee67faa51b18a90f3a712b", size = 258525, upload-time = "2025-01-28T09:29:12.551Z" },
+    { url = "https://files.pythonhosted.org/packages/3a/35/fdd3aff03237027f6ed7c1692b1ca7c839e504ae19a5709ea63da2ae1c3a/nbconvert-4.3.0-py2.py3-none-any.whl", hash = "sha256:9428b7995d3fb418749a5356e368eae756a695b88f062770b067b777742146f8", size = 353859, upload-time = "2016-12-14T00:48:09.292Z" },
 ]
 
 [[package]]
@@ -4977,32 +4834,22 @@ resolution-markers = [
     "python_full_version == '3.10.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
     "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
     "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
 ]
 dependencies = [
-    { name = "beautifulsoup4", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "bleach", version = "6.2.0", source = { registry = "https://pypi.org/simple" }, extra = ["css"], marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "bleach", version = "6.3.0", source = { registry = "https://pypi.org/simple" }, extra = ["css"], marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "defusedxml", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "importlib-metadata", version = "8.7.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jinja2", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jupyter-core", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "beautifulsoup4", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "bleach", extra = ["css"], marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "defusedxml", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "jinja2", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "jupyter-core", version = "5.9.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "jupyterlab-pygments", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "markupsafe", version = "3.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "mistune", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbclient", version = "0.10.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbclient", version = "0.10.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbformat", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "packaging", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "pandocfilters", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "traitlets", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "jupyterlab-pygments", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "markupsafe", version = "3.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "mistune", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "nbclient", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "nbformat", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "packaging", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "pandocfilters", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "pygments", version = "2.20.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "traitlets", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/01/b1/708e53fe2e429c103c6e6e159106bcf0357ac41aa4c28772bd8402339051/nbconvert-7.17.1.tar.gz", hash = "sha256:34d0d0a7e73ce3cbab6c5aae8f4f468797280b01fd8bd2ca746da8569eddd7d2", size = 865311, upload-time = "2026-04-08T00:44:14.914Z" }
 wheels = [
@@ -5112,7 +4959,7 @@ wheels = [
 
 [[package]]
 name = "notebook"
-version = "6.4.13"
+version = "6.4.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "argon2-cffi", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
@@ -5122,8 +4969,7 @@ dependencies = [
     { name = "jinja2", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "jupyter-client", version = "8.6.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "jupyter-core", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbconvert", version = "7.16.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-    { name = "nbconvert", version = "7.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "nbconvert", version = "4.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "nbformat", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "nest-asyncio", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "prometheus-client", version = "0.21.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
@@ -5135,9 +4981,9 @@ dependencies = [
     { name = "tornado", version = "6.5.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "traitlets", marker = "python_full_version < '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d6/09/5b4d96682d8fc9d1b839028381c40ee4c14874f68e8cd4c04158daa3966b/notebook-6.4.13.tar.gz", hash = "sha256:08da6c8e2d1748c8acfa6addcfb95501d8a52ef9e7ca238b0e242bfa829cecb7", size = 14387089, upload-time = "2023-09-19T02:45:54.16Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/61/ca/501363184557b9778756a9a63ab4e7cb4f8dcf8df15a2e53bc3ae21d292a/notebook-6.4.8.tar.gz", hash = "sha256:1e985c9dc6f678bdfffb9dc657306b5469bfa62d73e03f74e8defbf76d284312", size = 14347639, upload-time = "2022-01-25T19:28:23.937Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e2/68/306f9e68c9136fc404a5446e04933fe26f6d01101b5b2bddd610e8c388af/notebook-6.4.13-py3-none-any.whl", hash = "sha256:409f8f257c1841ac2647b1e04611facb64068c7e9a4a77ba0fd129b6d2f58b7e", size = 9933791, upload-time = "2023-09-19T02:45:48.729Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/be/285eb2886bd74d34af63c3d62928cf93f78f9158f2662fc287f60e48d766/notebook-6.4.8-py3-none-any.whl", hash = "sha256:3e702fcc54b8ae597533c3864793b7a1e971dec9e112f67235828d8a798fd654", size = 9902930, upload-time = "2022-01-25T19:28:19.574Z" },
 ]
 
 [[package]]
@@ -10115,59 +9961,8 @@ wheels = [
 
 [[package]]
 name = "soupsieve"
-version = "2.7"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.8.1' and python_full_version < '3.9' and sys_platform != 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.9' and sys_platform == 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.8.1' and sys_platform != 'win32'",
-    "python_full_version <= '3.8' and sys_platform == 'win32'",
-    "python_full_version <= '3.8' and sys_platform != 'win32'",
-]
-sdist = { url = "https://files.pythonhosted.org/packages/3f/f4/4a80cd6ef364b2e8b65b15816a843c0980f7a5a2b4dc701fc574952aa19f/soupsieve-2.7.tar.gz", hash = "sha256:ad282f9b6926286d2ead4750552c8a6142bc4c783fd66b0293547c8fe6ae126a", size = 103418, upload-time = "2025-04-20T18:50:08.518Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/9c/0e6afc12c269578be5c0c1c9f4b49a8d32770a080260c333ac04cc1c832d/soupsieve-2.7-py3-none-any.whl", hash = "sha256:6e60cc5c1ffaf1cebcc12e8188320b72071e922c2e897f737cadce79ad5d30c4", size = 36677, upload-time = "2025-04-20T18:50:07.196Z" },
-]
-
-[[package]]
-name = "soupsieve"
 version = "2.8.3"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-]
 sdist = { url = "https://files.pythonhosted.org/packages/7b/ae/2d9c981590ed9999a0d91755b47fc74f74de286b0f5cee14c9269041e6c4/soupsieve-2.8.3.tar.gz", hash = "sha256:3267f1eeea4251fb42728b6dfb746edc9acaffc4a45b27e19450b676586e8349", size = 118627, upload-time = "2026-01-20T04:27:02.457Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/2c/1462b1d0a634697ae9e55b3cecdcb64788e8b7d63f54d923fcd0bb140aed/soupsieve-2.8.3-py3-none-any.whl", hash = "sha256:ed64f2ba4eebeab06cc4962affce381647455978ffc1e36bb79a545b91f45a95", size = 37016, upload-time = "2026-01-20T04:27:01.012Z" },
@@ -11013,64 +10808,10 @@ wheels = [
 
 [[package]]
 name = "tinycss2"
-version = "1.2.1"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.8.1' and python_full_version < '3.9' and sys_platform != 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.9' and sys_platform == 'win32'",
-    "python_full_version > '3.8' and python_full_version < '3.8.1' and sys_platform != 'win32'",
-    "python_full_version <= '3.8' and sys_platform == 'win32'",
-    "python_full_version <= '3.8' and sys_platform != 'win32'",
-]
-dependencies = [
-    { name = "webencodings", marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/75/be/24179dfaa1d742c9365cbd0e3f0edc5d3aa3abad415a2327c5a6ff8ca077/tinycss2-1.2.1.tar.gz", hash = "sha256:8cff3a8f066c2ec677c06dbc7b45619804a6938478d9d73c284b29d14ecb0627", size = 65957, upload-time = "2022-10-18T07:04:56.49Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/da/99/fd23634d6962c2791fb8cb6ccae1f05dcbfc39bce36bba8b1c9a8d92eae8/tinycss2-1.2.1-py3-none-any.whl", hash = "sha256:2b80a96d41e7c3914b8cda8bc7f705a4d9c49275616e886103dd839dfc847847", size = 21824, upload-time = "2022-10-18T07:04:54.003Z" },
-]
-
-[[package]]
-name = "tinycss2"
 version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.11.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform == 'emscripten' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.11.*' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.10.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.10.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra == 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2' and extra != 'extra-6-plotly-dev-pandas3'",
-    "python_full_version == '3.9.*' and sys_platform == 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-    "python_full_version == '3.9.*' and sys_platform != 'win32' and extra != 'extra-6-plotly-dev-pandas1' and extra != 'extra-6-plotly-dev-pandas2'",
-]
 dependencies = [
-    { name = "webencodings", marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "webencodings", marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7a/fd/7a5ee21fd08ff70d3d33a5781c255cbe779659bd03278feb98b19ee550f4/tinycss2-1.4.0.tar.gz", hash = "sha256:10c0972f6fc0fbee87c3edb76549357415e94548c1ae10ebccdea16fb404a9b7", size = 87085, upload-time = "2024-10-24T14:58:29.895Z" }
 wheels = [
