@@ -890,3 +890,16 @@ def test_no_pd_perf_warning():
         if issubclass(warn.category, pd.errors.PerformanceWarning)
     ]
     assert len(performance_warnings) == 0, "PerformanceWarning(s) raised!"
+
+
+def test_wide_mode_does_not_mutate_x_or_y():
+    # https://github.com/plotly/plotly.py/issues/4117
+    df = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6], c=[7, 8, 9]))
+    for arg in ["x", "y"]:
+        cols = ["a", "b"]
+        px.bar(df, **{arg: cols})
+        assert cols == ["a", "b"]
+    cols = [0, 1]
+    df_int = pd.DataFrame([[1, 2], [3, 4]])
+    px.histogram(df_int, x=cols)
+    assert cols == [0, 1]
