@@ -1960,6 +1960,8 @@ def process_dataframe_hierarchy(args):
 
     # Keep track of the original row order, so that the sectors can be sorted by
     # first appearance after each group_by (Polars' group_by does not keep order).
+    # TODO: drop this column and use group_by(maintain_order=True) once narwhals
+    # exposes it, see #5769 and narwhals-dev/narwhals#3309.
     row_index_colname = _generate_temporary_column_name(n_bytes=16, columns=df.columns)
     df = df.with_row_index(row_index_colname).lazy()
 
