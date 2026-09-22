@@ -61,13 +61,25 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", nbinsx=20, nbinsy=20, colo
 fig.show()
 ```
 
-Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](/python/histograms/). Other allowable values are `violin`, `box` and `rug`.
+Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](/python/histograms/). Other allowable values are `violin`, `box`, `rug`, and `heatmap`.
 
 ```python
 import plotly.express as px
 df = px.data.tips()
 
 fig = px.density_heatmap(df, x="total_bill", y="tip", marginal_x="histogram", marginal_y="histogram")
+fig.show()
+```
+
+*New in 7.1*
+
+`marginal_x="heatmap"` and `marginal_y="heatmap"` draw the margin as a single-row or single-column heatmap strip. Each strip uses the same aggregate and the same color scale as the main plot. See [Marginal Plots](/python/marginal-plots/) for more detail.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+
+fig = px.density_heatmap(df, x="total_bill", y="tip", marginal_x="heatmap", marginal_y="heatmap")
 fig.show()
 ```
 

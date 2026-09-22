@@ -33,7 +33,7 @@ classifiers = [
 requires-python = ">=3.8"
 license = "MIT"
 license-files = ["LICENSE.txt"]
-version = "7.0.0"
+version = "7.1.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -77,6 +77,7 @@ dev_optional = [
     "pytz",
     "scikit-image",
     "scipy",
+    "sphinx-gallery",
     "statsmodels",
     "vaex;python_version<='3.9'",
     "xarray"

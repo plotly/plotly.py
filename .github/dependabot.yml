@@ -1,0 +1,53 @@
+version: 2
+
+updates:
+  # Update package versions pinned in uv.lock.
+  # Note that these updates only affect what dependency versions we use in the CI;
+  # they have no effect on the release artifacts.
+  # Still, it's important that we run our CI against the latest dependency versions
+  # in order to catch any potential issues early.
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      uv-dependencies:
+        patterns:
+          - "*"
+    labels: ["no-changelog"]
+    cooldown:
+      default-days: 3  # Should match tool.uv.exclude-newer option in pyproject.toml
+
+  # Update pinned versions for third-party GitHub Actions workflows
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"                   # Only covers .github/workflows/
+      - "/.github/actions/*"  # Covers all subdirectories under .github/actions/
+    schedule:
+      interval: "weekly"
+    groups:
+      actions-dependencies:
+        patterns:
+          - "*"
+    labels: ["no-changelog"]
+    cooldown:
+      default-days: 3
+
+  # Update version for JavaScript dependencies for Jupyter widget.
+  # Note: If the dependency update results in a changed build artifact,
+  # the `check-js-build` workflow will fail on the resulting PR.
+  # As currently configured, this will require a manual push of the
+  # updated build artifacts to resolve.
+  - package-ecosystem: "npm"
+    directory: "/js"
+    schedule:
+      interval: "monthly"
+    groups:
+      javascript-dependencies:
+        patterns:
+          - "*"
+    labels: ["no-changelog"]
+    cooldown:
+      default-days: 3
+    ignore:
+      - dependency-name: "plotly.js"  # We want to handle plotly.js updates manually
