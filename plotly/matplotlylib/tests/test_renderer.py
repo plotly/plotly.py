@@ -386,3 +386,4 @@ def test_line_collection_date_xaxis():
     lines = [t for t in plotly_fig.data if t.mode == "lines"]
     assert len(lines) >= 1
     assert all(isinstance(x, str) for t in lines for x in t.x)
+

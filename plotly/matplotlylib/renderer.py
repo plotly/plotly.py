@@ -564,13 +564,16 @@ class PlotlyRenderer(Renderer):
             linewidth = per_path(linewidths, i, 0)
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); drawing them in one trace would connect
-            # them, so draw each subpath separately.  The Z (close) codes
-            # carry no vertex, so the codes are iterated by index.
+            # them, so draw each subpath separately.
+            # In SVG paths, codes carry different numbers of vertices:
+            # M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
+            code_steps = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
             subpaths = []
             current = []
             closed = False
             vi = 0
             for c in codes:
+                step = code_steps.get(c, 1)
                 if c == "M":
                     if current:
                         subpaths.append((current, closed))
@@ -580,8 +583,8 @@ class PlotlyRenderer(Renderer):
                 elif c == "Z":
                     closed = True
                 else:
-                    current.append(verts[vi])
-                    vi += 1
+                    current.extend(verts[vi : vi + step])
+                    vi += step
             if current:
                 subpaths.append((current, closed))
             for sub, closed in subpaths:
