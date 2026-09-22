@@ -2,6 +2,7 @@ import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import plotly.tools as tls
 
 
@@ -368,3 +369,20 @@ def test_contour_rings_are_closed():
         if len(t.x) > 30 and t.x[0] == t.x[-1] and t.y[0] == t.y[-1]
     ]
     assert len(rings) >= 2
+
+
+def test_line_collection_date_xaxis():
+    """Line collections with date x-values must export date strings,
+    not raw matplotlib date numbers."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(10)
+    ]
+    y = np.linspace(0, 10, 10)
+    X, Y = np.meshgrid(mdates.date2num(dates), y)
+    fig, ax = plt.subplots()
+    ax.xaxis_date()
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), 5)
+    plotly_fig = tls.mpl_to_plotly(fig)
+    lines = [t for t in plotly_fig.data if t.mode == "lines"]
+    assert len(lines) >= 1
+    assert all(isinstance(x, str) for t in lines for x in t.x)

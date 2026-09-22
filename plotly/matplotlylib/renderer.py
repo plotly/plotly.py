@@ -593,7 +593,7 @@ class PlotlyRenderer(Renderer):
                     sub = sub + [sub[0]]
                 self.plotly_fig.add_trace(
                     go.Scatter(
-                        x=[v[0] for v in sub],
+                        x=self._convert_x_dates([v[0] for v in sub]),
                         y=[v[1] for v in sub],
                         mode="lines",
                         line=go.scatter.Line(
