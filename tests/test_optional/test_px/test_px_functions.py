@@ -235,6 +235,11 @@ def test_sunburst_treemap_with_path(constructor):
 
 @pytest.mark.parametrize("px_fn", [px.sunburst, px.treemap, px.icicle])
 def test_sunburst_treemap_with_path_order(constructor, px_fn):
+    if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
+        pytest.skip(
+            "known issue with pandas 3 + pandas_pyarrow_constructor + px hierarchy charts (https://github.com/plotly/plotly.py/issues/5571)"
+        )
+
     # Sectors should follow the order of first appearance in the data, whatever
     # the dataframe backend (Polars' group_by does not keep the row order).
     df = constructor(
