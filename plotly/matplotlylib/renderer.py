@@ -186,10 +186,14 @@ class PlotlyRenderer(Renderer):
         top_spine = mpltools.get_spine_visible(ax, "top")
         left_spine = mpltools.get_spine_visible(ax, "left")
         right_spine = mpltools.get_spine_visible(ax, "right")
-        bottom_tick_markers = ax.xaxis.get_tick_params()["bottom"]
-        top_tick_markers = ax.xaxis.get_tick_params()["top"]
-        left_tick_markers = ax.yaxis.get_tick_params()["left"]
-        right_tick_markers = ax.yaxis.get_tick_params()["right"]
+        x_tick_params = ax.xaxis.get_tick_params()
+        y_tick_params = ax.yaxis.get_tick_params()
+        bottom_tick_markers = x_tick_params.get(
+            "bottom", x_tick_params.get("left", True)
+        )
+        top_tick_markers = x_tick_params.get("top", x_tick_params.get("right", False))
+        left_tick_markers = y_tick_params.get("left", True)
+        right_tick_markers = y_tick_params.get("right", False)
         xaxis["mirror"] = mpltools.get_axis_mirror(
             bottom_spine, top_spine, bottom_tick_markers, top_tick_markers
         )
