@@ -88,7 +88,9 @@ At release time the synchronization is bidirectional (see also
 > release, update the `plotly==` version pin in `doc/requirements.txt` to match
 > the newly released version. The `doc-prod` build uses this pinned version
 > (not an editable install), so examples that rely on new features will fail
-> if the pin is stale.
+> if the pin is stale. Set the `release` string in `doc/apidoc/conf.py` to the
+> same version, because the API reference shows that string as the version of
+> the documented release.
 
 ### Tutorial file format
 
@@ -311,7 +313,10 @@ corresponding `.rst` file to appear in the API doc.
 - `css` files are found in `_static`
 - Template files are found in `_templates`. `.rst` templates describe how the
   autodoc of the different objects should look like.
-- `conf.py` contains the Sphinx configuration (theme, extensions, etc.)
+- `conf.py` contains the Sphinx configuration (theme, extensions, etc.). Its
+  `release` string gives the version that the API reference shows, so each
+  release must update it. See
+  [Keeping `main` and `doc-prod` in sync](#keeping-main-and-doc-prod-in-sync).
 
 ## CI/CD pipeline
 
