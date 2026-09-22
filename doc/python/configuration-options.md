@@ -202,6 +202,34 @@ fig = px.bar(x=[1, 2, 3], y=[1, 3, 1])
 fig.show(config=config)
 ```
 
+### Adding a "Download Plot as JSON" Button
+
+*New in 7.1*
+
+The modebar can include a button that downloads the figure as a JSON file. The file holds the full figure, which is every attribute with its default filled in, together with the figure's frames, its configuration, and the Plotly.js version. It is not the compact figure you wrote in Python.
+
+The button is optional, so add it with the `modeBarButtonsToAdd` configuration key:
+
+```python
+import plotly.express as px
+
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1])
+
+fig.show(config={'modeBarButtonsToAdd': ['downloadJson']})
+```
+
+The `layout.modebar.add` attribute adds the same button, and applies to the figure itself rather than to one call to `show()`:
+
+```python
+import plotly.express as px
+
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1])
+
+fig.update_layout(modebar_add=['downloadJson'])
+
+fig.show()
+```
+
 ### Removing Modebar Buttons
 
 To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the `modeBarButtonsToRemove` attribute in the figure's configuration dictionary. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
@@ -214,9 +242,11 @@ To delete buttons from the modebar, pass an array of strings containing the name
   - **Geo**: `zoomInGeo`, `zoomOutGeo`, `resetGeo`, `hoverClosestGeo`
   - **Tile maps**: `zoomInMap`, `zoomOutMap`, `resetViewMap`
   - **Sankey**: `resetSankeyGroup`
-  - **Other**: `hoverClosestPie`, `toggleHover`, `resetViews`, `toImage`, `sendChartToCloud`, `toggleSpikelines`
+  - **Other**: `hoverClosestPie`, `toggleHover`, `resetViews`, `toImage`, `downloadJson`, `sendChartToCloud`, `toggleSpikelines`
 
 *Changed in 7.0*: `handleDrag3d` and `hoverClosestGl2d` no longer exist, and `sendDataToCloud` is now named `sendChartToCloud`.
+
+*New in 7.1*: `downloadJson`. The modebar shows this button only when you add it.
 
 ```python
 import plotly.graph_objects as go
@@ -308,7 +338,10 @@ fig.show()
 ```
 
 ### Double-Click Delay
-Sets the maximum delay between two consecutive clicks to be interpreted as a double-click in milliseconds. This is the time interval between first mousedown and second mouseup. The default timing is 300 ms (less than half a second).
+
+*Changed in 7.1*
+
+Sets the maximum delay between two consecutive clicks to be interpreted as a double-click in milliseconds. This is the time interval between first mousedown and second mouseup. The default timing is 500 ms (half a second). Earlier versions used 300 ms.
 This setting propagates to all on-subplot double clicks (except for `geo` and `map`).
 
 ```python
