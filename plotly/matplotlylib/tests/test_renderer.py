@@ -358,17 +358,17 @@ def test_custom_date_xtickvals_given_as_numbers_are_converted():
 
 def test_contour_rings_are_closed():
     """Closed contour loops (Z codes) must close in plotly, not leave a gap."""
-    x = np.linspace(-3, 3, 30)
+    x = np.linspace(-3, 3, 50)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
-    ax.contour(X, Y, np.sin(X) * np.cos(Y), 10)
+    ax.contour(X, Y, X**2 + Y**2, levels=[1, 4])
     plotly_fig = tls.mpl_to_plotly(fig)
-    rings = [
-        t
-        for t in plotly_fig.data
-        if len(t.x) > 30 and t.x[0] == t.x[-1] and t.y[0] == t.y[-1]
-    ]
-    assert len(rings) >= 2
+
+    assert len(plotly_fig.data) == 2
+    assert plotly_fig.data[0].x[0] == plotly_fig.data[0].x[-1]
+    assert plotly_fig.data[0].y[0] == plotly_fig.data[0].y[-1]
+    assert plotly_fig.data[1].x[0] == plotly_fig.data[1].x[-1]
+    assert plotly_fig.data[1].y[0] == plotly_fig.data[1].y[-1]
 
 
 def test_line_collection_date_xaxis():
@@ -385,5 +385,5 @@ def test_line_collection_date_xaxis():
     plotly_fig = tls.mpl_to_plotly(fig)
     lines = [t for t in plotly_fig.data if t.mode == "lines"]
     assert len(lines) >= 1
-    assert all(isinstance(x, str) for t in lines for x in t.x)
-
+    assert any(isinstance(x, str) for t in lines for x in t.x)
+    assert all(x is None or isinstance(x, str) for t in lines for x in t.x)

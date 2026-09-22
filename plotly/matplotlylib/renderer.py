@@ -563,8 +563,8 @@ class PlotlyRenderer(Renderer):
             edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = per_path(linewidths, i, 0)
             # a path may contain several disjoint lines (e.g. contour lines
-            # of the same level); drawing them in one trace would connect
-            # them, so draw each subpath separately.
+            # of the same level); separate disjoint subpaths with None so
+            # plotly does not connect them.
             # In SVG paths, codes carry different numbers of vertices:
             # M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
             code_steps = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
@@ -587,6 +587,8 @@ class PlotlyRenderer(Renderer):
                     vi += step
             if current:
                 subpaths.append((current, closed))
+            x_combined = []
+            y_combined = []
             for sub, closed in subpaths:
                 if len(sub) < 2:
                     continue
@@ -594,10 +596,18 @@ class PlotlyRenderer(Renderer):
                 # plotly's lines mode does not close the loop
                 if closed:
                     sub = sub + [sub[0]]
+                sub_x = self._convert_x_dates([v[0] for v in sub])
+                sub_y = [v[1] for v in sub]
+                if x_combined:
+                    x_combined.append(None)
+                    y_combined.append(None)
+                x_combined.extend(sub_x)
+                y_combined.extend(sub_y)
+            if x_combined:
                 self.plotly_fig.add_trace(
                     go.Scatter(
-                        x=self._convert_x_dates([v[0] for v in sub]),
-                        y=[v[1] for v in sub],
+                        x=x_combined,
+                        y=y_combined,
                         mode="lines",
                         line=go.scatter.Line(
                             color=_export_color(edgecolor), width=linewidth
