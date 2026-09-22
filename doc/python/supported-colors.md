@@ -157,3 +157,20 @@ Version 7 parses these strings according to that specification. Four formats tha
 | Hexadecimal values without a leading `#` | `"fff"` | `"#fff"` |
 
 These rules apply to color strings only. Numeric arrays used with a [colorscale](/python/colorscales/) are unaffected.
+
+### Converting a Hexadecimal Color to RGB
+
+*Changed in 7.1*
+
+`plotly.colors.hex_to_rgb` converts a hexadecimal color string to a tuple of red, green, and blue values. It takes 3 or 6 hexadecimal digits, with or without a leading `#`:
+
+```python
+import plotly.colors as colors
+
+print(colors.hex_to_rgb("#EF553B"))
+print(colors.hex_to_rgb("#FFF"))
+```
+
+A 4-digit or 8-digit string carries an alpha channel, which a tuple of red, green, and blue values cannot hold. `hex_to_rgb` drops the alpha channel, warns, and returns the 3 remaining values. Earlier versions returned 4 values instead of 3.
+
+Any other length raises a `ValueError`, which version 7.1 added. Earlier versions returned a tuple of the wrong length. `hex_to_rgb("#FFFF0")` returned 5 values, one for each digit.
