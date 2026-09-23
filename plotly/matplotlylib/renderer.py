@@ -111,7 +111,7 @@ class PlotlyRenderer(Renderer):
             if len(radial_gridlines)
             else ("#b0b0b0", True)
         )
-        frame = ax.spines.get("polar")
+        frame = props.get("polar_frame")
         self.plotly_fig["layout"][self.current_polar_subplot] = go.layout.Polar(
             bgcolor=_export_color(props["axesbg"]),
             angularaxis=dict(
@@ -121,13 +121,9 @@ class PlotlyRenderer(Renderer):
                 ticktext=[t.get_text() for t in ax.xaxis.get_majorticklabels()],
                 showgrid=angular_grid[1],
                 gridcolor=_export_color(angular_grid[0]),
-                showline=frame.get_visible() if frame is not None else True,
-                linecolor=(
-                    _export_color(frame.get_edgecolor())
-                    if frame is not None
-                    else "black"
-                ),
-                linewidth=frame.get_linewidth() if frame is not None else 1,
+                showline=frame["visible"] if frame else True,
+                linecolor=(_export_color(frame["color"]) if frame else "black"),
+                linewidth=frame["linewidth"] if frame else 1,
             ),
             radialaxis=dict(
                 range=[float(v) for v in ax.get_ylim()],

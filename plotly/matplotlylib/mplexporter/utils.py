@@ -287,6 +287,17 @@ def get_axes_properties(ax):
         "axes": [get_axis_properties(ax.xaxis), get_axis_properties(ax.yaxis)],
     }
 
+    if getattr(ax, "name", None) == "polar":
+        frame = ax.spines.get("polar")
+        if frame is not None:
+            props["polar_frame"] = {
+                "color": export_color(frame.get_edgecolor()),
+                "linewidth": frame.get_linewidth(),
+                "visible": frame.get_visible(),
+            }
+        else:
+            props["polar_frame"] = None
+
     for axname in ["x", "y"]:
         axis = getattr(ax, axname + "axis")
         domain = getattr(ax, "get_{0}lim".format(axname))()
