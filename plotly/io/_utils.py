@@ -38,7 +38,7 @@ def validate_coerce_output_type(output_type):
         raise ValueError(
             """
 Invalid output type: {output_type}
-    Must be one of: 'Figure', 'FigureWidget'"""
+    Must be one of: 'Figure', 'FigureWidget'""".format(output_type=output_type)
         )
     return cls
 

@@ -2038,3 +2038,12 @@ def test_make_subplots_spacing_error():
         ValueError, match=r"^Vertical spacing must be between 0 and 1\.$"
     ):
         subplots.make_subplots(1, 1, vertical_spacing=1.01)
+
+
+def test_secondary_y_without_spec_error():
+    fig = subplots.make_subplots(rows=1, cols=2)
+    with pytest.raises(
+        ValueError,
+        match=r"Subplot with type 'xy' at grid position \(1, 2\) was not",
+    ):
+        fig.add_scatter(x=[1], y=[1], row=1, col=2, secondary_y=True)

@@ -118,6 +118,11 @@ def test_from_json_invalid(fig1):
         pio.from_json(bad_json)
 
 
+def test_from_json_invalid_output_type(fig1):
+    with pytest.raises(ValueError, match="Invalid output type: Bogus"):
+        pio.from_json(pio.to_json(fig1), output_type="Bogus")
+
+
 def test_from_json_skip_invalid(fig1):
     dict1 = fig1.to_dict()
 

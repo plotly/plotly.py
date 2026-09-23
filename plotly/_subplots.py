@@ -1425,7 +1425,7 @@ No subplot specified at grid position ({row}, {col})""".format(row=row, col=col)
 Subplot with type '{subplot_type}' at grid position ({row}, {col}) was not
 created with the secondary_y spec property set to True. See the docstring
 for the specs argument to plotly.subplots.make_subplots for more information.
-"""
+""".format(subplot_type=subplot_refs[0].subplot_type, row=row, col=col)
             )
         trace_kwargs = subplot_refs[1].trace_kwargs
     else:
