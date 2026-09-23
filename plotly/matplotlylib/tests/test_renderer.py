@@ -354,11 +354,32 @@ def test_polar_plot_converts():
     assert polar.angularaxis.ticktext[0] == "0°"
     assert polar.radialaxis.range == tuple(float(v) for v in ax.get_ylim())
     assert polar.bgcolor == "#FFFFFF"
-    assert polar.angularaxis.gridcolor == "#b0b0b0"
-    assert polar.radialaxis.gridcolor == "#b0b0b0"
+    assert polar.angularaxis.gridcolor == "#B0B0B0"
+    assert polar.radialaxis.gridcolor == "#B0B0B0"
     assert polar.angularaxis.linecolor == "#000000"
     assert polar.angularaxis.linewidth == 0.8
     assert polar.radialaxis.showline is False
+
+
+def test_polar_grid_with_tuple_color():
+    """Polar axes with tuple grid colors convert successfully."""
+    fig, ax = plt.subplots(subplot_kw={"projection": "polar"})
+    ax.grid(color=(0.5, 0.5, 0.5))
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.polar.angularaxis.gridcolor == "#7F7F7F"
+    assert plotly_fig.layout.polar.radialaxis.gridcolor == "#7F7F7F"
+
+
+def test_cartesian_grid_with_tuple_color():
+    """Cartesian axes with tuple grid colors convert successfully."""
+    fig, ax = plt.subplots()
+    ax.grid(color=(0.5, 0.5, 0.5))
+    ax.plot([0, 1], [0, 1])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.showgrid is True
+    assert plotly_fig.layout.yaxis.showgrid is True
 
 
 def test_custom_date_xtickvals_given_as_numbers_are_converted():

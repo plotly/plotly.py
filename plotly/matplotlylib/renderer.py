@@ -99,18 +99,9 @@ class PlotlyRenderer(Renderer):
         )
         theta_offset = ax.get_theta_offset()
         theta_direction = ax.get_theta_direction()
-        angular_gridlines = ax.xaxis.get_gridlines()
-        radial_gridlines = ax.yaxis.get_gridlines()
-        angular_grid = (
-            (angular_gridlines[0].get_color(), angular_gridlines[0].get_visible())
-            if len(angular_gridlines)
-            else ("#b0b0b0", True)
-        )
-        radial_grid = (
-            (radial_gridlines[0].get_color(), radial_gridlines[0].get_visible())
-            if len(radial_gridlines)
-            else ("#b0b0b0", True)
-        )
+        axes = props.get("axes", [])
+        angular_grid = axes[0].get("grid", {}) if len(axes) > 0 else {}
+        radial_grid = axes[1].get("grid", {}) if len(axes) > 1 else {}
         frame = props.get("polar_frame")
         self.plotly_fig["layout"][self.current_polar_subplot] = go.layout.Polar(
             bgcolor=_export_color(props["axesbg"]),
@@ -119,8 +110,8 @@ class PlotlyRenderer(Renderer):
                 direction=("counterclockwise" if theta_direction >= 0 else "clockwise"),
                 tickvals=[float(t) for t in np.degrees(ax.xaxis.get_majorticklocs())],
                 ticktext=[t.get_text() for t in ax.xaxis.get_majorticklabels()],
-                showgrid=angular_grid[1],
-                gridcolor=_export_color(angular_grid[0]),
+                showgrid=angular_grid.get("gridOn", True),
+                gridcolor=_export_color(angular_grid.get("color", "#B0B0B0")),
                 showline=frame["visible"] if frame else True,
                 linecolor=(_export_color(frame["color"]) if frame else "black"),
                 linewidth=frame["linewidth"] if frame else 1,
@@ -129,8 +120,8 @@ class PlotlyRenderer(Renderer):
                 range=[float(v) for v in ax.get_ylim()],
                 tickvals=[float(t) for t in ax.yaxis.get_majorticklocs()],
                 ticktext=[t.get_text() for t in ax.yaxis.get_majorticklabels()],
-                showgrid=radial_grid[1],
-                gridcolor=_export_color(radial_grid[0]),
+                showgrid=radial_grid.get("gridOn", True),
+                gridcolor=_export_color(radial_grid.get("color", "#B0B0B0")),
                 showline=False,
             ),
         )

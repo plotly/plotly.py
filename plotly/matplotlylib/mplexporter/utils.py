@@ -257,13 +257,14 @@ def get_axis_properties(axis):
 
 def get_grid_style(axis):
     gridlines = axis.get_gridlines()
-    if axis.get_tick_params()["gridOn"] and len(gridlines) > 0:
-        color = export_color(gridlines[0].get_color())
-        alpha = gridlines[0].get_alpha()
-        dasharray = get_dasharray(gridlines[0])
-        return dict(gridOn=True, color=color, dasharray=dasharray, alpha=alpha)
-    else:
+    if len(gridlines) == 0:
         return {"gridOn": False}
+    return dict(
+        gridOn=axis.get_tick_params().get("gridOn", False),
+        color=export_color(gridlines[0].get_color()),
+        dasharray=get_dasharray(gridlines[0]),
+        alpha=gridlines[0].get_alpha(),
+    )
 
 
 def get_figure_properties(fig):
