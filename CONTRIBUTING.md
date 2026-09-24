@@ -225,7 +225,7 @@ During development,
 you can speed things up by running only the tests in a particular file:
 
 ```bash
-python -m pytest tests/test_plotly/test_plot.py
+python -m pytest tests/test_io/test_to_from_json.py
 ```
 
 See [pytest's documentation](https://docs.pytest.org/) for more details.
@@ -327,7 +327,7 @@ you can update to development versions of `plotly.js` with this command:
 python commands.py updateplotlyjsdev --devrepo reponame --devbranch branchname
 ```
 
-This fetches the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`.
+This downloads `dist/plotly.min.js` and `dist/plot-schema.json` from the latest commit of the branch `branchname` of the repo `reponame`.
 If `--devrepo` or `--devbranch` are omitted,
 `updateplotlyjsdev` defaults to `plotly/plotly.js` and `main` respectively.
 
