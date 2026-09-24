@@ -526,8 +526,13 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Drawing path collection as markers\n"
             self.draw_marked_line(**scatter_props)
         elif props["path_coordinates"] == "data":
-            self.msg += "    Drawing path collection as filled polygons\n"
-            self._draw_filled_path_collection(props)
+            if len(props["styles"]["facecolor"]) == 0:
+                # no face colors: a line collection (e.g. contour lines)
+                self.msg += "    Drawing path collection as lines\n"
+                self._draw_line_collection(props)
+            else:
+                self.msg += "    Drawing path collection as filled polygons\n"
+                self._draw_filled_path_collection(props)
         else:
             self.msg += "    Path collection not linked to 'data', not drawing\n"
             warnings.warn(
@@ -536,6 +541,81 @@ class PlotlyRenderer(Renderer):
                 "it yet! Plotly can only import path "
                 "collections linked to 'data' coordinates"
             )
+
+    def _draw_line_collection(self, props):
+        """Draw a path collection without face colors (e.g. contour lines)
+        as plain lines."""
+        edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
+        linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
+
+        def per_path(colors, i, default):
+            if isinstance(colors, str):
+                return colors
+            if colors is None:
+                return default
+            try:
+                n = len(colors)
+            except TypeError:
+                return colors
+            return colors[i % n] if n else default
+
+        for i, (verts, codes) in enumerate(props["paths"]):
+            edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = per_path(linewidths, i, 0)
+            # a path may contain several disjoint lines (e.g. contour lines
+            # of the same level); separate disjoint subpaths with None so
+            # plotly does not connect them.
+            # In SVG paths, codes carry different numbers of vertices:
+            # M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
+            code_steps = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
+            subpaths = []
+            current = []
+            closed = False
+            vi = 0
+            for c in codes:
+                step = code_steps.get(c, 1)
+                if c == "M":
+                    if current:
+                        subpaths.append((current, closed))
+                    current = [verts[vi]]
+                    closed = False
+                    vi += 1
+                elif c == "Z":
+                    closed = True
+                else:
+                    current.extend(verts[vi : vi + step])
+                    vi += step
+            if current:
+                subpaths.append((current, closed))
+            x_combined = []
+            y_combined = []
+            for sub, closed in subpaths:
+                if len(sub) < 2:
+                    continue
+                # a closed subpath (Z code) must be closed explicitly since
+                # plotly's lines mode does not close the loop
+                if closed:
+                    sub = sub + [sub[0]]
+                sub_x = self._convert_x_dates([v[0] for v in sub])
+                sub_y = [v[1] for v in sub]
+                if x_combined:
+                    x_combined.append(None)
+                    y_combined.append(None)
+                x_combined.extend(sub_x)
+                y_combined.extend(sub_y)
+            if x_combined:
+                self.plotly_fig.add_trace(
+                    go.Scatter(
+                        x=x_combined,
+                        y=y_combined,
+                        mode="lines",
+                        line=go.scatter.Line(
+                            color=_export_color(edgecolor), width=linewidth
+                        ),
+                        xaxis="x{0}".format(self.axis_ct),
+                        yaxis="y{0}".format(self.axis_ct),
+                    )
+                )
 
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""

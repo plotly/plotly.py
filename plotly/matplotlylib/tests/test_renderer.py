@@ -2,6 +2,7 @@ import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import plotly.tools as tls
 
 
@@ -167,13 +168,15 @@ def test_stem_plot_renders():
 
 
 def test_contour_lines_convert():
-    """Contour lines used to crash with an ndarray line width."""
+    """Contour lines must render as lines, not filled polygons."""
     x = np.linspace(-3, 3, 30)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
     ax.contour(X, Y, np.sin(X) * np.cos(Y), 10)
     plotly_fig = tls.mpl_to_plotly(fig)
     assert len(plotly_fig.data) > 0
+    assert all(t.fill is None for t in plotly_fig.data)
+    assert all(t.mode == "lines" for t in plotly_fig.data)
 
 
 def test_contourf_bands_render():
@@ -351,3 +354,36 @@ def test_custom_date_xtickvals_given_as_numbers_are_converted():
         "2023-01-07 00:00:00",
         "2023-01-10 00:00:00",
     )
+
+
+def test_contour_rings_are_closed():
+    """Closed contour loops (Z codes) must close in plotly, not leave a gap."""
+    x = np.linspace(-3, 3, 50)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, X**2 + Y**2, levels=[1, 4])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 2
+    assert plotly_fig.data[0].x[0] == plotly_fig.data[0].x[-1]
+    assert plotly_fig.data[0].y[0] == plotly_fig.data[0].y[-1]
+    assert plotly_fig.data[1].x[0] == plotly_fig.data[1].x[-1]
+    assert plotly_fig.data[1].y[0] == plotly_fig.data[1].y[-1]
+
+
+def test_line_collection_date_xaxis():
+    """Line collections with date x-values must export date strings,
+    not raw matplotlib date numbers."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(10)
+    ]
+    y = np.linspace(0, 10, 10)
+    X, Y = np.meshgrid(mdates.date2num(dates), y)
+    fig, ax = plt.subplots()
+    ax.xaxis_date()
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), 5)
+    plotly_fig = tls.mpl_to_plotly(fig)
+    lines = [t for t in plotly_fig.data if t.mode == "lines"]
+    assert len(lines) >= 1
+    assert any(isinstance(x, str) for t in lines for x in t.x)
+    assert all(x is None or isinstance(x, str) for t in lines for x in t.x)
