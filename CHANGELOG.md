@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add `add_abline` method to `Figure` for drawing a straight line from a slope and an intercept, alongside the existing `add_hline`/`add_vline`/`add_hrect`/`add_vrect` convenience methods [[#3166](https://github.com/plotly/plotly.py/issues/3166)]
+
 ### Fixed
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#3441](https://github.com/plotly/plotly.py/issues/3441)], with thanks to @hb1915 for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5765](https://github.com/plotly/plotly.py/issues/5765)], with thanks to @Irahan2 for the contribution!
