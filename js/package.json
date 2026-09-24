@@ -18,13 +18,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@lumino/widgets": "~2.9.0",
     "lodash-es": "^4.17.21",
-    "plotly.js": "4.1.1",
-    "@lumino/widgets": "~2.9.0"
+    "plotly.js": "4.1.1"
   },
   "devDependencies": {
     "@jupyter/builder": "^1.2.2",
-    "@types/plotly.js": "^3.0.13",
     "esbuild": "^0.28.2",
     "typescript": "^7.0.2"
   },
