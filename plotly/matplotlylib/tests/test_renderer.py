@@ -187,6 +187,28 @@ def test_contourf_bands_render():
     assert len(filled) > 0
 
 
+def test_axis_linecolor_defaults_to_black():
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.linecolor == "#000000"
+    assert plotly_fig.layout.yaxis.linecolor == "#000000"
+
+
+def test_custom_axis_linecolors_are_preserved():
+    fig, ax = plt.subplots()
+    ax.spines["bottom"].set_color("red")
+    ax.spines["left"].set_color("green")
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.linecolor == "#FF0000"
+    assert plotly_fig.layout.yaxis.linecolor == "#008000"
+
+
 def test_filled_path_collection_date_xaxis():
     """Filled path collections with date x-values must export date strings,
     not raw matplotlib date numbers."""

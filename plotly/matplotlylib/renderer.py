@@ -11,6 +11,7 @@ import warnings
 
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
+from plotly.matplotlylib.mplexporter.utils import export_color
 from plotly.matplotlylib import mpltools
 
 
@@ -24,7 +25,10 @@ def _export_color(color):
     """
     if isinstance(color, str):
         return "rgba(0,0,0,0)" if color == "none" else color
-    return [_export_color(c) for c in color]
+    if isinstance(color, (list, tuple)) and all(isinstance(c, str) for c in color):
+        return [_export_color(c) for c in color]
+    bgcolor = export_color(color)
+    return "rgba(0,0,0,0)" if bgcolor == "none" else bgcolor
 
 
 class PlotlyRenderer(Renderer):
@@ -171,10 +175,16 @@ class PlotlyRenderer(Renderer):
         self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
-            anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
+            anchor="y{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor=_export_color(ax.spines["bottom"].get_edgecolor()),
         )
         yaxis = go.layout.YAxis(
-            anchor="x{0}".format(self.axis_ct), zeroline=False, ticks="inside"
+            anchor="x{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor=_export_color(ax.spines["left"].get_edgecolor()),
         )
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(
