@@ -36,9 +36,9 @@ def validate_coerce_output_type(output_type):
         cls = go.FigureWidget
     else:
         raise ValueError(
-            """
+            f"""
 Invalid output type: {output_type}
-    Must be one of: 'Figure', 'FigureWidget'""".format(output_type=output_type)
+    Must be one of: 'Figure', 'FigureWidget'"""
         )
     return cls
 
