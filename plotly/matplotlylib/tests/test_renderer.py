@@ -211,6 +211,17 @@ def test_background_colors_from_matplotlib_defaults():
     assert plotly_fig.layout.paper_bgcolor == "#FFFFFF"
 
 
+def test_stairs_converts_to_step_line():
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0])
+    plotly_fig = tls.mpl_to_plotly(fig)
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.mode == "lines"
+    assert tuple(trace.x) == (0.0, 1.0, 1.0, 2.0, 2.0, 3.0)
+    assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
+
+
 def test_custom_background_colors_are_preserved():
     fig, ax = plt.subplots()
     fig.patch.set_facecolor("lightyellow")
