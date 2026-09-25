@@ -517,7 +517,10 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
         showgrid=props["axes"][0]["grid"]["gridOn"],
         domain=convert_x_domain(props["bounds"], x_bounds),
         side=props["axes"][0]["position"],
-        tickfont=dict(size=props["axes"][0]["fontsize"]),
+        tickfont=dict(
+            size=props["axes"][0]["fontsize"],
+            color=props["axes"][0]["fontcolor"],
+        ),
     )
     xaxis.update(prep_ticks(ax, 0, "x", props))
     yaxis = dict(
@@ -526,7 +529,10 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
         showgrid=props["axes"][1]["grid"]["gridOn"],
         domain=convert_y_domain(props["bounds"], y_bounds),
         side=props["axes"][1]["position"],
-        tickfont=dict(size=props["axes"][1]["fontsize"]),
+        tickfont=dict(
+            size=props["axes"][1]["fontsize"],
+            color=props["axes"][1]["fontcolor"],
+        ),
     )
     yaxis.update(prep_ticks(ax, 1, "y", props))
     return xaxis, yaxis
