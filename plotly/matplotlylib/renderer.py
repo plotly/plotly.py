@@ -336,7 +336,7 @@ class PlotlyRenderer(Renderer):
             yaxis="y{0}".format(self.axis_ct),
             opacity=trace[0]["alpha"],  # TODO: get all alphas if array?
             marker=go.bar.Marker(
-                color=trace[0]["facecolor"],  # TODO: get all
+                color=_export_color(trace[0]["facecolor"]),  # TODO: get all
                 line=dict(width=trace[0]["edgewidth"]),
             ),
         )  # TODO ditto
@@ -398,9 +398,13 @@ class PlotlyRenderer(Renderer):
             self.msg += "... with just markers\n"
             mode = "markers"
         if props["linestyle"]:
-            color = mpltools.merge_color_and_opacity(
-                props["linestyle"]["color"], props["linestyle"]["alpha"]
-            )
+            if props["linestyle"]["color"] == "none":
+                # a fully transparent line; plotly rejects "none" as a color
+                color = "rgba(0,0,0,0)"
+            else:
+                color = mpltools.merge_color_and_opacity(
+                    props["linestyle"]["color"], props["linestyle"]["alpha"]
+                )
 
             if props["coordinates"] == "data":
                 line = go.scatter.Line(
@@ -420,22 +424,22 @@ class PlotlyRenderer(Renderer):
             if props["coordinates"] == "data":
                 marker = go.scatter.Marker(
                     opacity=props["markerstyle"]["alpha"],
-                    color=props["markerstyle"]["facecolor"],
+                    color=_export_color(props["markerstyle"]["facecolor"]),
                     symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
                     size=props["markerstyle"]["markersize"],
                     line=dict(
-                        color=props["markerstyle"]["edgecolor"],
+                        color=_export_color(props["markerstyle"]["edgecolor"]),
                         width=props["markerstyle"]["edgewidth"],
                     ),
                 )
             else:
                 shape = dict(
                     opacity=props["markerstyle"]["alpha"],
-                    fillcolor=props["markerstyle"]["facecolor"],
+                    fillcolor=_export_color(props["markerstyle"]["facecolor"]),
                     symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
                     size=props["markerstyle"]["markersize"],
                     line=dict(
-                        color=props["markerstyle"]["edgecolor"],
+                        color=_export_color(props["markerstyle"]["edgecolor"]),
                         width=props["markerstyle"]["edgewidth"],
                     ),
                 )
