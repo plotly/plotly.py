@@ -297,6 +297,17 @@ def test_fixed_formatter_ticktext():
     assert plotly_fig.layout.xaxis.ticktext == ("Baseline", "param = 1", "param = 2")
 
 
+def test_no_legend_entries_for_internal_mpl_labels():
+    """mpl internal labels (_nolegend_, _childN) must not become legend entries."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1, 2, 3], [0, 1, 0, 1], "b", [0, 1, 2, 3], [1, 0, 1, 0], "r--")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend == False
+    assert all(t.name is None for t in plotly_fig.data)
+
+
 def test_custom_date_xtickvals_are_converted():
     """Custom tick values on a date axis must be converted to date strings,
     not left as raw matplotlib date numbers or datetime objects."""
