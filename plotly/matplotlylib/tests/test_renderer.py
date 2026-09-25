@@ -315,6 +315,64 @@ def test_custom_date_xtickvals_are_converted():
     )
 
 
+def test_axhline_converts():
+    """axhline converts to a layout shape spanning the axes width."""
+    fig, ax = plt.subplots()
+    ax.axhline(0.5)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "line"
+    x0, x1 = ax.get_xlim()
+    assert abs(shape.x0 - x0) < 1e-9
+    assert abs(shape.x1 - x1) < 1e-9
+    assert abs(shape.y0 - 0.5) < 1e-9
+    assert abs(shape.y1 - 0.5) < 1e-9
+    assert shape.xref == "x"
+    assert shape.yref == "y"
+    assert shape.line.color == "rgba(31, 119, 180, 1)"
+
+
+def test_axvline_converts():
+    """axvline converts to a layout shape spanning the axes height."""
+    fig, ax = plt.subplots()
+    ax.axvline(0.5)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "line"
+    y0, y1 = ax.get_ylim()
+    assert abs(shape.x0 - 0.5) < 1e-9
+    assert abs(shape.x1 - 0.5) < 1e-9
+    assert abs(shape.y0 - y0) < 1e-9
+    assert abs(shape.y1 - y1) < 1e-9
+
+
+def test_axline_converts():
+    """axline converts to a layout shape spanning the whole axes box."""
+    fig, ax = plt.subplots()
+    ax.axline((0.5, 0.5), slope=1)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "line"
+    x0, x1 = ax.get_xlim()
+    y0, y1 = ax.get_ylim()
+    assert abs(shape.x0 - x0) < 1e-9
+    assert abs(shape.x1 - x1) < 1e-9
+    assert abs(shape.y0 - y0) < 1e-9
+    assert abs(shape.y1 - y1) < 1e-9
+
+
 def test_uneven_custom_date_xtickvals_are_converted():
     """Unevenly spaced custom date ticks must be converted to date strings."""
     dates = [datetime.datetime(2023, 1, i) for i in range(1, 11)]

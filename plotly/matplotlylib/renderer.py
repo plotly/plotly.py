@@ -9,6 +9,7 @@ with the matplotlylib package.
 
 import warnings
 
+from matplotlib import transforms
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -459,8 +460,18 @@ class PlotlyRenderer(Renderer):
             self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
-            # dealing with legend graphical elements
-            self.msg += "    Using native legend\n"
+            if self._processing_legend:
+                # dealing with legend graphical elements
+                self.msg += "    Using native legend\n"
+            else:
+                # horizontal/vertical reference lines (axhline/axvline)
+                self._draw_axes_line(props)
+        elif props["coordinates"] == "display" and isinstance(
+            props["mplobj"].get_transform(), transforms.BlendedGenericTransform
+        ):
+            # axhline/axvline: blended axes/data transforms are reported as
+            # display coordinates by the exporter
+            self._draw_axes_line(props)
         else:
             self.msg += "    Line didn't have 'data' coordinates, not drawing\n"
             warnings.warn(
@@ -468,6 +479,37 @@ class PlotlyRenderer(Renderer):
                 "objects from matplotlib that are in 'data' "
                 "coordinates!"
             )
+
+    def _draw_axes_line(self, props):
+        """Draw an axes-coordinate reference line (axhline/axvline) as a
+        layout shape spanning the line's endpoints in data coordinates."""
+        ax = self.current_mpl_ax
+        trans = props["mplobj"].get_transform()
+        if props["coordinates"] == "display":
+            px_points = props["data"]
+        else:
+            px_points = [trans.transform(pt) for pt in props["data"]]
+        (x0, y0), (x1, y1) = [ax.transData.inverted().transform(pt) for pt in px_points]
+        color = mpltools.merge_color_and_opacity(
+            props["linestyle"]["color"], props["linestyle"]["alpha"]
+        )
+        shape = go.layout.Shape(
+            type="line",
+            x0=x0,
+            y0=y0,
+            x1=x1,
+            y1=y1,
+            xref="x{0}".format(self.axis_ct),
+            yref="y{0}".format(self.axis_ct),
+            line=go.layout.shape.Line(
+                color=color,
+                width=props["linestyle"]["linewidth"],
+                dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
+            ),
+            layer="above",
+        )
+        self.plotly_fig["layout"]["shapes"] += (shape,)
+        self.msg += "    Heck yeah, I drew that reference line\n"
 
     def draw_image(self, **props):
         """Draw image.
