@@ -53,6 +53,15 @@ def test_unlabel_rgb_parses_string():
     assert unlabel_rgb("rgb(1, 2, 3)") == (1.0, 2.0, 3.0)
 
 
+def test_unlabel_rgb_parses_list():
+    # https://github.com/plotly/plotly.py/issues/3054
+    assert unlabel_rgb(["rgb(255, 0, 0)", "rgb(1, 2, 3)"]) == [
+        (255.0, 0.0, 0.0),
+        (1.0, 2.0, 3.0),
+    ]
+    assert unlabel_rgb([]) == []
+
+
 def test_label_and_unlabel_are_inverses():
     assert unlabel_rgb(label_rgb((10, 20, 30))) == (10.0, 20.0, 30.0)
 
