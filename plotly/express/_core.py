@@ -2530,6 +2530,36 @@ def get_groups_and_orders(args, grouper):
     return groups, orders
 
 
+def _default_category_orders_for_axes(args, groups, orders):
+    """
+    Add data-appearance orders for categorical x/y columns.
+
+    When the data is split into several traces (e.g. by `color`), plotly.js
+    orders categories by first appearance across traces, which can differ from
+    the order in the underlying data. Recording the data-appearance order here
+    lets `set_cartesian_axis_opts` emit an explicit `categoryarray`, matching
+    the documented behavior that Plotly Express lays out categorical data in
+    the order in which it appears in the data. See #3198.
+    """
+    if len(groups) <= 1:
+        return orders
+    df = args["data_frame"]
+    for letter in ("x", "y"):
+        col = args.get(letter)
+        if not isinstance(col, str) or col in orders or col not in df.columns:
+            continue
+        uniques = df.get_column(col).unique(maintain_order=True).to_list()
+        categories = [
+            value
+            for value in uniques
+            if value is not None
+            and not (isinstance(value, float) and math.isnan(value))
+        ]
+        if categories and all(isinstance(value, str) for value in categories):
+            orders[col] = categories
+    return orders
+
+
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
@@ -2556,6 +2586,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     groups, orders = get_groups_and_orders(args, grouper)
+    orders = _default_category_orders_for_axes(args, groups, orders)
 
     col_labels = []
     row_labels = []
