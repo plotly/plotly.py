@@ -728,6 +728,8 @@ def unlabel_rgb(colors):
     This function takes either an 'rgb(a, b, c)' color or a list of
     such colors and returns the color tuples in tuple(s) (a, b, c)
     """
+    if isinstance(colors, (list, tuple)):
+        return [unlabel_rgb(color) for color in colors]
     str_vals = ""
     for index in range(len(colors)):
         try:
