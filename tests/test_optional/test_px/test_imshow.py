@@ -183,6 +183,17 @@ def test_zmin_zmax_range_color():
     assert fig.layout.coloraxis.cmax == 0.8
 
 
+def test_zmin_zmax_nan_data():
+    # NaN values should be ignored when inferring the missing bound
+    img = np.array([[1.0, 2.0], [3.0, np_nan()]])
+    fig = px.imshow(img, zmax=2)
+    assert fig.layout.coloraxis.cmin == 1.0
+    assert fig.layout.coloraxis.cmax == 2.0
+    fig = px.imshow(img, zmin=2)
+    assert fig.layout.coloraxis.cmin == 2.0
+    assert fig.layout.coloraxis.cmax == 3.0
+
+
 def test_zmin_zmax_range_color_source():
     img = img_gray / 100.0
     fig1 = px.imshow(img, zmin=0.2, zmax=0.8, binary_string=True)

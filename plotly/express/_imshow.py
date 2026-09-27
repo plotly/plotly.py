@@ -412,9 +412,9 @@ def imshow(
     if contrast_rescaling == "minmax":
         # When using binary_string and minmax we need to set zmin and zmax to rescale the image
         if (zmin is not None or binary_string) and zmax is None:
-            zmax = img.max()
+            zmax = np.nanmax(img)
         if (zmax is not None or binary_string) and zmin is None:
-            zmin = img.min()
+            zmin = np.nanmin(img)
     else:
         # For uint8 data and infer we let zmin and zmax to be None if passed as None
         if zmax is None and img.dtype != np.uint8:
