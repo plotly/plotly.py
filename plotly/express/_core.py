@@ -5,6 +5,7 @@ from ._special_inputs import IdentityMap, Constant, Range
 from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
 from _plotly_utils.basevalidators import ColorscaleValidator
+from _plotly_utils.colors import hex_to_rgb, unlabel_rgb
 from plotly.colors import qualitative, sequential
 import math
 
@@ -2529,6 +2530,53 @@ def get_groups_and_orders(args, grouper):
     return groups, orders
 
 
+def _color_with_opacity(color, opacity):
+    """Return an ``rgba()`` string mixing ``color`` with ``opacity``.
+
+    Plotly.js error bars have a ``color`` property but no ``opacity``, so the
+    marker/line opacity has to be baked into the error-bar color. Returns
+    ``None`` when ``color`` is missing or not a parseable hex/rgb string
+    (named CSS colors are left unchanged by the caller).
+    """
+    if not isinstance(color, str):
+        return None
+    color = color.strip()
+    try:
+        if color.startswith("#"):
+            r, g, b = hex_to_rgb(color)
+        elif "rgb" in color.lower():
+            r, g, b = unlabel_rgb(color)
+        else:
+            return None
+        return f"rgba({int(r)}, {int(g)}, {int(b)}, {opacity})"
+    except (TypeError, ValueError, IndexError):
+        return None
+
+
+def _apply_error_bar_opacity(trace, opacity):
+    """Copy marker/line color through to error bars, including ``opacity``.
+
+    Categorical Plotly Express traces already give error bars the marker
+    color via Plotly.js inheritance, but ``marker.opacity`` is ignored.
+    Continuous color (numeric ``marker.color`` arrays) cannot be mapped
+    onto ``error_y.color``, which is a single color in the schema.
+    """
+    color = getattr(trace.marker, "color", None)
+    if not isinstance(color, str):
+        color = getattr(trace.line, "color", None)
+    rgba = _color_with_opacity(color, opacity)
+    if rgba is None:
+        return
+    for name in ("error_x", "error_y", "error_z"):
+        err = getattr(trace, name, None)
+        if err is None:
+            continue
+        if err.array is None and err.arrayminus is None:
+            continue
+        if err.color is None:
+            err.color = rgba
+
+
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
@@ -2729,6 +2777,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 args, trace_spec, group, mapping_labels.copy(), sizeref
             )
             trace.update(patch)
+            if args.get("opacity") is not None:
+                _apply_error_bar_opacity(trace, args["opacity"])
             if fit_results is not None:
                 trendline_rows.append(mapping_labels.copy())
                 trendline_rows[-1]["px_fit_results"] = fit_results

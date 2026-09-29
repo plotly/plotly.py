@@ -4,6 +4,7 @@ import warnings
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
+from plotly.colors import hex_to_rgb
 import narwhals.stable.v1 as nw
 import numpy as np
 import pytest
@@ -473,3 +474,73 @@ def test_no_warn_on_update_template():
     with warnings.catch_warnings():
         warnings.simplefilter("error")
         fig.update_layout(template="plotly_white")
+
+
+def test_error_bars_inherit_marker_opacity():
+    # https://github.com/plotly/plotly.py/issues/4353
+    df = px.data.iris()
+    df = df.assign(e_plus=df["sepal_width"] / 100, e_minus=df["sepal_width"] / 40)
+    opacity = 0.6
+    fig = px.scatter(
+        df,
+        x="sepal_width",
+        y="sepal_length",
+        color="species",
+        error_y="e_plus",
+        error_y_minus="e_minus",
+        opacity=opacity,
+    )
+    assert len(fig.data) == 3
+    for trace in fig.data:
+        assert trace.marker.opacity == opacity
+        r, g, b = hex_to_rgb(trace.marker.color)
+        assert trace.error_y.color == f"rgba({r}, {g}, {b}, {opacity})"
+
+
+def test_error_bars_keep_inherited_color_without_opacity():
+    # Without opacity, leave error_y.color unset so Plotly.js still inherits
+    # the marker color (the pre-fix behavior for categorical traces).
+    df = px.data.iris()
+    df = df.assign(e=df["sepal_width"] / 100)
+    fig = px.scatter(
+        df, x="sepal_width", y="sepal_length", color="species", error_y="e"
+    )
+    for trace in fig.data:
+        assert trace.error_y.color is None
+        assert trace.error_y.array is not None
+
+
+def test_error_x_bars_inherit_marker_opacity():
+    df = px.data.iris()
+    df = df.assign(e=df["sepal_width"] / 100)
+    opacity = 0.4
+    fig = px.scatter(
+        df,
+        x="sepal_width",
+        y="sepal_length",
+        color="species",
+        error_x="e",
+        opacity=opacity,
+    )
+    for trace in fig.data:
+        r, g, b = hex_to_rgb(trace.marker.color)
+        assert trace.error_x.color == f"rgba({r}, {g}, {b}, {opacity})"
+        assert trace.error_y.color is None
+
+
+def test_error_bars_opacity_with_continuous_color():
+    # error_y.color is a single color in the schema, so numeric color arrays
+    # cannot be mapped onto error bars. Opacity must not crash this path.
+    df = px.data.iris()
+    df = df.assign(e=df["sepal_width"] / 100)
+    fig = px.scatter(
+        df,
+        x="sepal_width",
+        y="sepal_length",
+        color="petal_width",
+        error_y="e",
+        opacity=0.6,
+    )
+    assert fig.data[0].marker.opacity == 0.6
+    assert fig.data[0].error_y.array is not None
+    assert fig.data[0].error_y.color is None
