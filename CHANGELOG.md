@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#3441](https://github.com/plotly/plotly.py/issues/3441)], with thanks to @hb1915 for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5765](https://github.com/plotly/plotly.py/issues/5765)], with thanks to @Irahan2 for the contribution!
-- Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` (see [#5325](https://github.com/plotly/plotly.py/pull/5325)), with thanks to @breken-ai for the contribution!
+- Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
 
 
 ## [7.1.0] - 2026-09-15
