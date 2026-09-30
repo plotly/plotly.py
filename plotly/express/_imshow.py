@@ -611,7 +611,10 @@ def imshow(
     nslices_facets = nslices_facet_row * nslices_facet_col
     frame_list = []
     for index, trace in enumerate(traces):
-        if ((facet_col or facet_row) and index < nrows * ncols) or index == 0:
+        # Only the first animation frame goes into fig.data. With facet_col_wrap,
+        # nrows * ncols can exceed the number of facets, so compare with
+        # nslices_facets to leave the unused cells of the grid empty.
+        if ((facet_col or facet_row) and index < nslices_facets) or index == 0:
             # Calculate row and col position
             # index is ordered by (facet_row, facet_col) from itertools.product
             # When facet_col_wrap is used (and facet_row is None), traces are laid out
