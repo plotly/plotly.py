@@ -469,6 +469,25 @@ def test_animation_and_facet(binary_string):
     assert len(fig.data) == img.shape[1]
 
 
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_and_facet_col_wrap_incomplete_grid(binary_string):
+    # 5 facets wrapped in 2 columns leave the 6th cell of the 3x2 grid empty.
+    # That cell must stay empty, instead of showing the first facet of the
+    # second animation frame.
+    img = np.arange(2 * 5 * 3 * 4).reshape(2, 5, 3, 4).astype(np.uint8)
+    fig = px.imshow(
+        img,
+        animation_frame=0,
+        facet_col=1,
+        facet_col_wrap=2,
+        binary_string=binary_string,
+    )
+    nslices_facet = img.shape[1]
+    assert len(fig.frames) == img.shape[0]
+    assert len(fig.data) == nslices_facet
+    assert [trace.name for trace in fig.data] == [str(i) for i in range(5)]
+
+
 @pytest.mark.parametrize("facet_row", [0, 1, 2, -1])
 @pytest.mark.parametrize("binary_string", [False, True])
 def test_facet_row(facet_row, binary_string):
