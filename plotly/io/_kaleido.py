@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 import os
 import json
 from pathlib import Path
@@ -8,7 +9,7 @@ import warnings
 
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dicts
-from plotly.io._defaults import defaults
+from plotly.io._defaults import defaults, DEFAULT_HEADERS
 from _plotly_utils.optional_imports import get_module
 
 kaleido = get_module("kaleido", should_load=True)
@@ -33,6 +34,18 @@ which can be installed using pip:
 
 
 _KALEIDO_AVAILABLE = None
+
+
+@contextmanager
+def _ignore_default_kopts_warning(kopts):
+    # A running kaleido sync server ignores kopts and warns about any. Only
+    # warn when the user set an option, not for plotly's default headers.
+    with warnings.catch_warnings():
+        if kopts == {"headers": DEFAULT_HEADERS}:
+            warnings.filterwarnings(
+                "ignore", message="The kopts argument", category=UserWarning
+            )
+        yield
 
 
 def kaleido_available() -> bool:
@@ -182,17 +195,18 @@ def to_image(
             or defaults.default_height
         )
 
-        img_bytes = kaleido.calc_fig_sync(
-            fig_dict,
-            opts=dict(
-                format=format or defaults.default_format,
-                width=width,
-                height=height,
-                scale=scale or defaults.default_scale,
-            ),
-            topojson=defaults.topojson,
-            kopts=kopts,
-        )
+        with _ignore_default_kopts_warning(kopts):
+            img_bytes = kaleido.calc_fig_sync(
+                fig_dict,
+                opts=dict(
+                    format=format or defaults.default_format,
+                    width=width,
+                    height=height,
+                    scale=scale or defaults.default_scale,
+                ),
+                topojson=defaults.topojson,
+                kopts=kopts,
+            )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
@@ -430,10 +444,11 @@ def write_images(
             kopts["mathjax"] = defaults.mathjax
         if defaults.headers:
             kopts["headers"] = defaults.headers
-        kaleido.write_fig_from_object_sync(
-            kaleido_specs,
-            kopts=kopts,
-        )
+        with _ignore_default_kopts_warning(kopts):
+            kaleido.write_fig_from_object_sync(
+                kaleido_specs,
+                kopts=kopts,
+            )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
