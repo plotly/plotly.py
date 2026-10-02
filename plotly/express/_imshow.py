@@ -631,6 +631,9 @@ def imshow(
     if animation_frame:
         fig.frames = frame_list
     fig.update_layout(layout)
+    if trace["type"] == "image" and aspect == "auto":
+        # plotly.js anchors the y axis of an image trace to its x axis by default
+        fig.update_yaxes(scaleanchor=False)
     # Hover name, z or color
     if binary_string and rescale_image and not np.all(img == img_rescaled):
         # we rescaled the image, hence z is not displayed in hover since it does

@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
 - Fix `mpl_to_plotly` crashing on touching bars (such as `plt.hist`) due to floating-point noise producing negative `bargap` values by clamping `bargap` to `[0, 1]` [[#5696](https://github.com/plotly/plotly.py/pull/5696)], with thanks to @robertoffmoura for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
+- Fix `px.imshow` ignoring `aspect="auto"` for RGB and RGBA images, which kept their pixels square instead of stretching the image to fill the axes [[#5788](https://github.com/plotly/plotly.py/pull/5788)], with thanks to @jayzhou2309 for the contribution!
 
 ## [7.1.0] - 2026-09-15
 
