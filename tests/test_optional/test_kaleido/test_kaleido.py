@@ -4,10 +4,12 @@ from io import BytesIO, StringIO
 from pathlib import Path
 import tempfile
 from unittest.mock import patch
+import warnings
 import xml.etree.ElementTree as ET
 
 from pdfrw import PdfReader
 from PIL import Image
+import kaleido
 import plotly.graph_objects as go
 import plotly.io as pio
 
@@ -335,3 +337,34 @@ def test_width_height_priority():
     assert height == pio.defaults.default_height, (
         "Default height should be used when no layout or argument"
     )
+
+
+def kopts_warnings(export):
+    """Run `export` under a kaleido sync server and return its kopts warnings."""
+    kaleido.start_sync_server()
+    try:
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            export()
+    finally:
+        kaleido.stop_sync_server()
+    return [str(w.message) for w in caught if "kopts" in str(w.message)]
+
+
+def test_sync_server_no_kopts_warning_for_default_options(tmp_path):
+    def export():
+        pio.to_image(fig, format="svg")
+        pio.write_image(fig, tmp_path / "fig.png")
+        pio.write_images([fig], [tmp_path / "figs.png"])
+
+    assert kopts_warnings(export) == []
+
+
+def test_sync_server_warns_when_options_are_ignored():
+    pio.defaults.plotlyjs = "https://cdn.plot.ly/plotly-3.0.0.js"
+    try:
+        warned = kopts_warnings(lambda: pio.to_image(fig, format="svg"))
+    finally:
+        pio.defaults.plotlyjs = None
+
+    assert warned == ["The kopts argument is ignored if using a server."]
