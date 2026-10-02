@@ -414,6 +414,15 @@ def test_imshow_hovertemplate(binary_string):
         )
 
 
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_image_trace_aspect(binary_string):
+    img = np.zeros((2, 10, 10, 3), dtype=np.uint8)
+    fig = px.imshow(img, facet_col=0, aspect="auto", binary_string=binary_string)
+    assert [ax.scaleanchor for ax in fig.select_yaxes()] == [False, False]
+    fig = px.imshow(img, facet_col=0, binary_string=binary_string)
+    assert [ax.scaleanchor for ax in fig.select_yaxes()] == [None, None]
+
+
 @pytest.mark.parametrize("facet_col", [0, 1, 2, -1])
 @pytest.mark.parametrize("binary_string", [False, True])
 def test_facet_col(facet_col, binary_string):
