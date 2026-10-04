@@ -632,15 +632,35 @@ class PlotlyRenderer(Renderer):
 
     def _draw_line_collection(self, props):
         """Draw a path collection without face colors (e.g. contour lines)
-        as plain lines."""
+        as plain lines, grouping consecutive same-style paths into single traces."""
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
         linestyles = props["styles"].get("linestyle")
 
+        current_style = None
+        grouped_x = []
+        grouped_y = []
+
+        def flush():
+            if current_style is not None and grouped_x:
+                ec, lw, d = current_style
+                self.plotly_fig.add_trace(
+                    go.Scatter(
+                        x=grouped_x,
+                        y=grouped_y,
+                        mode="lines",
+                        showlegend=False,
+                        line=go.scatter.Line(
+                            color=_export_color(ec),
+                            width=lw,
+                            dash=d,
+                        ),
+                        xaxis="x{0}".format(self.axis_ct),
+                        yaxis="y{0}".format(self.axis_ct),
+                    )
+                )
+
         for i, (verts, codes) in enumerate(props["paths"]):
-            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
-            linewidth = _per_path(linewidths, i, 0)
-            dash = _convert_collection_dash(_per_path(linestyles, i, None))
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); separate disjoint subpaths with None so
             # plotly does not connect them.
@@ -666,8 +686,8 @@ class PlotlyRenderer(Renderer):
                     vi += step
             if current:
                 subpaths.append((current, closed))
-            x_combined = []
-            y_combined = []
+            path_x = []
+            path_y = []
             for sub, closed in subpaths:
                 if len(sub) < 2:
                     continue
@@ -677,27 +697,31 @@ class PlotlyRenderer(Renderer):
                     sub = sub + [sub[0]]
                 sub_x = self._convert_x_dates([v[0] for v in sub])
                 sub_y = [v[1] for v in sub]
-                if x_combined:
-                    x_combined.append(None)
-                    y_combined.append(None)
-                x_combined.extend(sub_x)
-                y_combined.extend(sub_y)
-            if x_combined:
-                self.plotly_fig.add_trace(
-                    go.Scatter(
-                        x=x_combined,
-                        y=y_combined,
-                        mode="lines",
-                        showlegend=False,
-                        line=go.scatter.Line(
-                            color=_export_color(edgecolor),
-                            width=linewidth,
-                            dash=dash,
-                        ),
-                        xaxis="x{0}".format(self.axis_ct),
-                        yaxis="y{0}".format(self.axis_ct),
-                    )
-                )
+                if path_x:
+                    path_x.append(None)
+                    path_y.append(None)
+                path_x.extend(sub_x)
+                path_y.extend(sub_y)
+            if not path_x:
+                continue
+
+            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = _per_path(linewidths, i, 0)
+            dash = _convert_collection_dash(_per_path(linestyles, i, None))
+            style = (edgecolor, linewidth, dash)
+
+            if style != current_style:
+                flush()
+                current_style = style
+                grouped_x = list(path_x)
+                grouped_y = list(path_y)
+            else:
+                grouped_x.append(None)
+                grouped_y.append(None)
+                grouped_x.extend(path_x)
+                grouped_y.extend(path_y)
+
+        flush()
 
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""

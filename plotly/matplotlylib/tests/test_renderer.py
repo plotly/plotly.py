@@ -434,7 +434,9 @@ def test_eventplot_segments_render():
     fig, ax = plt.subplots()
     ax.eventplot([np.random.randn(20) for _ in range(5)])
     plotly_fig = tls.mpl_to_plotly(fig)
-    assert len(plotly_fig.data) == 100
+    # Each of the 5 event rows is a line collection whose 20 segments are grouped
+    assert len(plotly_fig.data) == 5
+    assert all(t.x.count(None) == 19 for t in plotly_fig.data)
 
 
 def test_stackplot_areas_render():
@@ -486,7 +488,11 @@ def test_stem_plot_renders():
     fig, ax = plt.subplots()
     ax.stem(x, np.sin(x))
     plotly_fig = tls.mpl_to_plotly(fig)
-    assert len(plotly_fig.data) >= 20
+    # The 20 vertical stem lines are grouped into a single line trace with 19 None separators
+    stem_lines = [
+        t for t in plotly_fig.data if t.mode == "lines" and t.x.count(None) == 19
+    ]
+    assert len(stem_lines) == 1
 
 
 def test_contour_lines_convert():
@@ -885,3 +891,49 @@ def test_contour_lines_not_in_legend():
     contour_traces = [t for t in plotly_fig.data if t.name != "Line"]
     assert len(contour_traces) >= 1
     assert all(t.showlegend is False for t in contour_traces)
+
+
+def test_consecutive_same_style_lines_grouped_into_one_trace():
+    """Consecutive paths with identical styles are grouped into a single trace."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    # 4 contour levels, all black, solid, width 1.5
+    ax.contour(
+        X,
+        Y,
+        X**2 + Y**2,
+        levels=[1, 2, 3, 4],
+        colors="k",
+        linestyles="solid",
+        linewidths=1.5,
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    # All 4 levels share the same style, so they should be grouped into 1 trace
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    # The trace combines the distinct levels separated by None
+    assert trace.x.count(None) >= 3
+
+
+def test_mixed_style_lines_group_consecutive_matches():
+    """Paths are grouped by consecutive matching style (color, width, dash)."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    # 4 levels: 2 negative (dashed by default in mpl), 2 positive (solid by default)
+    ax.contour(
+        X,
+        Y,
+        np.sin(X) * np.cos(Y),
+        levels=[-0.5, -0.25, 0.25, 0.5],
+        colors="k",
+        linewidths=1.5,
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    # 2 dashed levels grouped into 1 trace, 2 solid levels grouped into 1 trace -> 2 traces total
+    assert len(plotly_fig.data) == 2
+    assert plotly_fig.data[0].line.dash != "solid"
+    assert plotly_fig.data[1].line.dash == "solid"
