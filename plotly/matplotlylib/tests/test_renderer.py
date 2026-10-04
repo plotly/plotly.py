@@ -788,6 +788,64 @@ def test_axline_arbitrary_slope_and_limits():
     assert abs(y_at_1 - 8.0) < 1e-9
 
 
+def _shape_x_datenums(shape):
+    """Return a shape's date-string x endpoints as matplotlib date numbers."""
+    return [
+        matplotlib.dates.date2num(datetime.datetime.fromisoformat(x))
+        for x in (shape.x0, shape.x1)
+    ]
+
+
+def test_axline_on_pre_1970_date_axis():
+    """axline on a date axis before the matplotlib epoch (1970) extends on both
+    sides of the data and stays on the original line."""
+    dates = [datetime.datetime(1950, 1, i) for i in range(1, 10)]
+    fig, ax = plt.subplots()
+    ax.plot(dates, range(len(dates)))
+    x_ref = matplotlib.dates.date2num(dates[0])
+    ax.axline((x_ref, 0), slope=1)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 1
+    shape = shapes[0]
+    assert shape.xref == "x"
+    assert shape.yref == "y"
+
+    n0, n1 = _shape_x_datenums(shape)
+    x_min, x_max = ax.get_xlim()
+    assert n0 < x_min
+    assert n1 > x_max
+    slope = (shape.y1 - shape.y0) / (n1 - n0)
+    assert abs(slope - 1.0) < 1e-6
+    assert abs(shape.y0 + slope * (x_ref - n0)) < 1e-6
+
+
+def test_axline_on_date_axis_clamps_to_matplotlib_date_range():
+    """When extending a diagonal axline would leave matplotlib's supported date
+    range (years 0001-9999), its endpoints stop at the range limits while
+    staying on the original line."""
+    dates = [datetime.datetime(1900, 1, 1), datetime.datetime(2000, 1, 1)]
+    fig, ax = plt.subplots()
+    ax.plot(dates, [0, 1])
+    # Nearly flat line crossing the whole century, so the 100x extension of the
+    # visible segment reaches past both year 0001 and year 9999
+    x_ref = matplotlib.dates.date2num(dates[0])
+    ax.axline((x_ref, 0.5), slope=1e-6)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shape = plotly_fig.layout.shapes[0]
+    assert isinstance(shape.x0, str)
+    assert isinstance(shape.x1, str)
+    assert shape.x0.startswith("0001-01-01")
+    assert shape.x1.startswith("9999-12-31")
+
+    n0, n1 = _shape_x_datenums(shape)
+    slope = (shape.y1 - shape.y0) / (n1 - n0)
+    assert abs(slope - 1e-6) < 1e-12
+    assert abs(shape.y0 + slope * (x_ref - n0) - 0.5) < 1e-6
+
+
 def test_axline_horizontal_and_vertical():
     """Horizontal and vertical axline use domain coordinates appropriately."""
     fig, ax = plt.subplots()

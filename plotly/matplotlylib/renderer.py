@@ -7,9 +7,11 @@ with the matplotlylib package.
 
 """
 
+import datetime
 import math
 import warnings
 
+from matplotlib import dates as mdates
 from matplotlib import lines as mlines
 from matplotlib import transforms
 import plotly.graph_objs as go
@@ -668,15 +670,23 @@ class PlotlyRenderer(Renderer):
                 y1_ext = y1 + extension_factor * dy
 
                 if self.x_is_mpl_date:
-                    min_date_num = 1.0
-                    max_date_num = 3652000.0
+                    min_date_num = float(mdates.date2num(datetime.datetime(1, 1, 1)))
+                    max_date_num = float(
+                        mdates.date2num(datetime.datetime(9999, 12, 31))
+                    )
                     slope = dy / dx
                     if x0_ext < min_date_num:
                         y0_ext = y0 + slope * (min_date_num - x0)
                         x0_ext = min_date_num
+                    elif x0_ext > max_date_num:
+                        y0_ext = y0 + slope * (max_date_num - x0)
+                        x0_ext = max_date_num
                     if x1_ext > max_date_num:
                         y1_ext = y1 + slope * (max_date_num - x1)
                         x1_ext = max_date_num
+                    elif x1_ext < min_date_num:
+                        y1_ext = y1 + slope * (min_date_num - x1)
+                        x1_ext = min_date_num
                     x0, x1 = self._convert_x_dates([x0_ext, x1_ext])
                 else:
                     x0, x1 = float(x0_ext), float(x1_ext)
