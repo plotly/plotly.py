@@ -7,6 +7,7 @@ with the matplotlylib package.
 
 """
 
+import math
 import warnings
 
 from matplotlib import transforms
@@ -615,15 +616,56 @@ class PlotlyRenderer(Renderer):
             # general reference line (e.g. axline)
             if props["coordinates"] == "display":
                 px_points = props["data"]
+            elif props["coordinates"] == "axes":
+                px_points = [ax.transAxes.transform(pt) for pt in props["data"]]
             else:
                 px_points = [trans.transform(pt) for pt in props["data"]]
             (x0, y0), (x1, y1) = [
                 ax.transData.inverted().transform(pt) for pt in px_points
             ]
-            if self.x_is_mpl_date:
-                x0, x1 = self._convert_x_dates([x0, x1])
-            xref = x_axis
-            yref = y_axis
+
+            dx = x1 - x0
+            dy = y1 - y0
+            if math.isclose(dy, 0.0, abs_tol=1e-12):
+                # Horizontal line: use x domain so it spans the chart, y in data coordinates
+                x0, x1 = 0.0, 1.0
+                y0, y1 = float(y0), float(y1)
+                xref = x_domain
+                yref = y_axis
+            elif math.isclose(dx, 0.0, abs_tol=1e-12):
+                # Vertical line: use y domain so it spans the chart, x in data coordinates
+                y0, y1 = 0.0, 1.0
+                if self.x_is_mpl_date:
+                    x0, x1 = self._convert_x_dates([x0, x1])
+                else:
+                    x0, x1 = float(x0), float(x1)
+                xref = x_axis
+                yref = y_domain
+            else:
+                # Diagonal line: extend endpoints in data coordinates so it spans
+                # across zoom levels while staying locked to data coordinates on pan/zoom
+                extension_factor = 100.0
+                x0_ext = x0 - extension_factor * dx
+                y0_ext = y0 - extension_factor * dy
+                x1_ext = x1 + extension_factor * dx
+                y1_ext = y1 + extension_factor * dy
+
+                if self.x_is_mpl_date:
+                    min_date_num = 1.0
+                    max_date_num = 3652000.0
+                    slope = dy / dx
+                    if x0_ext < min_date_num:
+                        y0_ext = y0 + slope * (min_date_num - x0)
+                        x0_ext = min_date_num
+                    if x1_ext > max_date_num:
+                        y1_ext = y1 + slope * (max_date_num - x1)
+                        x1_ext = max_date_num
+                    x0, x1 = self._convert_x_dates([x0_ext, x1_ext])
+                else:
+                    x0, x1 = float(x0_ext), float(x1_ext)
+                y0, y1 = float(y0_ext), float(y1_ext)
+                xref = x_axis
+                yref = y_axis
 
         color = mpltools.merge_color_and_opacity(
             props["linestyle"]["color"], props["linestyle"]["alpha"]

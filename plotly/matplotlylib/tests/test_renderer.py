@@ -732,7 +732,7 @@ def test_axvline_converts():
 
 
 def test_axline_converts():
-    """axline converts to a layout shape spanning the whole axes box."""
+    """axline converts to a layout shape extended in data coordinates."""
     fig, ax = plt.subplots()
     ax.axline((0.5, 0.5), slope=1)
 
@@ -742,12 +742,77 @@ def test_axline_converts():
     assert len(plotly_fig.layout.shapes) == 1
     shape = plotly_fig.layout.shapes[0]
     assert shape.type == "line"
-    x0, x1 = ax.get_xlim()
-    y0, y1 = ax.get_ylim()
-    assert abs(shape.x0 - x0) < 1e-9
-    assert abs(shape.x1 - x1) < 1e-9
-    assert abs(shape.y0 - y0) < 1e-9
-    assert abs(shape.y1 - y1) < 1e-9
+    assert shape.xref == "x"
+    assert shape.yref == "y"
+    x_min, x_max = ax.get_xlim()
+    assert shape.x0 < x_min
+    assert shape.x1 > x_max
+    slope = (shape.y1 - shape.y0) / (shape.x1 - shape.x0)
+    assert abs(slope - 1.0) < 1e-9
+    # Passes through (0.5, 0.5)
+    y_at_05 = shape.y0 + slope * (0.5 - shape.x0)
+    assert abs(y_at_05 - 0.5) < 1e-9
+
+
+def test_axline_arbitrary_slope_and_limits():
+    """axline with non-trivial slopes and limits extends in data coordinates."""
+    fig, ax = plt.subplots()
+    ax.scatter([1, 2, 4, 7, 9], [2, 5, 4, 8, 10])
+    ax.axline((0, 1), slope=1.0)
+    ax.axline((1, 8), (8, 2))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 12)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 2
+
+    # Line 1: (0, 1), slope 1, xlim [0, 10], ylim [0, 12]
+    assert shapes[0].xref == "x"
+    assert shapes[0].yref == "y"
+    assert shapes[0].x0 < -500
+    assert shapes[0].x1 > 500
+    slope1 = (shapes[0].y1 - shapes[0].y0) / (shapes[0].x1 - shapes[0].x0)
+    assert abs(slope1 - 1.0) < 1e-9
+    y_at_0 = shapes[0].y0 + slope1 * (0.0 - shapes[0].x0)
+    assert abs(y_at_0 - 1.0) < 1e-9
+
+    # Line 2: (1, 8) to (8, 2) with slope -6/7
+    assert shapes[1].xref == "x"
+    assert shapes[1].yref == "y"
+    assert shapes[1].x0 < -500
+    assert shapes[1].x1 > 500
+    slope2 = (shapes[1].y1 - shapes[1].y0) / (shapes[1].x1 - shapes[1].x0)
+    assert abs(slope2 - (-6.0 / 7.0)) < 1e-9
+    y_at_1 = shapes[1].y0 + slope2 * (1.0 - shapes[1].x0)
+    assert abs(y_at_1 - 8.0) < 1e-9
+
+
+def test_axline_horizontal_and_vertical():
+    """Horizontal and vertical axline use domain coordinates appropriately."""
+    fig, ax = plt.subplots()
+    ax.axline((0, 5), slope=0)
+    ax.axline((3, 0), (3, 10))
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 2
+
+    # Horizontal axline: xref is domain, y is data
+    assert shapes[0].xref == "x domain"
+    assert shapes[0].yref == "y"
+    assert abs(shapes[0].x0 - 0.0) < 1e-9
+    assert abs(shapes[0].x1 - 1.0) < 1e-9
+    assert abs(shapes[0].y0 - 5.0) < 1e-9
+    assert abs(shapes[0].y1 - 5.0) < 1e-9
+
+    # Vertical axline: xref is data, yref is domain
+    assert shapes[1].xref == "x"
+    assert shapes[1].yref == "y domain"
+    assert abs(shapes[1].x0 - 3.0) < 1e-9
+    assert abs(shapes[1].x1 - 3.0) < 1e-9
+    assert abs(shapes[1].y0 - 0.0) < 1e-9
+    assert abs(shapes[1].y1 - 1.0) < 1e-9
 
 
 def test_axvline_and_axhline_on_date_xaxis():
