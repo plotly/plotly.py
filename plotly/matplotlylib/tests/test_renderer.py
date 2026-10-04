@@ -224,6 +224,10 @@ def test_twinx_axis_position_and_ticks():
     assert plotly_fig.layout.yaxis2.side == "right"
     assert plotly_fig.layout.yaxis2.title.text == "right axis"
     assert plotly_fig.layout.yaxis2.ticks == "inside"
+    assert plotly_fig.layout.yaxis2.overlaying == "y"
+    assert plotly_fig.layout.xaxis2.overlaying == "x"
+    assert plotly_fig.layout.xaxis2.visible is False
+    assert len(plotly_fig.data) == 2
 
 
 def test_twiny_axis_position_and_ticks():
@@ -244,6 +248,10 @@ def test_twiny_axis_position_and_ticks():
     assert plotly_fig.layout.xaxis2.side == "top"
     assert plotly_fig.layout.xaxis2.title.text == "top axis"
     assert plotly_fig.layout.xaxis2.ticks == "inside"
+    assert plotly_fig.layout.xaxis2.overlaying == "x"
+    assert plotly_fig.layout.yaxis2.overlaying == "y"
+    assert plotly_fig.layout.yaxis2.visible is False
+    assert len(plotly_fig.data) == 2
 
 
 def test_right_axis_ticks_hidden_when_mpl_right_ticks_hidden():

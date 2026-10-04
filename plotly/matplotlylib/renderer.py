@@ -67,6 +67,7 @@ class PlotlyRenderer(Renderer):
         self.msg = "Initialized PlotlyRenderer\n"
         self._processing_legend = False
         self._legend_visible = False
+        self.axes_list = []
 
     def _convert_x_dates(self, x):
         """Convert x values to date strings when the x-axis is a date axis."""
@@ -167,8 +168,8 @@ class PlotlyRenderer(Renderer):
         ]
         self.current_bars = []
         self.axis_ct += 1
-        # update plot background with the axes background from mpl
-        self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
+        if props.get("patch_visible", True):
+            self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
             anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
@@ -222,6 +223,36 @@ class PlotlyRenderer(Renderer):
         yaxis["showline"] = y_main_spine
         if not y_main_ticks:
             yaxis["ticks"] = ""
+
+        overlay_ax_ct = None
+        for prev_ax, prev_ct in self.axes_list:
+            is_twinned = (
+                (
+                    hasattr(ax, "_twinned_axes")
+                    and ax in ax._twinned_axes.get_siblings(prev_ax)
+                )
+                or getattr(ax, "_sharex", None) == prev_ax
+                or getattr(ax, "_sharey", None) == prev_ax
+                or getattr(prev_ax, "_sharex", None) == ax
+                or getattr(prev_ax, "_sharey", None) == ax
+                or (ax.get_position().bounds == prev_ax.get_position().bounds)
+            )
+            if is_twinned:
+                overlay_ax_ct = prev_ct
+                break
+
+        if overlay_ax_ct is not None:
+            overlay_x = "x" if overlay_ax_ct == 1 else "x{0}".format(overlay_ax_ct)
+            overlay_y = "y" if overlay_ax_ct == 1 else "y{0}".format(overlay_ax_ct)
+            xaxis["overlaying"] = overlay_x
+            yaxis["overlaying"] = overlay_y
+
+        if not props["axes"][0]["visible"]:
+            xaxis["visible"] = False
+        if not props["axes"][1]["visible"]:
+            yaxis["visible"] = False
+
+        self.axes_list.append((ax, self.axis_ct))
 
         # put axes in our figure
         self.plotly_fig["layout"]["xaxis{0}".format(self.axis_ct)] = xaxis
