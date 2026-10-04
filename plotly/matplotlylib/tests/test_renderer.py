@@ -770,6 +770,38 @@ def test_contour_rings_are_closed():
     assert plotly_fig.data[1].y[0] == plotly_fig.data[1].y[-1]
 
 
+def test_disjoint_contour_subpaths_are_separated_by_none():
+    """Disjoint subpaths of one contour level are drawn in a single trace,
+    separated by None so plotly does not connect them."""
+    x = np.linspace(-3, 3, 61)
+    X, Y = np.meshgrid(x, x)
+    # two separate bumps: the 0.5 level is two disjoint rings in one path
+    Z = np.exp(-((X + 1.5) ** 2 + Y**2)) + np.exp(-((X - 1.5) ** 2 + Y**2))
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, Z, levels=[0.5])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    xs = list(plotly_fig.data[0].x)
+    ys = list(plotly_fig.data[0].y)
+    x_gaps = [i for i, v in enumerate(xs) if v is None]
+    y_gaps = [i for i, v in enumerate(ys) if v is None]
+    assert len(x_gaps) == 1
+    assert x_gaps == y_gaps
+
+    gap = x_gaps[0]
+    rings = [(xs[:gap], ys[:gap]), (xs[gap + 1 :], ys[gap + 1 :])]
+    for ring_x, ring_y in rings:
+        assert len(ring_x) > 2
+        # each ring is closed
+        assert ring_x[0] == ring_x[-1]
+        assert ring_y[0] == ring_y[-1]
+    # one ring around each bump, so no segment bridges the two
+    left, right = sorted(rings, key=lambda ring: ring[0][0])
+    assert max(left[0]) < 0
+    assert min(right[0]) > 0
+
+
 def test_line_collection_date_xaxis():
     """Line collections with date x-values must export date strings,
     not raw matplotlib date numbers."""
