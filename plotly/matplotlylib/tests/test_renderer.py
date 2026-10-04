@@ -750,6 +750,31 @@ def test_axline_converts():
     assert abs(shape.y1 - y1) < 1e-9
 
 
+def test_axvline_and_axhline_on_date_xaxis():
+    """axvline and axhline on a date x-axis have x0 and x1 converted to date strings."""
+    dates = [datetime.datetime(2023, 1, i) for i in range(1, 10)]
+    fig, ax = plt.subplots()
+    ax.plot(dates, range(len(dates)))
+    ax.axvline(dates[4])
+    ax.axhline(4)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 2
+
+    vline_shape = shapes[0]
+    assert isinstance(vline_shape.x0, str)
+    assert isinstance(vline_shape.x1, str)
+    assert vline_shape.x0.startswith("2023-01-05")
+    assert vline_shape.x1.startswith("2023-01-05")
+
+    hline_shape = shapes[1]
+    assert isinstance(hline_shape.x0, str)
+    assert isinstance(hline_shape.x1, str)
+    assert hline_shape.x0.startswith("2022-12-31")
+    assert hline_shape.x1.startswith("2023-01-09")
+
+
 def test_axes_line_with_more_than_two_points_does_not_crash():
     """Axes-coordinate line with != 2 points does not crash and is ignored with a warning."""
     fig, ax = plt.subplots()

@@ -584,6 +584,8 @@ class PlotlyRenderer(Renderer):
         else:
             px_points = [trans.transform(pt) for pt in props["data"]]
         (x0, y0), (x1, y1) = [ax.transData.inverted().transform(pt) for pt in px_points]
+        if self.x_is_mpl_date:
+            x0, x1 = self._convert_x_dates([x0, x1])
         color = mpltools.merge_color_and_opacity(
             props["linestyle"]["color"], props["linestyle"]["alpha"]
         )
