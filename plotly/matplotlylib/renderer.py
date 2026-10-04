@@ -578,14 +578,53 @@ class PlotlyRenderer(Renderer):
         if not props.get("linestyle") or len(props.get("data", [])) != 2:
             return
         ax = self.current_mpl_ax
-        trans = props["mplobj"].get_transform()
-        if props["coordinates"] == "display":
-            px_points = props["data"]
+        line = props["mplobj"]
+        trans = line.get_transform()
+
+        axis_suffix = str(self.axis_ct) if self.axis_ct > 1 else ""
+        x_axis = "x{0}".format(axis_suffix)
+        y_axis = "y{0}".format(axis_suffix)
+        x_domain = "{0} domain".format(x_axis).strip()
+        y_domain = "{0} domain".format(y_axis).strip()
+
+        if isinstance(trans, transforms.BlendedGenericTransform) and (
+            trans == ax.get_yaxis_transform() or trans._x == ax.transAxes
+        ):
+            # axhline: x spans the axes domain [xmin, xmax], y is in data coordinates
+            x_data = line.get_xdata()
+            y_data = line.get_ydata()
+            x0, x1 = float(x_data[0]), float(x_data[1])
+            y0, y1 = float(y_data[0]), float(y_data[1])
+            xref = x_domain
+            yref = y_axis
+        elif isinstance(trans, transforms.BlendedGenericTransform) and (
+            trans == ax.get_xaxis_transform() or trans._y == ax.transAxes
+        ):
+            # axvline: x is in data coordinates, y spans the axes domain [ymin, ymax]
+            x_data = line.get_xdata()
+            y_data = line.get_ydata()
+            x0, x1 = x_data[0], x_data[1]
+            y0, y1 = float(y_data[0]), float(y_data[1])
+            if self.x_is_mpl_date:
+                x0, x1 = self._convert_x_dates([x0, x1])
+            else:
+                x0, x1 = float(x0), float(x1)
+            xref = x_axis
+            yref = y_domain
         else:
-            px_points = [trans.transform(pt) for pt in props["data"]]
-        (x0, y0), (x1, y1) = [ax.transData.inverted().transform(pt) for pt in px_points]
-        if self.x_is_mpl_date:
-            x0, x1 = self._convert_x_dates([x0, x1])
+            # general reference line (e.g. axline)
+            if props["coordinates"] == "display":
+                px_points = props["data"]
+            else:
+                px_points = [trans.transform(pt) for pt in props["data"]]
+            (x0, y0), (x1, y1) = [
+                ax.transData.inverted().transform(pt) for pt in px_points
+            ]
+            if self.x_is_mpl_date:
+                x0, x1 = self._convert_x_dates([x0, x1])
+            xref = x_axis
+            yref = y_axis
+
         color = mpltools.merge_color_and_opacity(
             props["linestyle"]["color"], props["linestyle"]["alpha"]
         )
@@ -595,8 +634,8 @@ class PlotlyRenderer(Renderer):
             y0=y0,
             x1=x1,
             y1=y1,
-            xref="x{0}".format(self.axis_ct),
-            yref="y{0}".format(self.axis_ct),
+            xref=xref,
+            yref=yref,
             line=go.layout.shape.Line(
                 color=color,
                 width=props["linestyle"]["linewidth"],

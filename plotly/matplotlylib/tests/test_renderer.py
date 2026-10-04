@@ -693,7 +693,7 @@ def test_custom_date_xtickvals_are_converted():
 
 
 def test_axhline_converts():
-    """axhline converts to a layout shape spanning the axes width."""
+    """axhline converts to a layout shape spanning the axes width using x domain."""
     fig, ax = plt.subplots()
     ax.axhline(0.5)
 
@@ -703,18 +703,17 @@ def test_axhline_converts():
     assert len(plotly_fig.layout.shapes) == 1
     shape = plotly_fig.layout.shapes[0]
     assert shape.type == "line"
-    x0, x1 = ax.get_xlim()
-    assert abs(shape.x0 - x0) < 1e-9
-    assert abs(shape.x1 - x1) < 1e-9
+    assert shape.x0 == 0
+    assert shape.x1 == 1
     assert abs(shape.y0 - 0.5) < 1e-9
     assert abs(shape.y1 - 0.5) < 1e-9
-    assert shape.xref == "x"
+    assert shape.xref == "x domain"
     assert shape.yref == "y"
     assert shape.line.color == "rgba(31, 119, 180, 1)"
 
 
 def test_axvline_converts():
-    """axvline converts to a layout shape spanning the axes height."""
+    """axvline converts to a layout shape spanning the axes height using y domain."""
     fig, ax = plt.subplots()
     ax.axvline(0.5)
 
@@ -724,11 +723,12 @@ def test_axvline_converts():
     assert len(plotly_fig.layout.shapes) == 1
     shape = plotly_fig.layout.shapes[0]
     assert shape.type == "line"
-    y0, y1 = ax.get_ylim()
     assert abs(shape.x0 - 0.5) < 1e-9
     assert abs(shape.x1 - 0.5) < 1e-9
-    assert abs(shape.y0 - y0) < 1e-9
-    assert abs(shape.y1 - y1) < 1e-9
+    assert shape.y0 == 0
+    assert shape.y1 == 1
+    assert shape.xref == "x"
+    assert shape.yref == "y domain"
 
 
 def test_axline_converts():
@@ -751,7 +751,7 @@ def test_axline_converts():
 
 
 def test_axvline_and_axhline_on_date_xaxis():
-    """axvline and axhline on a date x-axis have x0 and x1 converted to date strings."""
+    """axvline and axhline on a date x-axis use proper domain and data coordinate references."""
     dates = [datetime.datetime(2023, 1, i) for i in range(1, 10)]
     fig, ax = plt.subplots()
     ax.plot(dates, range(len(dates)))
@@ -767,12 +767,45 @@ def test_axvline_and_axhline_on_date_xaxis():
     assert isinstance(vline_shape.x1, str)
     assert vline_shape.x0.startswith("2023-01-05")
     assert vline_shape.x1.startswith("2023-01-05")
+    assert vline_shape.y0 == 0
+    assert vline_shape.y1 == 1
+    assert vline_shape.xref == "x"
+    assert vline_shape.yref == "y domain"
 
     hline_shape = shapes[1]
-    assert isinstance(hline_shape.x0, str)
-    assert isinstance(hline_shape.x1, str)
-    assert hline_shape.x0.startswith("2022-12-31")
-    assert hline_shape.x1.startswith("2023-01-09")
+    assert hline_shape.x0 == 0
+    assert hline_shape.x1 == 1
+    assert hline_shape.y0 == 4
+    assert hline_shape.y1 == 4
+    assert hline_shape.xref == "x domain"
+    assert hline_shape.yref == "y"
+
+
+def test_reference_lines_custom_limits_and_subplots():
+    """axhline and axvline respect custom domain limits and subplot axis references."""
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax1.axhline(0.5, xmin=0.2, xmax=0.8)
+    ax2.axvline(3.0, ymin=0.1, ymax=0.9)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 2
+
+    # First subplot
+    assert shapes[0].xref == "x domain"
+    assert shapes[0].yref == "y"
+    assert abs(shapes[0].x0 - 0.2) < 1e-9
+    assert abs(shapes[0].x1 - 0.8) < 1e-9
+    assert abs(shapes[0].y0 - 0.5) < 1e-9
+    assert abs(shapes[0].y1 - 0.5) < 1e-9
+
+    # Second subplot
+    assert shapes[1].xref == "x2"
+    assert shapes[1].yref == "y2 domain"
+    assert abs(shapes[1].x0 - 3.0) < 1e-9
+    assert abs(shapes[1].x1 - 3.0) < 1e-9
+    assert abs(shapes[1].y0 - 0.1) < 1e-9
+    assert abs(shapes[1].y1 - 0.9) < 1e-9
 
 
 def test_axes_line_with_more_than_two_points_does_not_crash():
