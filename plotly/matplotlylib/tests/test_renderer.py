@@ -373,3 +373,15 @@ def test_dark_tick_label_color_exports():
         plotly_fig = tls.mpl_to_plotly(fig)
 
     assert plotly_fig.layout.xaxis.tickfont.color == "#FFFFFF"
+
+
+def test_transparent_tick_label_color_exports():
+    """Transparent tick label colors ('none') export as transparent rgba."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+    ax.tick_params(labelcolor="none")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.tickfont.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.yaxis.tickfont.color == "rgba(0,0,0,0)"
