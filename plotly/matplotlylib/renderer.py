@@ -546,18 +546,10 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = self._convert_x_dates(marked_line["x"])
             self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
-        elif props["coordinates"] == "axes":
-            if self._processing_legend:
-                # dealing with legend graphical elements
-                self.msg += "    Using native legend\n"
-            else:
-                # horizontal/vertical reference lines (axhline/axvline)
-                self._draw_axes_line(props)
-        elif props["coordinates"] == "display" and isinstance(
-            props["mplobj"].get_transform(), transforms.BlendedGenericTransform
-        ):
-            # axhline/axvline: blended axes/data transforms are reported as
-            # display coordinates by the exporter
+        elif props["coordinates"] == "axes" and self._processing_legend:
+            # dealing with legend graphical elements
+            self.msg += "    Using native legend\n"
+        elif self._is_axes_reference_line(props):
             self._draw_axes_line(props)
         else:
             self.msg += "    Line didn't have 'data' coordinates, not drawing\n"
@@ -567,9 +559,24 @@ class PlotlyRenderer(Renderer):
                 "coordinates!"
             )
 
+    def _is_axes_reference_line(self, props):
+        """Check whether a line qualifies as an axes-coordinate reference line
+        (e.g. axhline, axvline, axline) that can be drawn as a 2-point layout shape."""
+        if not props.get("linestyle") or len(props.get("data", [])) != 2:
+            return False
+        if props["coordinates"] == "axes" and not self._processing_legend:
+            return True
+        if props["coordinates"] == "display" and isinstance(
+            props["mplobj"].get_transform(), transforms.BlendedGenericTransform
+        ):
+            return True
+        return False
+
     def _draw_axes_line(self, props):
         """Draw an axes-coordinate reference line (axhline/axvline) as a
         layout shape spanning the line's endpoints in data coordinates."""
+        if not props.get("linestyle") or len(props.get("data", [])) != 2:
+            return
         ax = self.current_mpl_ax
         trans = props["mplobj"].get_transform()
         if props["coordinates"] == "display":

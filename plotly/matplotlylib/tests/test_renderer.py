@@ -1,8 +1,11 @@
 import datetime
+import pytest
 
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from matplotlib import transforms
 import plotly.tools as tls
 
 
@@ -745,6 +748,45 @@ def test_axline_converts():
     assert abs(shape.x1 - x1) < 1e-9
     assert abs(shape.y0 - y0) < 1e-9
     assert abs(shape.y1 - y1) < 1e-9
+
+
+def test_axes_line_with_more_than_two_points_does_not_crash():
+    """Axes-coordinate line with != 2 points does not crash and is ignored with a warning."""
+    fig, ax = plt.subplots()
+    ax.plot([0.1, 0.5, 0.9], [0.1, 0.5, 0.9], transform=ax.transAxes)
+
+    with pytest.warns(UserWarning, match="Line2D objects from matplotlib"):
+        plotly_fig = tls.mpl_to_plotly(fig)
+    assert len(plotly_fig.layout.shapes) == 0
+
+
+def test_axes_line_two_points_markers_only_does_not_crash():
+    """Axes-coordinate line with exactly two points but markers only (linestyle is None) does not crash."""
+    fig, ax = plt.subplots()
+    # Exactly two points, marker-only (linestyle=None)
+    lines = ax.plot([0.1, 0.9], [0.1, 0.9], "o", transform=ax.transAxes)
+    assert len(lines[0].get_xydata()) == 2
+    assert lines[0].get_linestyle() == "None"
+
+    with pytest.warns(UserWarning, match="Line2D objects from matplotlib"):
+        plotly_fig = tls.mpl_to_plotly(fig)
+    assert len(plotly_fig.layout.shapes) == 0
+
+
+def test_blended_transform_line_invalid_does_not_crash():
+    """Blended transform line with != 2 points or marker only does not crash."""
+    fig, ax = plt.subplots()
+    trans = transforms.blended_transform_factory(ax.transData, ax.transAxes)
+    line1 = matplotlib.lines.Line2D([0.1, 0.5, 0.9], [0.1, 0.5, 0.9], transform=trans)
+    line2 = matplotlib.lines.Line2D(
+        [0.1, 0.9], [0.1, 0.9], linestyle="None", marker="o", transform=trans
+    )
+    ax.add_line(line1)
+    ax.add_line(line2)
+
+    with pytest.warns(UserWarning, match="Line2D objects from matplotlib"):
+        plotly_fig = tls.mpl_to_plotly(fig)
+    assert len(plotly_fig.layout.shapes) == 0
 
 
 def test_uneven_custom_date_xtickvals_are_converted():
