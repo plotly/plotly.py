@@ -57,34 +57,48 @@ def check_corners(inner_obj, outer_obj):
         return True
 
 
+VALID_DASH = {"solid", "dot", "dash", "longdash", "dashdot", "longdashdot"}
+
+
 def convert_dash(mpl_dash):
     """Convert mpl line symbol to plotly line symbol and return symbol."""
+    if not mpl_dash:
+        return "solid"
     if mpl_dash in DASH_MAP:
         return DASH_MAP[mpl_dash]
-    else:
-        dash_array = mpl_dash.split(",")
+    if mpl_dash in VALID_DASH:
+        return mpl_dash
+    if mpl_dash in ("dashed", "--"):
+        return "dash"
+    if mpl_dash in ("dotted", ":"):
+        return "dot"
 
-        if len(dash_array) < 2:
-            return "solid"
+    dash_array = mpl_dash.replace("px", "").replace(" ", "").split(",")
+    if len(dash_array) < 2:
+        return "solid"
 
-        # Catch the exception where the off length is zero, in case
-        # matplotlib 'solid' changes from '10,0' to 'N,0'
-        if math.isclose(float(dash_array[1]), 0.0):
-            return "solid"
+    try:
+        on = float(dash_array[0])
+        off = float(dash_array[1])
+    except ValueError:
+        return "solid"
 
-        # If we can't find the dash pattern in the map, convert it
-        # into custom values in px, e.g. '7,5' -> '7px,5px'
-        dashpx = ",".join([x + "px" for x in dash_array])
+    if math.isclose(off, 0.0):
+        return "solid"
 
-        # TODO: rewrite the convert_dash code
-        # only strings 'solid', 'dashed', etc allowed
-        if dashpx == "7.4px,3.2px":
-            dashpx = "dashed"
-        elif dashpx == "12.8px,3.2px,2.0px,3.2px":
-            dashpx = "dashdot"
-        elif dashpx == "2.0px,3.3px":
-            dashpx = "dotted"
-        return dashpx
+    if len(dash_array) == 2:
+        if on <= 2.5:
+            return "dot"
+        elif on >= 10:
+            return "longdash"
+        else:
+            return "dash"
+    elif len(dash_array) == 4:
+        return "dashdot"
+    elif len(dash_array) >= 6:
+        return "longdashdot"
+
+    return "solid"
 
 
 def convert_path(path):
@@ -603,10 +617,12 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
 DASH_MAP = {
     "10,0": "solid",
     "6,6": "dash",
-    "2,2": "circle",
+    "2,2": "dot",
     "4,4,2,4": "dashdot",
     "none": "solid",
     "7.4,3.2": "dash",
+    "12.8,3.2,2.0,3.2": "dashdot",
+    "2.0,3.3": "dot",
 }
 
 PATH_MAP = {

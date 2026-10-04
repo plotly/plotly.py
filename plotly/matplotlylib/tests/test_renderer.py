@@ -814,6 +814,44 @@ def test_blended_transform_line_invalid_does_not_crash():
     assert len(plotly_fig.layout.shapes) == 0
 
 
+def test_dotted_line_dash_converts_to_dot():
+    """Dotted lines (linestyle=':') convert to dash='dot'."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], linestyle=":")
+    ax.axhline(0.5, linestyle=":")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    assert plotly_fig.data[0].line.dash == "dot"
+    assert plotly_fig.layout.shapes[0].line.dash == "dot"
+
+
+def test_convert_dash_returns_valid_plotly_dash_styles():
+    """convert_dash must always return valid Plotly dash style strings."""
+    from plotly.matplotlylib.mpltools import convert_dash
+
+    valid_styles = {"solid", "dot", "dash", "longdash", "dashdot", "longdashdot"}
+    inputs = [
+        "10,0",
+        "6,6",
+        "2,2",
+        "4,4,2,4",
+        "none",
+        "7.4,3.2",
+        "2.0,3.3",
+        "12.8,3.2,2.0,3.2",
+        "5,5",
+        "12,3",
+        "1,1",
+        "dashed",
+        "dotted",
+        "",
+        None,
+    ]
+    for inp in inputs:
+        res = convert_dash(inp)
+        assert res in valid_styles, f"Input {inp!r} produced invalid dash {res!r}"
+
+
 def test_uneven_custom_date_xtickvals_are_converted():
     """Unevenly spaced custom date ticks must be converted to date strings."""
     dates = [datetime.datetime(2023, 1, i) for i in range(1, 11)]
