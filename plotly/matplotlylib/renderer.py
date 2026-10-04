@@ -35,6 +35,21 @@ def _per_path(values, i, default):
     return values[i % n] if n else default
 
 
+def _convert_collection_dash(linestyle):
+    """Convert a matplotlib collection line style to a plotly dash string.
+
+    Collections report line styles as (offset, dashes) tuples, with dashes
+    in points and already scaled by line width (None for solid lines). Line
+    widths are exported with their point values used as px, so the dashes
+    are exported the same way, which keeps matplotlib's dash-to-width ratio.
+    plotly has no dash offset, so the offset is dropped.
+    """
+    dashes = linestyle[1] if linestyle is not None else None
+    if not dashes:
+        return "solid"
+    return ",".join("{0:g}px".format(d) for d in dashes)
+
+
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -580,6 +595,7 @@ class PlotlyRenderer(Renderer):
         'linewidth',            (one or more linewidths)
         'facecolor',            (one or more facecolors for path)
         'edgecolor',            (one or more edgecolors for path)
+        'linestyle',            (one or more (offset, dashes) line styles)
         'alpha',                (one or more opacites for path)
         'zorder',               (precedence when stacked)
         ]
@@ -619,10 +635,12 @@ class PlotlyRenderer(Renderer):
         as plain lines."""
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
+        linestyles = props["styles"].get("linestyle")
 
         for i, (verts, codes) in enumerate(props["paths"]):
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
+            dash = _convert_collection_dash(_per_path(linestyles, i, None))
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); separate disjoint subpaths with None so
             # plotly does not connect them.
@@ -671,7 +689,9 @@ class PlotlyRenderer(Renderer):
                         y=y_combined,
                         mode="lines",
                         line=go.scatter.Line(
-                            color=_export_color(edgecolor), width=linewidth
+                            color=_export_color(edgecolor),
+                            width=linewidth,
+                            dash=dash,
                         ),
                         xaxis="x{0}".format(self.axis_ct),
                         yaxis="y{0}".format(self.axis_ct),

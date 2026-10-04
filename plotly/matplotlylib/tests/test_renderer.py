@@ -818,3 +818,43 @@ def test_line_collection_date_xaxis():
     assert len(lines) >= 1
     assert any(isinstance(x, str) for t in lines for x in t.x)
     assert all(x is None or isinstance(x, str) for t in lines for x in t.x)
+
+
+def test_contour_line_dash_styles():
+    """Each contour level keeps its matplotlib dash pattern, exported as a
+    px dash list (matplotlib's pattern is already scaled by line width)."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(
+        X,
+        Y,
+        np.sin(X) * np.cos(Y),
+        levels=[-0.5, -0.25, 0.25, 0.5],
+        colors="k",
+        linewidths=1.5,
+        linestyles=["dashed", "solid", "dotted", (0, (5, 2, 1, 2))],
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert [t.line.dash for t in plotly_fig.data] == [
+        "5.55px,2.4px",
+        "solid",
+        "1.5px,2.475px",
+        "7.5px,3px,1.5px,3px",
+    ]
+
+
+def test_contour_line_dash_scales_with_linewidth():
+    """matplotlib scales dash patterns by line width; the export follows."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(
+        X, Y, np.sin(X) * np.cos(Y), levels=[0.5], linewidths=3, linestyles="dashed"
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].line.width == 3
+    assert plotly_fig.data[0].line.dash == "11.1px,4.8px"
