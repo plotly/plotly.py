@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add support for converting matplotlib reference lines (`axhline`, `axvline`, and `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
+
 ### Fixed
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
@@ -12,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `mpl_to_plotly` showing unwanted legends with placeholder or internal label entries (`_nolegend_`, `_childN`) by defaulting `layout.showlegend=False` unless the matplotlib figure explicitly defines a legend [[#5699](https://github.com/plotly/plotly.py/pull/5699)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` crashing on figures with fully transparent or alpha-carrying colors, such as boxplot outlier markers (`facecolor="none"`), rgba line colors, and `color="none"` text and axis labels; all matplotlib colors are now exported through a single helper that maps `"none"` to transparent rgba and keeps or overrides alpha as matplotlib does [[#5700](https://github.com/plotly/plotly.py/pull/5700)], with thanks to @robertoffmoura for the contribution!
 - Export tick label colors to the plotly tickfont in `mpl_to_plotly` [[#5716](https://github.com/plotly/plotly.py/pull/5716)], with thanks to @robertoffmoura for the contribution!
+- Fix `convert_dash` mapping dotted lines (`linestyle=':'`) to invalid `'circle'` in Plotly, correctly converting them to `'dot'` and preserving custom dash patterns as pixel lists, [[#5719](https://github.com/plotly/plotly.py/pull/5719)] with thanks to @robertoffmoura for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
 - Fix `mpl_to_plotly` conversion of matplotlib contour lines and line collections: close contour rings ending with `Z` codes, support dash styles, convert date x-axes, separate disjoint subpaths with `None` separators, hide line collection traces from the legend by default, and group consecutive same-style lines into single traces [[#5770](https://github.com/plotly/plotly.py/pull/5770)], with thanks to @robertoffmoura for the contribution!
 
