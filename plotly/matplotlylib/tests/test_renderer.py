@@ -206,6 +206,58 @@ def test_ticks_hidden_when_mpl_main_ticks_hidden():
     assert plotly_fig.layout.yaxis.ticks == ""
 
 
+def test_twinx_axis_position_and_ticks():
+    """Test that twinx secondary y-axis is on the right with visible ticks and title."""
+    fig, ax1 = plt.subplots()
+    ax1.plot([0, 1, 2], [0, 1, 4])
+    ax1.set_ylabel("left axis")
+    ax2 = ax1.twinx()
+    ax2.plot([0, 1, 2], [10, 5, 2])
+    ax2.set_ylabel("right axis")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.yaxis.side == "left"
+    assert plotly_fig.layout.yaxis.title.text == "left axis"
+    assert plotly_fig.layout.yaxis.ticks == "inside"
+
+    assert plotly_fig.layout.yaxis2.side == "right"
+    assert plotly_fig.layout.yaxis2.title.text == "right axis"
+    assert plotly_fig.layout.yaxis2.ticks == "inside"
+
+
+def test_twiny_axis_position_and_ticks():
+    """Test that twiny secondary x-axis is on the top with visible ticks and title."""
+    fig, ax1 = plt.subplots()
+    ax1.plot([0, 1, 2], [0, 1, 4])
+    ax1.set_xlabel("bottom axis")
+    ax2 = ax1.twiny()
+    ax2.plot([10, 5, 2], [0, 1, 4])
+    ax2.set_xlabel("top axis")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.side == "bottom"
+    assert plotly_fig.layout.xaxis.title.text == "bottom axis"
+    assert plotly_fig.layout.xaxis.ticks == "inside"
+
+    assert plotly_fig.layout.xaxis2.side == "top"
+    assert plotly_fig.layout.xaxis2.title.text == "top axis"
+    assert plotly_fig.layout.xaxis2.ticks == "inside"
+
+
+def test_right_axis_ticks_hidden_when_mpl_right_ticks_hidden():
+    """Test that ticks are hidden on a right-side axis when right ticks are hidden in matplotlib."""
+    fig, ax1 = plt.subplots()
+    ax2 = ax1.twinx()
+    ax2.tick_params(right=False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.yaxis2.side == "right"
+    assert plotly_fig.layout.yaxis2.ticks == ""
+
+
 def test_violinplot_bodies_are_filled_polygons():
     fig, ax = plt.subplots()
     ax.violinplot(np.random.randn(100, 3))

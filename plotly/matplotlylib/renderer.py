@@ -194,18 +194,33 @@ class PlotlyRenderer(Renderer):
         top_tick_markers = x_tick_params.get("top", x_tick_params.get("right", False))
         left_tick_markers = y_tick_params.get("left", True)
         right_tick_markers = y_tick_params.get("right", False)
+        if xaxis["side"] == "top":
+            x_main_spine, x_mirror_spine = top_spine, bottom_spine
+            x_main_ticks, x_mirror_ticks = top_tick_markers, bottom_tick_markers
+        else:
+            x_main_spine, x_mirror_spine = bottom_spine, top_spine
+            x_main_ticks, x_mirror_ticks = bottom_tick_markers, top_tick_markers
+
         xaxis["mirror"] = mpltools.get_axis_mirror(
-            bottom_spine, top_spine, bottom_tick_markers, top_tick_markers
+            x_main_spine, x_mirror_spine, x_main_ticks, x_mirror_ticks
         )
-        yaxis["mirror"] = mpltools.get_axis_mirror(
-            left_spine, right_spine, left_tick_markers, right_tick_markers
-        )
-        xaxis["showline"] = bottom_spine
-        yaxis["showline"] = left_spine
+        xaxis["showline"] = x_main_spine
         # hide tick markers when the mpl main-side tick markers are hidden
-        if not bottom_tick_markers:
+        if not x_main_ticks:
             xaxis["ticks"] = ""
-        if not left_tick_markers:
+
+        if yaxis["side"] == "right":
+            y_main_spine, y_mirror_spine = right_spine, left_spine
+            y_main_ticks, y_mirror_ticks = right_tick_markers, left_tick_markers
+        else:
+            y_main_spine, y_mirror_spine = left_spine, right_spine
+            y_main_ticks, y_mirror_ticks = left_tick_markers, right_tick_markers
+
+        yaxis["mirror"] = mpltools.get_axis_mirror(
+            y_main_spine, y_mirror_spine, y_main_ticks, y_mirror_ticks
+        )
+        yaxis["showline"] = y_main_spine
+        if not y_main_ticks:
             yaxis["ticks"] = ""
 
         # put axes in our figure
