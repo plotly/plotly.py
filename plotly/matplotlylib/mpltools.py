@@ -5,6 +5,7 @@ A module for converting from mpl language to plotly language.
 
 """
 
+import datetime
 import math
 
 import warnings
@@ -603,7 +604,12 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
     # according to mpl --> try num2date(1)
     else:
         try:
-            dates = matplotlib.dates.num2date(dates)
+            dates = [
+                d
+                if isinstance(d, (datetime.date, datetime.datetime))
+                else matplotlib.dates.num2date(d)
+                for d in dates
+            ]
         except Exception:
             return _dates
 
