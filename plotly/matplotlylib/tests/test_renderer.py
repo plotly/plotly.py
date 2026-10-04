@@ -944,6 +944,27 @@ def test_axvline_and_axhline_on_date_xaxis():
     assert hline_shape.yref == "y"
 
 
+def test_axhline_on_date_yaxis():
+    """axhline with a datetime on a date y-axis converts without crashing."""
+    dates = [datetime.datetime(2023, 1, i) for i in range(1, 10)]
+    fig, ax = plt.subplots()
+    ax.plot(range(len(dates)), dates)
+    ax.axhline(dates[3])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 1
+    shape = shapes[0]
+    assert shape.type == "line"
+    assert shape.xref == "x domain"
+    assert shape.yref == "y"
+    assert abs(shape.x0 - 0.0) < 1e-9
+    assert abs(shape.x1 - 1.0) < 1e-9
+    expected_y = float(matplotlib.dates.date2num(dates[3]))
+    assert abs(shape.y0 - expected_y) < 1e-9
+    assert abs(shape.y1 - expected_y) < 1e-9
+
+
 def test_reference_lines_custom_limits_and_subplots():
     """axhline and axvline respect custom domain limits and subplot axis references."""
     fig, (ax1, ax2) = plt.subplots(1, 2)

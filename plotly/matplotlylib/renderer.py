@@ -604,8 +604,8 @@ class PlotlyRenderer(Renderer):
             trans == ax.get_yaxis_transform() or trans._x == ax.transAxes
         ):
             # axhline: x spans the axes domain [xmin, xmax], y is in data coordinates
-            x_data = line.get_xdata()
-            y_data = line.get_ydata()
+            x_data = line.get_xdata(orig=False)
+            y_data = line.get_ydata(orig=False)
             x0, x1 = float(x_data[0]), float(x_data[1])
             y0, y1 = float(y_data[0]), float(y_data[1])
             xref = x_domain
@@ -614,14 +614,12 @@ class PlotlyRenderer(Renderer):
             trans == ax.get_xaxis_transform() or trans._y == ax.transAxes
         ):
             # axvline: x is in data coordinates, y spans the axes domain [ymin, ymax]
-            x_data = line.get_xdata()
-            y_data = line.get_ydata()
-            x0, x1 = x_data[0], x_data[1]
+            x_data = line.get_xdata(orig=False)
+            y_data = line.get_ydata(orig=False)
+            x0, x1 = float(x_data[0]), float(x_data[1])
             y0, y1 = float(y_data[0]), float(y_data[1])
             if self.x_is_mpl_date:
                 x0, x1 = self._convert_x_dates([x0, x1])
-            else:
-                x0, x1 = float(x0), float(x1)
             xref = x_axis
             yref = y_domain
         elif props["coordinates"] == "axes" and not isinstance(line, _AXLINE_CLASS):
