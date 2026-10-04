@@ -815,6 +815,46 @@ def test_axline_horizontal_and_vertical():
     assert abs(shapes[1].y1 - 1.0) < 1e-9
 
 
+def test_axes_coordinate_segments_keep_their_endpoints():
+    """Two-point lines in axes coordinates (not axline) convert to shapes in
+    axes domain coordinates with their exact endpoints, without extension."""
+    fig, ax = plt.subplots()
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 10)
+    ax.plot([0.2, 0.4], [0.5, 0.5], transform=ax.transAxes)
+    ax.plot([0.2, 0.4], [0.2, 0.6], transform=ax.transAxes)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 2
+
+    expected = [((0.2, 0.5), (0.4, 0.5)), ((0.2, 0.2), (0.4, 0.6))]
+    for shape, ((x0, y0), (x1, y1)) in zip(shapes, expected):
+        assert shape.type == "line"
+        assert shape.xref == "x domain"
+        assert shape.yref == "y domain"
+        assert abs(shape.x0 - x0) < 1e-9
+        assert abs(shape.y0 - y0) < 1e-9
+        assert abs(shape.x1 - x1) < 1e-9
+        assert abs(shape.y1 - y1) < 1e-9
+
+
+def test_axes_coordinate_segment_on_subplot_uses_subplot_domain():
+    """Axes-coordinate segments on a second subplot reference that subplot's domain."""
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax2.plot([0.1, 0.3], [0.7, 0.9], transform=ax2.transAxes)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+    shapes = plotly_fig.layout.shapes
+    assert len(shapes) == 1
+    assert shapes[0].xref == "x2 domain"
+    assert shapes[0].yref == "y2 domain"
+    assert abs(shapes[0].x0 - 0.1) < 1e-9
+    assert abs(shapes[0].y0 - 0.7) < 1e-9
+    assert abs(shapes[0].x1 - 0.3) < 1e-9
+    assert abs(shapes[0].y1 - 0.9) < 1e-9
+
+
 def test_axvline_and_axhline_on_date_xaxis():
     """axvline and axhline on a date x-axis use proper domain and data coordinate references."""
     dates = [datetime.datetime(2023, 1, i) for i in range(1, 10)]

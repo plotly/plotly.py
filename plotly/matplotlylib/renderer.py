@@ -10,10 +10,15 @@ with the matplotlylib package.
 import math
 import warnings
 
+from matplotlib import lines as mlines
 from matplotlib import transforms
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
+
+# Artist class created by ``Axes.axline``: ``AxLine`` in matplotlib >= 3.8,
+# ``_AxLine`` in earlier versions.
+_AXLINE_CLASS = getattr(mlines, "AxLine", None) or getattr(mlines, "_AxLine", ())
 
 
 from plotly.matplotlylib.mpltools import _export_color
@@ -562,7 +567,8 @@ class PlotlyRenderer(Renderer):
 
     def _is_axes_reference_line(self, props):
         """Check whether a line qualifies as an axes-coordinate reference line
-        (e.g. axhline, axvline, axline) that can be drawn as a 2-point layout shape."""
+        (e.g. axhline, axvline, axline, or a 2-point segment drawn with
+        ``transform=ax.transAxes``) that can be drawn as a 2-point layout shape."""
         if not props.get("linestyle") or len(props.get("data", [])) != 2:
             return False
         if props["coordinates"] == "axes" and not self._processing_legend:
@@ -574,8 +580,12 @@ class PlotlyRenderer(Renderer):
         return False
 
     def _draw_axes_line(self, props):
-        """Draw an axes-coordinate reference line (axhline/axvline) as a
-        layout shape spanning the line's endpoints in data coordinates."""
+        """Draw an axes-coordinate reference line as a layout shape.
+
+        axhline/axvline span their axes-fraction extent along one axis and sit
+        at a data value on the other. Segments in axes coordinates keep their
+        exact endpoints in axes domain coordinates. axline is extended in data
+        coordinates."""
         if not props.get("linestyle") or len(props.get("data", [])) != 2:
             return
         ax = self.current_mpl_ax
@@ -611,6 +621,13 @@ class PlotlyRenderer(Renderer):
             else:
                 x0, x1 = float(x0), float(x1)
             xref = x_axis
+            yref = y_domain
+        elif props["coordinates"] == "axes" and not isinstance(line, _AXLINE_CLASS):
+            # Segment fixed to the axes (e.g. transform=ax.transAxes): props["data"]
+            # holds its endpoints as axes fractions, which map directly onto the
+            # axes domain, so the segment keeps its extent and stays put on pan/zoom
+            (x0, y0), (x1, y1) = [(float(x), float(y)) for x, y in props["data"]]
+            xref = x_domain
             yref = y_domain
         else:
             # general reference line (e.g. axline)
