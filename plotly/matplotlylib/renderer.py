@@ -17,6 +17,24 @@ from plotly.matplotlylib import mpltools
 from plotly.matplotlylib.mpltools import _export_color
 
 
+def _per_path(values, i, default):
+    """Return the style value for the i-th path of a path collection.
+
+    A scalar (or string) value applies to every path, a sequence is cycled
+    through like matplotlib does, and None or an empty sequence yields
+    `default`.
+    """
+    if isinstance(values, str):
+        return values
+    if values is None:
+        return default
+    try:
+        n = len(values)
+    except TypeError:
+        return values
+    return values[i % n] if n else default
+
+
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -602,20 +620,9 @@ class PlotlyRenderer(Renderer):
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
 
-        def per_path(colors, i, default):
-            if isinstance(colors, str):
-                return colors
-            if colors is None:
-                return default
-            try:
-                n = len(colors)
-            except TypeError:
-                return colors
-            return colors[i % n] if n else default
-
         for i, (verts, codes) in enumerate(props["paths"]):
-            edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
-            linewidth = per_path(linewidths, i, 0)
+            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = _per_path(linewidths, i, 0)
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); separate disjoint subpaths with None so
             # plotly does not connect them.
@@ -677,21 +684,10 @@ class PlotlyRenderer(Renderer):
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
 
-        def per_path(colors, i, default):
-            if isinstance(colors, str):
-                return colors
-            if colors is None:
-                return default
-            try:
-                n = len(colors)
-            except TypeError:
-                return colors
-            return colors[i % n] if n else default
-
         for i, (verts, codes) in enumerate(props["paths"]):
-            facecolor = per_path(facecolors, i, "rgba(0,0,0,0)")
-            edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
-            linewidth = per_path(linewidths, i, 0)
+            facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
+            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = _per_path(linewidths, i, 0)
             self.plotly_fig.add_trace(
                 go.Scatter(
                     x=self._convert_x_dates([v[0] for v in verts]),
