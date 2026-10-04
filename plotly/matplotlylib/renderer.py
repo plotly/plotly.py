@@ -688,6 +688,7 @@ class PlotlyRenderer(Renderer):
                         x=x_combined,
                         y=y_combined,
                         mode="lines",
+                        showlegend=False,
                         line=go.scatter.Line(
                             color=_export_color(edgecolor),
                             width=linewidth,

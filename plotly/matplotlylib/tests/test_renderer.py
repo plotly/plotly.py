@@ -858,3 +858,30 @@ def test_contour_line_dash_scales_with_linewidth():
     assert len(plotly_fig.data) == 1
     assert plotly_fig.data[0].line.width == 3
     assert plotly_fig.data[0].line.dash == "11.1px,4.8px"
+
+
+def test_contour_lines_showlegend_false():
+    """Contour line traces have showlegend=False so they do not produce legend entries."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), levels=[-0.5, 0.5])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) >= 1
+    assert all(t.showlegend is False for t in plotly_fig.data)
+
+
+def test_contour_lines_not_in_legend():
+    """Contour lines do not appear in the legend even when a figure legend is present."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], label="Line")
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), levels=[-0.5, 0.5])
+    ax.legend()
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    contour_traces = [t for t in plotly_fig.data if t.name != "Line"]
+    assert len(contour_traces) >= 1
+    assert all(t.showlegend is False for t in contour_traces)
