@@ -1043,30 +1043,36 @@ def test_dotted_line_dash_converts_to_dot():
 
 
 def test_convert_dash_returns_valid_plotly_dash_styles():
-    """convert_dash must always return valid Plotly dash style strings."""
+    """convert_dash maps standard styles to Plotly names and custom patterns to px lists."""
+    import plotly.graph_objs as go
     from plotly.matplotlylib.mpltools import convert_dash
 
-    valid_styles = {"solid", "dot", "dash", "longdash", "dashdot", "longdashdot"}
-    inputs = [
-        "10,0",
-        "6,6",
-        "2,2",
-        "4,4,2,4",
-        "none",
-        "7.4,3.2",
-        "2.0,3.3",
-        "12.8,3.2,2.0,3.2",
-        "5,5",
-        "12,3",
-        "1,1",
-        "dashed",
-        "dotted",
-        "",
-        None,
-    ]
-    for inp in inputs:
+    expected_mappings = {
+        "10,0": "solid",
+        "6,6": "dash",
+        "2,2": "dot",
+        "4,4,2,4": "dashdot",
+        "none": "solid",
+        "7.4,3.2": "dash",
+        "2.0,3.3": "dot",
+        "12.8,3.2,2.0,3.2": "dashdot",
+        "5,5": "5px,5px",
+        "12,3,2,3": "12px,3px,2px,3px",
+        "dashed": "dash",
+        "dotted": "dot",
+        "--": "dash",
+        ":": "dot",
+        "": "solid",
+        None: "solid",
+    }
+    for inp, expected in expected_mappings.items():
         res = convert_dash(inp)
-        assert res in valid_styles, f"Input {inp!r} produced invalid dash {res!r}"
+        assert res == expected, f"Input {inp!r} produced {res!r}, expected {expected!r}"
+        # Confirm Plotly layout shape line and scatter line accept the converted dash
+        shape_line = go.layout.shape.Line(dash=res)
+        scatter_line = go.scatter.Line(dash=res)
+        assert shape_line.dash == res
+        assert scatter_line.dash == res
 
 
 def test_uneven_custom_date_xtickvals_are_converted():

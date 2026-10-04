@@ -74,11 +74,14 @@ def convert_dash(mpl_dash):
         return "dot"
 
     dash_array = mpl_dash.replace("px", "").replace(" ", "").split(",")
+    cleaned = ",".join(dash_array)
+    if cleaned in DASH_MAP:
+        return DASH_MAP[cleaned]
+
     if len(dash_array) < 2:
         return "solid"
 
     try:
-        on = float(dash_array[0])
         off = float(dash_array[1])
     except ValueError:
         return "solid"
@@ -86,19 +89,8 @@ def convert_dash(mpl_dash):
     if math.isclose(off, 0.0):
         return "solid"
 
-    if len(dash_array) == 2:
-        if on <= 2.5:
-            return "dot"
-        elif on >= 10:
-            return "longdash"
-        else:
-            return "dash"
-    elif len(dash_array) == 4:
-        return "dashdot"
-    elif len(dash_array) >= 6:
-        return "longdashdot"
-
-    return "solid"
+    # Convert custom dash pattern into px list (e.g. '7,5' -> '7px,5px')
+    return ",".join([x + "px" for x in dash_array])
 
 
 def convert_path(path):
