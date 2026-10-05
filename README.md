@@ -39,7 +39,7 @@
 
 ## Quickstart
 
-`pip install plotly`
+`pip install "plotly[express]" pandas`
 
 ```python
 import plotly.express as px
