@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add support for converting matplotlib fill polygons (`plt.fill`) to filled scatter traces in `mpl_to_plotly`, with thanks to @robertoffmoura for the contribution!
+
 ### Fixed
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
 - Fix `mpl_to_plotly` crashing on touching bars (such as `plt.hist`) due to floating-point noise producing negative `bargap` values by clamping `bargap` to `[0, 1]` [[#5696](https://github.com/plotly/plotly.py/pull/5696)], with thanks to @robertoffmoura for the contribution!
