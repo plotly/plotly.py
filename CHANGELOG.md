@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Added
-- Add support for converting matplotlib fill polygons (`plt.fill`) to filled scatter traces in `mpl_to_plotly`, with thanks to @robertoffmoura for the contribution!
+- Add support for converting matplotlib fill polygons (`plt.fill`) to filled scatter traces in `mpl_to_plotly` [[#5795](https://github.com/plotly/plotly.py/pull/5795)], with thanks to @robertoffmoura for the contribution!
 
 ### Fixed
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
