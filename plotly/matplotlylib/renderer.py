@@ -622,8 +622,17 @@ class PlotlyRenderer(Renderer):
         verts = props["data"]
         facecolor = _export_color(style["facecolor"])
         edgecolor = _export_color(style["edgecolor"])
+        mplobj = props.get("mplobj")
+        label = mplobj.get_label() if mplobj is not None else None
+        if not label or (isinstance(label, str) and label.startswith("_")):
+            label = None
+            showlegend = False
+        else:
+            showlegend = None
         self.plotly_fig.add_trace(
             go.Scatter(
+                name=label,
+                showlegend=showlegend,
                 x=self._convert_x_dates([v[0] for v in verts]),
                 y=[v[1] for v in verts],
                 mode="lines",
