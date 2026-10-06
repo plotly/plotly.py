@@ -226,18 +226,9 @@ class PlotlyRenderer(Renderer):
 
         overlay_ax_ct = None
         for prev_ax, prev_ct in self.axes_list:
-            is_twinned = (
-                (
-                    hasattr(ax, "_twinned_axes")
-                    and ax in ax._twinned_axes.get_siblings(prev_ax)
-                )
-                or getattr(ax, "_sharex", None) == prev_ax
-                or getattr(ax, "_sharey", None) == prev_ax
-                or getattr(prev_ax, "_sharex", None) == ax
-                or getattr(prev_ax, "_sharey", None) == ax
-                or (ax.get_position().bounds == prev_ax.get_position().bounds)
-            )
-            if is_twinned:
+            # Overlay only axes that cover the same area. Shared-axis subplots, such
+            # as the ones from plt.subplots(sharex=True), sit in different places.
+            if ax.get_position().bounds == prev_ax.get_position().bounds:
                 overlay_ax_ct = prev_ct
                 break
 
