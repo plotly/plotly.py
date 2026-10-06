@@ -2193,11 +2193,18 @@ def process_dataframe_timeline(args):
                 "Both x_start and x_end must refer to data convertible to datetimes."
             ) from exc
 
+    # Match the local times displayed on date axes when calculating bar lengths.
+    schema = df.schema
+    x_start, x_end = [
+        nw.col(col).dt.replace_time_zone(None)
+        if schema[col] == nw.Datetime and schema[col].time_zone is not None
+        else nw.col(col)
+        for col in (args["x_start"], args["x_end"])
+    ]
+
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
     args["data_frame"] = df.with_columns(
-        (nw.col(args["x_end"]) - nw.col(args["x_start"]))
-        .dt.total_milliseconds()
-        .alias(args["x_end"])
+        (x_end - x_start).dt.total_milliseconds().alias(args["x_end"])
     )
     args["x"] = args["x_end"]
     args["base"] = args["x_start"]
