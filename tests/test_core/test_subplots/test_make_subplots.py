@@ -2038,3 +2038,35 @@ def test_make_subplots_spacing_error():
         ValueError, match=r"^Vertical spacing must be between 0 and 1\.$"
     ):
         subplots.make_subplots(1, 1, vertical_spacing=1.01)
+
+
+@pytest.mark.parametrize(
+    "spanned",
+    [
+        # the last cell of row 1 is covered by a colspan
+        dict(specs=[[{"colspan": 2}, None], [{}, {}]]),
+        # the last column holds a subplot spanning both rows
+        dict(specs=[[{}, {"rowspan": 2}], [{}, None]]),
+        # a rowspan starting in the bottom row leaves the top-row cell empty
+        dict(specs=[[{"rowspan": 2}, {}], [None, {}]], start_cell="bottom-left"),
+    ],
+)
+def test_row_and_column_titles_with_spanning_subplots(spanned):
+    # Each row/column title should stay aligned with its own row/column,
+    # exactly as in the equivalent grid without spanning subplots
+    titles = dict(row_titles=["r1", "r2"], column_titles=["c1", "c2"])
+    plain = {k: v for k, v in spanned.items() if k != "specs"}
+
+    fig = subplots.make_subplots(rows=2, cols=2, **spanned, **titles)
+    expected = subplots.make_subplots(rows=2, cols=2, **plain, **titles)
+
+    annotations = fig.layout.annotations
+    expected_annotations = expected.layout.annotations
+    assert [a.text for a in annotations] == ["c1", "c2", "r1", "r2"]
+    assert [a.text for a in annotations] == [a.text for a in expected_annotations]
+    assert [a.x for a in annotations] == pytest.approx(
+        [a.x for a in expected_annotations]
+    )
+    assert [a.y for a in annotations] == pytest.approx(
+        [a.y for a in expected_annotations]
+    )
