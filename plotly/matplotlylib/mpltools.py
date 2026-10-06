@@ -269,7 +269,13 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
         gap0 = gaps[0]
         uniform = all([abs(gap0 - gap) < tol for gap in gaps])
         if uniform:
-            return gap0
+            # Plotly's `bargap` is a fraction of the distance between bar positions, not a gap in data units
+            # so we need to normalize `gap0` with `bar_delta`
+            bar_delta = bar_starts[1] - bar_starts[0]
+            if bar_delta <= 0:
+                return None
+            # Clamp to guard against floating point noise, such as -8.9e-16 for touching bars
+            return min(max(gap0 / bar_delta, 0.0), 1.0)
 
 
 def convert_rgba_array(color_list):
