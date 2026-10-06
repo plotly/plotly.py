@@ -447,11 +447,15 @@ class PlotlyRenderer(Renderer):
             label = props["label"]
             # matplotlib uses "_nolegend_" and auto-generated "_childN"
             # labels for artists that must not appear in a legend
-            if isinstance(label, str) and label.startswith("_"):
+            if not label or (isinstance(label, str) and label.startswith("_")):
                 label = None
+                showlegend = False
+            else:
+                showlegend = None
             marked_line = go.Scatter(
                 mode=mode,
                 name=label,
+                showlegend=showlegend,
                 x=[xy_pair[0] for xy_pair in props["data"]],
                 y=[xy_pair[1] for xy_pair in props["data"]],
                 xaxis="x{0}".format(self.axis_ct),

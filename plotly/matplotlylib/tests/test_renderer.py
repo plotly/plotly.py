@@ -323,6 +323,23 @@ def test_no_legend_entries_for_internal_mpl_labels():
     assert all(t.name is None for t in plotly_fig.data)
 
 
+def test_unlabeled_traces_hidden_from_legend_when_figure_has_legend():
+    """Traces without labels must have showlegend=False when a figure has a legend."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], label="Labeled line")
+    ax.plot([0, 1], [1, 0])  # Unlabeled line
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend == True
+    assert len(plotly_fig.data) == 2
+    assert plotly_fig.data[0].name == "Labeled line"
+    assert plotly_fig.data[0].showlegend is not False
+    assert plotly_fig.data[1].name is None
+    assert plotly_fig.data[1].showlegend is False
+
+
 def test_custom_date_xtickvals_are_converted():
     """Custom tick values on a date axis must be converted to date strings,
     not left as raw matplotlib date numbers or datetime objects."""
