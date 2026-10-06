@@ -266,6 +266,28 @@ def test_right_axis_ticks_hidden_when_mpl_right_ticks_hidden():
     assert plotly_fig.layout.yaxis2.ticks == ""
 
 
+def test_sharex_stacked_lines_in_correct_subplots():
+    """Test that vertically stacked subplots with sharex=True place lines in separate subplots."""
+    fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
+    ax1.plot([1, 2, 3], [4, 5, 6])
+    ax2.plot([1, 2, 3], [10, 20, 30])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 2
+    # First line belongs to the top subplot
+    assert plotly_fig.data[0].yaxis in (None, "y", "y1")
+    # Second line belongs to the bottom subplot
+    assert plotly_fig.data[1].yaxis == "y2"
+
+    # Distinct non-overlapping vertical domains (top above bottom)
+    assert plotly_fig.layout.yaxis.domain[0] > plotly_fig.layout.yaxis2.domain[1]
+
+    # The bottom subplot must not overlay the top subplot
+    assert plotly_fig.layout.yaxis2.overlaying is None
+    assert plotly_fig.layout.xaxis2.overlaying is None
+
+
 def test_violinplot_bodies_are_filled_polygons():
     fig, ax = plt.subplots()
     ax.violinplot(np.random.randn(100, 3))
