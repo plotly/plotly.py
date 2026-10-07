@@ -169,6 +169,51 @@ def test_transparent_text_colors_export():
     assert plotly_fig.layout.yaxis.title.font.color == "rgba(0,0,0,0)"
 
 
+def test_export_color_maps_colors():
+    """_export_color maps matplotlib color strings to plotly colors, keeping
+    or overriding the alpha as requested."""
+    from plotly.matplotlylib.mpltools import _export_color
+
+    expected_mappings = {
+        (None, None): None,
+        ("none", None): "rgba(0,0,0,0)",
+        ("#FF0000", None): "#FF0000",
+        ("#FF0000", 1): "rgba(255, 0, 0, 1)",
+        ("#FF0000", 0.5): "rgba(255, 0, 0, 0.5)",
+        ("rgba(255, 0, 0, 0.2)", None): "rgba(255, 0, 0, 0.2)",
+        ("rgba(255, 0, 0, 0.2)", 1): "rgba(255, 0, 0, 0.2)",
+        ("rgba(255, 0, 0, 0.2)", 0.5): "rgba(255, 0, 0, 0.5)",
+        ("rgb(255, 0, 0)", None): "rgb(255, 0, 0)",
+        ("rgb(255, 0, 0)", 0.5): "rgba(255, 0, 0, 0.5)",
+        ((1.0, 0.0, 0.0, 0.5), None): "rgba(255, 0, 0, 0.5)",
+        ((0.0, 1.0, 0.0, 1.0), None): "#00FF00",
+    }
+    for (color, opacity), expected in expected_mappings.items():
+        result = _export_color(color, opacity)
+        assert result == expected, (
+            f"Input {color!r} with opacity {opacity!r} produced {result!r}, "
+            f"expected {expected!r}"
+        )
+
+    assert _export_color(["#FF0000", "none"]) == ["#FF0000", "rgba(0,0,0,0)"]
+    assert _export_color(["rgba(255, 0, 0, 0.2)"], 0.5) == ["rgba(255, 0, 0, 0.5)"]
+
+
+def test_scatter_with_multiple_colors_converts():
+    """Scatter markers with per-point colors export a list of marker colors."""
+    fig, ax = plt.subplots()
+    ax.scatter([0, 1, 2], [0, 1, 2], c=["red", "green", "blue"])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].mode == "markers"
+    assert plotly_fig.data[0].marker.color == (
+        "rgba(255,0,0,1.0)",
+        "rgba(0,128,0,1.0)",
+        "rgba(0,0,255,1.0)",
+    )
+
+
 def test_eventplot_segments_render():
     fig, ax = plt.subplots()
     ax.eventplot([np.random.randn(20) for _ in range(5)])
