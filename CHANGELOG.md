@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `mpl_to_plotly` crashing on figures with fully transparent or alpha-carrying colors, such as boxplot outlier markers (`facecolor="none"`), rgba line colors, and `color="none"` text and axis labels; all matplotlib colors are now exported through a single helper that maps `"none"` to transparent rgba and keeps or overrides alpha as matplotlib does [[#5700](https://github.com/plotly/plotly.py/pull/5700)], with thanks to @robertoffmoura for the contribution!
 - Export tick label colors to the plotly tickfont in `mpl_to_plotly` [[#5716](https://github.com/plotly/plotly.py/pull/5716)], with thanks to @robertoffmoura for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
+- Fix `px.timeline` bars ending an hour early or late when timezone-aware dates span a daylight saving time change [[#5796](https://github.com/plotly/plotly.py/pull/5796)], with thanks to @mottopanikeiku for the contribution!
 
 ## [7.1.0] - 2026-09-15
 
