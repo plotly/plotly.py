@@ -875,6 +875,9 @@ class PlotlyRenderer(Renderer):
         annotations = []
         for i, (tail, path) in enumerate(zip(props["offsets"], props["paths"])):
             verts = np.asarray(path[0], dtype=float)
+            if len(verts) < 6:
+                # masked, NaN, and zero-length arrows have no path
+                continue
             tail_px = np.asarray(trans.transform(tail))
             tip_offset = verts[3]
             # matplotlib clips arrowheads at the axes box, so clamp the

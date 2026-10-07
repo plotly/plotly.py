@@ -1465,3 +1465,38 @@ def test_quiver_arrow_head_size_uses_headwidth():
     ax2.quiver([0, 1], [0, 0], [1, 1], [0, 0], headwidth=6)
     anns2 = tls.mpl_to_plotly(fig2).layout.annotations
     assert abs(anns2[0].arrowsize / anns[0].arrowsize - 2.0) < 1e-9
+
+
+def test_quiver_masked_vectors_convert():
+    """Quiver arrows with masked vectors convert the unmasked arrows."""
+    fig, ax = plt.subplots()
+    ax.quiver(
+        [0, 1],
+        [0, 0],
+        np.ma.array([1.0, 1.0], mask=[False, True]),
+        np.ma.array([0.0, 0.0], mask=[False, True]),
+    )
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.layout.annotations) == 1
+
+
+def test_quiver_nan_vectors_convert():
+    """Quiver arrows with NaN vectors convert the finite arrows."""
+    fig, ax = plt.subplots()
+    ax.quiver([0, 1], [0, 0], [1.0, np.nan], [0.0, 0.0])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.layout.annotations) == 1
+
+
+def test_quiver_zero_vectors_convert():
+    """Quiver arrows with zero-length vectors convert without arrows."""
+    fig, ax = plt.subplots()
+    ax.quiver([0], [0], [0], [0])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.layout.annotations) == 0
