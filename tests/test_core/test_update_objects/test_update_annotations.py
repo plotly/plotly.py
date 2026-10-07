@@ -1,5 +1,6 @@
 import types
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
@@ -428,3 +429,35 @@ def test_select_annotations_integer(select_annotations_integer):
     assert (len(anns) == 1) and anns[0]["text"] == "B"
     with pytest.raises(IndexError):
         fig.select_annotations(row=2, col=2, selector=3)
+
+
+def test_add_annotation_keeps_existing_annotations():
+    fig = go.Figure()
+    fig.add_annotation(text="first")
+    first = fig.layout.annotations[0]
+
+    fig.add_annotation(text="second")
+
+    assert fig.layout.annotations[0] is first
+    first.text = "edited"
+    assert fig.to_dict()["layout"]["annotations"] == [
+        {"text": "edited"},
+        {"text": "second"},
+    ]
+
+
+def test_add_shape_sends_full_array_relayout():
+    fig = go.Figure()
+    fig.add_shape(type="line", x0=0, x1=1)
+    fig._send_relayout_msg = MagicMock()
+
+    fig.add_shape(type="rect", x0=2, x1=3)
+
+    fig._send_relayout_msg.assert_called_once_with(
+        {
+            "shapes": [
+                {"type": "line", "x0": 0, "x1": 1},
+                {"type": "rect", "x0": 2, "x1": 3},
+            ]
+        }
+    )

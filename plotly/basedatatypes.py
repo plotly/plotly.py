@@ -1627,7 +1627,7 @@ is of type {subplot_type}.""".format(
             xref, yref = map(lambda t: _add_domain(*t), zip(["x", "y"], [xref, yref]))
             new_obj.update(xref=xref, yref=yref)
 
-        self.layout[prop_plural] += (new_obj,)
+        self.layout._append_array_prop(prop_plural, new_obj)
         # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
         # will appear as if user supplied yref params when looping through subplots and
         # will force annotation to be on the axis of the last drawn annotation
@@ -5368,6 +5368,38 @@ class BasePlotlyType(object):
         # ----------------------------
         self._compound_array_props[prop] = val
         return val
+
+    def _append_array_prop(self, prop, val):
+        """
+        Append one element to a compound array property
+
+        Unlike `self[prop] += (val,)`, this validates only the new element
+        and keeps the existing elements, so N appends take O(N) time
+        instead of rebuilding every existing element on each append.
+
+        Parameters
+        ----------
+        prop : str
+            Name of a compound array property
+        val
+            The element to append
+        """
+        if self._in_batch_mode:
+            self[prop] += (val,)
+            return
+
+        curr_val = self[prop]
+        validator = self._get_validator(prop)
+        (new_el,) = validator.validate_coerce([val], skip_invalid=self._skip_invalid)
+
+        self._init_props()
+        new_dict_vals = self._props.get(prop, []) + [deepcopy(new_el._props)]
+        self._props[prop] = new_dict_vals
+        self._send_prop_set(prop, new_dict_vals)
+
+        new_el._orphan_props.clear()
+        new_el._parent = self
+        self._compound_array_props[prop] = list(curr_val) + [new_el]
 
     def _send_prop_set(self, prop_path_str, val):
         """
