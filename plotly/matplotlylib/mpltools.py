@@ -12,6 +12,8 @@ import matplotlib.dates
 
 from _plotly_utils.colors import hex_to_rgb
 
+from plotly.matplotlylib.mplexporter.utils import export_color
+
 
 def check_bar_match(old_bar, new_bar):
     """Check if two bars belong in the same collection (bar chart).
@@ -104,26 +106,6 @@ def convert_symbol(mpl_symbol):
         return SYMBOL_MAP[mpl_symbol]
     else:
         return "circle"  # default
-
-
-def merge_color_and_opacity(color, opacity):
-    """
-    Merge hex color with an alpha (opacity) to get an rgba tuple.
-
-    :param (str|unicode) color: A hex color string.
-    :param (float|int) opacity: A value [0, 1] for the 'a' in 'rgba'.
-    :return: (int, int, int, float) The rgba color and alpha tuple.
-
-    """
-    if color is None:  # None can be used as a placeholder, just bail.
-        return None
-
-    rgb_tup = hex_to_rgb(color)
-    if opacity is None:
-        return "rgb{}".format(rgb_tup)
-
-    rgba_tup = rgb_tup + (opacity,)
-    return "rgba{}".format(rgba_tup)
 
 
 def convert_va(mpl_va):
@@ -250,15 +232,12 @@ def get_axes_bounds(fig):
     return (x_min, x_max), (y_min, y_max)
 
 
-def get_axis_mirror(main_spine, mirror_spine):
-    if main_spine and mirror_spine:
+def get_axis_mirror(main_spine, mirror_spine, main_tick_markers, mirror_tick_markers):
+    if main_spine and mirror_spine and main_tick_markers and mirror_tick_markers:
         return "ticks"
-    elif main_spine and not mirror_spine:
-        return False
-    elif not main_spine and mirror_spine:
-        return False  # can't handle this case yet!
-    else:
-        return False  # nuttin'!
+    if main_spine and mirror_spine:
+        return True
+    return False
 
 
 def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
@@ -276,6 +255,23 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
                 return None
             # Clamp to guard against floating point noise, such as -8.9e-16 for touching bars
             return min(max(gap0 / bar_delta, 0.0), 1.0)
+
+
+DRAWSTYLE_SHAPE_MAP = {
+    "steps": "vh",
+    "steps-pre": "vh",
+    "steps-post": "hv",
+    "steps-mid": "hvh",
+}
+
+
+def convert_drawstyle(drawstyle):
+    """Convert a matplotlib line drawstyle to a plotly line shape.
+
+    Matplotlib draws steps as vertical/horizontal segments; plotly's
+    ``line.shape`` expresses the same via "vh", "hv" and "hvh".
+    """
+    return DRAWSTYLE_SHAPE_MAP.get(drawstyle)
 
 
 def convert_rgba_array(color_list):
@@ -516,6 +512,31 @@ def prep_ticks(ax, index, ax_type, props):
     return axis_dict
 
 
+def _export_color(color, opacity=None):
+    """Export a matplotlib color for use as a plotly color.
+
+    matplotlib uses "none" for fully transparent colors, which plotly does not
+    accept, so transparent colors are exported as transparent black. Colors
+    already exported by the mplexporter (hex or rgba strings) keep the alpha
+    they carry unless an explicit opacity overrides it.
+    """
+    if color is None:
+        return None
+    if isinstance(color, (list, tuple)) and all(isinstance(c, str) for c in color):
+        return [_export_color(c, opacity) for c in color]
+    if not isinstance(color, str):
+        color = export_color(color)
+    if color == "none":
+        return "rgba(0,0,0,0)"
+    if color.startswith("#") and opacity is not None:
+        return "rgba{0}".format(hex_to_rgb(color) + (opacity,))
+    if color.startswith("rgb") and opacity not in (None, 1):
+        rgb = color[color.index("(") + 1 : color.rindex(")")].split(",")
+        r, g, b = (int(round(float(component))) for component in rgb[:3])
+        return "rgba({0}, {1}, {2}, {3})".format(r, g, b, opacity)
+    return color
+
+
 def prep_xy_axis(ax, props, x_bounds, y_bounds):
     xaxis = dict(
         type=props["axes"][0]["scale"],
@@ -523,7 +544,10 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
         showgrid=props["axes"][0]["grid"]["gridOn"],
         domain=convert_x_domain(props["bounds"], x_bounds),
         side=props["axes"][0]["position"],
-        tickfont=dict(size=props["axes"][0]["fontsize"]),
+        tickfont=dict(
+            size=props["axes"][0]["fontsize"],
+            color=_export_color(props["axes"][0]["fontcolor"]),
+        ),
     )
     xaxis.update(prep_ticks(ax, 0, "x", props))
     yaxis = dict(
@@ -532,7 +556,10 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
         showgrid=props["axes"][1]["grid"]["gridOn"],
         domain=convert_y_domain(props["bounds"], y_bounds),
         side=props["axes"][1]["position"],
-        tickfont=dict(size=props["axes"][1]["fontsize"]),
+        tickfont=dict(
+            size=props["axes"][1]["fontsize"],
+            color=_export_color(props["axes"][1]["fontcolor"]),
+        ),
     )
     yaxis.update(prep_ticks(ax, 1, "y", props))
     return xaxis, yaxis
