@@ -451,6 +451,7 @@ class PlotlyRenderer(Renderer):
                     color=color,
                     width=props["linestyle"]["linewidth"],
                     dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
+                    shape=mpltools.convert_drawstyle(props["linestyle"]["drawstyle"]),
                 )
             else:
                 shape = dict(
