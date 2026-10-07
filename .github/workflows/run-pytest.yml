@@ -184,8 +184,8 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
-          uv sync --extra dev_core
-          uv pip install matplotlib
+          uv lock --check
+          uv sync --locked --extra dev_matplotlib
           python --version
       - name: Test matplotlylib
         run: |
