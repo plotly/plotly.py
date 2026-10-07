@@ -1500,3 +1500,13 @@ def test_quiver_zero_vectors_convert():
     plotly_fig = tls.mpl_to_plotly(fig)
 
     assert len(plotly_fig.layout.annotations) == 0
+
+
+def test_quiver_nan_tails_convert():
+    """Quiver arrows with NaN tail positions convert the finite arrows."""
+    fig, ax = plt.subplots()
+    ax.quiver([0, np.nan], [0, 0], [1.0, 1.0], [0.0, 0.0])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.layout.annotations) == 1
