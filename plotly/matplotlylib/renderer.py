@@ -875,20 +875,26 @@ class PlotlyRenderer(Renderer):
         dpi = self.mpl_fig.dpi
         axis_ref = str(self.axis_ct)
         annotations = []
-        for tail, path in zip(props["offsets"], props["paths"]):
+
+        def per_arrow(styles, i, default):
+            if isinstance(styles, str):
+                return styles
+            if styles is None:
+                return default
+            try:
+                n = len(styles)
+            except TypeError:
+                return styles
+            return styles[i % n] if n else default
+
+        for i, (tail, path) in enumerate(zip(props["offsets"], props["paths"])):
             tail_px = np.asarray(trans.transform(tail))
             # matplotlib clips arrowheads at the axes box, so clamp the
             # arrowhead position into the axes range the same way
             tip_px = np.clip(tail_px + np.asarray(path[0][3]), box_min, box_max)
             tip = trans.inverted().transform(tip_px)
-            if isinstance(facecolors, list):
-                color = facecolors[0]
-            else:
-                color = facecolors
-            if isinstance(linewidths, list):
-                linewidth = linewidths[0]
-            else:
-                linewidth = linewidths
+            color = per_arrow(facecolors, i, "rgba(0,0,0,0)")
+            linewidth = per_arrow(linewidths, i, 0)
             annotations.append(
                 go.layout.Annotation(
                     x=tip[0],

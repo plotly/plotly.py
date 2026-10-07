@@ -1437,3 +1437,15 @@ def test_quiver_alpha_rides_in_arrow_color():
     assert len(anns) == 1
     assert anns[0].opacity is None
     assert anns[0].arrowcolor == "rgba(0,0,0,0.5)"
+
+
+def test_quiver_per_arrow_styles():
+    """Quiver arrows keep their per-arrow colors and linewidths."""
+    fig, ax = plt.subplots()
+    ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], color=["red", "blue"], linewidths=[1, 2])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert [a.arrowcolor for a in anns] == ["rgba(255,0,0,1.0)", "rgba(0,0,255,1.0)"]
+    assert anns[0].arrowwidth < anns[1].arrowwidth
