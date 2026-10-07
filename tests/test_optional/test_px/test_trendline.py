@@ -264,3 +264,34 @@ def test_overall_trendline(backend):
     params3 = results3["px_fit_results"].iloc[0].params
 
     assert np.all(np.array_equal(params1, params3))
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        dict(marginal_x="box", marginal_y="box"),
+        dict(marginal_x="histogram", facet_col="smoker"),
+        dict(marginal_y="violin", facet_row="smoker"),
+    ],
+)
+def test_overall_trendline_skips_marginals(backend, kwargs):
+    df = px.data.tips(return_type=backend)
+    fig = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        color="sex",
+        trendline="ols",
+        trendline_scope="overall",
+        **kwargs,
+    )
+    trendline_axes = [
+        (t.xaxis, t.yaxis) for t in fig.data if t.name == "Overall Trendline"
+    ]
+    scatter_axes = {
+        (t.xaxis, t.yaxis)
+        for t in fig.data
+        if t.type == "scatter" and t.name != "Overall Trendline"
+    }
+    assert len(trendline_axes) == len(scatter_axes)
+    assert set(trendline_axes) == scatter_axes

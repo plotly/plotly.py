@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `mpl_to_plotly` drawing step plots with diagonal lines instead of vertical/horizontal step segments by mapping matplotlib step drawstyles (`steps-pre`, `steps-post`, `steps-mid`) to plotly line shapes [[#5697](https://github.com/plotly/plotly.py/pull/5697)], with thanks to @robertoffmoura for the contribution!
 - Export tick label colors to the plotly tickfont in `mpl_to_plotly` [[#5716](https://github.com/plotly/plotly.py/pull/5716)], with thanks to @robertoffmoura for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
+- Fix `trendline_scope="overall"` drawing the overall trendline on the `marginal_x`/`marginal_y` subplots as well as the main plot; it is now drawn only on the main subplots [[#5780](https://github.com/plotly/plotly.py/pull/5780)]
 
 ## [7.1.0] - 2026-09-15
 

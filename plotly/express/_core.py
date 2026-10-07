@@ -2833,9 +2833,13 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             args, trendline_spec, args["data_frame"], {}, sizeref
         )
         trendline_trace.update(patch)
-        fig.add_trace(
-            trendline_trace, row="all", col="all", exclude_empty_subplots=True
-        )
+        main_rows = nrows - 1 if args.get("marginal_x") is not None else nrows
+        main_cols = ncols - 1 if args.get("marginal_y") is not None else ncols
+        for row in range(1, main_rows + 1):
+            for col in range(1, main_cols + 1):
+                fig.add_trace(
+                    trendline_trace, row=row, col=col, exclude_empty_subplots=True
+                )
         fig.update_traces(selector=-1, showlegend=True)
         if fit_results is not None:
             trendline_rows.append(dict(px_fit_results=fit_results))
