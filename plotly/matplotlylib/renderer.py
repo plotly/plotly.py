@@ -894,7 +894,7 @@ class PlotlyRenderer(Renderer):
                     ax=tail_px[0] - tip_px[0],
                     ay=tip_px[1] - tail_px[1],
                     arrowhead=2,
-                    arrowsize=max(1.0, linewidth * dpi / 72 * 2),
+                    arrowsize=max(0.3, q.headwidth / 3.0),
                     arrowwidth=max(1.0, linewidth * dpi / 72),
                     arrowcolor=color,
                 )
