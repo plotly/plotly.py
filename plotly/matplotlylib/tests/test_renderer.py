@@ -322,6 +322,113 @@ def test_pcolor_rectangles_render():
     assert all(len(t.x) >= 4 for t in plotly_fig.data)
 
 
+def test_boxplot_converts_with_none_marker_facecolor():
+    """Boxplot outlier markers use facecolor 'none', which plotly rejects."""
+    fig, ax = plt.subplots()
+    ax.boxplot(np.random.randn(100, 4))
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) > 0
+
+
+def test_line_with_none_color_converts():
+    """Lines with color='none' use the string 'none' for the line color,
+    which plotly rejects; it must be exported as a transparent line."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], color="none")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].line.color == "rgba(0,0,0,0)"
+
+
+def test_line_with_rgba_color_converts():
+    """Line colors that carry their own alpha (rgba tuple or 8-digit hex)
+    export as rgba strings."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], color=(1.0, 0.0, 0.0, 0.5))
+    ax.plot([0, 1], [1, 0], color="#0000FF80")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].line.color == "rgba(255, 0, 0, 0.5)"
+    assert plotly_fig.data[1].line.color == "rgba(0, 0, 255, 0.5019607843137255)"
+
+
+def test_line_rgba_color_with_separate_alpha_converts():
+    """An explicit alpha overrides the alpha carried by the line color."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], color=(1.0, 0.0, 0.0, 0.2), alpha=0.5)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].line.color == "rgba(255, 0, 0, 0.5)"
+
+
+def test_transparent_text_colors_export():
+    """Text, title, and axis labels with color 'none' export transparent
+    fonts."""
+    fig, ax = plt.subplots()
+    ax.text(0.5, 0.5, "text", color="none")
+    ax.set_title("title", color="none")
+    ax.set_xlabel("xlabel", color="none")
+    ax.set_ylabel("ylabel", color="none")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.annotations[0].font.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.title.font.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.xaxis.title.font.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.yaxis.title.font.color == "rgba(0,0,0,0)"
+
+
+def test_export_color_maps_colors():
+    """_export_color maps matplotlib color strings to plotly colors, keeping
+    or overriding the alpha as requested."""
+    from plotly.matplotlylib.mpltools import _export_color
+
+    expected_mappings = {
+        (None, None): None,
+        ("none", None): "rgba(0,0,0,0)",
+        ("#FF0000", None): "#FF0000",
+        ("#FF0000", 1): "rgba(255, 0, 0, 1)",
+        ("#FF0000", 0.5): "rgba(255, 0, 0, 0.5)",
+        ("rgba(255, 0, 0, 0.2)", None): "rgba(255, 0, 0, 0.2)",
+        ("rgba(255, 0, 0, 0.2)", 1): "rgba(255, 0, 0, 0.2)",
+        ("rgba(255, 0, 0, 0.2)", 0.5): "rgba(255, 0, 0, 0.5)",
+        ("rgb(255, 0, 0)", None): "rgb(255, 0, 0)",
+        ("rgb(255, 0, 0)", 0.5): "rgba(255, 0, 0, 0.5)",
+        ((1.0, 0.0, 0.0, 0.5), None): "rgba(255, 0, 0, 0.5)",
+        ((0.0, 1.0, 0.0, 1.0), None): "#00FF00",
+    }
+    for (color, opacity), expected in expected_mappings.items():
+        result = _export_color(color, opacity)
+        assert result == expected, (
+            f"Input {color!r} with opacity {opacity!r} produced {result!r}, "
+            f"expected {expected!r}"
+        )
+
+    assert _export_color(["#FF0000", "none"]) == ["#FF0000", "rgba(0,0,0,0)"]
+    assert _export_color(["rgba(255, 0, 0, 0.2)"], 0.5) == ["rgba(255, 0, 0, 0.5)"]
+
+
+def test_scatter_with_multiple_colors_converts():
+    """Scatter markers with per-point colors export a list of marker colors."""
+    fig, ax = plt.subplots()
+    ax.scatter([0, 1, 2], [0, 1, 2], c=["red", "green", "blue"])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].mode == "markers"
+    assert plotly_fig.data[0].marker.color == (
+        "rgba(255,0,0,1.0)",
+        "rgba(0,128,0,1.0)",
+        "rgba(0,0,255,1.0)",
+    )
+
+
 def test_eventplot_segments_render():
     fig, ax = plt.subplots()
     ax.eventplot([np.random.randn(20) for _ in range(5)])

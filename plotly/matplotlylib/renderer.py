@@ -384,7 +384,7 @@ class PlotlyRenderer(Renderer):
             yaxis="y{0}".format(self.axis_ct),
             opacity=trace[0]["alpha"],  # TODO: get all alphas if array?
             marker=go.bar.Marker(
-                color=trace[0]["facecolor"],  # TODO: get all
+                color=_export_color(trace[0]["facecolor"]),  # TODO: get all
                 line=dict(width=trace[0]["edgewidth"]),
             ),
         )  # TODO ditto
@@ -446,7 +446,7 @@ class PlotlyRenderer(Renderer):
             self.msg += "... with just markers\n"
             mode = "markers"
         if props["linestyle"]:
-            color = mpltools.merge_color_and_opacity(
+            color = _export_color(
                 props["linestyle"]["color"], props["linestyle"]["alpha"]
             )
 
@@ -469,22 +469,22 @@ class PlotlyRenderer(Renderer):
             if props["coordinates"] == "data":
                 marker = go.scatter.Marker(
                     opacity=props["markerstyle"]["alpha"],
-                    color=props["markerstyle"]["facecolor"],
+                    color=_export_color(props["markerstyle"]["facecolor"]),
                     symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
                     size=props["markerstyle"]["markersize"],
                     line=dict(
-                        color=props["markerstyle"]["edgecolor"],
+                        color=_export_color(props["markerstyle"]["edgecolor"]),
                         width=props["markerstyle"]["edgewidth"],
                     ),
                 )
             else:
                 shape = dict(
                     opacity=props["markerstyle"]["alpha"],
-                    fillcolor=props["markerstyle"]["facecolor"],
+                    fillcolor=_export_color(props["markerstyle"]["facecolor"]),
                     symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
                     size=props["markerstyle"]["markersize"],
                     line=dict(
-                        color=props["markerstyle"]["edgecolor"],
+                        color=_export_color(props["markerstyle"]["edgecolor"]),
                         width=props["markerstyle"]["edgewidth"],
                     ),
                 )
@@ -782,7 +782,8 @@ class PlotlyRenderer(Renderer):
                 yanchor=yanchor,
                 showarrow=False,  # change this later?
                 font=go.layout.annotation.Font(
-                    color=props["style"]["color"], size=props["style"]["fontsize"]
+                    color=_export_color(props["style"]["color"]),
+                    size=props["style"]["fontsize"],
                 ),
             )
             self.plotly_fig["layout"]["annotations"] += (annotation,)
@@ -822,7 +823,8 @@ class PlotlyRenderer(Renderer):
             annotation = go.layout.Annotation(
                 text=props["text"],
                 font=go.layout.annotation.Font(
-                    color=props["style"]["color"], size=props["style"]["fontsize"]
+                    color=_export_color(props["style"]["color"]),
+                    size=props["style"]["fontsize"],
                 ),
                 xref="paper",
                 yref="paper",
@@ -837,7 +839,8 @@ class PlotlyRenderer(Renderer):
             self.msg += "          Only one subplot found, adding as a plotly title\n"
             self.plotly_fig["layout"]["title"] = props["text"]
             title_font = dict(
-                size=props["style"]["fontsize"], color=props["style"]["color"]
+                size=props["style"]["fontsize"],
+                color=_export_color(props["style"]["color"]),
             )
             self.plotly_fig["layout"]["title_font"] = title_font
 
@@ -868,7 +871,8 @@ class PlotlyRenderer(Renderer):
         axis_key = "xaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = str(props["text"])
         title_font = dict(
-            size=props["style"]["fontsize"], color=props["style"]["color"]
+            size=props["style"]["fontsize"],
+            color=_export_color(props["style"]["color"]),
         )
         self.plotly_fig["layout"][axis_key]["title_font"] = title_font
 
@@ -899,7 +903,8 @@ class PlotlyRenderer(Renderer):
         axis_key = "yaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = props["text"]
         title_font = dict(
-            size=props["style"]["fontsize"], color=props["style"]["color"]
+            size=props["style"]["fontsize"],
+            color=_export_color(props["style"]["color"]),
         )
         self.plotly_fig["layout"][axis_key]["title_font"] = title_font
 

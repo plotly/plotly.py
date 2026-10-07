@@ -12,6 +12,8 @@ import matplotlib.dates
 
 from _plotly_utils.colors import hex_to_rgb
 
+from plotly.matplotlylib.mplexporter.utils import export_color
+
 
 def check_bar_match(old_bar, new_bar):
     """Check if two bars belong in the same collection (bar chart).
@@ -104,26 +106,6 @@ def convert_symbol(mpl_symbol):
         return SYMBOL_MAP[mpl_symbol]
     else:
         return "circle"  # default
-
-
-def merge_color_and_opacity(color, opacity):
-    """
-    Merge hex color with an alpha (opacity) to get an rgba tuple.
-
-    :param (str|unicode) color: A hex color string.
-    :param (float|int) opacity: A value [0, 1] for the 'a' in 'rgba'.
-    :return: (int, int, int, float) The rgba color and alpha tuple.
-
-    """
-    if color is None:  # None can be used as a placeholder, just bail.
-        return None
-
-    rgb_tup = hex_to_rgb(color)
-    if opacity is None:
-        return "rgb{}".format(rgb_tup)
-
-    rgba_tup = rgb_tup + (opacity,)
-    return "rgba{}".format(rgba_tup)
 
 
 def convert_va(mpl_va):
@@ -530,19 +512,29 @@ def prep_ticks(ax, index, ax_type, props):
     return axis_dict
 
 
-def _export_color(color):
+def _export_color(color, opacity=None):
     """Export a matplotlib color for use as a plotly color.
 
     matplotlib uses "none" for fully transparent colors, which plotly does not
-    accept, so transparent colors are exported as transparent black.
-    Colors already exported by the mplexporter (hex or rgba strings) are
-    passed through unchanged.
+    accept, so transparent colors are exported as transparent black. Colors
+    already exported by the mplexporter (hex or rgba strings) keep the alpha
+    they carry unless an explicit opacity overrides it.
     """
     if color is None:
         return None
-    if isinstance(color, str):
-        return color if color != "none" else "rgba(0,0,0,0)"
-    return [_export_color(c) for c in color]
+    if isinstance(color, (list, tuple)) and all(isinstance(c, str) for c in color):
+        return [_export_color(c, opacity) for c in color]
+    if not isinstance(color, str):
+        color = export_color(color)
+    if color == "none":
+        return "rgba(0,0,0,0)"
+    if color.startswith("#") and opacity is not None:
+        return "rgba{0}".format(hex_to_rgb(color) + (opacity,))
+    if color.startswith("rgb") and opacity not in (None, 1):
+        rgb = color[color.index("(") + 1 : color.rindex(")")].split(",")
+        r, g, b = (int(round(float(component))) for component in rgb[:3])
+        return "rgba({0}, {1}, {2}, {3})".format(r, g, b, opacity)
+    return color
 
 
 def prep_xy_axis(ax, props, x_bounds, y_bounds):
