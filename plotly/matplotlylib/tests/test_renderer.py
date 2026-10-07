@@ -1529,3 +1529,24 @@ def test_quiver_mid_pivot_converts():
     assert abs(anns[0].y - tip_data[1]) < 1e-6
     assert abs(anns[0].ax + 2 * tip_px[0]) < 1e-6
     assert abs(anns[0].ay - 2 * tip_px[1]) < 1e-6
+
+
+def test_quiver_tip_pivot_converts():
+    """Quiver arrows with pivot 'tip' convert to annotations anchored at the
+    grid points."""
+    fig, ax = plt.subplots()
+    q = ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], pivot="tip")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert len(anns) == 2
+    verts = q.get_paths()[0].vertices
+    tip_px = q.get_transform().transform(verts[3])
+    tail_px = q.get_transform().transform((verts[0] + verts[6]) / 2)
+    vector_px = tip_px - tail_px
+    pivot = q.get_offsets()[0]
+    assert abs(anns[0].x - pivot[0]) < 1e-6
+    assert abs(anns[0].y - pivot[1]) < 1e-6
+    assert abs(anns[0].ax + vector_px[0]) < 1e-6
+    assert abs(anns[0].ay - vector_px[1]) < 1e-6
