@@ -731,9 +731,9 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path collection\n"
-        if (
-            isinstance(props["mplobj"], mquiver.Quiver)
-            and props["mplobj"].pivot == "tail"
+        if isinstance(props["mplobj"], mquiver.Quiver) and props["mplobj"].pivot in (
+            "tail",
+            "middle",
         ):
             self.msg += "    Drawing a quiver as arrow annotations\n"
             self._draw_quiver(props)
@@ -873,16 +873,20 @@ class PlotlyRenderer(Renderer):
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
         axis_ref = str(self.axis_ct)
         annotations = []
-        for i, (tail, path) in enumerate(zip(props["offsets"], props["paths"])):
+        for i, (pivot, path) in enumerate(zip(props["offsets"], props["paths"])):
             verts = np.asarray(path[0], dtype=float)
-            if len(verts) < 6 or not np.all(np.isfinite(tail)):
+            if len(verts) < 6 or not np.all(np.isfinite(pivot)):
                 continue
-            tail_px = np.asarray(trans.transform(tail))
+            pivot_px = np.asarray(trans.transform(pivot))
             tip_offset = verts[3]
             # matplotlib clips arrowheads at the axes box, so clamp the
             # arrowhead position into the axes range the same way
-            tip_px = np.clip(tail_px + tip_offset, box_min, box_max)
+            tip_px = np.clip(pivot_px + tip_offset, box_min, box_max)
             tip = trans.inverted().transform(tip_px)
+            if q.pivot == "middle":
+                tail_px = pivot_px - tip_offset
+            else:
+                tail_px = pivot_px
             color = _per_path(facecolors, i, "rgba(0,0,0,0)")
             length = np.hypot(*tip_offset)
             if length > 0:

@@ -1510,3 +1510,22 @@ def test_quiver_nan_tails_convert():
     plotly_fig = tls.mpl_to_plotly(fig)
 
     assert len(plotly_fig.layout.annotations) == 1
+
+
+def test_quiver_mid_pivot_converts():
+    """Quiver arrows with pivot 'mid' convert to annotations centered on the
+    grid points."""
+    fig, ax = plt.subplots()
+    q = ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], pivot="mid")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert len(anns) == 2
+    tip_px = q.get_transform().transform(q.get_paths()[0].vertices[3])
+    pivot_px = q.get_offset_transform().transform(q.get_offsets()[0])
+    tip_data = q.get_offset_transform().inverted().transform(pivot_px + tip_px)
+    assert abs(anns[0].x - tip_data[0]) < 1e-6
+    assert abs(anns[0].y - tip_data[1]) < 1e-6
+    assert abs(anns[0].ax + 2 * tip_px[0]) < 1e-6
+    assert abs(anns[0].ay - 2 * tip_px[1]) < 1e-6
