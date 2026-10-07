@@ -129,6 +129,46 @@ def test_line_with_none_color_converts():
     assert plotly_fig.data[0].line.color == "rgba(0,0,0,0)"
 
 
+def test_line_with_rgba_color_converts():
+    """Line colors that carry their own alpha (rgba tuple or 8-digit hex)
+    export as rgba strings."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], color=(1.0, 0.0, 0.0, 0.5))
+    ax.plot([0, 1], [1, 0], color="#0000FF80")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].line.color == "rgba(255, 0, 0, 0.5)"
+    assert plotly_fig.data[1].line.color == "rgba(0, 0, 255, 0.5019607843137255)"
+
+
+def test_line_rgba_color_with_separate_alpha_converts():
+    """An explicit alpha overrides the alpha carried by the line color."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], color=(1.0, 0.0, 0.0, 0.2), alpha=0.5)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].line.color == "rgba(255, 0, 0, 0.5)"
+
+
+def test_transparent_text_colors_export():
+    """Text, title, and axis labels with color 'none' export transparent
+    fonts."""
+    fig, ax = plt.subplots()
+    ax.text(0.5, 0.5, "text", color="none")
+    ax.set_title("title", color="none")
+    ax.set_xlabel("xlabel", color="none")
+    ax.set_ylabel("ylabel", color="none")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.annotations[0].font.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.title.font.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.xaxis.title.font.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.yaxis.title.font.color == "rgba(0,0,0,0)"
+
+
 def test_eventplot_segments_render():
     fig, ax = plt.subplots()
     ax.eventplot([np.random.randn(20) for _ in range(5)])
