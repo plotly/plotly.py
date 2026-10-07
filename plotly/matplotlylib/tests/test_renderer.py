@@ -105,6 +105,205 @@ def test_multiple_traces_native_legend():
     assert plotly_fig.data[2].mode == "lines+markers"
 
 
+def test_axis_mirror_with_spines_and_ticks():
+    """Test that mirror=True when both spines and ticks are visible on both sides."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    # Show all spines
+    ax.spines["top"].set_visible(True)
+    ax.spines["bottom"].set_visible(True)
+    ax.spines["left"].set_visible(True)
+    ax.spines["right"].set_visible(True)
+
+    # Show ticks on all sides
+    ax.tick_params(top=True, bottom=True, left=True, right=True)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.mirror == "ticks"
+    assert plotly_fig.layout.yaxis.mirror == "ticks"
+
+
+def test_axis_mirror_with_ticks_only():
+    """Test that mirror=False when spines are not visible on both sides."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    # Hide opposite spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Show ticks on all sides
+    ax.tick_params(top=True, bottom=True, left=True, right=True)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.mirror == False
+    assert plotly_fig.layout.yaxis.mirror == False
+
+
+def test_axis_mirror_false_with_one_sided_ticks():
+    """Test that mirror=True when ticks are only on one side but spines are
+    visible on both sides."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    # Default matplotlib behavior - ticks only on bottom and left
+    ax.tick_params(top=False, bottom=True, left=True, right=False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.mirror == True
+    assert plotly_fig.layout.yaxis.mirror == True
+
+
+def test_axis_mirror_mixed_configurations():
+    """Test different configurations for x and y axes."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    # X-axis: spines and ticks on both sides (mirror="ticks")
+    ax.spines["top"].set_visible(True)
+    ax.spines["bottom"].set_visible(True)
+    ax.tick_params(top=True, bottom=True)
+
+    # Y-axis: spine only on one side (mirror=False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_visible(True)
+    ax.tick_params(left=True, right=True)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.mirror == "ticks"
+    assert plotly_fig.layout.yaxis.mirror == False
+
+
+def test_axis_showline_tied_to_main_spine():
+    """Test that showline follows the main-side spine (bottom for x, left for y)."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    # Hide the mirror-side spines only
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.showline == True
+    assert plotly_fig.layout.yaxis.showline == True
+
+
+def test_axis_showline_hidden_when_main_spine_hidden():
+    """Test that showline is False when the main-side spine is hidden."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    # Hide the main-side spines but keep the mirror-side ones
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.showline == False
+    assert plotly_fig.layout.yaxis.showline == False
+
+
+def test_ticks_hidden_when_mpl_main_ticks_hidden():
+    """Test that tick markers are hidden when the mpl main-side ticks are hidden."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    ax.tick_params(top=False, bottom=False, left=False, right=False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.ticks == ""
+    assert plotly_fig.layout.yaxis.ticks == ""
+
+
+def test_twinx_axis_position_and_ticks():
+    """Test that twinx secondary y-axis is on the right with visible ticks and title."""
+    fig, ax1 = plt.subplots()
+    ax1.plot([0, 1, 2], [0, 1, 4])
+    ax1.set_ylabel("left axis")
+    ax2 = ax1.twinx()
+    ax2.plot([0, 1, 2], [10, 5, 2])
+    ax2.set_ylabel("right axis")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.yaxis.side == "left"
+    assert plotly_fig.layout.yaxis.title.text == "left axis"
+    assert plotly_fig.layout.yaxis.ticks == "inside"
+
+    assert plotly_fig.layout.yaxis2.side == "right"
+    assert plotly_fig.layout.yaxis2.title.text == "right axis"
+    assert plotly_fig.layout.yaxis2.ticks == "inside"
+    assert plotly_fig.layout.yaxis2.overlaying == "y"
+    assert plotly_fig.layout.xaxis2.overlaying == "x"
+    assert plotly_fig.layout.xaxis2.visible is False
+    assert len(plotly_fig.data) == 2
+
+
+def test_twiny_axis_position_and_ticks():
+    """Test that twiny secondary x-axis is on the top with visible ticks and title."""
+    fig, ax1 = plt.subplots()
+    ax1.plot([0, 1, 2], [0, 1, 4])
+    ax1.set_xlabel("bottom axis")
+    ax2 = ax1.twiny()
+    ax2.plot([10, 5, 2], [0, 1, 4])
+    ax2.set_xlabel("top axis")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.side == "bottom"
+    assert plotly_fig.layout.xaxis.title.text == "bottom axis"
+    assert plotly_fig.layout.xaxis.ticks == "inside"
+
+    assert plotly_fig.layout.xaxis2.side == "top"
+    assert plotly_fig.layout.xaxis2.title.text == "top axis"
+    assert plotly_fig.layout.xaxis2.ticks == "inside"
+    assert plotly_fig.layout.xaxis2.overlaying == "x"
+    assert plotly_fig.layout.yaxis2.overlaying == "y"
+    assert plotly_fig.layout.yaxis2.visible is False
+    assert len(plotly_fig.data) == 2
+
+
+def test_right_axis_ticks_hidden_when_mpl_right_ticks_hidden():
+    """Test that ticks are hidden on a right-side axis when right ticks are hidden in matplotlib."""
+    fig, ax1 = plt.subplots()
+    ax2 = ax1.twinx()
+    ax2.tick_params(right=False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.yaxis2.side == "right"
+    assert plotly_fig.layout.yaxis2.ticks == ""
+
+
+def test_sharex_stacked_lines_in_correct_subplots():
+    """Test that vertically stacked subplots with sharex=True place lines in separate subplots."""
+    fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
+    ax1.plot([1, 2, 3], [4, 5, 6])
+    ax2.plot([1, 2, 3], [10, 20, 30])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 2
+    # First line belongs to the top subplot
+    assert plotly_fig.data[0].yaxis in (None, "y", "y1")
+    # Second line belongs to the bottom subplot
+    assert plotly_fig.data[1].yaxis == "y2"
+
+    # Distinct non-overlapping vertical domains (top above bottom)
+    assert plotly_fig.layout.yaxis.domain[0] > plotly_fig.layout.yaxis2.domain[1]
+
+    # The bottom subplot must not overlay the top subplot
+    assert plotly_fig.layout.yaxis2.overlaying is None
+    assert plotly_fig.layout.xaxis2.overlaying is None
+
+
 def test_violinplot_bodies_are_filled_polygons():
     fig, ax = plt.subplots()
     ax.violinplot(np.random.randn(100, 3))
@@ -382,3 +581,37 @@ def test_custom_date_xtickvals_given_as_numbers_are_converted():
         "2023-01-07 00:00:00",
         "2023-01-10 00:00:00",
     )
+
+
+def test_tick_label_color_exports():
+    """Tick label colors are exported to the plotly tickfont."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.tickfont.color == "#000000"
+
+
+def test_dark_tick_label_color_exports():
+    """Dark-background tick label colors are exported to the plotly
+    tickfont."""
+    with plt.style.context("dark_background"):
+        fig, ax = plt.subplots()
+        ax.plot([0, 1], [0, 1])
+
+        plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.tickfont.color == "#FFFFFF"
+
+
+def test_transparent_tick_label_color_exports():
+    """Transparent tick label colors ('none') export as transparent rgba."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+    ax.tick_params(labelcolor="none")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.tickfont.color == "rgba(0,0,0,0)"
+    assert plotly_fig.layout.yaxis.tickfont.color == "rgba(0,0,0,0)"
