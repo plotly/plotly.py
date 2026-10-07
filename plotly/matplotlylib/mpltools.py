@@ -232,15 +232,12 @@ def get_axes_bounds(fig):
     return (x_min, x_max), (y_min, y_max)
 
 
-def get_axis_mirror(main_spine, mirror_spine):
-    if main_spine and mirror_spine:
+def get_axis_mirror(main_spine, mirror_spine, main_tick_markers, mirror_tick_markers):
+    if main_spine and mirror_spine and main_tick_markers and mirror_tick_markers:
         return "ticks"
-    elif main_spine and not mirror_spine:
-        return False
-    elif not main_spine and mirror_spine:
-        return False  # can't handle this case yet!
-    else:
-        return False  # nuttin'!
+    if main_spine and mirror_spine:
+        return True
+    return False
 
 
 def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
@@ -258,6 +255,23 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
                 return None
             # Clamp to guard against floating point noise, such as -8.9e-16 for touching bars
             return min(max(gap0 / bar_delta, 0.0), 1.0)
+
+
+DRAWSTYLE_SHAPE_MAP = {
+    "steps": "vh",
+    "steps-pre": "vh",
+    "steps-post": "hv",
+    "steps-mid": "hvh",
+}
+
+
+def convert_drawstyle(drawstyle):
+    """Convert a matplotlib line drawstyle to a plotly line shape.
+
+    Matplotlib draws steps as vertical/horizontal segments; plotly's
+    ``line.shape`` expresses the same via "vh", "hv" and "hvh".
+    """
+    return DRAWSTYLE_SHAPE_MAP.get(drawstyle)
 
 
 def convert_rgba_array(color_list):

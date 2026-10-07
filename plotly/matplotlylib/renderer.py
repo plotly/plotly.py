@@ -57,6 +57,7 @@ class PlotlyRenderer(Renderer):
         self.msg = "Initialized PlotlyRenderer\n"
         self._processing_legend = False
         self._legend_visible = False
+        self.axes_list = []
 
     def _convert_x_dates(self, x):
         """Convert x values to date strings when the x-axis is a date axis."""
@@ -90,6 +91,10 @@ class PlotlyRenderer(Renderer):
             height=int(props["figheight"] * props["dpi"]),
             autosize=False,
             hovermode="closest",
+            # plotly.js auto-names unnamed traces "trace N" and shows them
+            # in the legend; the legend is only enabled when the mpl figure
+            # actually has one (see open_legend)
+            showlegend=False,
         )
         self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
@@ -157,8 +162,8 @@ class PlotlyRenderer(Renderer):
         ]
         self.current_bars = []
         self.axis_ct += 1
-        # update plot background with the axes background from mpl
-        self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
+        if props.get("patch_visible", True):
+            self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
             anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
@@ -176,10 +181,63 @@ class PlotlyRenderer(Renderer):
         top_spine = mpltools.get_spine_visible(ax, "top")
         left_spine = mpltools.get_spine_visible(ax, "left")
         right_spine = mpltools.get_spine_visible(ax, "right")
-        xaxis["mirror"] = mpltools.get_axis_mirror(bottom_spine, top_spine)
-        yaxis["mirror"] = mpltools.get_axis_mirror(left_spine, right_spine)
-        xaxis["showline"] = bottom_spine
-        yaxis["showline"] = top_spine
+        x_tick_params = ax.xaxis.get_tick_params()
+        y_tick_params = ax.yaxis.get_tick_params()
+        bottom_tick_markers = x_tick_params.get(
+            "bottom", x_tick_params.get("left", True)
+        )
+        top_tick_markers = x_tick_params.get("top", x_tick_params.get("right", False))
+        left_tick_markers = y_tick_params.get("left", True)
+        right_tick_markers = y_tick_params.get("right", False)
+        if xaxis["side"] == "top":
+            x_main_spine, x_mirror_spine = top_spine, bottom_spine
+            x_main_ticks, x_mirror_ticks = top_tick_markers, bottom_tick_markers
+        else:
+            x_main_spine, x_mirror_spine = bottom_spine, top_spine
+            x_main_ticks, x_mirror_ticks = bottom_tick_markers, top_tick_markers
+
+        xaxis["mirror"] = mpltools.get_axis_mirror(
+            x_main_spine, x_mirror_spine, x_main_ticks, x_mirror_ticks
+        )
+        xaxis["showline"] = x_main_spine
+        # hide tick markers when the mpl main-side tick markers are hidden
+        if not x_main_ticks:
+            xaxis["ticks"] = ""
+
+        if yaxis["side"] == "right":
+            y_main_spine, y_mirror_spine = right_spine, left_spine
+            y_main_ticks, y_mirror_ticks = right_tick_markers, left_tick_markers
+        else:
+            y_main_spine, y_mirror_spine = left_spine, right_spine
+            y_main_ticks, y_mirror_ticks = left_tick_markers, right_tick_markers
+
+        yaxis["mirror"] = mpltools.get_axis_mirror(
+            y_main_spine, y_mirror_spine, y_main_ticks, y_mirror_ticks
+        )
+        yaxis["showline"] = y_main_spine
+        if not y_main_ticks:
+            yaxis["ticks"] = ""
+
+        overlay_ax_ct = None
+        for prev_ax, prev_ct in self.axes_list:
+            # Overlay only axes that cover the same area. Shared-axis subplots, such
+            # as the ones from plt.subplots(sharex=True), sit in different places.
+            if ax.get_position().bounds == prev_ax.get_position().bounds:
+                overlay_ax_ct = prev_ct
+                break
+
+        if overlay_ax_ct is not None:
+            overlay_x = "x" if overlay_ax_ct == 1 else "x{0}".format(overlay_ax_ct)
+            overlay_y = "y" if overlay_ax_ct == 1 else "y{0}".format(overlay_ax_ct)
+            xaxis["overlaying"] = overlay_x
+            yaxis["overlaying"] = overlay_y
+
+        if not props["axes"][0]["visible"]:
+            xaxis["visible"] = False
+        if not props["axes"][1]["visible"]:
+            yaxis["visible"] = False
+
+        self.axes_list.append((ax, self.axis_ct))
 
         # put axes in our figure
         self.plotly_fig["layout"]["xaxis{0}".format(self.axis_ct)] = xaxis
@@ -397,6 +455,7 @@ class PlotlyRenderer(Renderer):
                     color=color,
                     width=props["linestyle"]["linewidth"],
                     dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
+                    shape=mpltools.convert_drawstyle(props["linestyle"]["drawstyle"]),
                 )
             else:
                 shape = dict(
@@ -430,13 +489,18 @@ class PlotlyRenderer(Renderer):
                     ),
                 )
         if props["coordinates"] == "data":
+            label = props["label"]
+            # matplotlib uses "_nolegend_" and auto-generated "_childN"
+            # labels for artists that must not appear in a legend
+            if not label or (isinstance(label, str) and label.startswith("_")):
+                label = None
+                showlegend = False
+            else:
+                showlegend = None
             marked_line = go.Scatter(
                 mode=mode,
-                name=(
-                    str(props["label"])
-                    if isinstance(props["label"], str)
-                    else props["label"]
-                ),
+                name=label,
+                showlegend=showlegend,
                 x=[xy_pair[0] for xy_pair in props["data"]],
                 y=[xy_pair[1] for xy_pair in props["data"]],
                 xaxis="x{0}".format(self.axis_ct),
