@@ -14,17 +14,7 @@ from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
 
 
-def _export_color(color):
-    """Export a matplotlib color for use as a plotly color.
-
-    matplotlib uses "none" for fully transparent colors, which plotly does not
-    accept, so transparent colors are exported as transparent black.
-    Colors already exported by the mplexporter (hex or rgba strings) are
-    passed through unchanged.
-    """
-    if isinstance(color, str):
-        return "rgba(0,0,0,0)" if color == "none" else color
-    return [_export_color(c) for c in color]
+from plotly.matplotlylib.mpltools import _export_color
 
 
 class PlotlyRenderer(Renderer):
