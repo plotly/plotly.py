@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Fixed
+- Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
 - Fix `mpl_to_plotly` crashing on touching bars (such as `plt.hist`) due to floating-point noise producing negative `bargap` values by clamping `bargap` to `[0, 1]` [[#5696](https://github.com/plotly/plotly.py/pull/5696)], with thanks to @robertoffmoura for the contribution!
 - Export tick label colors to the plotly tickfont in `mpl_to_plotly` [[#5716](https://github.com/plotly/plotly.py/pull/5716)], with thanks to @robertoffmoura for the contribution!
