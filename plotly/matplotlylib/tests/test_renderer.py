@@ -1439,8 +1439,8 @@ def test_quiver_alpha_rides_in_arrow_color():
     assert anns[0].arrowcolor == "rgba(0,0,0,0.5)"
 
 
-def test_quiver_per_arrow_styles():
-    """Quiver arrows keep their per-arrow colors and linewidths."""
+def test_quiver_per_arrow_colors():
+    """Quiver arrows keep their per-arrow colors."""
     fig, ax = plt.subplots()
     ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], color=["red", "blue"], linewidths=[1, 2])
 
@@ -1448,16 +1448,20 @@ def test_quiver_per_arrow_styles():
 
     anns = plotly_fig.layout.annotations
     assert [a.arrowcolor for a in anns] == ["rgba(255,0,0,1.0)", "rgba(0,0,255,1.0)"]
-    assert anns[0].arrowwidth < anns[1].arrowwidth
+    assert anns[0].arrowwidth == anns[1].arrowwidth
+    assert anns[0].arrowsize == anns[1].arrowsize
 
 
 def test_quiver_arrow_head_size_uses_headwidth():
     """Quiver arrow heads use the quiver's headwidth ratio."""
     fig, ax = plt.subplots()
-    q = ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], linewidths=[1, 4])
+    ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], linewidths=[1, 4])
 
     plotly_fig = tls.mpl_to_plotly(fig)
-
     anns = plotly_fig.layout.annotations
     assert anns[0].arrowsize == anns[1].arrowsize
-    assert abs(anns[0].arrowsize - q.headwidth / 3.0) < 1e-9
+
+    fig2, ax2 = plt.subplots()
+    ax2.quiver([0, 1], [0, 0], [1, 1], [0, 0], headwidth=6)
+    anns2 = tls.mpl_to_plotly(fig2).layout.annotations
+    assert abs(anns2[0].arrowsize / anns[0].arrowsize - 2.0) < 1e-9

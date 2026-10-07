@@ -871,18 +871,29 @@ class PlotlyRenderer(Renderer):
         box_min = np.asarray(trans.transform((ax.get_xlim()[0], ax.get_ylim()[0])))
         box_max = np.asarray(trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
-        linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
-        dpi = self.mpl_fig.dpi
         axis_ref = str(self.axis_ct)
         annotations = []
         for i, (tail, path) in enumerate(zip(props["offsets"], props["paths"])):
+            verts = np.asarray(path[0], dtype=float)
             tail_px = np.asarray(trans.transform(tail))
+            tip_offset = verts[3]
             # matplotlib clips arrowheads at the axes box, so clamp the
             # arrowhead position into the axes range the same way
-            tip_px = np.clip(tail_px + np.asarray(path[0][3]), box_min, box_max)
+            tip_px = np.clip(tail_px + tip_offset, box_min, box_max)
             tip = trans.inverted().transform(tip_px)
             color = _per_path(facecolors, i, "rgba(0,0,0,0)")
-            linewidth = _per_path(linewidths, i, 0)
+            length = np.hypot(*tip_offset)
+            if length > 0:
+                along = tip_offset / length
+                perp = np.array([-along[1], along[0]])
+                shaft_width = abs(verts[1] @ perp) + abs(verts[5] @ perp)
+                head_width = abs(verts[2] @ perp) + abs(verts[4] @ perp)
+            else:
+                shaft_width = 1.0
+                head_width = 3.0
+            arrowwidth = max(0.1, shaft_width)
+            # plotly draws the head 5x arrowwidth wide per unit arrowsize
+            arrowsize = max(0.3, head_width / (5.0 * arrowwidth))
             annotations.append(
                 go.layout.Annotation(
                     x=tip[0],
@@ -894,8 +905,8 @@ class PlotlyRenderer(Renderer):
                     ax=tail_px[0] - tip_px[0],
                     ay=tip_px[1] - tail_px[1],
                     arrowhead=2,
-                    arrowsize=max(0.3, q.headwidth / 3.0),
-                    arrowwidth=max(1.0, linewidth * dpi / 72),
+                    arrowsize=arrowsize,
+                    arrowwidth=arrowwidth,
                     arrowcolor=color,
                 )
             )
