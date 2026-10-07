@@ -64,6 +64,28 @@ class TestStreamline(TestCaseNoTemplate):
         }
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
+    def test_uneven_x_shrinking_steps(self):
+        # check for PlotlyError if x steps get smaller than the first one
+
+        kwargs = {
+            "x": [0, 2, 3, 3.5],
+            "y": [0, 1, 2, 3],
+            "u": [[1, 1, 1, 1]] * 4,
+            "v": [[1, 1, 1, 1]] * 4,
+        }
+        self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
+
+    def test_uneven_y_shrinking_steps(self):
+        # check for PlotlyError if y steps get smaller than the first one
+
+        kwargs = {
+            "x": [0, 1, 2, 3],
+            "y": [0, 2, 3, 3.5],
+            "u": [[1, 1, 1, 1]] * 4,
+            "v": [[1, 1, 1, 1]] * 4,
+        }
+        self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
+
     def test_unequal_length_xy(self):
         # check for PlotlyError if u and v are not the same length
 
