@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
-- Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the bottom and left spine colors to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!
+- Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the color of each axis's displayed spine to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
 - Fix `mpl_to_plotly` crashing on touching bars (such as `plt.hist`) due to floating-point noise producing negative `bargap` values by clamping `bargap` to `[0, 1]` [[#5696](https://github.com/plotly/plotly.py/pull/5696)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` drawing step plots with diagonal lines instead of vertical/horizontal step segments by mapping matplotlib step drawstyles (`steps-pre`, `steps-post`, `steps-mid`) to plotly line shapes [[#5697](https://github.com/plotly/plotly.py/pull/5697)], with thanks to @robertoffmoura for the contribution!

@@ -199,16 +199,10 @@ class PlotlyRenderer(Renderer):
             self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
-            anchor="y{0}".format(self.axis_ct),
-            zeroline=False,
-            ticks="inside",
-            linecolor=_export_color(ax.spines["bottom"].get_edgecolor()),
+            anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
         )
         yaxis = go.layout.YAxis(
-            anchor="x{0}".format(self.axis_ct),
-            zeroline=False,
-            ticks="inside",
-            linecolor=_export_color(ax.spines["left"].get_edgecolor()),
+            anchor="x{0}".format(self.axis_ct), zeroline=False, ticks="inside"
         )
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(
@@ -216,6 +210,10 @@ class PlotlyRenderer(Renderer):
         )
         xaxis.update(mpl_xaxis)
         yaxis.update(mpl_yaxis)
+        x_spine = "top" if xaxis["side"] == "top" else "bottom"
+        y_spine = "right" if yaxis["side"] == "right" else "left"
+        xaxis["linecolor"] = _export_color(ax.spines[x_spine].get_edgecolor())
+        yaxis["linecolor"] = _export_color(ax.spines[y_spine].get_edgecolor())
         bottom_spine = mpltools.get_spine_visible(ax, "bottom")
         top_spine = mpltools.get_spine_visible(ax, "top")
         left_spine = mpltools.get_spine_visible(ax, "left")

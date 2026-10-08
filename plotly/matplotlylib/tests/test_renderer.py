@@ -540,6 +540,32 @@ def test_custom_axis_linecolors_are_preserved():
     assert plotly_fig.layout.yaxis.linecolor == "#008000"
 
 
+def test_axis_linecolor_follows_right_axis_side():
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+    ax2 = ax.twinx()
+    ax2.plot([0, 1], [1, 0])
+    ax2.spines["right"].set_color("red")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.yaxis2.side == "right"
+    assert plotly_fig.layout.yaxis2.linecolor == "#FF0000"
+
+
+def test_axis_linecolor_follows_top_axis_side():
+    fig, ax = plt.subplots()
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["top"].set_color("red")
+    ax.xaxis.set_ticks_position("top")
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.side == "top"
+    assert plotly_fig.layout.xaxis.linecolor == "#FF0000"
+
+
 def test_filled_path_collection_date_xaxis():
     """Filled path collections with date x-values must export date strings,
     not raw matplotlib date numbers."""
