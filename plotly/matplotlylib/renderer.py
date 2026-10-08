@@ -827,7 +827,7 @@ class PlotlyRenderer(Renderer):
             showlegend = None
         self.plotly_fig.add_trace(
             go.Scatter(
-                x=self._convert_x_dates(x),
+                x=x,
                 y=y,
                 mode="lines",
                 name=label,
