@@ -1,8 +1,10 @@
 import datetime
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from packaging.version import Version
 import plotly.tools as tls
 
 
@@ -894,7 +896,8 @@ def test_contour_lines_not_in_legend():
 
 
 def test_consecutive_same_style_lines_grouped_into_one_trace():
-    """Consecutive paths with identical styles are grouped into a single trace."""
+    """Contour levels with identical styles share one trace on matplotlib 3.8
+    and newer, which hands all levels over as a single collection."""
     x = np.linspace(-3, 3, 30)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
@@ -910,15 +913,23 @@ def test_consecutive_same_style_lines_grouped_into_one_trace():
     )
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    # All 4 levels share the same style, so they should be grouped into 1 trace
-    assert len(plotly_fig.data) == 1
-    trace = plotly_fig.data[0]
-    # The trace combines the distinct levels separated by None
-    assert trace.x.count(None) >= 3
+    # All 4 levels share the same style
+    assert (
+        len({(t.line.color, t.line.width, t.line.dash) for t in plotly_fig.data}) == 1
+    )
+    if Version(matplotlib.__version__) >= Version("3.8"):
+        # matplotlib >= 3.8 hands the levels over as one collection, so they
+        # are grouped into 1 trace with the distinct levels separated by None
+        assert len(plotly_fig.data) == 1
+        assert plotly_fig.data[0].x.count(None) >= 3
+    else:
+        # older matplotlib emits one collection per level
+        assert len(plotly_fig.data) == 4
 
 
 def test_mixed_style_lines_group_consecutive_matches():
-    """Paths are grouped by consecutive matching style (color, width, dash)."""
+    """Consecutive paths with matching styles share a trace and differing
+    styles start a new one on matplotlib 3.8 and newer."""
     x = np.linspace(-3, 3, 30)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
@@ -933,7 +944,10 @@ def test_mixed_style_lines_group_consecutive_matches():
     )
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    # 2 dashed levels grouped into 1 trace, 2 solid levels grouped into 1 trace -> 2 traces total
-    assert len(plotly_fig.data) == 2
-    assert plotly_fig.data[0].line.dash != "solid"
-    assert plotly_fig.data[1].line.dash == "solid"
+    dashes = [t.line.dash for t in plotly_fig.data]
+    if Version(matplotlib.__version__) >= Version("3.8"):
+        # 2 dashed levels grouped into 1 trace, 2 solid levels grouped into 1 trace
+        assert dashes == ["5.55px,2.4px", "solid"]
+    else:
+        # older matplotlib emits one collection per level
+        assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2
