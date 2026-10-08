@@ -9,6 +9,7 @@ with the matplotlylib package.
 
 import warnings
 
+import numpy as np
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -85,6 +86,9 @@ class PlotlyRenderer(Renderer):
         self.current_bars = []
         self.axis_ct = 0
         self.x_is_mpl_date = False
+        self.current_is_polar = False
+        self.polar_ct = 0
+        self.current_polar_subplot = None
         self.mpl_x_bounds = (0, 1)
         self.mpl_y_bounds = (0, 1)
         self.msg = "Initialized PlotlyRenderer\n"
@@ -100,6 +104,51 @@ class PlotlyRenderer(Renderer):
             )
             x = mpltools.mpl_dates_to_datestrings(x, formatter)
         return x
+
+    def _open_polar_axes(self, ax, props):
+        """Create a plotly polar layout object for a matplotlib polar axes.
+
+        matplotlib polar data coordinates are (theta, r) with theta in
+        radians measured from the positive x-axis (east). Plotly angular
+        values are in degrees, with the rotation property setting the
+        position of angular value 0 and direction setting the direction
+        of positive angles, so both are taken from the matplotlib axes
+        to map the two coordinate systems onto each other. Background,
+        grid, and frame colors are taken from the matplotlib axes like
+        they are for cartesian axes.
+        """
+        self.polar_ct += 1
+        self.current_polar_subplot = (
+            "polar{0}".format(self.polar_ct) if self.polar_ct > 1 else "polar"
+        )
+        theta_offset = ax.get_theta_offset()
+        theta_direction = ax.get_theta_direction()
+        axes = props.get("axes", [])
+        angular_grid = axes[0].get("grid", {}) if len(axes) > 0 else {}
+        radial_grid = axes[1].get("grid", {}) if len(axes) > 1 else {}
+        frame = props.get("polar_frame")
+        self.plotly_fig["layout"][self.current_polar_subplot] = go.layout.Polar(
+            bgcolor=_export_color(props["axesbg"]),
+            angularaxis=dict(
+                rotation=float(np.degrees(theta_offset)),
+                direction=("counterclockwise" if theta_direction >= 0 else "clockwise"),
+                tickvals=[float(t) for t in np.degrees(ax.xaxis.get_majorticklocs())],
+                ticktext=[t.get_text() for t in ax.xaxis.get_majorticklabels()],
+                showgrid=angular_grid.get("gridOn", True),
+                gridcolor=_export_color(angular_grid.get("color", "#B0B0B0")),
+                showline=frame["visible"] if frame else True,
+                linecolor=(_export_color(frame["color"]) if frame else "black"),
+                linewidth=frame["linewidth"] if frame else 1,
+            ),
+            radialaxis=dict(
+                range=[float(v) for v in ax.get_ylim()],
+                tickvals=[float(t) for t in ax.yaxis.get_majorticklocs()],
+                ticktext=[t.get_text() for t in ax.yaxis.get_majorticklabels()],
+                showgrid=radial_grid.get("gridOn", True),
+                gridcolor=_export_color(radial_grid.get("color", "#B0B0B0")),
+                showline=False,
+            ),
+        )
 
     def open_figure(self, fig, props):
         """Creates a new figure by beginning to fill out layout dict.
@@ -194,6 +243,11 @@ class PlotlyRenderer(Renderer):
             if c.__class__.__name__ == "BarContainer"
         ]
         self.current_bars = []
+        self.current_is_polar = getattr(ax, "name", None) == "polar"
+        if self.current_is_polar:
+            self.msg += "  Opening polar axes\n"
+            self._open_polar_axes(ax, props)
+            return
         self.axis_ct += 1
         if props.get("patch_visible", True):
             self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
@@ -296,6 +350,7 @@ class PlotlyRenderer(Renderer):
         self.draw_bars(self.current_bars)
         self.msg += "  Closing axes\n"
         self.x_is_mpl_date = False
+        self.current_is_polar = False
 
     def open_legend(self, legend, props):
         """Enable Plotly's native legend when matplotlib legend is detected.
@@ -530,6 +585,41 @@ class PlotlyRenderer(Renderer):
                 showlegend = False
             else:
                 showlegend = None
+            if self.current_is_polar:
+                self.plotly_fig.add_trace(
+                    go.Scatterpolar(
+                        mode=mode,
+                        name=label,
+                        theta=np.degrees([xy_pair[0] for xy_pair in props["data"]]),
+                        r=[xy_pair[1] for xy_pair in props["data"]],
+                        subplot=self.current_polar_subplot,
+                        line=(
+                            go.scatterpolar.Line(
+                                color=line.color,
+                                width=line.width,
+                                dash=line.dash,
+                            )
+                            if props["linestyle"]
+                            else None
+                        ),
+                        marker=(
+                            go.scatterpolar.Marker(
+                                opacity=marker.opacity,
+                                color=marker.color,
+                                symbol=marker.symbol,
+                                size=marker.size,
+                                line=dict(
+                                    color=marker.line.color,
+                                    width=marker.line.width,
+                                ),
+                            )
+                            if props["markerstyle"]
+                            else None
+                        ),
+                    )
+                )
+                self.msg += "    Heck yeah, I drew that line on polar axes\n"
+                return
             marked_line = go.Scatter(
                 mode=mode,
                 name=label,
@@ -733,6 +823,21 @@ class PlotlyRenderer(Renderer):
             facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
+            if self.current_is_polar:
+                self.plotly_fig.add_trace(
+                    go.Scatterpolar(
+                        theta=np.degrees([v[0] for v in verts]),
+                        r=[v[1] for v in verts],
+                        mode="lines",
+                        line=go.scatterpolar.Line(
+                            color=_export_color(edgecolor), width=linewidth
+                        ),
+                        fill="toself",
+                        fillcolor=_export_color(facecolor),
+                        subplot=self.current_polar_subplot,
+                    )
+                )
+                continue
             self.plotly_fig.add_trace(
                 go.Scatter(
                     x=self._convert_x_dates([v[0] for v in verts]),
