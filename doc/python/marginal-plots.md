@@ -61,6 +61,8 @@ fig.show()
 
 ### Marginal Heatmaps on Density Heatmaps
 
+*New in 7.1*
+
 `marginal_x` and `marginal_y` also accept `"heatmap"` for [`density_heatmap`](/python/2D-Histogram/). This draws a single-row or single-column heatmap strip, colored by the same aggregate (`histfunc` of `z`, or count by default) as the main plot, and sharing its color scale. This is not supported for `density_contour`, since a contour plot's colorbar is discrete and not compatible with the continuous colorbar used by the marginal heatmap.
 
 ```python

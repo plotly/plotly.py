@@ -282,6 +282,7 @@ class Exporter(object):
             "linewidth": collection.get_linewidths(),
             "facecolor": collection.get_facecolors(),
             "edgecolor": collection.get_edgecolors(),
+            "linestyle": collection.get_linestyle(),
             "alpha": collection._alpha,
             "zorder": collection.get_zorder(),
         }

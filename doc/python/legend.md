@@ -697,6 +697,41 @@ fig.show()
 
 ```
 
+#### Group double-click toggle behavior
+
+*New in 7.1*
+
+`groupdoubleclick` sets the scope of a double-click on a legend item, the way `groupclick` sets the scope of a single click. A double-click isolates, because `itemdoubleclick` defaults to `"toggleothers"`. Set `groupdoubleclick` to `"togglegroup"`, and a double-click hides every item outside the group of the item clicked on. A second double-click brings those items back. Set it to `"toggleitem"`, and a double-click isolates the single item clicked on.
+
+In the example below, a single click hides one item, and a double-click leaves only the group of the item clicked on.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+for name, color, y in [("first legend group", "Crimson", [2, 1, 3]),
+                       ("first legend group - average", "Crimson", [2, 2, 2])]:
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=y, legendgroup="group",
+                             legendgrouptitle_text="First Group Title",
+                             name=name, mode="lines+markers",
+                             line=dict(color=color)))
+
+for name, color, y in [("second legend group", "MediumPurple", [4, 9, 2]),
+                       ("second legend group - average", "MediumPurple", [5, 5, 5])]:
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=y, legendgroup="group2",
+                             legendgrouptitle_text="Second Group Title",
+                             name=name, mode="lines+markers",
+                             line=dict(color=color)))
+
+fig.update_layout(title=dict(text="Try Clicking and Double-Clicking on the Legend Items!"),
+                  legend=dict(groupclick="toggleitem", groupdoubleclick="togglegroup"))
+
+fig.show()
+```
+
+`groupdoubleclick` takes the value of `groupclick` when you do not set it. To make a double-click toggle a group rather than isolate it, set `itemdoubleclick` to `"toggle"` as well.
+
 ### Legend items for continuous fields (2D and 3D)
 
 Traces corresponding to 2D fields (e.g. `go.Heatmap`, `go.Histogram2d`) or 3D fields (e.g. `go.Isosurface`, `go.Volume`, `go.Cone`) can also appear in the legend. They come with legend icons corresponding to each trace type, which are colored using the same colorscale as the trace.

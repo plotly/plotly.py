@@ -1,3 +1,5 @@
+import pytest
+
 from _plotly_utils.colors import (
     find_intermediate_color,
     hex_to_rgb,
@@ -19,6 +21,26 @@ def test_hex_to_rgb_shorthand_3_digit():
     assert hex_to_rgb("#f00") == (255, 0, 0)
     assert hex_to_rgb("#0f0") == (0, 255, 0)
     assert hex_to_rgb("#00f") == (0, 0, 255)
+
+
+@pytest.mark.parametrize("value", ["#abcd", "eb4d", "#12345678", "b24fa3d1"])
+def test_hex_to_rgb_warns_on_4_and_8_digits(value):
+    warning_must_contain = "4-char" if len(value.lstrip("#")) == 4 else "8-char"
+    with pytest.warns(UserWarning, match=warning_must_contain):
+        hex_to_rgb(value)
+
+
+@pytest.mark.parametrize("value", ["#12345", "#1", "#1234567", "", "#"])
+def test_hex_to_rgb_rejects_other_lengths(value):
+    # The section width was len // 3, so "#12345" returned a 5-tuple rather
+    # than raising.
+    with pytest.raises(ValueError, match="3 or 6 hex digits"):
+        hex_to_rgb(value)
+
+
+def test_hex_to_rgb_accepts_missing_hash():
+    assert hex_to_rgb("aabbcc") == (170, 187, 204)
+    assert hex_to_rgb("abc") == (170, 187, 204)
 
 
 def test_label_rgb_formats_tuple():

@@ -56,6 +56,10 @@ Tile-based traces in Plotly use MapLibre.
 
 MapLibre-based traces (new in 5.24) are ones generated in Plotly Express using `px.scatter_map`, `px.line_map`, `px.choropleth_map`, `px.density_map`, or Graph Objects using `go.Scattermap`, `go.Choroplethmap`, or `go.Densitymap`.
 
+*Changed in 7.1*
+
+Version 7.1 updates MapLibre GL JS from version 5 to version 6. Version 6 requires WebGL2, which raises the browser requirement for tile maps to Safari 15, Chrome 56, and Firefox 51. Outline-based maps and all other trace types are unaffected.
+
 
 ### MapLibre
 

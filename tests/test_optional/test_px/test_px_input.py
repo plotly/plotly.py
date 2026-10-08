@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 from packaging import version
 import unittest.mock as mock
-from plotly.express._core import build_dataframe
+from plotly.express._core import build_dataframe, _is_continuous
 from plotly import optional_imports
 from pandas.testing import assert_frame_equal
 import sys
@@ -622,6 +622,19 @@ def test_auto_orient_x_and_y(fn, x, y, result):
             assert fn(x=series[x], y=series[y]).data[0].orientation != result
         else:
             assert fn(x=series[x], y=series[y]).data[0].orientation == result
+
+
+@pytest.mark.parametrize("dtype", [nw.UInt8, nw.UInt16, nw.UInt32, nw.UInt64])
+def test_auto_orient_unsigned_int(constructor, dtype):
+    df = nw.from_native(constructor(dict(category=["a", "b", "c"], value=[1, 2, 3])))
+    df = df.with_columns(nw.col("value").cast(dtype)).to_native()
+
+    assert _is_continuous(nw.from_native(df, eager_only=True), "value")
+    fig = px.bar(df, x="category", y="value")
+    assert fig.data[0].orientation == "v"
+    assert list(fig.data[0].y) == [1, 2, 3]
+    fig = px.bar(df, x="value", y="category")
+    assert fig.data[0].orientation == "h"
 
 
 def test_histogram_auto_orient():

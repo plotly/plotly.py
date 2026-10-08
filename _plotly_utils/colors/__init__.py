@@ -76,6 +76,7 @@ end up with a colormap that is massive and may slow down graphing performance.
 
 import decimal
 from numbers import Number
+from warnings import warn
 
 from _plotly_utils import exceptions
 
@@ -763,15 +764,29 @@ def hex_to_rgb(value):
         '#FFF'    --> (255, 255, 255)
 
     """
+
+    input_value = value
     value = value.lstrip("#")
     if len(value) == 3:
         value = "".join(c * 2 for c in value)
-    hex_total_length = len(value)
-    rgb_section_length = hex_total_length // 3
-    return tuple(
-        int(value[i : i + rgb_section_length], 16)
-        for i in range(0, hex_total_length, rgb_section_length)
-    )
+    elif len(value) == 4:
+        warn(
+            "4-character hex color provided; 4th character will be ignored."
+            "got {!r}".format(input_value)
+        )
+        value = "".join(c * 2 for c in value)[:6]
+    elif len(value) == 8:
+        warn(
+            "8-character hex color provided; last two characters will be ignored."
+            "got {!r}".format(input_value)
+        )
+        value = value[:6]
+    elif len(value) != 6:
+        raise ValueError(
+            "hex color must be 3 or 6 hex digits, optionally prefixed with "
+            "'#'; got {!r}".format(input_value)
+        )
+    return tuple(int(value[i : i + 2], 16) for i in range(0, 6, 2))
 
 
 def colorscale_to_colors(colorscale):

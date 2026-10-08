@@ -4,11 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
+- Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
+- Fix `mpl_to_plotly` crashing on touching bars (such as `plt.hist`) due to floating-point noise producing negative `bargap` values by clamping `bargap` to `[0, 1]` [[#5696](https://github.com/plotly/plotly.py/pull/5696)], with thanks to @robertoffmoura for the contribution!
+- Fix `mpl_to_plotly` drawing step plots with diagonal lines instead of vertical/horizontal step segments by mapping matplotlib step drawstyles (`steps-pre`, `steps-post`, `steps-mid`) to plotly line shapes [[#5697](https://github.com/plotly/plotly.py/pull/5697)], with thanks to @robertoffmoura for the contribution!
+- Fix `mpl_to_plotly` showing unwanted legends with placeholder or internal label entries (`_nolegend_`, `_childN`) by defaulting `layout.showlegend=False` unless the matplotlib figure explicitly defines a legend [[#5699](https://github.com/plotly/plotly.py/pull/5699)], with thanks to @robertoffmoura for the contribution!
+- Fix `mpl_to_plotly` crashing on figures with fully transparent or alpha-carrying colors, such as boxplot outlier markers (`facecolor="none"`), rgba line colors, and `color="none"` text and axis labels; all matplotlib colors are now exported through a single helper that maps `"none"` to transparent rgba and keeps or overrides alpha as matplotlib does [[#5700](https://github.com/plotly/plotly.py/pull/5700)], with thanks to @robertoffmoura for the contribution!
+- Export tick label colors to the plotly tickfont in `mpl_to_plotly` [[#5716](https://github.com/plotly/plotly.py/pull/5716)], with thanks to @robertoffmoura for the contribution!
+- Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
+- Fix `mpl_to_plotly` conversion of matplotlib contour lines and line collections: close contour rings ending with `Z` codes, support dash styles, convert date x-axes, separate disjoint subpaths with `None` separators, hide line collection traces from the legend by default, and group consecutive same-style lines into single traces [[#5770](https://github.com/plotly/plotly.py/pull/5770)], with thanks to @robertoffmoura for the contribution!
+
+## [7.1.0] - 2026-09-15
+
 ### Added
 - Support `marginal_x`/`marginal_y="heatmap"` in `density_heatmap`, drawing a single-row/column heatmap strip in the margin colored by the same `z`/`histfunc` aggregate as the main plot and sharing its color scale [[#5706](https://github.com/plotly/plotly.py/issues/5706)], with thanks to @lucasjamar for the contribution!
 - Add support for custom tick values in `mpl_to_plotly` when the matplotlib tick positions don't follow an arithmetic progression, including custom tick labels and tick values on date axes [[#5262](https://github.com/plotly/plotly.py/pull/5262)], with thanks to @robertoffmoura for the contribution!
 
 ### Fixed
+- Fix Plotly Express treating unsigned integer columns (`uint8`, `uint16`, `uint32`, `uint64`) in pandas DataFrames as categorical, which caused `px.bar` and other functions to pick the wrong orientation and render unexpected plots [[#4291](https://github.com/plotly/plotly.py/issues/4291), [#4344](https://github.com/plotly/plotly.py/issues/4344)], with thanks to @Belagum for the contribution!
 - Fix `mpl_to_plotly` not setting `paper_bgcolor` and `plot_bgcolor` from the matplotlib figure and axes backgrounds, so converted figures match the source figure's background colors [[#5285](https://github.com/plotly/plotly.py/pull/5285)], with thanks to @robertoffmoura for the contribution!
 - Fix rendering issue causing a too-large div when calling `Figure.show()` in Google Colab [[#5718](https://github.com/plotly/plotly.py/pull/5718)]
 - Fix the sphinx-gallery scraper so that it generates thumbnails for figures shown with `fig.show()` or displayed as the last expression of a code block [[#5701](https://github.com/plotly/plotly.py/pull/5701)], with thanks to @larsoner for the contribution!
@@ -24,6 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Fix issue with per-point marker color for hover labels in `scattergl`, `quiver` traces [[#8027](https://github.com/plotly/plotly.js/pull/8027)]
   - Update `maplibre-gl` to v6 to address [CVE-2026-85061](https://github.com/advisories/GHSA-jrc7-96c5-q579) [[#8035](https://github.com/plotly/plotly.js/pull/8035)]
     - Note: Safari 15, Chrome 56, Firefox 51 and later are now required for map traces
+- Update `hex_to_rgb` function to raise error for invalid-length hex codes, and emit warning for hex codes containing alpha [[#5729](https://github.com/plotly/plotly.py/pull/5729)], with thanks to @dylanpulver for the contribution!
 
 ## [7.0.0] - 2026-08-25
 
