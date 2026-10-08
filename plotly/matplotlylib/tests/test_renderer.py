@@ -553,6 +553,22 @@ def test_stairs_converts_to_step_line():
     assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
 
 
+def test_stairs_date_xaxis():
+    """Stairs with date x-values must export date strings,
+    not raw matplotlib date numbers."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
+    ]
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], dates)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.type == "date"
+    trace = plotly_fig.data[0]
+    assert all(isinstance(x, str) for x in trace.x)
+
+
 def test_stairs_label_used_in_legend():
     """A labeled stairs patch must become a named legend entry."""
     fig, ax = plt.subplots()
