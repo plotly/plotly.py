@@ -569,6 +569,20 @@ def test_stairs_date_xaxis():
     assert all(isinstance(x, str) for x in trace.x)
 
 
+def test_stairs_fill_converts_to_filled_area():
+    """Filled stairs must export the patch facecolor as a filled area."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0], fill=True)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert trace.fill == "toself"
+    assert trace.fillcolor == "#1F77B4"
+    assert tuple(trace.x) == (0.0, 1.0, 1.0, 2.0, 2.0, 3.0)
+    assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
+
+
 def test_stairs_label_used_in_legend():
     """A labeled stairs patch must become a named legend entry."""
     fig, ax = plt.subplots()

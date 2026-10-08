@@ -789,7 +789,7 @@ class PlotlyRenderer(Renderer):
             )
 
     def _draw_step_path(self, props):
-        """Draw a matplotlib StepPatch as a step line trace."""
+        """Draw a matplotlib StepPatch as a step trace."""
         if props["coordinates"] != "data":
             self.msg += "    Step path is not in data coordinates, not drawing\n"
             return
@@ -821,6 +821,8 @@ class PlotlyRenderer(Renderer):
                     width=style["edgewidth"],
                     dash=mpltools.convert_dash(style["dasharray"]),
                 ),
+                fill="toself" if style["facecolor"] != "none" else None,
+                fillcolor=_export_color(style["facecolor"]),
                 xaxis="x{0}".format(self.axis_ct),
                 yaxis="y{0}".format(self.axis_ct),
             )
