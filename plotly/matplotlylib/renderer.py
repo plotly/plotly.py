@@ -14,17 +14,40 @@ from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
 
 
-def _export_color(color):
-    """Export a matplotlib color for use as a plotly color.
+from plotly.matplotlylib.mpltools import _export_color
 
-    matplotlib uses "none" for fully transparent colors, which plotly does not
-    accept, so transparent colors are exported as transparent black.
-    Colors already exported by the mplexporter (hex or rgba strings) are
-    passed through unchanged.
+
+def _per_path(values, i, default):
+    """Return the style value for the i-th path of a path collection.
+
+    A scalar (or string) value applies to every path, a sequence is cycled
+    through like matplotlib does, and None or an empty sequence yields
+    `default`.
     """
-    if isinstance(color, str):
-        return "rgba(0,0,0,0)" if color == "none" else color
-    return [_export_color(c) for c in color]
+    if isinstance(values, str):
+        return values
+    if values is None:
+        return default
+    try:
+        n = len(values)
+    except TypeError:
+        return values
+    return values[i % n] if n else default
+
+
+def _convert_collection_dash(linestyle):
+    """Convert a matplotlib collection line style to a plotly dash string.
+
+    Collections report line styles as (offset, dashes) tuples, with dashes
+    in points and already scaled by line width (None for solid lines). Line
+    widths are exported with their point values used as px, so the dashes
+    are exported the same way, which keeps matplotlib's dash-to-width ratio.
+    plotly has no dash offset, so the offset is dropped.
+    """
+    dashes = linestyle[1] if linestyle is not None else None
+    if not dashes:
+        return "solid"
+    return ",".join("{0:g}px".format(d) for d in dashes)
 
 
 class PlotlyRenderer(Renderer):
@@ -67,6 +90,7 @@ class PlotlyRenderer(Renderer):
         self.msg = "Initialized PlotlyRenderer\n"
         self._processing_legend = False
         self._legend_visible = False
+        self.axes_list = []
 
     def _convert_x_dates(self, x):
         """Convert x values to date strings when the x-axis is a date axis."""
@@ -100,6 +124,10 @@ class PlotlyRenderer(Renderer):
             height=int(props["figheight"] * props["dpi"]),
             autosize=False,
             hovermode="closest",
+            # plotly.js auto-names unnamed traces "trace N" and shows them
+            # in the legend; the legend is only enabled when the mpl figure
+            # actually has one (see open_legend)
+            showlegend=False,
         )
         self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
@@ -167,8 +195,8 @@ class PlotlyRenderer(Renderer):
         ]
         self.current_bars = []
         self.axis_ct += 1
-        # update plot background with the axes background from mpl
-        self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
+        if props.get("patch_visible", True):
+            self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
             anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
@@ -186,10 +214,63 @@ class PlotlyRenderer(Renderer):
         top_spine = mpltools.get_spine_visible(ax, "top")
         left_spine = mpltools.get_spine_visible(ax, "left")
         right_spine = mpltools.get_spine_visible(ax, "right")
-        xaxis["mirror"] = mpltools.get_axis_mirror(bottom_spine, top_spine)
-        yaxis["mirror"] = mpltools.get_axis_mirror(left_spine, right_spine)
-        xaxis["showline"] = bottom_spine
-        yaxis["showline"] = top_spine
+        x_tick_params = ax.xaxis.get_tick_params()
+        y_tick_params = ax.yaxis.get_tick_params()
+        bottom_tick_markers = x_tick_params.get(
+            "bottom", x_tick_params.get("left", True)
+        )
+        top_tick_markers = x_tick_params.get("top", x_tick_params.get("right", False))
+        left_tick_markers = y_tick_params.get("left", True)
+        right_tick_markers = y_tick_params.get("right", False)
+        if xaxis["side"] == "top":
+            x_main_spine, x_mirror_spine = top_spine, bottom_spine
+            x_main_ticks, x_mirror_ticks = top_tick_markers, bottom_tick_markers
+        else:
+            x_main_spine, x_mirror_spine = bottom_spine, top_spine
+            x_main_ticks, x_mirror_ticks = bottom_tick_markers, top_tick_markers
+
+        xaxis["mirror"] = mpltools.get_axis_mirror(
+            x_main_spine, x_mirror_spine, x_main_ticks, x_mirror_ticks
+        )
+        xaxis["showline"] = x_main_spine
+        # hide tick markers when the mpl main-side tick markers are hidden
+        if not x_main_ticks:
+            xaxis["ticks"] = ""
+
+        if yaxis["side"] == "right":
+            y_main_spine, y_mirror_spine = right_spine, left_spine
+            y_main_ticks, y_mirror_ticks = right_tick_markers, left_tick_markers
+        else:
+            y_main_spine, y_mirror_spine = left_spine, right_spine
+            y_main_ticks, y_mirror_ticks = left_tick_markers, right_tick_markers
+
+        yaxis["mirror"] = mpltools.get_axis_mirror(
+            y_main_spine, y_mirror_spine, y_main_ticks, y_mirror_ticks
+        )
+        yaxis["showline"] = y_main_spine
+        if not y_main_ticks:
+            yaxis["ticks"] = ""
+
+        overlay_ax_ct = None
+        for prev_ax, prev_ct in self.axes_list:
+            # Overlay only axes that cover the same area. Shared-axis subplots, such
+            # as the ones from plt.subplots(sharex=True), sit in different places.
+            if ax.get_position().bounds == prev_ax.get_position().bounds:
+                overlay_ax_ct = prev_ct
+                break
+
+        if overlay_ax_ct is not None:
+            overlay_x = "x" if overlay_ax_ct == 1 else "x{0}".format(overlay_ax_ct)
+            overlay_y = "y" if overlay_ax_ct == 1 else "y{0}".format(overlay_ax_ct)
+            xaxis["overlaying"] = overlay_x
+            yaxis["overlaying"] = overlay_y
+
+        if not props["axes"][0]["visible"]:
+            xaxis["visible"] = False
+        if not props["axes"][1]["visible"]:
+            yaxis["visible"] = False
+
+        self.axes_list.append((ax, self.axis_ct))
 
         # put axes in our figure
         self.plotly_fig["layout"]["xaxis{0}".format(self.axis_ct)] = xaxis
@@ -336,7 +417,7 @@ class PlotlyRenderer(Renderer):
             yaxis="y{0}".format(self.axis_ct),
             opacity=trace[0]["alpha"],  # TODO: get all alphas if array?
             marker=go.bar.Marker(
-                color=trace[0]["facecolor"],  # TODO: get all
+                color=_export_color(trace[0]["facecolor"]),  # TODO: get all
                 line=dict(width=trace[0]["edgewidth"]),
             ),
         )  # TODO ditto
@@ -398,7 +479,7 @@ class PlotlyRenderer(Renderer):
             self.msg += "... with just markers\n"
             mode = "markers"
         if props["linestyle"]:
-            color = mpltools.merge_color_and_opacity(
+            color = _export_color(
                 props["linestyle"]["color"], props["linestyle"]["alpha"]
             )
 
@@ -407,6 +488,7 @@ class PlotlyRenderer(Renderer):
                     color=color,
                     width=props["linestyle"]["linewidth"],
                     dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
+                    shape=mpltools.convert_drawstyle(props["linestyle"]["drawstyle"]),
                 )
             else:
                 shape = dict(
@@ -420,33 +502,38 @@ class PlotlyRenderer(Renderer):
             if props["coordinates"] == "data":
                 marker = go.scatter.Marker(
                     opacity=props["markerstyle"]["alpha"],
-                    color=props["markerstyle"]["facecolor"],
+                    color=_export_color(props["markerstyle"]["facecolor"]),
                     symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
                     size=props["markerstyle"]["markersize"],
                     line=dict(
-                        color=props["markerstyle"]["edgecolor"],
+                        color=_export_color(props["markerstyle"]["edgecolor"]),
                         width=props["markerstyle"]["edgewidth"],
                     ),
                 )
             else:
                 shape = dict(
                     opacity=props["markerstyle"]["alpha"],
-                    fillcolor=props["markerstyle"]["facecolor"],
+                    fillcolor=_export_color(props["markerstyle"]["facecolor"]),
                     symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
                     size=props["markerstyle"]["markersize"],
                     line=dict(
-                        color=props["markerstyle"]["edgecolor"],
+                        color=_export_color(props["markerstyle"]["edgecolor"]),
                         width=props["markerstyle"]["edgewidth"],
                     ),
                 )
         if props["coordinates"] == "data":
+            label = props["label"]
+            # matplotlib uses "_nolegend_" and auto-generated "_childN"
+            # labels for artists that must not appear in a legend
+            if not label or (isinstance(label, str) and label.startswith("_")):
+                label = None
+                showlegend = False
+            else:
+                showlegend = None
             marked_line = go.Scatter(
                 mode=mode,
-                name=(
-                    str(props["label"])
-                    if isinstance(props["label"], str)
-                    else props["label"]
-                ),
+                name=label,
+                showlegend=showlegend,
                 x=[xy_pair[0] for xy_pair in props["data"]],
                 y=[xy_pair[1] for xy_pair in props["data"]],
                 xaxis="x{0}".format(self.axis_ct),
@@ -508,6 +595,7 @@ class PlotlyRenderer(Renderer):
         'linewidth',            (one or more linewidths)
         'facecolor',            (one or more facecolors for path)
         'edgecolor',            (one or more edgecolors for path)
+        'linestyle',            (one or more (offset, dashes) line styles)
         'alpha',                (one or more opacites for path)
         'zorder',               (precedence when stacked)
         ]
@@ -526,8 +614,13 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Drawing path collection as markers\n"
             self.draw_marked_line(**scatter_props)
         elif props["path_coordinates"] == "data":
-            self.msg += "    Drawing path collection as filled polygons\n"
-            self._draw_filled_path_collection(props)
+            if len(props["styles"]["facecolor"]) == 0:
+                # no face colors: a line collection (e.g. contour lines)
+                self.msg += "    Drawing path collection as lines\n"
+                self._draw_line_collection(props)
+            else:
+                self.msg += "    Drawing path collection as filled polygons\n"
+                self._draw_filled_path_collection(props)
         else:
             self.msg += "    Path collection not linked to 'data', not drawing\n"
             warnings.warn(
@@ -537,27 +630,109 @@ class PlotlyRenderer(Renderer):
                 "collections linked to 'data' coordinates"
             )
 
+    def _draw_line_collection(self, props):
+        """Draw a path collection without face colors (e.g. contour lines)
+        as plain lines, grouping consecutive same-style paths into single traces."""
+        edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
+        linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
+        linestyles = props["styles"].get("linestyle")
+
+        current_style = None
+        grouped_x = []
+        grouped_y = []
+
+        def flush():
+            if current_style is not None and grouped_x:
+                ec, lw, d = current_style
+                self.plotly_fig.add_trace(
+                    go.Scatter(
+                        x=grouped_x,
+                        y=grouped_y,
+                        mode="lines",
+                        showlegend=False,
+                        line=go.scatter.Line(
+                            color=_export_color(ec),
+                            width=lw,
+                            dash=d,
+                        ),
+                        xaxis="x{0}".format(self.axis_ct),
+                        yaxis="y{0}".format(self.axis_ct),
+                    )
+                )
+
+        for i, (verts, codes) in enumerate(props["paths"]):
+            # a path may contain several disjoint lines (e.g. contour lines
+            # of the same level); separate disjoint subpaths with None so
+            # plotly does not connect them.
+            # In SVG paths, codes carry different numbers of vertices:
+            # M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
+            code_steps = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
+            subpaths = []
+            current = []
+            closed = False
+            vi = 0
+            for c in codes:
+                step = code_steps.get(c, 1)
+                if c == "M":
+                    if current:
+                        subpaths.append((current, closed))
+                    current = [verts[vi]]
+                    closed = False
+                    vi += 1
+                elif c == "Z":
+                    closed = True
+                else:
+                    current.extend(verts[vi : vi + step])
+                    vi += step
+            if current:
+                subpaths.append((current, closed))
+            path_x = []
+            path_y = []
+            for sub, closed in subpaths:
+                if len(sub) < 2:
+                    continue
+                # a closed subpath (Z code) must be closed explicitly since
+                # plotly's lines mode does not close the loop
+                if closed:
+                    sub = sub + [sub[0]]
+                sub_x = self._convert_x_dates([v[0] for v in sub])
+                sub_y = [v[1] for v in sub]
+                if path_x:
+                    path_x.append(None)
+                    path_y.append(None)
+                path_x.extend(sub_x)
+                path_y.extend(sub_y)
+            if not path_x:
+                continue
+
+            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = _per_path(linewidths, i, 0)
+            dash = _convert_collection_dash(_per_path(linestyles, i, None))
+            style = (edgecolor, linewidth, dash)
+
+            if style != current_style:
+                flush()
+                current_style = style
+                grouped_x = list(path_x)
+                grouped_y = list(path_y)
+            else:
+                grouped_x.append(None)
+                grouped_y.append(None)
+                grouped_x.extend(path_x)
+                grouped_y.extend(path_y)
+
+        flush()
+
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
 
-        def per_path(colors, i, default):
-            if isinstance(colors, str):
-                return colors
-            if colors is None:
-                return default
-            try:
-                n = len(colors)
-            except TypeError:
-                return colors
-            return colors[i % n] if n else default
-
         for i, (verts, codes) in enumerate(props["paths"]):
-            facecolor = per_path(facecolors, i, "rgba(0,0,0,0)")
-            edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
-            linewidth = per_path(linewidths, i, 0)
+            facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
+            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = _per_path(linewidths, i, 0)
             self.plotly_fig.add_trace(
                 go.Scatter(
                     x=self._convert_x_dates([v[0] for v in verts]),
@@ -728,7 +903,8 @@ class PlotlyRenderer(Renderer):
                 yanchor=yanchor,
                 showarrow=False,  # change this later?
                 font=go.layout.annotation.Font(
-                    color=props["style"]["color"], size=props["style"]["fontsize"]
+                    color=_export_color(props["style"]["color"]),
+                    size=props["style"]["fontsize"],
                 ),
             )
             self.plotly_fig["layout"]["annotations"] += (annotation,)
@@ -768,7 +944,8 @@ class PlotlyRenderer(Renderer):
             annotation = go.layout.Annotation(
                 text=props["text"],
                 font=go.layout.annotation.Font(
-                    color=props["style"]["color"], size=props["style"]["fontsize"]
+                    color=_export_color(props["style"]["color"]),
+                    size=props["style"]["fontsize"],
                 ),
                 xref="paper",
                 yref="paper",
@@ -783,7 +960,8 @@ class PlotlyRenderer(Renderer):
             self.msg += "          Only one subplot found, adding as a plotly title\n"
             self.plotly_fig["layout"]["title"] = props["text"]
             title_font = dict(
-                size=props["style"]["fontsize"], color=props["style"]["color"]
+                size=props["style"]["fontsize"],
+                color=_export_color(props["style"]["color"]),
             )
             self.plotly_fig["layout"]["title_font"] = title_font
 
@@ -814,7 +992,8 @@ class PlotlyRenderer(Renderer):
         axis_key = "xaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = str(props["text"])
         title_font = dict(
-            size=props["style"]["fontsize"], color=props["style"]["color"]
+            size=props["style"]["fontsize"],
+            color=_export_color(props["style"]["color"]),
         )
         self.plotly_fig["layout"][axis_key]["title_font"] = title_font
 
@@ -845,7 +1024,8 @@ class PlotlyRenderer(Renderer):
         axis_key = "yaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = props["text"]
         title_font = dict(
-            size=props["style"]["fontsize"], color=props["style"]["color"]
+            size=props["style"]["fontsize"],
+            color=_export_color(props["style"]["color"]),
         )
         self.plotly_fig["layout"][axis_key]["title_font"] = title_font
 
