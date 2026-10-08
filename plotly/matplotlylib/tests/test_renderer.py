@@ -594,6 +594,21 @@ def test_stairs_nan_values_split_into_disjoint_steps():
     assert tuple(trace.y) == (0.2, 1.0, 1.0, 0.2, None, 0.2, 0.5, 0.5, 0.2)
 
 
+def test_stairs_date_xaxis_with_nan_values():
+    """NaN-separated stairs on a date axis must export date strings."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
+    ]
+    fig, ax = plt.subplots()
+    ax.stairs([1.0, np.nan, 0.5], dates)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert None in trace.x
+    assert all(isinstance(x, str) or x is None for x in trace.x)
+
+
 def test_stairs_label_used_in_legend():
     """A labeled stairs patch must become a named legend entry."""
     fig, ax = plt.subplots()

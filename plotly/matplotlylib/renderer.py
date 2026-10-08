@@ -795,15 +795,27 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Step path is not in data coordinates, not drawing\n"
             return
         style = props["style"]
+        segments = []
+        segment_x = []
+        segment_y = []
+        for (x0, y0), code in zip(props["data"], props["pathcodes"]):
+            if code == "M" and segment_x:
+                segments.append((segment_x, segment_y))
+                segment_x = []
+                segment_y = []
+            if not segment_x or x0 != segment_x[-1] or y0 != segment_y[-1]:
+                segment_x.append(x0)
+                segment_y.append(y0)
+        if segment_x:
+            segments.append((segment_x, segment_y))
         x = []
         y = []
-        for (x0, y0), code in zip(props["data"], props["pathcodes"]):
-            if code == "M" and x:
+        for sub_x, sub_y in segments:
+            if x:
                 x.append(None)
                 y.append(None)
-            if not x or x0 != x[-1] or y0 != y[-1]:
-                x.append(x0)
-                y.append(y0)
+            x.extend(self._convert_x_dates(sub_x))
+            y.extend(sub_y)
         if len(x) < 2:
             self.msg += "    Step path has fewer than 2 points, not drawing\n"
             return
