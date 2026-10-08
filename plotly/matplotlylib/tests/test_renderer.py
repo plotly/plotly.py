@@ -583,6 +583,18 @@ def test_stairs_fill_converts_to_filled_area():
     assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
 
 
+def test_stairs_nan_values_split_into_disjoint_steps():
+    """NaN values split stairs into separate step regions."""
+    fig, ax = plt.subplots()
+    ax.stairs([1.0, np.nan, 0.5], [0.0, 1.0, 2.0, 3.0], baseline=0.2)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert tuple(trace.x) == (0.0, 0.0, 1.0, 1.0, None, 2.0, 2.0, 3.0, 3.0)
+    assert tuple(trace.y) == (0.2, 1.0, 1.0, 0.2, None, 0.2, 0.5, 0.5, 0.2)
+
+
 def test_stairs_label_used_in_legend():
     """A labeled stairs patch must become a named legend entry."""
     fig, ax = plt.subplots()

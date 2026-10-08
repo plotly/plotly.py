@@ -796,7 +796,10 @@ class PlotlyRenderer(Renderer):
         style = props["style"]
         x = []
         y = []
-        for x0, y0 in props["data"]:
+        for (x0, y0), code in zip(props["data"], props["pathcodes"]):
+            if code == "M" and x:
+                x.append(None)
+                y.append(None)
             if not x or x0 != x[-1] or y0 != y[-1]:
                 x.append(x0)
                 y.append(y0)
