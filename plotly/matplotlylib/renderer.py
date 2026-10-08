@@ -692,9 +692,7 @@ class PlotlyRenderer(Renderer):
                 xref = x_axis
                 yref = y_axis
 
-        color = mpltools.merge_color_and_opacity(
-            props["linestyle"]["color"], props["linestyle"]["alpha"]
-        )
+        color = _export_color(props["linestyle"]["color"], props["linestyle"]["alpha"])
         shape = go.layout.Shape(
             type="line",
             x0=x0,
