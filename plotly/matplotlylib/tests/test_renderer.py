@@ -707,6 +707,48 @@ def test_uneven_custom_date_xtickvals_are_converted():
     )
 
 
+def test_fill_converts():
+    """plt.fill polygons convert to filled scatter traces."""
+    x = np.linspace(0, 2 * np.pi, 50)
+    fig, ax = plt.subplots()
+    ax.fill(x, np.sin(x), "g")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.type == "scatter"
+    assert trace.fill == "toself"
+    assert np.allclose(trace.x, x)
+    assert np.allclose(trace.y, np.sin(x))
+    assert trace.fillcolor == "#007F00"
+    assert trace.line.color == "rgba(0,0,0,0)"
+
+
+def test_fill_with_legend_label():
+    """plt.fill polygons with labels export their name and show in legend."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 2], [0, 2, 0], "b", label="Shaded Area")
+    ax.fill([0, 1, 2], [0, 1, 0], "g")
+    ax.plot([0, 1, 2], [1, 1, 1], "r-", label="Threshold")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend == True
+    assert len(plotly_fig.data) == 3
+
+    labeled_fill = next(
+        t for t in plotly_fig.data if t.fill == "toself" and t.name == "Shaded Area"
+    )
+    assert labeled_fill.showlegend is not False
+
+    unlabeled_fill = next(
+        t for t in plotly_fig.data if t.fill == "toself" and t.name is None
+    )
+    assert unlabeled_fill.showlegend is False
+
+
 def test_custom_date_xtickvals_given_as_numbers_are_converted():
     """Custom date ticks given as matplotlib date numbers must be converted
     to date strings."""
