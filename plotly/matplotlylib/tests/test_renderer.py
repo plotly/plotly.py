@@ -554,8 +554,7 @@ def test_stairs_converts_to_step_line():
 
 
 def test_stairs_date_xaxis():
-    """Stairs with date x-values must export date strings,
-    not raw matplotlib date numbers."""
+    """Stairs with date x-values must export date strings."""
     dates = [
         datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
     ]

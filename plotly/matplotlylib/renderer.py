@@ -750,11 +750,12 @@ class PlotlyRenderer(Renderer):
             )
 
     def draw_path(self, **props):
-        """Draw path, currently only attempts to draw bar charts.
+        """Draw a bar chart path or a matplotlib step patch.
 
         This function attempts to sort a given path into a collection of
-        horizontal or vertical bar charts. Most of the actual code takes
-        place in functions from mpltools.py.
+        horizontal or vertical bar charts, and draws matplotlib StepPatch
+        artists as step traces. Most of the actual code takes place in
+        functions from mpltools.py.
 
         props.keys() -- [
         'data',         (a list of vertices for the path)
