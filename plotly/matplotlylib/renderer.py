@@ -803,11 +803,19 @@ class PlotlyRenderer(Renderer):
         if len(x) < 2:
             self.msg += "    Step path has fewer than 2 points, not drawing\n"
             return
+        label = props["mplobj"].get_label()
+        if not label or (isinstance(label, str) and label.startswith("_")):
+            label = None
+            showlegend = False
+        else:
+            showlegend = None
         self.plotly_fig.add_trace(
             go.Scatter(
                 x=x,
                 y=y,
                 mode="lines",
+                name=label,
+                showlegend=showlegend,
                 line=go.scatter.Line(
                     color=_export_color(style["edgecolor"], style["alpha"]),
                     width=style["edgewidth"],

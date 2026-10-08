@@ -553,6 +553,34 @@ def test_stairs_converts_to_step_line():
     assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
 
 
+def test_stairs_label_used_in_legend():
+    """A labeled stairs patch must become a named legend entry."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0], label="my stairs")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    assert plotly_fig.data[0].name == "my stairs"
+    assert plotly_fig.data[0].showlegend is not False
+
+
+def test_stairs_without_label_hidden_from_legend():
+    """An unlabeled stairs patch must not appear in the plotly legend."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0])
+    ax.plot([0, 1], [2, 2], label="Labeled line")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    stairs = [trace for trace in plotly_fig.data if trace.name is None]
+    assert len(stairs) == 1
+    assert stairs[0].showlegend is False
+
+
 def test_custom_background_colors_are_preserved():
     fig, ax = plt.subplots()
     fig.patch.set_facecolor("lightyellow")
