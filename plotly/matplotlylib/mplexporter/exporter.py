@@ -84,12 +84,6 @@ class Exporter(object):
             Data transformed to match the given coordinate code.
             Returned only if data is specified
         """
-        if isinstance(transform, transforms.BlendedGenericTransform):
-            warnings.warn(
-                "Blended transforms not yet supported. "
-                "Zoom behavior may not work as expected."
-            )
-
         if force_trans is not None:
             if data is not None:
                 data = (transform - force_trans).transform(data)
