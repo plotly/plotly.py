@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add support for converting matplotlib polar plots to plotly polar subplots in `mpl_to_plotly`, including theta direction and rotation and background, grid, and frame colors [[#5771](https://github.com/plotly/plotly.py/pull/5771)], with thanks to @robertoffmoura for the contribution!
+
 ### Fixed
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the color of each axis's displayed spine to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!
