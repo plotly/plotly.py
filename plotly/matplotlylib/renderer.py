@@ -809,9 +809,7 @@ class PlotlyRenderer(Renderer):
                 y=y,
                 mode="lines",
                 line=go.scatter.Line(
-                    color=mpltools.merge_color_and_opacity(
-                        style["edgecolor"], style["alpha"]
-                    ),
+                    color=_export_color(style["edgecolor"], style["alpha"]),
                     width=style["edgewidth"],
                     dash=mpltools.convert_dash(style["dasharray"]),
                 ),
