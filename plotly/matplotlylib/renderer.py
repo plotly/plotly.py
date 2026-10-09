@@ -210,6 +210,10 @@ class PlotlyRenderer(Renderer):
         )
         xaxis.update(mpl_xaxis)
         yaxis.update(mpl_yaxis)
+        x_spine = "top" if xaxis["side"] == "top" else "bottom"
+        y_spine = "right" if yaxis["side"] == "right" else "left"
+        xaxis["linecolor"] = _export_color(ax.spines[x_spine].get_edgecolor())
+        yaxis["linecolor"] = _export_color(ax.spines[y_spine].get_edgecolor())
         bottom_spine = mpltools.get_spine_visible(ax, "bottom")
         top_spine = mpltools.get_spine_visible(ax, "top")
         left_spine = mpltools.get_spine_visible(ax, "left")
