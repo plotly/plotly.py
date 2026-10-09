@@ -1421,8 +1421,8 @@ No subplot specified at grid position ({row}, {col})""".format(row=row, col=col)
     if secondary_y:
         if len(subplot_refs) < 2:
             raise ValueError(
-                """
-Subplot with type '{subplot_type}' at grid position ({row}, {col}) was not
+                f"""
+Subplot with type '{subplot_refs[0].subplot_type}' at grid position ({row}, {col}) was not
 created with the secondary_y spec property set to True. See the docstring
 for the specs argument to plotly.subplots.make_subplots for more information.
 """
