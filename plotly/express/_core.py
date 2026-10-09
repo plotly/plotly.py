@@ -1687,7 +1687,7 @@ def build_dataframe(args, constructor):
             args["wide_variable"] = args["y"] if wide_y else args["x"]
             if df_provided and is_pd_like and args["wide_variable"] is columns:
                 var_name = columns.name
-            # copy into a new list so that the list provided by the user for
+            # copy into a new list so that the object passed by the user for
             # x or y is not mutated when wide_variable's entries are replaced
             args["wide_variable"] = list(args["wide_variable"])
             if var_name in [None, "value", "index"] or (
