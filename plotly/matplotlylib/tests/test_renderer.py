@@ -592,6 +592,101 @@ def test_background_colors_from_matplotlib_defaults():
     assert plotly_fig.layout.paper_bgcolor == "#FFFFFF"
 
 
+def test_stairs_converts_to_step_line():
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0])
+    plotly_fig = tls.mpl_to_plotly(fig)
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.mode == "lines"
+    assert tuple(trace.x) == (0.0, 1.0, 1.0, 2.0, 2.0, 3.0)
+    assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
+
+
+def test_stairs_date_xaxis():
+    """Stairs with date x-values must export date strings."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
+    ]
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], dates)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.type == "date"
+    trace = plotly_fig.data[0]
+    assert all(isinstance(x, str) for x in trace.x)
+
+
+def test_stairs_fill_converts_to_filled_area():
+    """Filled stairs must export the patch facecolor as a filled area."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0], fill=True)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert trace.fill == "toself"
+    assert trace.fillcolor == "#1F77B4"
+    assert tuple(trace.x) == (0.0, 1.0, 1.0, 2.0, 2.0, 3.0)
+    assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
+
+
+def test_stairs_nan_values_split_into_disjoint_steps():
+    """NaN values split stairs into separate step regions."""
+    fig, ax = plt.subplots()
+    ax.stairs([1.0, np.nan, 0.5], [0.0, 1.0, 2.0, 3.0], baseline=0.2)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert tuple(trace.x) == (0.0, 0.0, 1.0, 1.0, None, 2.0, 2.0, 3.0, 3.0)
+    assert tuple(trace.y) == (0.2, 1.0, 1.0, 0.2, None, 0.2, 0.5, 0.5, 0.2)
+
+
+def test_stairs_date_xaxis_with_nan_values():
+    """NaN-separated stairs on a date axis must export date strings."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
+    ]
+    fig, ax = plt.subplots()
+    ax.stairs([1.0, np.nan, 0.5], dates)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert None in trace.x
+    assert all(isinstance(x, str) or x is None for x in trace.x)
+
+
+def test_stairs_label_used_in_legend():
+    """A labeled stairs patch must become a named legend entry."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0], label="my stairs")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    assert plotly_fig.data[0].name == "my stairs"
+    assert plotly_fig.data[0].showlegend is not False
+
+
+def test_stairs_without_label_hidden_from_legend():
+    """An unlabeled stairs patch must not appear in the plotly legend."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0])
+    ax.plot([0, 1], [2, 2], label="Labeled line")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    stairs = [trace for trace in plotly_fig.data if trace.name is None]
+    assert len(stairs) == 1
+    assert stairs[0].showlegend is False
+
+
 def test_custom_background_colors_are_preserved():
     fig, ax = plt.subplots()
     fig.patch.set_facecolor("lightyellow")

@@ -9,6 +9,7 @@ with the matplotlylib package.
 
 import warnings
 
+import matplotlib.patches as mpatches
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -753,11 +754,12 @@ class PlotlyRenderer(Renderer):
             )
 
     def draw_path(self, **props):
-        """Draw path, currently only attempts to draw bar charts.
+        """Draw a bar chart path or a matplotlib step patch.
 
         This function attempts to sort a given path into a collection of
-        horizontal or vertical bar charts. Most of the actual code takes
-        place in functions from mpltools.py.
+        horizontal or vertical bar charts, and draws matplotlib StepPatch
+        artists as step traces. Most of the actual code takes place in
+        functions from mpltools.py.
 
         props.keys() -- [
         'data',         (a list of vertices for the path)
@@ -781,12 +783,70 @@ class PlotlyRenderer(Renderer):
         is_bar = mpltools.is_bar(self.current_mpl_ax.containers, **props)
         if is_bar:
             self.current_bars += [props]
+        elif isinstance(props["mplobj"], mpatches.StepPatch):
+            self.msg += "    Drawing a step path\n"
+            self._draw_step_path(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
                 "I found a path object that I don't think is part "
                 "of a bar chart. Ignoring."
             )
+
+    def _draw_step_path(self, props):
+        """Draw a matplotlib StepPatch as a step trace."""
+        if props["coordinates"] != "data":
+            self.msg += "    Step path is not in data coordinates, not drawing\n"
+            return
+        style = props["style"]
+        segments = []
+        segment_x = []
+        segment_y = []
+        for (x0, y0), code in zip(props["data"], props["pathcodes"]):
+            if code == "M" and segment_x:
+                segments.append((segment_x, segment_y))
+                segment_x = []
+                segment_y = []
+            if not segment_x or x0 != segment_x[-1] or y0 != segment_y[-1]:
+                segment_x.append(x0)
+                segment_y.append(y0)
+        if segment_x:
+            segments.append((segment_x, segment_y))
+        x = []
+        y = []
+        for sub_x, sub_y in segments:
+            if x:
+                x.append(None)
+                y.append(None)
+            x.extend(self._convert_x_dates(sub_x))
+            y.extend(sub_y)
+        if len(x) < 2:
+            self.msg += "    Step path has fewer than 2 points, not drawing\n"
+            return
+        label = props["mplobj"].get_label()
+        if not label or (isinstance(label, str) and label.startswith("_")):
+            label = None
+            showlegend = False
+        else:
+            showlegend = None
+        self.plotly_fig.add_trace(
+            go.Scatter(
+                x=x,
+                y=y,
+                mode="lines",
+                name=label,
+                showlegend=showlegend,
+                line=go.scatter.Line(
+                    color=_export_color(style["edgecolor"], style["alpha"]),
+                    width=style["edgewidth"],
+                    dash=mpltools.convert_dash(style["dasharray"]),
+                ),
+                fill="toself" if style["facecolor"] != "none" else None,
+                fillcolor=_export_color(style["facecolor"]),
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
+            )
+        )
 
     def draw_text(self, **props):
         """Create an annotation dict for a text obj.
