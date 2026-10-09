@@ -106,7 +106,7 @@ def annotation_params_for_line(shape_type, shape_args, position):
     aaX = _argmax(X)
     aiX = _argmin(X)
     position, pos_str = _prepare_position(position)
-    if shape_type == "vline":
+    if shape_type in ("vline", "abline"):
         if position == set(["top", "left"]):
             return _df_anno(R, T, X[aaY], aY)
         if position == set(["top", "right"]):
