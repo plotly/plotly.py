@@ -90,6 +90,38 @@ For example:
     return format
 
 
+def _is_kaleido_server_running() -> bool:
+    """Check if the Kaleido sync server singleton is currently running."""
+    server = getattr(kaleido, "_global_server", None)
+    return bool(server and getattr(server, "is_running", lambda: False)())
+
+
+def _get_kaleido_opts() -> dict:
+    """
+    Build kwargs dictionary for Kaleido's kopts argument.
+
+    When the Kaleido sync server is running, the server is already active with the
+    options provided at startup. Passing options to calc_fig_sync or
+    write_fig_from_object_sync emits an unnecessary UserWarning:
+        "The kopts argument is ignored if using a server."
+    To avoid this warning, we only include options if the server is not running,
+    or if non-default options were explicitly set.
+    """
+    kopts = {}
+    if defaults.plotlyjs:
+        kopts["plotlyjs"] = defaults.plotlyjs
+    if defaults.mathjax:
+        kopts["mathjax"] = defaults.mathjax
+    if defaults.headers:
+        # Defaults include {'X-Requested-With': 'plotly.py'} for OSM tile compliance.
+        # If the server is running, skip this default header to avoid the warning.
+        if not _is_kaleido_server_running() or defaults.headers != {
+            "X-Requested-With": "plotly.py"
+        }:
+            kopts["headers"] = defaults.headers
+    return kopts
+
+
 def to_image(
     fig: Union[dict, plotly.graph_objects.Figure],
     format: Union[str, None] = None,
@@ -155,13 +187,7 @@ def to_image(
     from kaleido.errors import ChromeNotFoundError
 
     try:
-        kopts = {}
-        if defaults.plotlyjs:
-            kopts["plotlyjs"] = defaults.plotlyjs
-        if defaults.mathjax:
-            kopts["mathjax"] = defaults.mathjax
-        if defaults.headers:
-            kopts["headers"] = defaults.headers
+        kopts = _get_kaleido_opts()
 
         width = (
             width
@@ -182,8 +208,7 @@ def to_image(
             or defaults.default_height
         )
 
-        img_bytes = kaleido.calc_fig_sync(
-            fig_dict,
+        calc_fig_kwargs = dict(
             opts=dict(
                 format=format or defaults.default_format,
                 width=width,
@@ -191,7 +216,13 @@ def to_image(
                 scale=scale or defaults.default_scale,
             ),
             topojson=defaults.topojson,
-            kopts=kopts,
+        )
+        if kopts:
+            calc_fig_kwargs["kopts"] = kopts
+
+        img_bytes = kaleido.calc_fig_sync(
+            fig_dict,
+            **calc_fig_kwargs,
         )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
@@ -423,16 +454,13 @@ def write_images(
     from kaleido.errors import ChromeNotFoundError
 
     try:
-        kopts = {}
-        if defaults.plotlyjs:
-            kopts["plotlyjs"] = defaults.plotlyjs
-        if defaults.mathjax:
-            kopts["mathjax"] = defaults.mathjax
-        if defaults.headers:
-            kopts["headers"] = defaults.headers
+        kopts = _get_kaleido_opts()
+        write_fig_kwargs = {}
+        if kopts:
+            write_fig_kwargs["kopts"] = kopts
         kaleido.write_fig_from_object_sync(
             kaleido_specs,
-            kopts=kopts,
+            **write_fig_kwargs,
         )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)

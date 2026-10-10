@@ -335,3 +335,58 @@ def test_width_height_priority():
     assert height == pio.defaults.default_height, (
         "Default height should be used when no layout or argument"
     )
+
+
+def test_kaleido_sync_server_no_kopts_warning():
+    """Test that fig.write_image() and fig.to_image() do not emit UserWarning about kopts when using kaleido.start_sync_server() (Fixes #5786)."""
+    import warnings
+    import kaleido
+
+    test_fig = go.Figure(fig)
+    kaleido.start_sync_server()
+    try:
+        with warnings.catch_warnings(record=True) as recorded_warnings:
+            warnings.simplefilter("always")
+            test_fig.to_image(format="png")
+            for w in recorded_warnings:
+                assert not (
+                    issubclass(w.category, UserWarning)
+                    and "The kopts argument is ignored" in str(w.message)
+                ), f"Unexpected warning: {w.message}"
+    finally:
+        kaleido.stop_sync_server()
+
+
+def test_kaleido_get_opts_helper():
+    """Test that _get_kaleido_opts only excludes default headers when sync server is running."""
+    import kaleido
+    from plotly.io._kaleido import _get_kaleido_opts, _is_kaleido_server_running
+
+    # Server stopped: default headers should be included
+    assert not _is_kaleido_server_running()
+    opts = _get_kaleido_opts()
+    assert opts == {"headers": {"X-Requested-With": "plotly.py"}}
+
+    kaleido.start_sync_server()
+    try:
+        assert _is_kaleido_server_running()
+        # Server running with default headers: kopts should be empty to prevent spurious warning
+        assert _get_kaleido_opts() == {}
+
+        # Server running with custom mathjax: custom option should be included
+        pio.defaults.mathjax = "custom_mathjax_path"
+        assert _get_kaleido_opts() == {"mathjax": "custom_mathjax_path"}
+
+        # Server running with custom headers: custom header should be included
+        pio.defaults.headers = {"Custom-Header": "Value"}
+        assert _get_kaleido_opts() == {
+            "mathjax": "custom_mathjax_path",
+            "headers": {"Custom-Header": "Value"},
+        }
+    finally:
+        pio.defaults.mathjax = None
+        pio.defaults.headers = {"X-Requested-With": "plotly.py"}
+        kaleido.stop_sync_server()
+
+    assert not _is_kaleido_server_running()
+    assert _get_kaleido_opts() == {"headers": {"X-Requested-With": "plotly.py"}}
