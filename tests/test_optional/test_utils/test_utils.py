@@ -491,10 +491,15 @@ class TestNoNumpyIntegerBaseType(TestCase):
         from _plotly_utils.optional_imports import get_module
 
         np = get_module("numpy", should_load=False)
+        saved_numpy = None
         if np:
-            sys.modules.pop("numpy")
+            saved_numpy = sys.modules.pop("numpy")
 
-        int_type_tuple = _get_int_type()
-        expected_tuple = (int,)
+        try:
+            int_type_tuple = _get_int_type()
+            expected_tuple = (int,)
 
-        self.assertEqual(int_type_tuple, expected_tuple)
+            self.assertEqual(int_type_tuple, expected_tuple)
+        finally:
+            if saved_numpy is not None:
+                sys.modules["numpy"] = saved_numpy
