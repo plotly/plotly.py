@@ -1,5 +1,7 @@
 from unittest import TestCase
 
+import pytest
+
 from plotly.exceptions import PlotlyError
 import plotly.colors as colors
 
@@ -224,3 +226,65 @@ class TestColors(TestCase):
         ]
 
         self.assertEqual(generated_colorscale, expected_colorscale)
+
+
+@pytest.mark.parametrize(
+    "colorscale,low,high,colortype,expected",
+    [
+        ("Viridis", 0.0, 1.0, "rgb", ["rgb(68, 1, 84)"]),
+        ("Viridis_r", 0.0, 1.0, "rgb", ["rgb(253, 231, 37)"]),
+        (["#000000", "#ffffff"], 0.0, 1.0, "tuple", [(0.0, 0.0, 0.0)]),
+        (
+            [[0.0, "#ff0000"], [1.0, "#0000ff"]],
+            0.25,
+            0.75,
+            "tuple",
+            [(0.75, 0.0, 0.25)],
+        ),
+        (["#000000", "#ffffff"], 0.5, 0.5, "tuple", [(0.5, 0.5, 0.5)]),
+        (["#000000", "#ffffff"], 1.0, 0.0, "rgb", ["rgb(255, 255, 255)"]),
+    ],
+)
+def test_sample_colorscale_single_color(colorscale, low, high, colortype, expected):
+    assert (
+        colors.sample_colorscale(colorscale, 1, low=low, high=high, colortype=colortype)
+        == expected
+    )
+
+
+@pytest.mark.parametrize(
+    "lowcolor,highcolor,colortype,expected",
+    [
+        ((0, 0, 0), (1, 1, 1), "tuple", [(0.0, 0.0, 0.0)]),
+        ("rgb(255,0,0)", "rgb(0,255,0)", "rgb", ["rgb(255.0, 0.0, 0.0)"]),
+    ],
+)
+def test_n_colors_single_color(lowcolor, highcolor, colortype, expected):
+    assert colors.n_colors(lowcolor, highcolor, 1, colortype=colortype) == expected
+
+
+@pytest.mark.parametrize(
+    "count,expected",
+    [
+        (0, []),
+        (2, [(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)]),
+        (3, [(0.0, 0.0, 0.0), (0.5, 0.5, 0.5), (1.0, 1.0, 1.0)]),
+    ],
+)
+def test_sample_colorscale_empty_and_multiple_colors(count, expected):
+    assert (
+        colors.sample_colorscale(["#000000", "#ffffff"], count, colortype="tuple")
+        == expected
+    )
+
+
+@pytest.mark.parametrize(
+    "count,expected",
+    [
+        (0, []),
+        (2, [(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)]),
+        (3, [(0.0, 0.0, 0.0), (0.5, 0.5, 0.5), (1.0, 1.0, 1.0)]),
+    ],
+)
+def test_n_colors_empty_and_multiple_colors(count, expected):
+    assert colors.n_colors((0, 0, 0), (1, 1, 1), count) == expected
