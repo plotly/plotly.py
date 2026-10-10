@@ -2049,6 +2049,20 @@ def test_make_subplots_spacing_error():
         dict(specs=[[{}, {"rowspan": 2}], [{}, None]]),
         # a rowspan starting in the bottom row leaves the top-row cell empty
         dict(specs=[[{"rowspan": 2}, {}], [None, {}]], start_cell="bottom-left"),
+        # uneven row heights and column widths; with the default top-left start
+        # the empty cell's height is read from row_heights in reverse order
+        dict(
+            specs=[[{"colspan": 2}, None], [{}, {}]],
+            row_heights=[3, 1],
+            column_widths=[1, 2],
+        ),
+        # uneven row heights and column widths with start_cell="bottom-left"
+        dict(
+            specs=[[{"rowspan": 2}, {}], [None, {}]],
+            start_cell="bottom-left",
+            row_heights=[1, 3],
+            column_widths=[2, 1],
+        ),
     ],
 )
 def test_row_and_column_titles_with_spanning_subplots(spanned):
