@@ -361,6 +361,57 @@ def test_category_order_with_category_as_x(backend):
         assert set(trace["x"]) == {"Thur", "Fri", "Sat", "Sun"}
 
 
+def test_category_order_defaults_to_data_order_with_color():
+    # https://github.com/plotly/plotly.py/issues/3198
+    # Splitting into one trace per color must not change the axis order:
+    # it should follow first appearance in the underlying data.
+    fig = px.line(
+        x=["A", "B", None, "B", "C", None, "C", "D", None, "D", "E", None],
+        y=[1, 1, None, 2, 2, None, 3, 3, None, 4, 4, None],
+        color=[1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1],
+    )
+    assert fig["layout"]["xaxis"]["categoryorder"] == "array"
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("A", "B", "C", "D", "E")
+
+
+def test_category_order_defaults_to_data_order_with_color_bar():
+    # https://github.com/plotly/plotly.py/issues/3291
+    df = pd.DataFrame(
+        {"x": ["a", "b", "c", "d"], "y": [1, 2, 3, 4], "z": ["p", "q", "p", "q"]}
+    )
+    fig = px.bar(df, x="x", y="y", color="z")
+    assert fig["layout"]["xaxis"]["categoryorder"] == "array"
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("a", "b", "c", "d")
+
+
+def test_no_default_category_array_for_single_trace_or_numeric():
+    # A single trace already follows data order, and numeric axes
+    # must never get a category array.
+    fig = px.line(x=["A", "B", "C"], y=[1, 2, 3])
+    assert fig["layout"]["xaxis"]["categoryorder"] is None
+    fig = px.line(x=[1, 2, 3], y=[1, 2, 3], color=["a", "b", "a"])
+    assert fig["layout"]["xaxis"]["categoryorder"] is None
+
+
+def test_no_default_category_array_for_y_with_color():
+    # https://github.com/plotly/plotly.py/pull/5776#pullrequestreview-5478271667
+    # y categoricals must stay untouched so the `autorange="reversed"`
+    # pattern from doc/python/gantt.md keeps listing tasks top-down.
+    df = pd.DataFrame(
+        [
+            dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28", Resource="Alex"),
+            dict(Task="Job B", Start="2009-03-05", Finish="2009-04-15", Resource="Alex"),
+            dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30", Resource="Max"),
+        ]
+    )
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Resource")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis"]["categoryarray"] is None
+    fig = px.bar(x=[1, 2, 3, 4], y=list("abcd"), color=list("ppqq"), orientation="h")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis"]["categoryarray"] is None
+
+
 def test_permissive_defaults():
     msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
