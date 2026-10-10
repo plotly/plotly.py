@@ -2532,7 +2532,7 @@ def get_groups_and_orders(args, grouper):
 
 def _default_category_orders_for_axes(args, groups, orders):
     """
-    Add data-appearance orders for categorical x/y columns.
+    Add data-appearance order for the categorical x column.
 
     When the data is split into several traces (e.g. by `color`), plotly.js
     orders categories by first appearance across traces, which can differ from
@@ -2540,23 +2540,28 @@ def _default_category_orders_for_axes(args, groups, orders):
     lets `set_cartesian_axis_opts` emit an explicit `categoryarray`, matching
     the documented behavior that Plotly Express lays out categorical data in
     the order in which it appears in the data. See #3198.
+
+    Only the x axis is handled: y categoricals are intentionally left alone
+    because `set_cartesian_axis_opts` reverses y orders for top-down display
+    and figures such as `px.timeline` / horizontal `px.bar` pair that with
+    `autorange="reversed"` (see `doc/python/gantt.md`), so an explicit y
+    `categoryarray` would double-reverse and flip the documented order.
     """
     if len(groups) <= 1:
         return orders
     df = args["data_frame"]
-    for letter in ("x", "y"):
-        col = args.get(letter)
-        if not isinstance(col, str) or col in orders or col not in df.columns:
-            continue
-        uniques = df.get_column(col).unique(maintain_order=True).to_list()
-        categories = [
-            value
-            for value in uniques
-            if value is not None
-            and not (isinstance(value, float) and math.isnan(value))
-        ]
-        if categories and all(isinstance(value, str) for value in categories):
-            orders[col] = categories
+    col = args.get("x")
+    if not isinstance(col, str) or col in orders or col not in df.columns:
+        return orders
+    uniques = df.get_column(col).unique(maintain_order=True).to_list()
+    categories = [
+        value
+        for value in uniques
+        if value is not None
+        and not (isinstance(value, float) and math.isnan(value))
+    ]
+    if categories and all(isinstance(value, str) for value in categories):
+        orders[col] = categories
     return orders
 
 

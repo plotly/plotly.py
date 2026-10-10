@@ -393,6 +393,25 @@ def test_no_default_category_array_for_single_trace_or_numeric():
     assert fig["layout"]["xaxis"]["categoryorder"] is None
 
 
+def test_no_default_category_array_for_y_with_color():
+    # https://github.com/plotly/plotly.py/pull/5776#pullrequestreview-5478271667
+    # y categoricals must stay untouched so the `autorange="reversed"`
+    # pattern from doc/python/gantt.md keeps listing tasks top-down.
+    df = pd.DataFrame(
+        [
+            dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28", Resource="Alex"),
+            dict(Task="Job B", Start="2009-03-05", Finish="2009-04-15", Resource="Alex"),
+            dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30", Resource="Max"),
+        ]
+    )
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Resource")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis"]["categoryarray"] is None
+    fig = px.bar(x=[1, 2, 3, 4], y=list("abcd"), color=list("ppqq"), orientation="h")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis"]["categoryarray"] is None
+
+
 def test_permissive_defaults():
     msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
