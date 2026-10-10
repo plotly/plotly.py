@@ -179,6 +179,9 @@ CUSTOM_VALIDATOR_DATATYPES = {
     "layout.template": "_plotly_utils.basevalidators.BaseTemplateValidator",
     "frame.data": "plotly.validators.DataValidator",
     "frame.layout": "plotly.validators.LayoutValidator",
+    "layout.updatemenu.button.args": "_plotly_utils.basevalidators.MethodArgsValidator",
+    "layout.updatemenu.button.args2": "_plotly_utils.basevalidators.MethodArgsValidator",
+    "layout.slider.step.args": "_plotly_utils.basevalidators.MethodArgsValidator",
 }
 
 

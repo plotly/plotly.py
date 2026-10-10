@@ -2232,6 +2232,57 @@ class InfoArrayValidator(BaseValidator):
                 return tuple(v)
 
 
+class MethodArgsValidator(InfoArrayValidator):
+    """
+    Validator for the `args` / `args2` properties of updatemenu buttons and
+    slider steps, which hold the arguments passed to a Plotly.js method
+    (e.g. `restyle`, `relayout`, `update`) when the control is activated.
+
+    Plotly.js no longer accepts a string (or number) for a `title` attribute,
+    so, as `TitleValidator` does for figure properties, such values are mapped
+    to the `text` property of the title:
+
+      - `{"xaxis.title": "Time"}` -> `{"xaxis.title.text": "Time"}`
+      - `{"xaxis": {"title": "Time"}}` -> `{"xaxis": {"title": {"text": "Time"}}}`
+    """
+
+    def validate_coerce(self, v):
+        v = super(MethodArgsValidator, self).validate_coerce(v)
+        if v is not None:
+            v = [
+                MethodArgsValidator._coerce_title_strings(el, top_level=True)
+                for el in v
+            ]
+        return v
+
+    @staticmethod
+    def _coerce_title_strings(v, top_level=False):
+        # Only dicts (i.e. attribute/value objects) are inspected, so strings
+        # in other positions (e.g. animation frame names) are left alone.
+        # A new dict is returned so that the user's input is not mutated.
+        if not isinstance(v, dict):
+            return v
+
+        res = {}
+        for key, val in v.items():
+            if (
+                isinstance(key, str)
+                and key.split(".")[-1] == "title"
+                and isinstance(val, (str, int, float))
+            ):
+                if top_level and key + ".text" not in v:
+                    # Top-level keys are attribute paths, so only update the
+                    # title text and keep the other title properties
+                    # (e.g. font), as Plotly.js did before version 3.
+                    res[key + ".text"] = val
+                    continue
+                val = {"text": val}
+            else:
+                val = MethodArgsValidator._coerce_title_strings(val)
+            res[key] = val
+        return res
+
+
 class LiteralValidator(BaseValidator):
     """
     Validator for readonly literal values
