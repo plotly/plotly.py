@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/heatmap.jpg
 ---
 
-The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/tile-density-heatmaps/).
+The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/density-heatmaps/).
 
 Plotly supports two different types of colored-tile heatmaps:
 
@@ -48,7 +48,7 @@ Plotly supports two different types of colored-tile heatmaps:
 
 
 <!-- #region -->
-The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](/python/px-arguments#supported-dataframes).
+The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](/python/px-arguments#Supported-DataFrame-Types).
 
 
 > For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](/python/imshow).

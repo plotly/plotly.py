@@ -112,7 +112,7 @@ It is intentionally left in for backwards-compatibility reasons.
 A collection of predefined diverging color scales is provided in the `plotly.colors.diverging` module.
 Diverging color scales are appropriate for continuous data that has a natural midpoint
 other otherwise informative special value, such as 0 altitude, or the boiling point
-of a liquid. These scales are intended to be used when [explicitly setting the midpoint of the scale](/python/colorscales/#setting-the-midpoint-of-a-color-range-for-a-diverging-color-scale).
+of a liquid. These scales are intended to be used when [explicitly setting the midpoint of the scale](/python/colorscales/#Setting-the-Midpoint-of-a-Color-Range-for-a-Diverging-Color-scale).
 
 Here are all the built-in scales in the `plotly.colors.diverging` module:
 

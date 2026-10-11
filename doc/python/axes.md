@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explains how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/yaxis/).
+This tutorial explains how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2D-Cartesian-Trace-Types-and-Subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/yaxis/).
 
 Other kinds of subplots and axes are described in other tutorials:
 
@@ -190,7 +190,7 @@ fig.show()
 
 ### Set axis title position
 
-This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#Automatically-Adjust-Margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
 ```python
 import plotly.graph_objects as go

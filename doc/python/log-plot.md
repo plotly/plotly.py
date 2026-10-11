@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/log.jpg
 ---
 
-This page shows examples of how to configure [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](/python/axes/) on logarithmic axes is done the same was as with [linear axes](/python/axes/).
+This page shows examples of how to configure [2-dimensional Cartesian axes](/python/figure-structure/#2D-Cartesian-Trace-Types-and-Subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](/python/axes/) on logarithmic axes is done the same was as with [linear axes](/python/axes/).
 
 ### Logarithmic Axes with Plotly Express
 

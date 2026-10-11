@@ -414,7 +414,7 @@ fig.show()
 
 *New in v5.0*
 
-When [displaying periodic data](https://plotly.com/python/time-series/#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hover modes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+When [displaying periodic data](https://plotly.com/python/time-series/#Displaying-Period-Data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hover modes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
 
 ```python
 import plotly.graph_objects as go

@@ -275,7 +275,7 @@ fig.show()
 
 #### Connect Data Gaps
 
-[connectgaps](https://plotly.com/python/reference/scatter/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-tile-maps/#multiple-filled-areas-with-a-scattermap-trace), we showed how to take benefit of this feature and illustrate multiple areas on a tile map.
+[connectgaps](https://plotly.com/python/reference/scatter/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-tile-maps/#Multiple-Filled-Areas-with-a-Scattermap-trace), we showed how to take benefit of this feature and illustrate multiple areas on a tile map.
 
 ```python
 import plotly.graph_objects as go
