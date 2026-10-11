@@ -305,7 +305,7 @@ In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
 - add modebar buttons corresponding to the drawing tools you wish to use.
 
-The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#Drawing-shapes-with-a-Mouse-on-Cartesian-plots).
 
 Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 

@@ -207,7 +207,7 @@ fig.show()
 
 ### Modifying The Algorithm For Computing Quartiles
 
-For an explanation of how each algorithm works, see [Choosing The Algorithm For Computing Quartiles](#choosing-the-algorithm-for-computing-quartiles).
+For an explanation of how each algorithm works, see [Choosing The Algorithm For Computing Quartiles](#Choosing-The-Algorithm-For-Computing-Quartiles).
 
 ```python
 import plotly.graph_objects as go

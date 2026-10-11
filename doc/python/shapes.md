@@ -51,7 +51,7 @@ The differences between these two approaches are that:
 
 ### Shape-drawing with Scatter traces
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermap](https://plotly.com/python/filled-area-tile-maps/#filled-scattermap-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#Categorical-Polar-Chart), scattergeo, [scattermap](https://plotly.com/python/filled-area-tile-maps/#Filled-Scattermap-Trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -718,7 +718,7 @@ fig.show()
 
 _introduced in plotly 4.7_
 
-You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
+You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](/python/configuration-options#Add-optional-shape-drawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
 
 This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
 

@@ -73,7 +73,7 @@ If you want to use Plotly Express, install its required dependencies with:
 pip install plotly[express]
 ```
 
-You'll also need to install a [supported dataframe library](/python/px-arguments#supported-dataFrame-types).
+You'll also need to install a [supported dataframe library](/python/px-arguments#Supported-DataFrame-Types).
 
 ### Plotly charts in Dash
 
