@@ -1,7 +1,10 @@
 import datetime
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from packaging.version import Version
 import plotly.tools as tls
 
 
@@ -433,7 +436,9 @@ def test_eventplot_segments_render():
     fig, ax = plt.subplots()
     ax.eventplot([np.random.randn(20) for _ in range(5)])
     plotly_fig = tls.mpl_to_plotly(fig)
-    assert len(plotly_fig.data) == 100
+    # Each of the 5 event rows is a line collection whose 20 segments are grouped
+    assert len(plotly_fig.data) == 5
+    assert all(t.x.count(None) == 19 for t in plotly_fig.data)
 
 
 def test_stackplot_areas_render():
@@ -485,17 +490,23 @@ def test_stem_plot_renders():
     fig, ax = plt.subplots()
     ax.stem(x, np.sin(x))
     plotly_fig = tls.mpl_to_plotly(fig)
-    assert len(plotly_fig.data) >= 20
+    # The 20 vertical stem lines are grouped into a single line trace with 19 None separators
+    stem_lines = [
+        t for t in plotly_fig.data if t.mode == "lines" and t.x.count(None) == 19
+    ]
+    assert len(stem_lines) == 1
 
 
 def test_contour_lines_convert():
-    """Contour lines used to crash with an ndarray line width."""
+    """Contour lines must render as lines, not filled polygons."""
     x = np.linspace(-3, 3, 30)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
     ax.contour(X, Y, np.sin(X) * np.cos(Y), 10)
     plotly_fig = tls.mpl_to_plotly(fig)
     assert len(plotly_fig.data) > 0
+    assert all(t.fill is None for t in plotly_fig.data)
+    assert all(t.mode == "lines" for t in plotly_fig.data)
 
 
 def test_contourf_bands_render():
@@ -507,6 +518,54 @@ def test_contourf_bands_render():
     plotly_fig = tls.mpl_to_plotly(fig)
     filled = [t for t in plotly_fig.data if t.fill == "toself"]
     assert len(filled) > 0
+
+
+def test_axis_linecolor_defaults_to_black():
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.linecolor == "#000000"
+    assert plotly_fig.layout.yaxis.linecolor == "#000000"
+
+
+def test_custom_axis_linecolors_are_preserved():
+    fig, ax = plt.subplots()
+    ax.spines["bottom"].set_color("red")
+    ax.spines["left"].set_color("green")
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.linecolor == "#FF0000"
+    assert plotly_fig.layout.yaxis.linecolor == "#008000"
+
+
+def test_axis_linecolor_follows_right_axis_side():
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+    ax2 = ax.twinx()
+    ax2.plot([0, 1], [1, 0])
+    ax2.spines["right"].set_color("red")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.yaxis2.side == "right"
+    assert plotly_fig.layout.yaxis2.linecolor == "#FF0000"
+
+
+def test_axis_linecolor_follows_top_axis_side():
+    fig, ax = plt.subplots()
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["top"].set_color("red")
+    ax.xaxis.set_ticks_position("top")
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.side == "top"
+    assert plotly_fig.layout.xaxis.linecolor == "#FF0000"
 
 
 def test_filled_path_collection_date_xaxis():
@@ -531,6 +590,101 @@ def test_background_colors_from_matplotlib_defaults():
 
     assert plotly_fig.layout.plot_bgcolor == "#FFFFFF"
     assert plotly_fig.layout.paper_bgcolor == "#FFFFFF"
+
+
+def test_stairs_converts_to_step_line():
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0])
+    plotly_fig = tls.mpl_to_plotly(fig)
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.mode == "lines"
+    assert tuple(trace.x) == (0.0, 1.0, 1.0, 2.0, 2.0, 3.0)
+    assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
+
+
+def test_stairs_date_xaxis():
+    """Stairs with date x-values must export date strings."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
+    ]
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], dates)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.type == "date"
+    trace = plotly_fig.data[0]
+    assert all(isinstance(x, str) for x in trace.x)
+
+
+def test_stairs_fill_converts_to_filled_area():
+    """Filled stairs must export the patch facecolor as a filled area."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0], fill=True)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert trace.fill == "toself"
+    assert trace.fillcolor == "#1F77B4"
+    assert tuple(trace.x) == (0.0, 1.0, 1.0, 2.0, 2.0, 3.0)
+    assert tuple(trace.y) == (0.0, 0.0, 1.0, 1.0, 0.0, 0.0)
+
+
+def test_stairs_nan_values_split_into_disjoint_steps():
+    """NaN values split stairs into separate step regions."""
+    fig, ax = plt.subplots()
+    ax.stairs([1.0, np.nan, 0.5], [0.0, 1.0, 2.0, 3.0], baseline=0.2)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert tuple(trace.x) == (0.0, 0.0, 1.0, 1.0, None, 2.0, 2.0, 3.0, 3.0)
+    assert tuple(trace.y) == (0.2, 1.0, 1.0, 0.2, None, 0.2, 0.5, 0.5, 0.2)
+
+
+def test_stairs_date_xaxis_with_nan_values():
+    """NaN-separated stairs on a date axis must export date strings."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(4)
+    ]
+    fig, ax = plt.subplots()
+    ax.stairs([1.0, np.nan, 0.5], dates)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = plotly_fig.data[0]
+    assert None in trace.x
+    assert all(isinstance(x, str) or x is None for x in trace.x)
+
+
+def test_stairs_label_used_in_legend():
+    """A labeled stairs patch must become a named legend entry."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0], label="my stairs")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    assert plotly_fig.data[0].name == "my stairs"
+    assert plotly_fig.data[0].showlegend is not False
+
+
+def test_stairs_without_label_hidden_from_legend():
+    """An unlabeled stairs patch must not appear in the plotly legend."""
+    fig, ax = plt.subplots()
+    ax.stairs([0.0, 1.0, 0.0], [0.0, 1.0, 2.0, 3.0])
+    ax.plot([0, 1], [2, 2], label="Labeled line")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    stairs = [trace for trace in plotly_fig.data if trace.name is None]
+    assert len(stairs) == 1
+    assert stairs[0].showlegend is False
 
 
 def test_custom_background_colors_are_preserved():
@@ -750,3 +904,193 @@ def test_transparent_tick_label_color_exports():
 
     assert plotly_fig.layout.xaxis.tickfont.color == "rgba(0,0,0,0)"
     assert plotly_fig.layout.yaxis.tickfont.color == "rgba(0,0,0,0)"
+
+
+def test_contour_rings_are_closed():
+    """Closed contour loops (Z codes) must close in plotly, not leave a gap."""
+    x = np.linspace(-3, 3, 50)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, X**2 + Y**2, levels=[1, 4])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 2
+    assert plotly_fig.data[0].x[0] == plotly_fig.data[0].x[-1]
+    assert plotly_fig.data[0].y[0] == plotly_fig.data[0].y[-1]
+    assert plotly_fig.data[1].x[0] == plotly_fig.data[1].x[-1]
+    assert plotly_fig.data[1].y[0] == plotly_fig.data[1].y[-1]
+
+
+def test_disjoint_contour_subpaths_are_separated_by_none():
+    """Disjoint subpaths of one contour level are drawn in a single trace,
+    separated by None so plotly does not connect them."""
+    x = np.linspace(-3, 3, 61)
+    X, Y = np.meshgrid(x, x)
+    # two separate bumps: the 0.5 level is two disjoint rings in one path
+    Z = np.exp(-((X + 1.5) ** 2 + Y**2)) + np.exp(-((X - 1.5) ** 2 + Y**2))
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, Z, levels=[0.5])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    xs = list(plotly_fig.data[0].x)
+    ys = list(plotly_fig.data[0].y)
+    x_gaps = [i for i, v in enumerate(xs) if v is None]
+    y_gaps = [i for i, v in enumerate(ys) if v is None]
+    assert len(x_gaps) == 1
+    assert x_gaps == y_gaps
+
+    gap = x_gaps[0]
+    rings = [(xs[:gap], ys[:gap]), (xs[gap + 1 :], ys[gap + 1 :])]
+    for ring_x, ring_y in rings:
+        assert len(ring_x) > 2
+        # each ring is closed
+        assert ring_x[0] == ring_x[-1]
+        assert ring_y[0] == ring_y[-1]
+    # one ring around each bump, so no segment bridges the two
+    left, right = sorted(rings, key=lambda ring: ring[0][0])
+    assert max(left[0]) < 0
+    assert min(right[0]) > 0
+
+
+def test_line_collection_date_xaxis():
+    """Line collections with date x-values must export date strings,
+    not raw matplotlib date numbers."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(10)
+    ]
+    y = np.linspace(0, 10, 10)
+    X, Y = np.meshgrid(mdates.date2num(dates), y)
+    fig, ax = plt.subplots()
+    ax.xaxis_date()
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), 5)
+    plotly_fig = tls.mpl_to_plotly(fig)
+    lines = [t for t in plotly_fig.data if t.mode == "lines"]
+    assert len(lines) >= 1
+    assert any(isinstance(x, str) for t in lines for x in t.x)
+    assert all(x is None or isinstance(x, str) for t in lines for x in t.x)
+
+
+def test_contour_line_dash_styles():
+    """Each contour level keeps its matplotlib dash pattern, exported as a
+    px dash list (matplotlib's pattern is already scaled by line width)."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(
+        X,
+        Y,
+        np.sin(X) * np.cos(Y),
+        levels=[-0.5, -0.25, 0.25, 0.5],
+        colors="k",
+        linewidths=1.5,
+        linestyles=["dashed", "solid", "dotted", (0, (5, 2, 1, 2))],
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert [t.line.dash for t in plotly_fig.data] == [
+        "5.55px,2.4px",
+        "solid",
+        "1.5px,2.475px",
+        "7.5px,3px,1.5px,3px",
+    ]
+
+
+def test_contour_line_dash_scales_with_linewidth():
+    """matplotlib scales dash patterns by line width; the export follows."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(
+        X, Y, np.sin(X) * np.cos(Y), levels=[0.5], linewidths=3, linestyles="dashed"
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].line.width == 3
+    assert plotly_fig.data[0].line.dash == "11.1px,4.8px"
+
+
+def test_contour_lines_showlegend_false():
+    """Contour line traces have showlegend=False so they do not produce legend entries."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), levels=[-0.5, 0.5])
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) >= 1
+    assert all(t.showlegend is False for t in plotly_fig.data)
+
+
+def test_contour_lines_not_in_legend():
+    """Contour lines do not appear in the legend even when a figure legend is present."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1], label="Line")
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), levels=[-0.5, 0.5])
+    ax.legend()
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    contour_traces = [t for t in plotly_fig.data if t.name != "Line"]
+    assert len(contour_traces) >= 1
+    assert all(t.showlegend is False for t in contour_traces)
+
+
+def test_consecutive_same_style_lines_grouped_into_one_trace():
+    """Contour levels with identical styles share one trace on matplotlib 3.8
+    and newer, which hands all levels over as a single collection."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    # 4 contour levels, all black, solid, width 1.5
+    ax.contour(
+        X,
+        Y,
+        X**2 + Y**2,
+        levels=[1, 2, 3, 4],
+        colors="k",
+        linestyles="solid",
+        linewidths=1.5,
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    # All 4 levels share the same style
+    assert (
+        len({(t.line.color, t.line.width, t.line.dash) for t in plotly_fig.data}) == 1
+    )
+    if Version(matplotlib.__version__) >= Version("3.8"):
+        # matplotlib >= 3.8 hands the levels over as one collection, so they
+        # are grouped into 1 trace with the distinct levels separated by None
+        assert len(plotly_fig.data) == 1
+        assert plotly_fig.data[0].x.count(None) >= 3
+    else:
+        # older matplotlib emits one collection per level
+        assert len(plotly_fig.data) == 4
+
+
+def test_mixed_style_lines_group_consecutive_matches():
+    """Consecutive paths with matching styles share a trace and differing
+    styles start a new one on matplotlib 3.8 and newer."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    # 4 levels: 2 negative (dashed by default in mpl), 2 positive (solid by default)
+    ax.contour(
+        X,
+        Y,
+        np.sin(X) * np.cos(Y),
+        levels=[-0.5, -0.25, 0.25, 0.5],
+        colors="k",
+        linewidths=1.5,
+    )
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    dashes = [t.line.dash for t in plotly_fig.data]
+    if Version(matplotlib.__version__) >= Version("3.8"):
+        # 2 dashed levels grouped into 1 trace, 2 solid levels grouped into 1 trace
+        assert dashes == ["5.55px,2.4px", "solid"]
+    else:
+        # older matplotlib emits one collection per level
+        assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2

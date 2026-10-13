@@ -39,13 +39,32 @@
 
 ## Quickstart
 
-`pip install plotly`
+### Graph Objects
+
+```
+pip install plotly
+```
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure()
+fig.add_trace(go.Bar(x=["a", "b", "c"], y=[1, 3, 2]))
+fig.show()
+```
+
+### Plotly Express
+
+```
+pip install plotly[express]
+```
 
 ```python
 import plotly.express as px
 fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
 fig.show()
 ```
+
+You'll also need to install a [supported dataframe library](https://plotly.com/python/px-arguments/#supported-dataframe-types).
 
 See the [Python documentation](https://plotly.com/python/) for more examples.
 
@@ -135,4 +154,3 @@ Code and documentation copyright 2026 Plotly, Inc.
 Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt).
 
 Docs released under the [Creative Commons license](https://creativecommons.org/licenses/by/4.0/).
-
