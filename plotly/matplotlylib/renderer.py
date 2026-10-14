@@ -786,6 +786,12 @@ class PlotlyRenderer(Renderer):
         elif isinstance(props["mplobj"], mpatches.StepPatch):
             self.msg += "    Drawing a step path\n"
             self._draw_step_path(props)
+        elif (
+            isinstance(props["mplobj"], mpatches.Polygon)
+            and props["coordinates"] == "data"
+        ):
+            self.msg += "    Drawing a filled polygon\n"
+            self._draw_filled_polygon(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
@@ -843,6 +849,34 @@ class PlotlyRenderer(Renderer):
                 ),
                 fill="toself" if style["facecolor"] != "none" else None,
                 fillcolor=_export_color(style["facecolor"]),
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
+            )
+        )
+
+    def _draw_filled_polygon(self, props):
+        """Draw a matplotlib Polygon patch as a filled scatter trace."""
+        style = props["style"]
+        verts = props["data"]
+        facecolor = _export_color(style["facecolor"])
+        edgecolor = _export_color(style["edgecolor"])
+        mplobj = props.get("mplobj")
+        label = mplobj.get_label() if mplobj is not None else None
+        if not label or (isinstance(label, str) and label.startswith("_")):
+            label = None
+            showlegend = False
+        else:
+            showlegend = None
+        self.plotly_fig.add_trace(
+            go.Scatter(
+                name=label,
+                showlegend=showlegend,
+                x=self._convert_x_dates([v[0] for v in verts]),
+                y=[v[1] for v in verts],
+                mode="lines",
+                line=go.scatter.Line(color=edgecolor, width=style["edgewidth"]),
+                fill="toself",
+                fillcolor=facecolor,
                 xaxis="x{0}".format(self.axis_ct),
                 yaxis="y{0}".format(self.axis_ct),
             )
