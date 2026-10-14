@@ -266,3 +266,59 @@ def test_sanitize_json(engine):
 def test_na_values(engine, na_value):
     result = pio.to_json_plotly(na_value, engine=engine)
     assert result == "null"
+
+
+def _figure_with_frames():
+    x = [datetime.datetime(2024, 1, 1) + datetime.timedelta(hours=i) for i in range(4)]
+    return go.Figure(
+        data=[go.Scatter(x=x, y=np.arange(4.0)), go.Bar(y=[1, 2, 3])],
+        layout={"title": {"text": "t"}},
+        frames=[go.Frame(data=[go.Scatter(y=np.array([4, 5, 6]))], name="f")],
+    )
+
+
+def test_figure_is_not_deep_copied(engine, monkeypatch):
+    fig = _figure_with_frames()
+    trace = go.Scatter(y=np.array([1.5, 2.5]))
+    payload = {"fig": fig, "trace": trace, "when": pd.Timestamp("2024-01-01")}
+    expected = pio.to_json_plotly(
+        {
+            "fig": fig.to_dict(),
+            "trace": trace.to_plotly_json(),
+            "when": "2024-01-01T00:00:00",
+        },
+        engine=engine,
+    )
+    before = fig.to_dict()
+
+    def no_deepcopy(value, memo=None):
+        raise AssertionError("serializing a figure should not deep copy it")
+
+    monkeypatch.setattr("plotly.basedatatypes.deepcopy", no_deepcopy)
+    result = pio.to_json_plotly(payload, engine=engine)
+    monkeypatch.undo()
+
+    assert json.loads(result) == json.loads(expected)
+    assert isinstance(fig.data[0].y, np.ndarray)
+    assert isinstance(fig.frames[0].data[0].y, np.ndarray)
+    assert fig.to_dict() == before
+
+
+def test_subclass_overrides_are_kept(engine):
+    class MyFigure(go.Figure):
+        def to_dict(self):
+            res = super().to_dict()
+            res["layout"]["title"] = {"text": "from to_dict"}
+            return res
+
+    class MyScatter(go.Scatter):
+        def to_plotly_json(self):
+            return dict(super().to_plotly_json(), name="from to_plotly_json")
+
+    result = json.loads(
+        pio.to_json_plotly(
+            {"fig": MyFigure(go.Bar(y=[1])), "trace": MyScatter(y=[1])}, engine=engine
+        )
+    )
+    assert result["fig"]["layout"]["title"] == {"text": "from to_dict"}
+    assert result["trace"]["name"] == "from to_plotly_json"

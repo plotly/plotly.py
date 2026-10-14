@@ -147,18 +147,37 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         if pretty:
             opts |= orjson.OPT_INDENT_2
 
+        def default(value):
+            # orjson calls this only for values it cannot serialize itself
+            to_json_dict = getattr(value, "_to_json_dict", None)
+            if to_json_dict is not None:
+                return to_json_dict()
+            cleaned = clean_to_json_compatible(
+                value,
+                numpy_allowed=True,
+                datetime_allowed=True,
+                modules=modules,
+            )
+            if cleaned is value:
+                raise TypeError(
+                    f"Type is not JSON serializable: {type(value).__name__}"
+                )
+            return cleaned
+
+        try:
+            return _safe(
+                orjson.dumps(plotly_object, default=default, option=opts).decode(
+                    "utf8"
+                ),
+                _swap_orjson,
+            )
+        except TypeError:
+            pass
+
         # Plotly
         try:
             plotly_object = plotly_object.to_plotly_json()
         except AttributeError:
-            pass
-
-        # Try without cleaning
-        try:
-            return _safe(
-                orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
-            )
-        except TypeError:
             pass
 
         cleaned = clean_to_json_compatible(
