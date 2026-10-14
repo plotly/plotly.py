@@ -68,6 +68,28 @@ def test_custom_data_scatter(backend):
     )
 
 
+def test_custom_data_histogram(backend):
+    tips = nw.from_native(px.data.tips(return_type=backend))
+    # No custom data
+    fig = px.histogram(tips.to_native(), x="total_bill")
+    assert fig.data[0].customdata is None
+    # Custom data is carried per row of the input, not per bin
+    fig = px.histogram(tips.to_native(), x="total_bill", custom_data=["tip", "day"])
+    assert fig.data[0].customdata.shape == (len(tips), 2)
+    assert np.all(fig.data[0].customdata[:, 0] == tips.get_column("tip").to_numpy())
+    assert np.all(fig.data[0].customdata[:, 1] == tips.get_column("day").to_numpy())
+    # Bins are aggregates, so custom data does not show up in the hover label
+    assert fig.data[0].hovertemplate == "total_bill=%{x}<br>count=%{y}<extra></extra>"
+    # Each colored trace carries the custom data of its own rows
+    fig = px.histogram(
+        tips.to_native(), x="total_bill", color="sex", custom_data=["tip"]
+    )
+    for trace in fig.data:
+        group = tips.filter(nw.col("sex") == trace.name)
+        assert trace.customdata.shape == (len(group), 1)
+        assert np.all(trace.customdata[:, 0] == group.get_column("tip").to_numpy())
+
+
 def test_labels(backend):
     tips = nw.from_native(px.data.tips(return_type=backend))
     fig = px.scatter(
