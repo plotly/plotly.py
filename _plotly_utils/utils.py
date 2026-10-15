@@ -1,4 +1,5 @@
 import base64
+import datetime
 import decimal
 import json as _json
 import sys
@@ -114,6 +115,40 @@ def convert_to_base64(obj):
             convert_to_base64(value)
 
 
+def to_base64_copy(obj):
+    """
+    Like convert_to_base64, but leaves obj untouched: only the containers
+    that change are copied, everything else is shared with obj.
+    """
+    if isinstance(obj, dict):
+        out = None
+        for key, value in obj.items():
+            if is_skipped_key(key):
+                continue
+            if is_homogeneous_array(value):
+                new = to_typed_array_spec(value)
+            else:
+                new = to_base64_copy(value)
+            if new is not value:
+                if out is None:
+                    out = dict(obj)
+                out[key] = new
+        return obj if out is None else out
+    elif isinstance(obj, (list, tuple)):
+        # Data arrays hold scalars: skip them without a Python-level loop.
+        if not any(issubclass(t, (dict, list, tuple)) for t in set(map(type, obj))):
+            return obj
+        out = None
+        for i, value in enumerate(obj):
+            new = to_base64_copy(value)
+            if new is not value:
+                if out is None:
+                    out = list(obj)
+                out[i] = new
+        return obj if out is None else out
+    return obj
+
+
 def cumsum(x):
     """
     Custom cumsum to avoid a numpy import.
@@ -218,6 +253,16 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         Therefore, we only anticipate either unknown iterables or values here.
 
         """
+        # Only the base class takes these shortcuts: subclasses may override
+        # the encode_as_* methods.
+        # Exact types only: pandas.Timestamp and pandas.NaT subclass datetime.
+        if type(self) is PlotlyJSONEncoder:
+            if type(obj) in (datetime.datetime, datetime.date):
+                return obj.isoformat()
+            to_json_dict = getattr(obj, "_to_json_dict", None)
+            if to_json_dict is not None:
+                return to_json_dict()
+
         # TODO: The ordering if these methods is *very* important. Is this OK?
         encoding_methods = (
             self.encode_as_plotly,

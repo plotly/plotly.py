@@ -10,7 +10,7 @@ from _plotly_utils.basevalidators import ImageUriValidator
 
 
 class JsonConfig(object):
-    _valid_engines = ("json", "orjson", "auto")
+    _valid_engines = ("json", "orjson", "msgspec", "auto")
 
     def __init__(self):
         self._default_engine = "auto"
@@ -30,6 +30,8 @@ class JsonConfig(object):
 
         if val == "orjson":
             self.validate_orjson()
+        elif val == "msgspec":
+            self.validate_msgspec()
 
         self._default_engine = val
 
@@ -38,6 +40,12 @@ class JsonConfig(object):
         orjson = get_module("orjson")
         if orjson is None:
             raise ValueError("The orjson engine requires the orjson package")
+
+    @classmethod
+    def validate_msgspec(cls):
+        msgspec = get_module("msgspec")
+        if msgspec is None:
+            raise ValueError("The msgspec engine requires the msgspec package")
 
 
 config = JsonConfig()
@@ -66,6 +74,20 @@ _swap_orjson = _swap_json + (
 )
 
 
+def _resolve_engine(engine):
+    if engine is None:
+        engine = config.default_engine
+    if engine == "auto":
+        if get_module("orjson", should_load=True) is not None:
+            return "orjson"
+        if get_module("msgspec", should_load=True) is not None:
+            return "msgspec"
+        return "json"
+    if engine not in ("orjson", "msgspec", "json"):
+        raise ValueError("Invalid json engine: %s" % engine)
+    return engine
+
+
 def _safe(json_str, _swap):
     out = json_str
     for unsafe_char, safe_char in _swap:
@@ -91,7 +113,9 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         The JSON encoding engine to use. One of:
           - "json" for an engine based on the built-in Python json module
           - "orjson" for a faster engine that requires the orjson package
-          - "auto" for the "orjson" engine if available, otherwise "json"
+          - "msgspec" for a faster engine that requires the msgspec package
+          - "auto" for the "orjson" engine if available, then "msgspec",
+            otherwise "json"
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
 
@@ -104,19 +128,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     --------
     to_json : Convert a plotly Figure to JSON with validation
     """
-    orjson = get_module("orjson", should_load=True)
-
-    # Determine json engine
-    if engine is None:
-        engine = config.default_engine
-
-    if engine == "auto":
-        if orjson is not None:
-            engine = "orjson"
-        else:
-            engine = "json"
-    elif engine not in ["orjson", "json"]:
-        raise ValueError("Invalid json engine: %s" % engine)
+    engine = _resolve_engine(engine)
 
     modules = {
         "sage_all": get_module("sage.all", should_load=False),
@@ -140,25 +152,108 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         return _safe(
             json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts), _swap_json
         )
+    elif engine == "msgspec":
+        JsonConfig.validate_msgspec()
+        msgspec = get_module("msgspec", should_load=True)
+        np = modules["np"]
+        pd = modules["pd"]
+
+        def enc_hook(value):
+            # msgspec takes only exact types: numpy scalars subclass these
+            if isinstance(value, float):
+                return float(value)
+            if isinstance(value, int):
+                return int(value)
+            if isinstance(value, str):
+                return str.__str__(value)
+            if isinstance(value, (dict, list, tuple)):
+                # only asked for when they sit where JSON can't hold them
+                # (a tuple dict key), converting would loop forever
+                raise TypeError(
+                    f"Type is not JSON serializable: {type(value).__name__}"
+                )
+            if np is not None and isinstance(value, np.datetime64) and np.isnat(value):
+                return None
+            if pd is not None:
+                if value is pd.NaT:
+                    return None
+                # isoformat keeps nanoseconds, as in the json engine
+                if isinstance(value, pd.Timestamp):
+                    return value.isoformat()
+                if isinstance(value, (pd.Series, pd.Index)) and value.dtype.kind == "M":
+                    return value.tolist()
+            to_json_dict = getattr(value, "_to_json_dict", None)
+            if to_json_dict is not None:
+                return to_json_dict()
+            cleaned = clean_to_json_compatible(
+                value,
+                numpy_allowed=False,
+                datetime_allowed=False,
+                modules=modules,
+            )
+            if cleaned is value:
+                raise TypeError(
+                    f"Type is not JSON serializable: {type(value).__name__}"
+                )
+            return cleaned
+
+        encoder = msgspec.json.Encoder(enc_hook=enc_hook, decimal_format="number")
+        try:
+            out = encoder.encode(plotly_object)
+            # msgspec writes Decimal as is, so a NaN or Infinity value or a
+            # Decimal dict key gives invalid JSON. Checking the syntax is cheap.
+            msgspec.json.decode(out, type=msgspec.Raw)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+            RecursionError,
+            msgspec.MsgspecError,
+        ):
+            # Errors and values msgspec rejects come out as with the json engine
+            return to_json_plotly(plotly_object, pretty=pretty, engine="json")
+        if pretty:
+            out = msgspec.json.format(out, indent=2)
+        return _safe(out.decode("utf8"), _swap_orjson)
     elif engine == "orjson":
         JsonConfig.validate_orjson()
+        orjson = get_module("orjson", should_load=True)
         opts = orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY
 
         if pretty:
             opts |= orjson.OPT_INDENT_2
 
+        def default(value):
+            # orjson calls this only for values it cannot serialize itself
+            to_json_dict = getattr(value, "_to_json_dict", None)
+            if to_json_dict is not None:
+                return to_json_dict()
+            cleaned = clean_to_json_compatible(
+                value,
+                numpy_allowed=True,
+                datetime_allowed=True,
+                modules=modules,
+            )
+            if cleaned is value:
+                raise TypeError(
+                    f"Type is not JSON serializable: {type(value).__name__}"
+                )
+            return cleaned
+
+        try:
+            return _safe(
+                orjson.dumps(plotly_object, default=default, option=opts).decode(
+                    "utf8"
+                ),
+                _swap_orjson,
+            )
+        except TypeError:
+            pass
+
         # Plotly
         try:
             plotly_object = plotly_object.to_plotly_json()
         except AttributeError:
-            pass
-
-        # Try without cleaning
-        try:
-            return _safe(
-                orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
-            )
-        except TypeError:
             pass
 
         cleaned = clean_to_json_compatible(
@@ -194,7 +289,9 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
         The JSON encoding engine to use. One of:
           - "json" for an engine based on the built-in Python json module
           - "orjson" for a faster engine that requires the orjson package
-          - "auto" for the "orjson" engine if available, otherwise "json"
+          - "msgspec" for a faster engine that requires the msgspec package
+          - "auto" for the "orjson" engine if available, then "msgspec",
+            otherwise "json"
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
 
@@ -247,7 +344,9 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         The JSON encoding engine to use. One of:
           - "json" for an engine based on the built-in Python json module
           - "orjson" for a faster engine that requires the orjson package
-          - "auto" for the "orjson" engine if available, otherwise "json"
+          - "msgspec" for a faster engine that requires the msgspec package
+          - "auto" for the "orjson" engine if available, then "msgspec",
+            otherwise "json"
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
     Returns
@@ -310,7 +409,10 @@ def from_json_plotly(value, engine=None):
           - if "json", parse JSON using built in json module
           - if "orjson", parse using the faster orjson module, requires the orjson
             package
-          - if "auto" use orjson module if available, otherwise use the json module
+          - if "msgspec", parse using the faster msgspec module, requires the
+            msgspec package
+          - if "auto" use orjson module if available, then msgspec, otherwise
+            use the json module
 
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -323,8 +425,6 @@ def from_json_plotly(value, engine=None):
     --------
     from_json_plotly : Parse JSON with plotly conventions into a dict
     """
-    orjson = get_module("orjson", should_load=True)
-
     # Validate value
     # --------------
     if not isinstance(value, (str, bytes)):
@@ -334,22 +434,20 @@ from_json_plotly requires a string or bytes argument but received value of type 
     Received value: {value}""".format(typ=type(value), value=value)
         )
 
-    # Determine json engine
-    if engine is None:
-        engine = config.default_engine
-
-    if engine == "auto":
-        if orjson is not None:
-            engine = "orjson"
-        else:
-            engine = "json"
-    elif engine not in ["orjson", "json"]:
-        raise ValueError("Invalid json engine: %s" % engine)
+    engine = _resolve_engine(engine)
 
     if engine == "orjson":
         JsonConfig.validate_orjson()
         # orjson handles bytes input natively
-        value_dict = orjson.loads(value)
+        value_dict = get_module("orjson", should_load=True).loads(value)
+    elif engine == "msgspec":
+        JsonConfig.validate_msgspec()
+        msgspec = get_module("msgspec", should_load=True)
+        try:
+            value_dict = msgspec.json.decode(value)
+        except (ValueError, msgspec.MsgspecError):
+            # NaN and Infinity literals, numbers out of float range
+            value_dict = from_json_plotly(value, engine="json")
     else:
         # decode bytes to str for built-in json module
         if isinstance(value, bytes):
@@ -381,7 +479,10 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
           - if "json", parse JSON using built in json module
           - if "orjson", parse using the faster orjson module, requires the orjson
             package
-          - if "auto" use orjson module if available, otherwise use the json module
+          - if "msgspec", parse using the faster msgspec module, requires the
+            msgspec package
+          - if "auto" use orjson module if available, then msgspec, otherwise
+            use the json module
 
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -437,7 +538,10 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
           - if "json", parse JSON using built in json module
           - if "orjson", parse using the faster orjson module, requires the orjson
             package
-          - if "auto" use orjson module if available, otherwise use the json module
+          - if "msgspec", parse using the faster msgspec module, requires the
+            msgspec package
+          - if "auto" use orjson module if available, then msgspec, otherwise
+            use the json module
 
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.

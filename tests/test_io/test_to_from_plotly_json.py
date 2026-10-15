@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
+import decimal
 import re
 import sys
 import warnings
@@ -13,6 +14,7 @@ from pytz import timezone
 from _plotly_utils.optional_imports import get_module
 
 orjson = get_module("orjson")
+msgspec = get_module("msgspec")
 
 eastern = timezone("US/Eastern")
 
@@ -67,10 +69,11 @@ def check_roundtrip(value, engine, pretty):
 
 
 # Fixtures
+engines = ["json", "auto"]
 if orjson is not None:
-    engines = ["json", "orjson", "auto"]
-else:
-    engines = ["json", "auto"]
+    engines.append("orjson")
+if msgspec is not None:
+    engines.append("msgspec")
 
 
 @pytest.fixture(scope="module", params=engines)
@@ -266,3 +269,132 @@ def test_sanitize_json(engine):
 def test_na_values(engine, na_value):
     result = pio.to_json_plotly(na_value, engine=engine)
     assert result == "null"
+
+
+def _figure_with_frames():
+    x = [datetime.datetime(2024, 1, 1) + datetime.timedelta(hours=i) for i in range(4)]
+    return go.Figure(
+        data=[go.Scatter(x=x, y=np.arange(4.0)), go.Bar(y=[1, 2, 3])],
+        layout={"title": {"text": "t"}},
+        frames=[go.Frame(data=[go.Scatter(y=np.array([4, 5, 6]))], name="f")],
+    )
+
+
+def test_figure_is_not_deep_copied(engine, monkeypatch):
+    fig = _figure_with_frames()
+    trace = go.Scatter(y=np.array([1.5, 2.5]))
+    payload = {"fig": fig, "trace": trace, "when": pd.Timestamp("2024-01-01")}
+    expected = pio.to_json_plotly(
+        {
+            "fig": fig.to_dict(),
+            "trace": trace.to_plotly_json(),
+            "when": "2024-01-01T00:00:00",
+        },
+        engine=engine,
+    )
+    before = fig.to_dict()
+
+    def no_deepcopy(value, memo=None):
+        raise AssertionError("serializing a figure should not deep copy it")
+
+    monkeypatch.setattr("plotly.basedatatypes.deepcopy", no_deepcopy)
+    result = pio.to_json_plotly(payload, engine=engine)
+    monkeypatch.undo()
+
+    assert json.loads(result) == json.loads(expected)
+    assert isinstance(fig.data[0].y, np.ndarray)
+    assert isinstance(fig.frames[0].data[0].y, np.ndarray)
+    assert fig.to_dict() == before
+
+
+def test_subclass_overrides_are_kept(engine):
+    class MyFigure(go.Figure):
+        def to_dict(self):
+            res = super().to_dict()
+            res["layout"]["title"] = {"text": "from to_dict"}
+            return res
+
+    class MyScatter(go.Scatter):
+        def to_plotly_json(self):
+            return dict(super().to_plotly_json(), name="from to_plotly_json")
+
+    result = json.loads(
+        pio.to_json_plotly(
+            {"fig": MyFigure(go.Bar(y=[1])), "trace": MyScatter(y=[1])}, engine=engine
+        )
+    )
+    assert result["fig"]["layout"]["title"] == {"text": "from to_dict"}
+    assert result["trace"]["name"] == "from to_plotly_json"
+
+
+def test_datetime_series_with_nat(engine):
+    value = {"v": pd.Series([pd.Timestamp("2024-01-01"), pd.NaT])}
+    result = pio.to_json_plotly(value, engine=engine)
+    assert json.loads(result) == {"v": ["2024-01-01T00:00:00", None]}
+
+
+@pytest.mark.parametrize("value", [object(), 1j, {(1, 2): 1}, [{(1,): 2}]])
+def test_unserializable_raises_type_error(engine, value):
+    with pytest.raises(TypeError):
+        pio.to_json_plotly({"v": value}, engine=engine)
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_auto_engine_uses_msgspec_without_orjson(monkeypatch):
+    def without_orjson(name, **kwargs):
+        return None if name == "orjson" else get_module(name, **kwargs)
+
+    monkeypatch.setattr("plotly.io._json.get_module", without_orjson)
+    utc = datetime.datetime(2024, 1, 1, tzinfo=datetime.timezone.utc)
+    # msgspec writes UTC as Z, the json engine as +00:00
+    assert (
+        pio.to_json_plotly({"t": utc}, engine="auto") == '{"t":"2024-01-01T00:00:00Z"}'
+    )
+    assert pio.from_json_plotly('{"a":[1]}', engine="auto") == {"a": [1]}
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_default_engine():
+    original = pio.config.default_engine
+    try:
+        pio.config.default_engine = "msgspec"
+        assert pio.to_json_plotly(go.Figure(go.Bar(y=[1]))) == pio.to_json_plotly(
+            go.Figure(go.Bar(y=[1])), engine="json"
+        )
+    finally:
+        pio.config.default_engine = original
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        decimal.Decimal("NaN"),
+        decimal.Decimal("-Infinity"),
+    ],
+)
+def test_non_finite_values_are_null(engine, pretty, value):
+    result = pio.to_json_plotly({"v": [value]}, engine=engine, pretty=pretty)
+    assert json.loads(result) == {"v": [None]}
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_datetime64_nat_is_null():
+    value = {"v": np.datetime64("NaT")}
+    assert pio.to_json_plotly(value, engine="msgspec") == '{"v":null}'
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_errors_match_json():
+    circular = []
+    circular.append(circular)
+    with pytest.raises(ValueError, match="Circular reference"):
+        pio.to_json_plotly(circular, engine="msgspec")
+    with pytest.raises(TypeError):
+        pio.to_json_plotly({decimal.Decimal("1.5"): 1}, engine="msgspec")
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_reads_what_json_reads():
+    value = '{"a":NaN,"b":1e400}'
+    result = pio.from_json_plotly(value, engine="msgspec")
+    assert str(result) == str(pio.from_json_plotly(value, engine="json"))

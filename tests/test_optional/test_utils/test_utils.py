@@ -20,6 +20,7 @@ import os
 import base64
 
 from plotly import optional_imports, utils
+from _plotly_utils import utils as plotly_utils
 import plotly.graph_objects as go
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
 from plotly.utils import get_by_path
@@ -457,6 +458,25 @@ class TestJSONEncoder(TestCase):
         with self.assertRaises(TypeError):
             _json.dumps({"a": {1}}, cls=utils.PlotlyJSONEncoder)
 
+    def test_encoder_subclass_overrides_are_kept(self):
+        class Encoder(utils.PlotlyJSONEncoder):
+            @staticmethod
+            def encode_as_datetime(obj):
+                return "datetime"
+
+            @staticmethod
+            def encode_as_plotly(obj):
+                if not isinstance(obj, go.Figure):
+                    raise utils.NotEncodable
+                return "plotly"
+
+        value = [dt(2020, 1, 1), datetime.date(2020, 1, 1), go.Figure()]
+        assert _json.loads(_json.dumps(value, cls=Encoder)) == [
+            "datetime",
+            "datetime",
+            "plotly",
+        ]
+
 
 class TestNumpyIntegerBaseType(TestCase):
     def test_numpy_integer_import(self):
@@ -498,3 +518,28 @@ class TestNoNumpyIntegerBaseType(TestCase):
         expected_tuple = (int,)
 
         self.assertEqual(int_type_tuple, expected_tuple)
+
+
+def test_to_base64_copy_leaves_input_untouched():
+    y = np.arange(5.0)
+    x = [1, 2, 3]
+    trace = {"x": x, "y": y, "marker": {"size": np.array([1, 2])}}
+    layout = {"title": {"text": "t"}}
+    fig = {"data": [trace], "layout": layout}
+
+    out = plotly_utils.to_base64_copy(fig)
+
+    assert out == {
+        "data": [
+            {
+                "x": x,
+                "y": plotly_utils.to_typed_array_spec(y),
+                "marker": {"size": plotly_utils.to_typed_array_spec(np.array([1, 2]))},
+            }
+        ],
+        "layout": layout,
+    }
+    assert trace["y"] is y
+    assert out["data"][0]["x"] is x
+    assert out["layout"] is layout
+    assert plotly_utils.to_base64_copy(layout) is layout

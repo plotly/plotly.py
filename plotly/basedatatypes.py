@@ -16,6 +16,7 @@ from _plotly_utils.utils import (
     chomp_empty_strings,
     find_closest_string,
     convert_to_base64,
+    to_base64_copy,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -3323,6 +3324,23 @@ Invalid property path '{key_path_str}' for layout
 
         return res
 
+    def _to_json_dict(self):
+        """
+        to_dict() without the deepcopy, for serializers that only read it.
+        Shares data with the figure: never mutate the result.
+        """
+        cls = type(self)
+        if (
+            cls.to_dict is not BaseFigure.to_dict
+            or cls.to_plotly_json is not BaseFigure.to_plotly_json
+        ):
+            return self.to_plotly_json()
+        res = {"data": self._data, "layout": self._layout}
+        frames = [frame._props for frame in self._frame_objs]
+        if frames:
+            res["frames"] = frames
+        return to_base64_copy(res)
+
     def to_plotly_json(self):
         """
         Convert figure to a JSON representation as a Python dict
@@ -3440,6 +3458,7 @@ Invalid property path '{key_path_str}' for layout
             The JSON encoding engine to use. One of:
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
+              - "msgspec" for a fast encoder that requires the msgspec package
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -3500,6 +3519,7 @@ Invalid property path '{key_path_str}' for layout
             The JSON encoding engine to use. One of:
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
+              - "msgspec" for a fast encoder that requires the msgspec package
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -5562,6 +5582,12 @@ on_change callbacks are not supported in this case.
         # -----------------
         self._change_callbacks[arg_tuples].append(callback)
 
+    def _to_json_dict(self):
+        # to_plotly_json() without the deepcopy; never mutate the result
+        if type(self).to_plotly_json is not BasePlotlyType.to_plotly_json:
+            return self.to_plotly_json()
+        return self._props if self._props is not None else {}
+
     def to_plotly_json(self):
         """
         Return plotly JSON representation of object as a Python dict
@@ -5596,6 +5622,7 @@ on_change callbacks are not supported in this case.
             The JSON encoding engine to use. One of:
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
+              - "msgspec" for a fast encoder that requires the msgspec package
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
