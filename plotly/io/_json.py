@@ -155,6 +155,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     elif engine == "msgspec":
         JsonConfig.validate_msgspec()
         msgspec = get_module("msgspec", should_load=True)
+        np = modules["np"]
         pd = modules["pd"]
 
         def enc_hook(value):
@@ -171,6 +172,8 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
                 raise TypeError(
                     f"Type is not JSON serializable: {type(value).__name__}"
                 )
+            if np is not None and isinstance(value, np.datetime64) and np.isnat(value):
+                return None
             if pd is not None:
                 if value is pd.NaT:
                     return None
@@ -197,7 +200,16 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         encoder = msgspec.json.Encoder(enc_hook=enc_hook, decimal_format="number")
         try:
             out = encoder.encode(plotly_object)
-        except (TypeError, ValueError, OverflowError, msgspec.EncodeError):
+            # msgspec writes Decimal as is, so a NaN or Infinity value or a
+            # Decimal dict key gives invalid JSON. Checking the syntax is cheap.
+            msgspec.json.decode(out, type=msgspec.Raw)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+            RecursionError,
+            msgspec.MsgspecError,
+        ):
             # Errors and values msgspec rejects come out as with the json engine
             return to_json_plotly(plotly_object, pretty=pretty, engine="json")
         if pretty:
@@ -430,7 +442,12 @@ from_json_plotly requires a string or bytes argument but received value of type 
         value_dict = get_module("orjson", should_load=True).loads(value)
     elif engine == "msgspec":
         JsonConfig.validate_msgspec()
-        value_dict = get_module("msgspec", should_load=True).json.decode(value)
+        msgspec = get_module("msgspec", should_load=True)
+        try:
+            value_dict = msgspec.json.decode(value)
+        except (ValueError, msgspec.MsgspecError):
+            # NaN and Infinity literals, numbers out of float range
+            value_dict = from_json_plotly(value, engine="json")
     else:
         # decode bytes to str for built-in json module
         if isinstance(value, bytes):

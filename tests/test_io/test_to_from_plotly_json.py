@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
+import decimal
 import re
 import sys
 import warnings
@@ -362,3 +363,38 @@ def test_msgspec_default_engine():
         )
     finally:
         pio.config.default_engine = original
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        decimal.Decimal("NaN"),
+        decimal.Decimal("-Infinity"),
+    ],
+)
+def test_non_finite_values_are_null(engine, pretty, value):
+    result = pio.to_json_plotly({"v": [value]}, engine=engine, pretty=pretty)
+    assert json.loads(result) == {"v": [None]}
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_datetime64_nat_is_null():
+    value = {"v": np.datetime64("NaT")}
+    assert pio.to_json_plotly(value, engine="msgspec") == '{"v":null}'
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_errors_match_json():
+    circular = []
+    circular.append(circular)
+    with pytest.raises(ValueError, match="Circular reference"):
+        pio.to_json_plotly(circular, engine="msgspec")
+    with pytest.raises(TypeError):
+        pio.to_json_plotly({decimal.Decimal("1.5"): 1}, engine="msgspec")
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_reads_what_json_reads():
+    value = '{"a":NaN,"b":1e400}'
+    result = pio.from_json_plotly(value, engine="msgspec")
+    assert str(result) == str(pio.from_json_plotly(value, engine="json"))
