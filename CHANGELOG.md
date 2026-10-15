@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add a `msgspec` JSON engine, used by the `auto` engine when `msgspec` is installed and `orjson` is not [[#5813](https://github.com/plotly/plotly.py/pull/5813)]
+
 ### Updated
 - Speed up `plotly.io.to_json` and `PlotlyJSONEncoder` for figures and for payloads that mix plotly objects with plain data: figures are no longer deep copied, and with orjson only the values orjson can't serialize go through the slow cleaning path [[#5813](https://github.com/plotly/plotly.py/pull/5813)]
 

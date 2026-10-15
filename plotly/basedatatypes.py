@@ -3458,6 +3458,7 @@ Invalid property path '{key_path_str}' for layout
             The JSON encoding engine to use. One of:
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
+              - "msgspec" for a fast encoder that requires the msgspec package
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -3518,6 +3519,7 @@ Invalid property path '{key_path_str}' for layout
             The JSON encoding engine to use. One of:
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
+              - "msgspec" for a fast encoder that requires the msgspec package
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -5620,6 +5622,7 @@ on_change callbacks are not supported in this case.
             The JSON encoding engine to use. One of:
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
+              - "msgspec" for a fast encoder that requires the msgspec package
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 

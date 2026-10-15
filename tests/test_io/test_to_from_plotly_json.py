@@ -13,6 +13,7 @@ from pytz import timezone
 from _plotly_utils.optional_imports import get_module
 
 orjson = get_module("orjson")
+msgspec = get_module("msgspec")
 
 eastern = timezone("US/Eastern")
 
@@ -67,10 +68,11 @@ def check_roundtrip(value, engine, pretty):
 
 
 # Fixtures
+engines = ["json", "auto"]
 if orjson is not None:
-    engines = ["json", "orjson", "auto"]
-else:
-    engines = ["json", "auto"]
+    engines.append("orjson")
+if msgspec is not None:
+    engines.append("msgspec")
 
 
 @pytest.fixture(scope="module", params=engines)
@@ -322,3 +324,41 @@ def test_subclass_overrides_are_kept(engine):
     )
     assert result["fig"]["layout"]["title"] == {"text": "from to_dict"}
     assert result["trace"]["name"] == "from to_plotly_json"
+
+
+def test_datetime_series_with_nat(engine):
+    value = {"v": pd.Series([pd.Timestamp("2024-01-01"), pd.NaT])}
+    result = pio.to_json_plotly(value, engine=engine)
+    assert json.loads(result) == {"v": ["2024-01-01T00:00:00", None]}
+
+
+@pytest.mark.parametrize("value", [object(), 1j, {(1, 2): 1}, [{(1,): 2}]])
+def test_unserializable_raises_type_error(engine, value):
+    with pytest.raises(TypeError):
+        pio.to_json_plotly({"v": value}, engine=engine)
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_auto_engine_uses_msgspec_without_orjson(monkeypatch):
+    def without_orjson(name, **kwargs):
+        return None if name == "orjson" else get_module(name, **kwargs)
+
+    monkeypatch.setattr("plotly.io._json.get_module", without_orjson)
+    utc = datetime.datetime(2024, 1, 1, tzinfo=datetime.timezone.utc)
+    # msgspec writes UTC as Z, the json engine as +00:00
+    assert (
+        pio.to_json_plotly({"t": utc}, engine="auto") == '{"t":"2024-01-01T00:00:00Z"}'
+    )
+    assert pio.from_json_plotly('{"a":[1]}', engine="auto") == {"a": [1]}
+
+
+@pytest.mark.skipif(msgspec is None, reason="requires msgspec")
+def test_msgspec_default_engine():
+    original = pio.config.default_engine
+    try:
+        pio.config.default_engine = "msgspec"
+        assert pio.to_json_plotly(go.Figure(go.Bar(y=[1]))) == pio.to_json_plotly(
+            go.Figure(go.Bar(y=[1])), engine="json"
+        )
+    finally:
+        pio.config.default_engine = original
