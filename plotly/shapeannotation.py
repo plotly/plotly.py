@@ -1,5 +1,6 @@
 # some functions defined here to avoid numpy import
 
+import copy
 import datetime
 
 
@@ -244,6 +245,10 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
     # go.layout.Annotation ?
     if annotation is None:
         annotation = dict()
+    else:
+        # Fill in a copy, so that an annotation passed in can be reused for
+        # other shapes without keeping this shape's text and position.
+        annotation = copy.copy(annotation)
     for k in annotation_keys:
         if k == "annotation_position":
             # don't set so that Annotation constructor doesn't complain
