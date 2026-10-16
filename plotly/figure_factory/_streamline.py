@@ -55,7 +55,10 @@ def create_streamline(
         for more information on valid kwargs call
         help(plotly.graph_objs.Scatter)
 
-    :rtype (dict): returns a representation of streamline figure.
+    Returns
+    -------
+    plotly.graph_objects.Figure
+        A Plotly figure containing the streamlines and arrows.
 
     Example 1: Plot simple streamline and increase arrow size
 
