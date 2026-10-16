@@ -60,7 +60,7 @@ Plotly Express currently includes the following functions:
 * **Matrix or Image Input**: [`imshow`](/python/imshow/)
 * **3-Dimensional**: [`scatter_3d`](/python/3d-scatter-plots/), [`line_3d`](/python/3d-line-plots/)
 * **Multidimensional**: [`scatter_matrix`](/python/splom/), [`parallel_coordinates`](/python/parallel-coordinates-plot/), [`parallel_categories`](/python/parallel-categories-diagram/)
-* **Tile Maps**: [`scatter_map`](/python/tile-scatter-maps/), [`line_map`](/python/lines-on-tile-maps/), [`choropleth_map`](/python/tile-county-choropleth/), [`density_map`](/python/tile-density-heatmaps/)
+* **Tile Maps**: [`scatter_map`](/python/tile-scatter-maps/), [`line_map`](/python/lines-on-tile-maps/), [`choropleth_map`](/python/tile-county-choropleth/), [`density_map`](/python/density-heatmaps/)
 * **Outline Maps**: [`scatter_geo`](/python/scatter-plots-on-maps/), [`line_geo`](/python/lines-on-maps/), [`choropleth`](/python/choropleth-maps/)
 * **Polar Charts**: [`scatter_polar`](/python/polar-chart/), [`line_polar`](/python/polar-chart/), [`bar_polar`](/python/wind-rose-charts/)
 * **Ternary Charts**: [`scatter_ternary`](/python/ternary-plots/), [`line_ternary`](/python/ternary-plots/)
