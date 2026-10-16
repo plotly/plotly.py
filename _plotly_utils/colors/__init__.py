@@ -677,18 +677,20 @@ def n_colors(lowcolor, highcolor, n_colors, colortype="tuple"):
     which form the intermediate colors between lowcolor and highcolor
     from linearly interpolating through RGB space. If colortype is 'rgb'
     the function will return a list of colors in the same form.
+    When one color is requested, the result contains only lowcolor.
     """
     if colortype == "rgb":
         # convert to tuple
         lowcolor = unlabel_rgb(lowcolor)
         highcolor = unlabel_rgb(highcolor)
 
+    intervals = max(n_colors - 1, 1)
     diff_0 = float(highcolor[0] - lowcolor[0])
-    incr_0 = diff_0 / (n_colors - 1)
+    incr_0 = diff_0 / intervals
     diff_1 = float(highcolor[1] - lowcolor[1])
-    incr_1 = diff_1 / (n_colors - 1)
+    incr_1 = diff_1 / intervals
     diff_2 = float(highcolor[2] - lowcolor[2])
-    incr_2 = diff_2 / (n_colors - 1)
+    incr_2 = diff_2 / intervals
     list_of_colors = []
 
     def _constrain_color(c):
@@ -874,6 +876,7 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
     be spaced equally between the low value (default 0.0) and the high value
     (default 1.0). The output is a list of colors, formatted according to the
     specified colortype.
+    When one point is requested, the color at low is returned.
     """
     from bisect import bisect_left
 
@@ -891,8 +894,9 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
     colors = validate_colors(colors, colortype="tuple")
 
     if isinstance(samplepoints, int):
+        intervals = max(samplepoints - 1, 1)
         samplepoints = [
-            low + idx / (samplepoints - 1) * (high - low) for idx in range(samplepoints)
+            low + idx / intervals * (high - low) for idx in range(samplepoints)
         ]
     elif isinstance(samplepoints, float):
         samplepoints = [samplepoints]
