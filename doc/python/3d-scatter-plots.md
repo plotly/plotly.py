@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/3d-scatter.jpg
 ---
 
-## 3D scatter plot with Plotly Express
+## 3D Scatter Plot with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
@@ -57,7 +57,7 @@ fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
 fig.show()
 ```
 
-#### Style 3d scatter plot
+#### Style 3D Scatter Plot
 
 It is possible to customize the style of the figure through the parameters of `px.scatter_3d` for some options, or by updating the traces or the layout of the figure through `fig.update`.
 
@@ -73,11 +73,11 @@ fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
 fig.show()
 ```
 
-#### 3d scatter plots in Dash
+#### 3D Scatter Plots in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true

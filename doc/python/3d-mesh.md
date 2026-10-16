@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/3d-mesh.jpg
 ---
 
-### Simple 3D Mesh example ###
+### Simple 3D Mesh Example
 
 `go.Mesh3d` draws a 3D set of triangles with vertices given by `x`, `y` and `z`. If only coordinates are given, an algorithm such as [Delaunay triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation) is used to draw the triangles. Otherwise the triangles can be given using the `i`, `j` and `k` parameters (see examples below).
 
@@ -49,7 +49,7 @@ fig = go.Figure(data=[go.Mesh3d(x=x, y=y, z=z, color='lightpink', opacity=0.50)]
 fig.show()
 ```
 
-### 3D Mesh example with Alphahull
+### 3D Mesh Example with Alphahull
 
 
 The `alphahull` parameter sets the shape of the mesh. If the value is -1 (default value) then [Delaunay triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation) is used. If >0 then the [alpha-shape algorithm](https://en.wikipedia.org/wiki/Alpha_shape) is used. If 0, the [convex hull](https://en.wikipedia.org/wiki/Convex_hull) is represented (resulting in a convex body).
@@ -72,7 +72,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -146,7 +146,7 @@ fig = go.Figure(data=[
 fig.show()
 ```
 
-### Intensity values defined on vertices or cells
+### Intensity Values Defined on Vertices or Cells
 
 The `intensitymode` attribute of `go.Mesh3d` can be set to `vertex` (default mode, in which case intensity values are interpolated between values defined on vertices), or to `cell` (value of the whole cell, no interpolation). Note that the `intensity` parameter should have the same length as the number of vertices or cells, depending on the `intensitymode`.
 
