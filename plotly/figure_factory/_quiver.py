@@ -27,7 +27,10 @@ def create_quiver(
         for more information on valid kwargs call
         help(plotly.graph_objs.Scatter)
 
-    :rtype (dict): returns a representation of quiver figure.
+    Returns
+    -------
+    plotly.graph_objects.Figure
+        A Plotly figure containing the quiver arrows.
 
     Example 1: Trivial Quiver
 
