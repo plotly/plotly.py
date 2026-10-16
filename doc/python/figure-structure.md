@@ -192,7 +192,7 @@ The following trace types are compatible with tile map subplots via the `map` at
 
 * [`scattermap`](/python/tile-scatter-maps/), which can be used to draw [individual markers](/python/tile-scatter-maps/), [lines and curves](/python/lines-on-tile-maps/) and [filled areas](/python/filled-area-tile-maps/) on tile maps
 * [`choroplethmap`](/python/tile-county-choropleth/): colored polygons on tile maps
-* [`densitymap`](/python/tile-density-heatmaps/): density heatmaps on tile maps
+* [`densitymap`](/python/density-heatmaps/): density heatmaps on tile maps
 
 ### Traces Which Are Their Own Subplots
 
