@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add `px.scatter_smith` for plotting complex values (`real` and `imag`) on Smith charts, and support the `"smith"` subplot type in `make_subplots` [[#5824](https://github.com/plotly/plotly.py/pull/5824)], with thanks to @ybai08 for the contribution!
+
 ### Fixed
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the color of each axis's displayed spine to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!

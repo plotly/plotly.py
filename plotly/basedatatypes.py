@@ -2428,6 +2428,7 @@ Please use the add_trace method with the row and col parameters.
             * plotly.graph_objs.layout.Polar: if subplot type is 'polar'
             * plotly.graph_objs.layout.Ternary: if subplot type is 'ternary'
             * plotly.graph_objs.layout.Map: if subplot type is 'map'
+            * plotly.graph_objs.layout.Smith: if subplot type is 'smith'
             * SubplotDomain namedtuple with `x` and `y` fields:
               if subplot type is 'domain'.
                 - x: length 2 list of the subplot start and stop width

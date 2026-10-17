@@ -38,6 +38,24 @@ jupyter:
 A [Smith Chart](https://en.wikipedia.org/wiki/Smith_chart) is a specialized chart for visualizing [complex numbers](https://en.wikipedia.org/wiki/Complex_number): numbers with both a real and imaginary part.
 
 
+### Smith Charts with Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.scatter_smith`, each row of the DataFrame is represented as a marker on the Smith chart, with `real` and `imag` giving the real and imaginary parts of its normalized impedance.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame({
+    "real": [0.2, 0.5, 1.0, 2.0, 0.2, 0.5, 1.0, 2.0],
+    "imag": [0.5, 1.0, 0.5, -1.0, -0.5, -1.0, 2.0, 0.0],
+    "antenna": ["A", "A", "A", "A", "B", "B", "B", "B"],
+})
+
+fig = px.scatter_smith(df, real="real", imag="imag", color="antenna")
+fig.show()
+```
+
 ### Smith Charts with Plotly Graph Objects
 
 ```python

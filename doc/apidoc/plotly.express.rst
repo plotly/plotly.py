@@ -18,6 +18,7 @@ plotly's high-level API for rapid figure generation. ::
     scatter_3d
     scatter_polar
     scatter_ternary
+    scatter_smith
     scatter_map
     scatter_geo
     line
