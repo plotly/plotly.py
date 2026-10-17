@@ -30,10 +30,10 @@ trendline_functions = dict(
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
-    ["base", "x", "y", "z", "a", "b", "c", "r", "theta", "size", "x_start", "x_end"]
-    + ["hover_name", "text", "names", "values", "parents", "wide_cross"]
-    + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
-    + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
+    ["base", "x", "y", "z", "a", "b", "c", "r", "theta", "real", "imag", "size"]
+    + ["x_start", "x_end", "hover_name", "text", "names", "values", "parents"]
+    + ["wide_cross", "ids", "error_x", "error_x_minus", "error_y", "error_y_minus"]
+    + ["error_z", "error_z_minus", "lat", "lon", "locations", "animation_group"]
 )
 array_attrables = ["dimensions", "custom_data", "hover_data", "path", "wide_variable"]
 group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
@@ -2893,7 +2893,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             horizontal_spacing = args.get("facet_col_spacing") or 0.02
     else:
         # Other subplot types:
-        #   'scene', 'geo', 'polar', 'ternary', 'map', 'domain', None
+        #   'scene', 'geo', 'polar', 'ternary', 'map', 'smith', 'domain', None
         #
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types

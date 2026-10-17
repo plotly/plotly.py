@@ -688,3 +688,37 @@ def test_empty_histogram():
     fig = px.histogram()
     assert len(fig.data) == 1
     assert fig.data[0].type == "histogram"
+
+
+def test_scatter_smith_px():
+    real = np.array([0.5, 1.0, 2.0])
+    imag = np.array([1.0, -0.5, 0.0])
+    go_trace = go.Scattersmith(real=real, imag=imag, mode="markers")
+    fig = px.scatter_smith(real=real, imag=imag)
+    _compare_figures(go_trace, fig)
+    assert fig.data[0].subplot == "smith"
+    assert fig.layout.smith.domain.x == (0.0, 1.0)
+
+
+def test_scatter_smith(constructor):
+    data = {
+        "r": [0.5, 1.0, 2.0, 0.2],
+        "x": [1.0, -0.5, 0.0, 3.0],
+        "band": ["low", "low", "high", "high"],
+        "f": [1, 2, 3, 4],
+    }
+    df = constructor(data)
+    fig = px.scatter_smith(
+        df, real="r", imag="x", color="band", text="f", hover_data=["f"]
+    )
+
+    assert [t.type for t in fig.data] == ["scattersmith", "scattersmith"]
+    assert [t.name for t in fig.data] == ["low", "high"]
+    assert_array_equal(fig.data[0].real, [0.5, 1.0])
+    assert_array_equal(fig.data[0].imag, [1.0, -0.5])
+    assert_array_equal(fig.data[1].real, [2.0, 0.2])
+    assert_array_equal(fig.data[1].imag, [0.0, 3.0])
+    assert fig.data[0].mode == "markers+text"
+    assert fig.data[0].hovertemplate == (
+        "band=low<br>r=%{real}<br>x=%{imag}<br>f=%{customdata[0]}<extra></extra>"
+    )

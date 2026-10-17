@@ -159,6 +159,26 @@ class TestGetSubplot(TestCase):
         domain = fig.data[-1].domain
         self.assertEqual(subplot, SubplotDomain(x=domain.x, y=domain.y))
 
+    def test_get_subplot_smith(self):
+        # "smith" and the "scattersmith" trace type both create smith subplots
+        fig = subplots.make_subplots(
+            rows=1, cols=2, specs=[[{"type": "smith"}, {"type": "scattersmith"}]]
+        )
+        fig.add_trace(go.Scattersmith(real=[0.5, 1], imag=[1, 2]), row=1, col=1)
+        fig.add_trace(go.Scattersmith(real=[2, 3], imag=[-1, 0]), row=1, col=2)
+
+        self.assertEqual(fig.layout.smith.domain.x, (0.0, 0.45))
+        self.assertEqual(fig.layout.smith2.domain.x, (0.55, 1.0))
+        self.assertEqual(fig.data[0].subplot, "smith")
+        self.assertEqual(fig.data[1].subplot, "smith2")
+
+        self.assertEqual(fig.get_subplot(1, 1), fig.layout.smith)
+        self.assertEqual(fig.get_subplot(1, 2), fig.layout.smith2)
+
+        fig.update_traces(marker_color="red", row=1, col=2)
+        self.assertIsNone(fig.data[0].marker.color)
+        self.assertEqual(fig.data[1].marker.color, "red")
+
     def test_get_subplot_out_of_bounds(self):
         fig = subplots.make_subplots(rows=4, cols=2)
 

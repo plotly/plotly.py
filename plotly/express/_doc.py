@@ -73,6 +73,16 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to position marks along the angular axis in polar coordinates.",
     ],
+    real=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used as the real part of the normalized impedance of marks in Smith chart coordinates.",
+    ],
+    imag=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used as the imaginary part of the normalized impedance of marks in Smith chart coordinates.",
+    ],
     values=[
         colref_type,
         colref_desc,
