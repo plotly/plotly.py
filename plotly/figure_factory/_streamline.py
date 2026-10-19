@@ -38,7 +38,7 @@ def create_streamline(
     x, y, u, v, density=1, angle=math.pi / 9, arrow_scale=0.09, **kwargs
 ):
     """
-    Returns data for a streamline plot.
+    Returns a figure for a streamline plot.
 
     :param (list|ndarray) x: 1 dimensional, evenly spaced list or array
     :param (list|ndarray) y: 1 dimensional, evenly spaced list or array
@@ -55,10 +55,7 @@ def create_streamline(
         for more information on valid kwargs call
         help(plotly.graph_objs.Scatter)
 
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        A Plotly figure containing the streamlines and arrows.
+    :rtype (plotly.graph_objects.Figure): returns a representation of streamline figure.
 
     Example 1: Plot simple streamline and increase arrow size
 

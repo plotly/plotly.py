@@ -9,7 +9,7 @@ def create_quiver(
     x, y, u, v, scale=0.1, arrow_scale=0.3, angle=math.pi / 9, scaleratio=None, **kwargs
 ):
     """
-    Returns data for a quiver plot.
+    Returns a figure for a quiver plot.
 
     :param (list|ndarray) x: x coordinates of the arrow locations
     :param (list|ndarray) y: y coordinates of the arrow locations
@@ -27,10 +27,7 @@ def create_quiver(
         for more information on valid kwargs call
         help(plotly.graph_objs.Scatter)
 
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        A Plotly figure containing the quiver arrows.
+    :rtype (plotly.graph_objects.Figure): returns a representation of quiver figure.
 
     Example 1: Trivial Quiver
 
