@@ -132,6 +132,28 @@ fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
+#### Diagonal Line From a Slope and an Intercept
+
+To draw a straight line from a slope and an intercept rather than from
+endpoint coordinates, use `add_abline`, which computes the line's endpoints
+from the current x-axis range (or from the range of the data already plotted,
+if the x-axis range has not been set explicitly) at the time it is called.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3], y=[0, 1, 4, 9]))
+fig.add_abline(slope=3, intercept=-2, line=dict(color="MediumPurple", dash="dot"))
+fig.show()
+```
+
+Note that, unlike `add_hline` and `add_vline`, the line added by
+`add_abline` is not re-anchored to the axes: its endpoints are ordinary data
+coordinates fixed at the time the line is added, so panning or zooming the
+figure afterwards, or adding data that falls outside the original range,
+will not extend or move it.
+
 #### Lines Positioned Relative to the Plot & to the Axis Data
 
 ```python
