@@ -74,6 +74,19 @@ def _safe(json_str, _swap):
     return out
 
 
+def _has_nat_datetime_array(obj, np):
+    """Return whether nested figure data contain missing NumPy datetimes."""
+    if np is None:
+        return False
+    if isinstance(obj, np.ndarray):
+        return obj.dtype.kind == "M" and bool(np.isnat(obj).any())
+    if isinstance(obj, dict):
+        return any(_has_nat_datetime_array(value, np) for value in obj.values())
+    if isinstance(obj, (list, tuple)):
+        return any(_has_nat_datetime_array(value, np) for value in obj)
+    return False
+
+
 def to_json_plotly(plotly_object, pretty=False, engine=None):
     """
     Convert a plotly/Dash object to a JSON string representation
@@ -153,13 +166,15 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         except AttributeError:
             pass
 
-        # Try without cleaning
-        try:
-            return _safe(
-                orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
-            )
-        except TypeError:
-            pass
+        # The fast NumPy serializer can emit "NaT" or a spurious date for NaT.
+        # Normalize only when needed, preserving the fast path otherwise.
+        if not _has_nat_datetime_array(plotly_object, modules["np"]):
+            try:
+                return _safe(
+                    orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
+                )
+            except TypeError:
+                pass
 
         cleaned = clean_to_json_compatible(
             plotly_object,
