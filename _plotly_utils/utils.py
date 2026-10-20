@@ -294,7 +294,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             return float("nan")
         elif isinstance(obj, numpy.ndarray) and obj.dtype.kind == "M":
             try:
-                return numpy.datetime_as_string(obj).tolist()
+                return numpy.where(numpy.isnat(obj), None, numpy.datetime_as_string(obj)).tolist()
             except TypeError:
                 pass
 
