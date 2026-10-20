@@ -266,3 +266,35 @@ def test_sanitize_json(engine):
 def test_na_values(engine, na_value):
     result = pio.to_json_plotly(na_value, engine=engine)
     assert result == "null"
+
+@pytest.mark.parametrize("unit", ["D", "us", "ns"])
+@pytest.mark.parametrize("two_dimensional", [False, True])
+def test_datetime64_array_nat_is_json_null(engine, unit, two_dimensional):
+    dates = np.array(["2020-01-01", "NaT", "2020-01-03"], dtype=f"datetime64[{unit}]")
+    if two_dimensional:
+        dates = dates.reshape(1, 3)
+
+    result = json.loads(pio.to_json_plotly(dates, engine=engine))
+    items = result[0] if two_dimensional else result
+    assert items[0].startswith("2020-01-01")
+    assert items[1] is None
+    assert items[2].startswith("2020-01-03")
+
+
+@pytest.mark.parametrize("unit", ["D", "us", "ns"])
+def test_zero_dimensional_nat_array_is_json_null(engine, unit):
+    value = np.array("NaT", dtype=f"datetime64[{unit}]")
+    assert json.loads(pio.to_json_plotly(value, engine=engine)) is None
+
+
+def test_pandas_datetime_series_nat_roundtrip(engine):
+    series = pd.Series(pd.to_datetime(["2020-01-01", None]))
+    fig = go.Figure(go.Scatter(x=series))
+    encoded = pio.to_json(fig, engine=engine)
+
+    values = json.loads(encoded)["data"][0]["x"]
+    assert values[0].startswith("2020-01-01")
+    assert values[1] is None
+
+    decoded = pio.from_json(encoded, engine=engine)
+    assert decoded.data[0].x[1] is None
