@@ -267,6 +267,7 @@ def test_na_values(engine, na_value):
     result = pio.to_json_plotly(na_value, engine=engine)
     assert result == "null"
 
+
 @pytest.mark.parametrize("unit", ["D", "us", "ns"])
 @pytest.mark.parametrize("two_dimensional", [False, True])
 def test_datetime64_array_nat_is_json_null(engine, unit, two_dimensional):
