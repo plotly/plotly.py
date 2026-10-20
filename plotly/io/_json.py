@@ -171,7 +171,8 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         if not _has_nat_datetime_array(plotly_object, modules["np"]):
             try:
                 return _safe(
-                    orjson.dumps(plotly_object, option=opts).decode("utf8"), _swap_orjson
+                    orjson.dumps(plotly_object, option=opts).decode("utf8"),
+                    _swap_orjson,
                 )
             except TypeError:
                 pass
@@ -529,7 +530,9 @@ def clean_to_json_compatible(obj, **kwargs):
                 return np.ascontiguousarray(obj)
             elif obj.dtype.kind == "M":
                 # datetime64 array
-                return np.where(np.isnat(obj), None, np.datetime_as_string(obj)).tolist()
+                return np.where(
+                    np.isnat(obj), None, np.datetime_as_string(obj)
+                ).tolist()
             elif obj.dtype.kind == "U":
                 return obj.tolist()
             elif obj.dtype.kind == "O":
