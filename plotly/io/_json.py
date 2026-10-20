@@ -514,7 +514,7 @@ def clean_to_json_compatible(obj, **kwargs):
                 return np.ascontiguousarray(obj)
             elif obj.dtype.kind == "M":
                 # datetime64 array
-                return np.datetime_as_string(obj).tolist()
+                return np.where(np.isnat(obj), None, np.datetime_as_string(obj)).tolist()
             elif obj.dtype.kind == "U":
                 return obj.tolist()
             elif obj.dtype.kind == "O":
