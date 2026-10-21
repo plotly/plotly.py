@@ -876,123 +876,8 @@ def test_axvline_converts():
     assert shape.yref == "y domain"
 
 
-def test_axline_converts():
-    """axline converts to a layout shape extended in data coordinates."""
-    fig, ax = plt.subplots()
-    ax.axline((0.5, 0.5), slope=1)
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-
-    assert len(plotly_fig.data) == 0
-    assert len(plotly_fig.layout.shapes) == 1
-    shape = plotly_fig.layout.shapes[0]
-    assert shape.type == "line"
-    assert shape.xref == "x"
-    assert shape.yref == "y"
-    x_min, x_max = ax.get_xlim()
-    assert shape.x0 < x_min
-    assert shape.x1 > x_max
-    slope = (shape.y1 - shape.y0) / (shape.x1 - shape.x0)
-    assert abs(slope - 1.0) < 1e-9
-    # Passes through (0.5, 0.5)
-    y_at_05 = shape.y0 + slope * (0.5 - shape.x0)
-    assert abs(y_at_05 - 0.5) < 1e-9
-
-
-def test_axline_arbitrary_slope_and_limits():
-    """axline with non-trivial slopes and limits extends in data coordinates."""
-    fig, ax = plt.subplots()
-    ax.scatter([1, 2, 4, 7, 9], [2, 5, 4, 8, 10])
-    ax.axline((0, 1), slope=1.0)
-    ax.axline((1, 8), (8, 2))
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 12)
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-    shapes = plotly_fig.layout.shapes
-    assert len(shapes) == 2
-
-    # Line 1: (0, 1), slope 1, xlim [0, 10], ylim [0, 12]
-    assert shapes[0].xref == "x"
-    assert shapes[0].yref == "y"
-    assert shapes[0].x0 < -500
-    assert shapes[0].x1 > 500
-    slope1 = (shapes[0].y1 - shapes[0].y0) / (shapes[0].x1 - shapes[0].x0)
-    assert abs(slope1 - 1.0) < 1e-9
-    y_at_0 = shapes[0].y0 + slope1 * (0.0 - shapes[0].x0)
-    assert abs(y_at_0 - 1.0) < 1e-9
-
-    # Line 2: (1, 8) to (8, 2) with slope -6/7
-    assert shapes[1].xref == "x"
-    assert shapes[1].yref == "y"
-    assert shapes[1].x0 < -500
-    assert shapes[1].x1 > 500
-    slope2 = (shapes[1].y1 - shapes[1].y0) / (shapes[1].x1 - shapes[1].x0)
-    assert abs(slope2 - (-6.0 / 7.0)) < 1e-9
-    y_at_1 = shapes[1].y0 + slope2 * (1.0 - shapes[1].x0)
-    assert abs(y_at_1 - 8.0) < 1e-9
-
-
-def _shape_x_datenums(shape):
-    """Return a shape's date-string x endpoints as matplotlib date numbers."""
-    return [
-        matplotlib.dates.date2num(datetime.datetime.fromisoformat(x))
-        for x in (shape.x0, shape.x1)
-    ]
-
-
-def test_axline_on_pre_1970_date_axis():
-    """axline on a date axis before the matplotlib epoch (1970) extends on both
-    sides of the data and stays on the original line."""
-    dates = [datetime.datetime(1950, 1, i) for i in range(1, 10)]
-    fig, ax = plt.subplots()
-    ax.plot(dates, range(len(dates)))
-    x_ref = matplotlib.dates.date2num(dates[0])
-    ax.axline((x_ref, 0), slope=1)
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-    shapes = plotly_fig.layout.shapes
-    assert len(shapes) == 1
-    shape = shapes[0]
-    assert shape.xref == "x"
-    assert shape.yref == "y"
-
-    n0, n1 = _shape_x_datenums(shape)
-    x_min, x_max = ax.get_xlim()
-    assert n0 < x_min
-    assert n1 > x_max
-    slope = (shape.y1 - shape.y0) / (n1 - n0)
-    assert abs(slope - 1.0) < 1e-6
-    assert abs(shape.y0 + slope * (x_ref - n0)) < 1e-6
-
-
-def test_axline_on_date_axis_clamps_to_matplotlib_date_range():
-    """When extending a diagonal axline would leave matplotlib's supported date
-    range (years 0001-9999), its endpoints stop at the range limits while
-    staying on the original line."""
-    dates = [datetime.datetime(1900, 1, 1), datetime.datetime(2000, 1, 1)]
-    fig, ax = plt.subplots()
-    ax.plot(dates, [0, 1])
-    # Nearly flat line crossing the whole century, so the 100x extension of the
-    # visible segment reaches past both year 0001 and year 9999
-    x_ref = matplotlib.dates.date2num(dates[0])
-    ax.axline((x_ref, 0.5), slope=1e-6)
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-    shape = plotly_fig.layout.shapes[0]
-    assert isinstance(shape.x0, str)
-    assert isinstance(shape.x1, str)
-    assert shape.x0.startswith("0001-01-01")
-    assert shape.x1.startswith("9999-12-31")
-
-    n0, n1 = _shape_x_datenums(shape)
-    slope = (shape.y1 - shape.y0) / (n1 - n0)
-    assert abs(slope - 1e-6) < 1e-12
-    assert abs(shape.y0 + slope * (x_ref - n0) - 0.5) < 1e-6
-
-
 def test_axline_horizontal_and_vertical():
-    """Horizontal and vertical axline use domain coordinates appropriately."""
+    """Horizontal and vertical axline use domain coordinates on the spanned axis."""
     fig, ax = plt.subplots()
     ax.axline((0, 5), slope=0)
     ax.axline((3, 0), (3, 10))
@@ -1018,9 +903,21 @@ def test_axline_horizontal_and_vertical():
     assert abs(shapes[1].y1 - 1.0) < 1e-9
 
 
+def test_diagonal_axline_warns_and_is_skipped():
+    """Diagonal axline emits a UserWarning for non-data Line2D coordinates."""
+    fig, ax = plt.subplots()
+    ax.axline((0.5, 0.5), slope=1)
+
+    with pytest.warns(UserWarning, match="Line2D objects from matplotlib"):
+        plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 0
+
+
 def test_axes_coordinate_segments_keep_their_endpoints():
-    """Two-point lines in axes coordinates (not axline) convert to shapes in
-    axes domain coordinates with their exact endpoints, without extension."""
+    """Two-point lines in axes coordinates convert to shapes in axes domain
+    coordinates with their exact endpoints."""
     fig, ax = plt.subplots()
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 10)

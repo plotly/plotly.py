@@ -7,24 +7,20 @@ with the matplotlylib package.
 
 """
 
-import datetime
 import math
 import warnings
 
 import matplotlib.patches as mpatches
-from matplotlib import dates as mdates
 from matplotlib import lines as mlines
 from matplotlib import transforms
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
+from plotly.matplotlylib.mpltools import _export_color
 
 # Artist class created by ``Axes.axline``: ``AxLine`` in matplotlib >= 3.8,
 # ``_AxLine`` in earlier versions.
 _AXLINE_CLASS = getattr(mlines, "AxLine", None) or getattr(mlines, "_AxLine", ())
-
-
-from plotly.matplotlylib.mpltools import _export_color
 
 
 def _per_path(values, i, default):
@@ -562,8 +558,8 @@ class PlotlyRenderer(Renderer):
         elif props["coordinates"] == "axes" and self._processing_legend:
             # dealing with legend graphical elements
             self.msg += "    Using native legend\n"
-        elif self._is_axes_reference_line(props):
-            self._draw_axes_line(props)
+        elif self._is_axes_reference_line(props) and self._draw_axes_line(props):
+            pass
         else:
             self.msg += "    Line didn't have 'data' coordinates, not drawing\n"
             warnings.warn(
@@ -574,8 +570,9 @@ class PlotlyRenderer(Renderer):
 
     def _is_axes_reference_line(self, props):
         """Check whether a line qualifies as an axes-coordinate reference line
-        (e.g. axhline, axvline, axline, or a 2-point segment drawn with
-        ``transform=ax.transAxes``) that can be drawn as a 2-point layout shape."""
+        (e.g. axhline, axvline, horizontal/vertical axline, or a 2-point
+        segment drawn with ``transform=ax.transAxes``) that can be drawn as a
+        2-point layout shape."""
         if not props.get("linestyle") or len(props.get("data", [])) != 2:
             return False
         if props["coordinates"] == "axes" and not self._processing_legend:
@@ -589,12 +586,12 @@ class PlotlyRenderer(Renderer):
     def _draw_axes_line(self, props):
         """Draw an axes-coordinate reference line as a layout shape.
 
-        axhline/axvline span their axes-fraction extent along one axis and sit
-        at a data value on the other. Segments in axes coordinates keep their
-        exact endpoints in axes domain coordinates. axline is extended in data
-        coordinates."""
+        axhline/axvline and horizontal/vertical axline span the axes domain
+        along one axis and sit at a data value on the other. Segments in axes
+        coordinates keep their exact endpoints in axes domain coordinates.
+        Returns True when a shape is drawn."""
         if not props.get("linestyle") or len(props.get("data", [])) != 2:
-            return
+            return False
         ax = self.current_mpl_ax
         line = props["mplobj"]
         trans = line.get_transform()
@@ -635,7 +632,7 @@ class PlotlyRenderer(Renderer):
             xref = x_domain
             yref = y_domain
         else:
-            # general reference line (e.g. axline)
+            # general reference line (e.g. horizontal or vertical axline)
             if props["coordinates"] == "display":
                 px_points = props["data"]
             elif props["coordinates"] == "axes":
@@ -664,38 +661,7 @@ class PlotlyRenderer(Renderer):
                 xref = x_axis
                 yref = y_domain
             else:
-                # Diagonal line: extend endpoints in data coordinates so it spans
-                # across zoom levels while staying locked to data coordinates on pan/zoom
-                extension_factor = 100.0
-                x0_ext = x0 - extension_factor * dx
-                y0_ext = y0 - extension_factor * dy
-                x1_ext = x1 + extension_factor * dx
-                y1_ext = y1 + extension_factor * dy
-
-                if self.x_is_mpl_date:
-                    min_date_num = float(mdates.date2num(datetime.datetime(1, 1, 1)))
-                    max_date_num = float(
-                        mdates.date2num(datetime.datetime(9999, 12, 31))
-                    )
-                    slope = dy / dx
-                    if x0_ext < min_date_num:
-                        y0_ext = y0 + slope * (min_date_num - x0)
-                        x0_ext = min_date_num
-                    elif x0_ext > max_date_num:
-                        y0_ext = y0 + slope * (max_date_num - x0)
-                        x0_ext = max_date_num
-                    if x1_ext > max_date_num:
-                        y1_ext = y1 + slope * (max_date_num - x1)
-                        x1_ext = max_date_num
-                    elif x1_ext < min_date_num:
-                        y1_ext = y1 + slope * (min_date_num - x1)
-                        x1_ext = min_date_num
-                    x0, x1 = self._convert_x_dates([x0_ext, x1_ext])
-                else:
-                    x0, x1 = float(x0_ext), float(x1_ext)
-                y0, y1 = float(y0_ext), float(y1_ext)
-                xref = x_axis
-                yref = y_axis
+                return False
 
         color = _export_color(props["linestyle"]["color"], props["linestyle"]["alpha"])
         shape = go.layout.Shape(
@@ -715,6 +681,7 @@ class PlotlyRenderer(Renderer):
         )
         self.plotly_fig["layout"]["shapes"] += (shape,)
         self.msg += "    Heck yeah, I drew that reference line\n"
+        return True
 
     def draw_image(self, **props):
         """Draw image.
