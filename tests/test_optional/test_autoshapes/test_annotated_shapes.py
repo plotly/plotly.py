@@ -24,6 +24,7 @@
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from itertools import product
+import copy
 import os
 import pytest
 import json
@@ -276,6 +277,30 @@ def test_specify_annotation_as_dict(multi_plot_fixture):
                 "xref": "x4",
                 "yref": "y4 domain",
             }
+        ],
+    ):
+        ret &= _cmp_partial_dict(sh, d)
+    assert ret
+
+
+# Test that the annotation passed in isn't modified, so it can be reused for
+# several shapes
+@pytest.mark.parametrize(
+    "annotation",
+    [dict(font_color="red"), go.layout.Annotation(font_color="red")],
+    ids=["dict", "Annotation"],
+)
+def test_reuse_annotation(single_plot_fixture, annotation):
+    before = copy.deepcopy(annotation)
+    single_plot_fixture.add_vline(x=2, annotation_text="A", annotation=annotation)
+    single_plot_fixture.add_vline(x=3, annotation_text="B", annotation=annotation)
+    assert annotation == before
+    ret = len(single_plot_fixture.layout.annotations) == 2
+    for sh, d in zip(
+        single_plot_fixture.layout.annotations,
+        [
+            {"text": "A", "x": 2, "font.color": "red"},
+            {"text": "B", "x": 3, "font.color": "red"},
         ],
     ):
         ret &= _cmp_partial_dict(sh, d)
