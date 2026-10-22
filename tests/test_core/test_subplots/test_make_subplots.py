@@ -1,3 +1,4 @@
+import re
 from unittest import TestCase
 import pytest
 from plotly.graph_objs import (
@@ -658,7 +659,10 @@ class TestMakeSubplots(TestCase):
         )
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
-    def test_specs_rounding_rounds_down(self):
+    def test_specs_padding_larger_than_cell(self):
+        # With the default vertical_spacing, each of the 8 cells is ~0.092 tall,
+        # so 'b' + 't' = 0.2 leaves no room for the subplots. This used to give
+        # inverted y domains, which plotly.js replaces with [0, 1]
         n_subplots = 8
         padding_size = 0.2
 
@@ -666,13 +670,8 @@ class TestMakeSubplots(TestCase):
         for _ in range(n_subplots):
             specs.append([{"b": padding_size / 2.0, "t": padding_size / 2.0}])
 
-        fig = subplots.make_subplots(rows=n_subplots, specs=specs)
-        self.assertTrue(
-            all(
-                fig.layout[f"yaxis{i if i > 1 else ''}"]["domain"][0] <= 1.0
-                for i in range(1, n_subplots + 1)
-            )
-        )
+        with self.assertRaisesRegex(ValueError, r"less than 0\.0921875, the height"):
+            subplots.make_subplots(rows=n_subplots, specs=specs)
 
     def test_specs_padding_bottom_left(self):
         expected = Figure(
@@ -1959,6 +1958,142 @@ class TestMakeSubplots(TestCase):
         fig2sp = subplots.make_subplots(2, 2)
         assert id(fig2sp) != id(figsp)
         assert fig2sp.layout == figsp.layout
+
+
+@pytest.mark.parametrize(
+    "kwargs, message",
+    [
+        # The cell height doesn't include the vertical_spacing around the cell
+        pytest.param(
+            dict(rows=2, vertical_spacing=0.1, specs=[[{}], [{"b": 0.3, "t": 0.2}]]),
+            "The 'b' and 't' padding of the subplot at grid position (2, 1) "
+            "must add up to less than 0.45, the height of its cell",
+            id="b-t",
+        ),
+        pytest.param(
+            dict(cols=2, horizontal_spacing=0.1, specs=[[{}, {"l": 0.25, "r": 0.25}]]),
+            "The 'l' and 'r' padding of the subplot at grid position (1, 2) "
+            "must add up to less than 0.45, the width of its cell",
+            id="l-r",
+        ),
+        # Padding that fills the whole cell leaves no room for the subplot
+        pytest.param(
+            dict(rows=2, vertical_spacing=0, specs=[[{"b": 0.25, "t": 0.25}], [{}]]),
+            "grid position (1, 1) must add up to less than 0.5, the height",
+            id="exact-fit",
+        ),
+        # The second row is the 0.2 tall one, whatever the start_cell
+        pytest.param(
+            dict(
+                rows=2,
+                row_heights=[3, 1],
+                vertical_spacing=0.2,
+                specs=[[{"b": 0.15, "t": 0.15}], [{"b": 0.15, "t": 0.15}]],
+            ),
+            "grid position (2, 1) must add up to less than 0.2, the height",
+            id="row_heights",
+        ),
+        pytest.param(
+            dict(
+                rows=2,
+                row_heights=[3, 1],
+                vertical_spacing=0.2,
+                start_cell="bottom-left",
+                specs=[[{"b": 0.15, "t": 0.15}], [{"b": 0.15, "t": 0.15}]],
+            ),
+            "grid position (2, 1) must add up to less than 0.2, the height",
+            id="row_heights-bottom-left",
+        ),
+        # Spanning subplots can use the cells they span and the spacing between
+        # them, but no more
+        pytest.param(
+            dict(
+                rows=2,
+                cols=2,
+                horizontal_spacing=0.1,
+                specs=[[{"colspan": 2, "l": 0.6, "r": 0.4}, None], [{}, {}]],
+            ),
+            "grid position (1, 1) must add up to less than 1, the width",
+            id="colspan",
+        ),
+        pytest.param(
+            dict(
+                rows=3,
+                vertical_spacing=0.1,
+                specs=[[{}], [{"rowspan": 2, "b": 0.4, "t": 0.3}], [None]],
+            ),
+            "grid position (2, 1) must add up to less than 0.633333, the height",
+            id="rowspan",
+        ),
+        pytest.param(
+            dict(
+                rows=3,
+                vertical_spacing=0.1,
+                start_cell="bottom-left",
+                specs=[[{"rowspan": 2, "b": 0.4, "t": 0.3}], [None], [{}]],
+            ),
+            "grid position (1, 1) must add up to less than 0.633333, the height",
+            id="rowspan-bottom-left",
+        ),
+        pytest.param(
+            dict(cols=2, specs=[[{"type": "domain", "l": 0.5}, {}]]),
+            "grid position (1, 1) must add up to less than 0.45, the width",
+            id="domain-subplot",
+        ),
+    ],
+)
+def test_make_subplots_padding_error(kwargs, message):
+    with pytest.raises(ValueError, match=re.escape(message)):
+        subplots.make_subplots(**kwargs)
+
+
+def test_make_subplots_padding_within_cell():
+    # Padding that leaves room for the subplot is applied as before, including
+    # padding larger than a single cell for subplots spanning several cells
+    fig = subplots.make_subplots(
+        rows=3,
+        cols=2,
+        horizontal_spacing=0.1,
+        vertical_spacing=0.05,
+        specs=[
+            [{"rowspan": 2, "b": 0.3, "t": 0.3}, {"l": 0.2, "r": 0.24}],
+            [None, {"b": 0.15, "t": 0.14}],
+            [{"colspan": 2, "l": 0.5, "r": 0.4}, None],
+        ],
+    )
+    # Each cell is 0.45 wide and 0.3 tall
+    assert fig.get_subplot(1, 1).yaxis.domain == pytest.approx((0.65, 0.7))
+    assert fig.get_subplot(1, 2).xaxis.domain == pytest.approx((0.75, 0.76))
+    assert fig.get_subplot(2, 2).yaxis.domain == pytest.approx((0.5, 0.51))
+    assert fig.get_subplot(3, 1).xaxis.domain == pytest.approx((0.5, 0.6))
+
+
+def test_make_subplots_padding_issue_4144():
+    # With the default vertical_spacing, each of the 8 cells is ~0.092 tall, so
+    # this padding used to stack all the subplots on top of each other
+    with pytest.raises(
+        ValueError,
+        match=re.escape("must add up to less than 0.0921875, the height of its cell"),
+    ):
+        subplots.make_subplots(
+            rows=8,
+            cols=1,
+            row_heights=[0.1] * 8,
+            specs=[[{"b": 0.05, "t": 0.05}] for _ in range(8)],
+        )
+
+    # Without vertical_spacing, each cell is 0.125 tall and the padding fits
+    fig = subplots.make_subplots(
+        rows=8,
+        cols=1,
+        row_heights=[0.1] * 8,
+        vertical_spacing=0,
+        specs=[[{"b": 0.05, "t": 0.05}] for _ in range(8)],
+    )
+    for row in range(1, 9):
+        cell_top = 1 - 0.125 * (row - 1)
+        domain = fig.get_subplot(row, 1).yaxis.domain
+        assert domain == pytest.approx((cell_top - 0.125 + 0.05, cell_top - 0.05))
 
 
 def test_make_subplots_spacing_error():

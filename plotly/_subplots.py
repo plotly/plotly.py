@@ -541,6 +541,30 @@ The resulting plot would have {dimsize} {dimname} ({dimvarname}={dimsize}).""".f
                 )
             )
 
+    def _check_padding(spec, row, col, start, end, cell, dimname):
+        # Padding that leaves no room for the subplot in its cell would give an
+        # empty or inverted domain, which plotly.js replaces with [0, 1]
+        padding = spec[start] + spec[end]
+        cell_size = cell[1] - cell[0]
+        # Without padding, a cell can be empty if the spacing is at its maximum
+        if padding > 0 and padding >= cell_size:
+            raise ValueError(
+                """
+The '{start}' and '{end}' padding of the subplot at grid position ({row}, {col}) \
+must add up to less than {cell_size:g}, the {dimname} of its cell in normalized \
+plot coordinates.
+    Received '{start}': {start_val}, '{end}': {end_val}""".format(
+                    start=start,
+                    end=end,
+                    row=row,
+                    col=col,
+                    cell_size=cell_size,
+                    dimname=dimname,
+                    start_val=spec[start],
+                    end_val=spec[end],
+                )
+            )
+
     # ### horizontal_spacing ###
     if horizontal_spacing is None:
         if has_secondary_y:
@@ -681,19 +705,26 @@ The row_titles argument to make_subplots must be a list or tuple
                     "Some 'rowspan' value is too large for this subplot grid."
                 )
 
-            # Get x domain using grid and colspan
-            x_s = grid[r][c][0] + spec["l"]
+            # Get x extent of the cell using grid and colspan
+            x_cell = [grid[r][c][0], grid[r][c_spanned][0] + widths[c_spanned]]
 
-            x_e = grid[r][c_spanned][0] + widths[c_spanned] - spec["r"]
+            # Get y extent of the cell (dep. on row_dir) using grid & r_spanned
+            if row_dir > 0:
+                y_cell = [grid[r][c][1], grid[r_spanned][c][1] + heights[r_spanned]]
+            else:
+                y_cell = [grid[r_spanned][c][1], grid[r][c][1] + heights[-1 - r]]
+
+            # Throw exception if the padding leaves no room for the subplot
+            _check_padding(spec, r + 1, c + 1, "l", "r", x_cell, "width")
+            _check_padding(spec, r + 1, c + 1, "b", "t", y_cell, "height")
+
+            # Get x and y domain by applying the padding to the cell extent
+            x_s = x_cell[0] + spec["l"]
+            x_e = x_cell[1] - spec["r"]
             x_domain = [x_s, x_e]
 
-            # Get y domain (dep. on row_dir) using grid & r_spanned
-            if row_dir > 0:
-                y_s = grid[r][c][1] + spec["b"]
-                y_e = grid[r_spanned][c][1] + heights[r_spanned] - spec["t"]
-            else:
-                y_s = grid[r_spanned][c][1] + spec["b"]
-                y_e = grid[r][c][1] + heights[-1 - r] - spec["t"]
+            y_s = y_cell[0] + spec["b"]
+            y_e = y_cell[1] - spec["t"]
 
             if y_s < 0.0:
                 # round for values very close to one
