@@ -51,11 +51,11 @@ fig.update_layout(
 fig.show()
 ```
 
-### Adjusting graph size with Dash
+### Adjusting Graph Size with Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 ```python hide_code=true
 from IPython.display import IFrame
@@ -67,7 +67,7 @@ IFrame(snippet_url + 'setting-graph-size', width='100%', height=1200)
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-### Adjusting Height, Width, & Margins With Graph Objects
+### Adjusting Height, Width, & Margins with Graph Objects
 
 [Graph objects](/python/graph-objects/) are the low-level building blocks of figures which you can use instead of Plotly Express for greater control.
 

@@ -38,7 +38,7 @@ A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map compos
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth_map` function or the lower-level `go.Choroplethmap` graph object.
 
-### Introduction: main parameters for choropleth tile maps
+### Introduction: Main Parameters for Choropleth Tile Maps
 
 Making choropleth maps requires two main types of input:
 
@@ -62,7 +62,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 counties["features"][0]
 ```
 
-#### Data indexed by `id`
+#### Data Indexed by `id`
 
 Here we load unemployment data by county, also indexed by [FIPS code](https://en.wikipedia.org/wiki/FIPS_county_code).
 
@@ -73,7 +73,7 @@ df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-
 df.head()
 ```
 
-### Choropleth map using plotly.express and carto base map
+### Choropleth Map Using plotly.express and Carto Base Map
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
@@ -103,11 +103,11 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-### Choropleth maps in Dash
+### Choropleth Maps in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -193,7 +193,7 @@ fig = px.choropleth_map(geo_df,
 fig.show()
 ```
 
-### Choropleth map using plotly.graph_objects and carto base map
+### Choropleth Map Using plotly.graph_objects and Carto Base Map
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Choroplethmap` class from `plotly.graph_objects`](/python/graph-objects/).
 

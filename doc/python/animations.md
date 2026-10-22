@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/animations.gif
 ---
 
-#### Animated figures with Plotly Express
+#### Animated Figures with Plotly Express
 
 Several [Plotly Express](/python/plotly-express/)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
@@ -48,11 +48,11 @@ px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animation_gro
            log_x=True, size_max=55, range_x=[100,100000], range_y=[25,90])
 ```
 
-#### Animated figures in Dash
+#### Animated Figures in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -81,7 +81,7 @@ fig.show()
 * Although Plotly Express supports animation for many chart and map types, smooth inter-frame transitions are today *only* possible for `scatter` and `bar`
 * Plotly Express will *not* automatically compute the union of all x/y/color ranges, so these must be specified manually to avoid scale jumps across frames
 
-#### Animated figures with Graph Objects
+#### Animated Figures with Graph Objects
 
 The remainder of this section describes the low-level [graph objects](/python/graph-objects/) API for constructing animated figures manually.
 

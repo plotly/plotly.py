@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/bar.jpg
 ---
 
-### Bar chart with Plotly Express
+### Bar Charts with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
@@ -49,7 +49,7 @@ fig.show()
 ```
 
 
-#### Bar charts with Long Format Data
+#### Bar Charts with Long Format Data
 
 Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 
@@ -71,7 +71,7 @@ fig.show()
 long_df
 ```
 
-#### Bar charts with Wide Format Data
+#### Bar Charts with Wide Format Data
 Wide-form data has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
 
 ```python
@@ -87,11 +87,11 @@ fig.show()
 wide_df
 ```
 
-### Bar charts in Dash
+### Bar Charts in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -246,7 +246,7 @@ fig = px.bar(df, x="medal", y="count", color="nation",
 fig.show()
 ```
 
-### Facetted subplots
+### Facetted Subplots
 
 Use the keyword arguments `facet_row` (resp. `facet_col`) to create facetted subplots, where different rows (resp. columns) correspond to different values of the dataframe column specified in `facet_row`.
 
@@ -467,7 +467,7 @@ fig = go.Figure(data=[go.Bar(
 fig.show()
 ```
 
-### Controlling text fontsize with uniformtext
+### Controlling Text Font Size with <code>uniformtext</code>
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow. In the example below we also force the text to be outside of bars with `textposition`.
 
@@ -589,9 +589,9 @@ fig.update_layout(
 )
 ```
 
-### Using a scatterplot to wrap long bars into multiple columns
+### Using a Scatter Plot to Wrap Long Bars into Multiple Columns
 
-This bar-style pictogram allows readers to focus on the relative sizes of smaller entities by wrapping the bar for largest entries into multiple columns.  You could make it even more of a pictogram by using fontawesome to replace the square markers we use below with icons like mortar boards for students.
+This bar-style pictogram allows readers to focus on the relative sizes of smaller entities by wrapping the bar for largest entries into multiple columns. You could make it even more of a pictogram by using fontawesome to replace the square markers we use below with icons like mortar boards for students.
 
 ```python
 import plotly.graph_objects as go

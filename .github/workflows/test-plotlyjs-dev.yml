@@ -1,0 +1,78 @@
+name: Test plotly.js dev
+
+# Run codegen and the core tests against the plot-schema.json on plotly.js main
+# once a week. This catches plotly.js schema changes that break codegen or
+# validation before the next plotly.js release.
+on:
+  schedule:
+    - cron: "0 9 * * 1"  # Monday 09:00 UTC
+  workflow_dispatch:
+    inputs:
+      plotlyjs_ref:
+        description: "plotly.js branch, tag, or commit SHA to test"
+        required: false
+        default: "main"
+
+permissions:
+  contents: read
+
+jobs:
+  test-plotlyjs-dev:
+    name: Test against plotly.js dev schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7  # v10.2.0
+      - name: Install dependencies
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync --locked --extra dev_optional
+      - name: Download plot-schema.json from plotly.js
+        # plotly.js CI keeps test/plot-schema.json identical to the built schema
+        env:
+          PLOTLYJS_REF: ${{ inputs.plotlyjs_ref || 'main' }}
+        run: |
+          curl -fsSL -o codegen/resources/plot-schema.json \
+            "https://raw.githubusercontent.com/plotly/plotly.js/${PLOTLYJS_REF}/test/plot-schema.json"
+      - name: Run codegen
+        run: |
+          source .venv/bin/activate
+          python commands.py codegen
+      - name: Test core (excluding nodev)
+        run: |
+          source .venv/bin/activate
+          pytest -k 'not nodev' tests/test_core
+
+  report-failure:
+    name: Open an issue for a failed scheduled run
+    needs: test-plotlyjs-dev
+    # Manual runs can test any plotly.js ref, so only report scheduled runs
+    if: failure() && github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update the failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          TITLE: "Weekly plotly.js dev test failed"
+        run: |
+          BODY="The weekly test against the plot-schema.json on plotly.js main failed: ${RUN_URL}"
+          # Comment on an open issue from an earlier failure instead of opening a duplicate
+          EXISTING=$(gh issue list --state open --search "in:title \"${TITLE}\"" \
+            --json number,title --jq "map(select(.title == \"${TITLE}\")) | .[0].number // empty")
+          if [ -n "${EXISTING}" ]; then
+            gh issue comment "${EXISTING}" --body "${BODY}"
+          else
+            gh issue create --title "${TITLE}" --body "${BODY}"
+          fi
