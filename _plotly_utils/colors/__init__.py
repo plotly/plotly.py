@@ -338,6 +338,11 @@ def validate_colors(colors, colortype="tuple"):
         else:
             colors = list(colors)
 
+    else:
+        # copy the list so that neither the caller's list nor
+        # DEFAULT_PLOTLY_COLORS is modified in place below
+        colors = list(colors)
+
     # convert color elements in list to tuple color
     for j, each_color in enumerate(colors):
         if "rgb" in each_color:
@@ -454,7 +459,7 @@ def convert_colors_to_same_type(
             colors_list = list(colors)
 
     elif isinstance(colors, list):
-        colors_list = colors
+        colors_list = list(colors)
 
     # validate scale
     if scale is not None:
