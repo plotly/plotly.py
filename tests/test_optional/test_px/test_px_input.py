@@ -756,3 +756,36 @@ def test_no_futurewarning():
         warn for warn in warn_list if issubclass(warn.category, FutureWarning)
     ]
     assert len(future_warnings) == 0, "FutureWarning(s) raised!"
+
+
+def test_wrong_column_name_in_list(constructor):  # issue 4040
+    df = constructor(dict(x=[1, 2, 3], data1=[1, 4, 9], data2=[1, 8, 27]))
+    # a typo in a list of column names used to raise a misleading
+    # "All arguments should have the same length" error
+    with pytest.raises(ValueError) as err_msg:
+        px.line(df, x="x", y=["data1", "Data2"])
+    msg = str(err_msg.value)
+    assert "Value of 'y' looks like a list of column names" in msg
+    assert "'Data2' is not the name of a column in 'data_frame'" in msg
+    assert "same length" not in msg
+    if isinstance(df, pd.DataFrame):
+        # without x, y is compared with the length of the index
+        with pytest.raises(ValueError, match="'Data2' is not the name of a column"):
+            px.line(df, y=["data1", "Data2"])
+    # all names wrong
+    with pytest.raises(ValueError, match="'Data1', 'Data2' are not names of columns"):
+        px.line(df, x="x", y=["Data1", "Data2"])
+
+
+def test_list_of_strings_as_values_with_data_frame():
+    # lists of strings whose length matches are still treated as data
+    df = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6]))
+    fig = px.scatter(df, x=["u", "v", "w"], y="b")
+    assert list(fig.data[0].x) == ["u", "v", "w"]
+    fig = px.scatter(df, x=["u", "v"], y=["w", "z"])
+    assert list(fig.data[0].y) == ["w", "z"]
+    # even if some of the strings are also column names
+    fig = px.scatter(df, x=["a", "u"], y=[1, 2])
+    assert list(fig.data[0].x) == ["a", "u"]
+    fig = px.histogram(df, x=["a", "u"])
+    assert list(fig.data[0].x) == ["a", "u"]

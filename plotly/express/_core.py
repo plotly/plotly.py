@@ -1188,6 +1188,39 @@ def _is_col_list(columns, arg, is_pd_like, native_namespace):
     return True
 
 
+def _check_col_list_typos(field, argument, df_input, length):
+    """Raise a helpful error if `argument` looks like a list of column names of
+    `df_input` (e.g. `y=["a", "b"]`) but some of them are not columns, instead of
+    letting it be treated as a list of values with a confusing length error.
+    `length` is the length of the previously-processed arguments (0 if none).
+    """
+    if (
+        not isinstance(argument, (list, tuple))
+        or len(argument) == 0
+        or not all(isinstance(c, str) for c in argument)
+    ):
+        return
+    missing = [c for c in argument if c not in df_input.columns]
+    if not missing or len(argument) == len(df_input):
+        return
+    # Only raise where a length error would be raised anyway, so that lists of
+    # strings used as data keep working even if some of them match column names
+    if length and len(argument) != length:
+        raise ValueError(
+            "Value of '%s' looks like a list of column names, but %s %s in "
+            "'data_frame'. Expected one of %s but received: %s"
+            % (
+                field,
+                ", ".join(repr(c) for c in missing),
+                "is not the name of a column"
+                if len(missing) == 1
+                else "are not names of columns",
+                str(list(df_input.columns)),
+                list(argument),
+            )
+        )
+
+
 def _isinstance_listlike(x):
     """Returns True if x is an iterable which can be transformed into a pandas Series,
     False for the other types of possible values of a `hover_data` dict.
@@ -1420,6 +1453,9 @@ def process_args_into_dataframe(
                             col_name = argument.name
                 if col_name is None:  # numpy array, list...
                     col_name = _check_name_not_reserved(field, reserved_names)
+
+                if df_provided and field_name in ("x", "y"):
+                    _check_col_list_typos(field, argument, df_input, length)
 
                 if length and (len_arg := len(argument)) != length:
                     raise ValueError(
