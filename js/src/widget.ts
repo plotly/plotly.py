@@ -1149,12 +1149,6 @@ export class FigureView {
     if (data.hasOwnProperty("range")) {
       // Box selection - preserve all subplot-specific axis keys (x, x2, x3, ... and y, y2, y3, ...)
       var rangeData = data["range"];
-      // Verify we have at least an x and y range (in any subplot)
-      var hasXRange = Object.keys(rangeData || {}).some((key: string) => /^x\d*$/.test(key));
-      var hasYRange = Object.keys(rangeData || {}).some((key: string) => /^y\d*$/.test(key));
-      if (!hasXRange || !hasYRange) {
-        return null;
-      }
       selectorObject = {
         type: "box",
         selector_state: rangeData,
@@ -1162,12 +1156,6 @@ export class FigureView {
     } else if (data.hasOwnProperty("lassoPoints")) {
       // Lasso selection - preserve all subplot-specific axis keys
       var lassoData = data["lassoPoints"];
-      // Verify we have at least an x and y coordinate array (in any subplot)
-      var hasXCoords = Object.keys(lassoData || {}).some((key: string) => /^x\d*$/.test(key));
-      var hasYCoords = Object.keys(lassoData || {}).some((key: string) => /^y\d*$/.test(key));
-      if (!hasXCoords || !hasYCoords) {
-        return null;
-      }
       selectorObject = {
         type: "lasso",
         selector_state: lassoData,

@@ -9,6 +9,33 @@ from .serializers import custom_serializers
 import anywidget
 
 
+def _selector_for_trace(selector_data, trace):
+    """
+    Return the selection as seen from one trace.
+
+    Plotly.js keys the payload by axis id, so a selection in the second
+    subplot arrives as {"x2": [...], "y2": [...]}. A trace drawn on another
+    subplot gets None, because that trace was not selected.
+    """
+    state = selector_data["selector_state"]
+    xaxis = getattr(trace, "xaxis", None) or "x"
+    yaxis = getattr(trace, "yaxis", None) or "y"
+
+    # "xrange"/"yrange" and "xs"/"ys" come from an older frontend bundle.
+    selector_type = selector_data["type"]
+    if selector_type == "box":
+        return BoxSelector(
+            xrange=state.get("xrange", state.get(xaxis)),
+            yrange=state.get("yrange", state.get(yaxis)),
+        )
+    elif selector_type == "lasso":
+        return LassoSelector(
+            xs=state.get("xs", state.get(xaxis)),
+            ys=state.get("ys", state.get(yaxis)),
+        )
+    raise ValueError("Unsupported selector type: %s" % selector_type)
+
+
 class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     """
     Base class for FigureWidget. The FigureWidget class is code-generated as a
@@ -651,18 +678,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
 
         # Build Selector Object
         # ---------------------
-        if callback_data.get("selector", None):
-            selector_data = callback_data["selector"]
-            selector_type = selector_data["type"]
-            selector_state = selector_data["selector_state"]
-            if selector_type == "box":
-                selector = BoxSelector(**selector_state)
-            elif selector_type == "lasso":
-                selector = LassoSelector(**selector_state)
-            else:
-                raise ValueError("Unsupported selector type: %s" % selector_type)
-        else:
-            selector = None
+        selector_data = callback_data.get("selector", None)
 
         # Build Input Device State Object
         # -------------------------------
@@ -710,6 +726,9 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
             elif event_type == "plotly_unhover":
                 trace._dispatch_on_unhover(points, state)
             elif event_type == "plotly_selected":
+                selector = (
+                    _selector_for_trace(selector_data, trace) if selector_data else None
+                )
                 trace._dispatch_on_selection(points, selector)
             elif event_type == "plotly_deselect":
                 trace._dispatch_on_deselect(points)
