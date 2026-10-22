@@ -995,7 +995,13 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
             ):
                 if "marker" not in trace_spec.trace_patch:
                     trace_spec.trace_patch["marker"] = dict()
-                first_default_color = args["color_continuous_scale"][0]
+                # color_continuous_scale may be a named scale (e.g. "Viridis") or a
+                # list of [position, color] pairs, so normalize it before picking
+                # the first color
+                colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
+                first_default_color = colorscale_validator.validate_coerce(
+                    args["color_continuous_scale"]
+                )[0][1]
                 trace_spec.trace_patch["marker"]["color"] = first_default_color
             result.append(trace_spec)
 
