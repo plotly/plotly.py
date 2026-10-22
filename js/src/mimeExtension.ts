@@ -3,7 +3,7 @@
 
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { Widget } from '@lumino/widgets';
-import type PlotlyType from "plotly.js";
+import type * as PlotlyType from "plotly.js";
 
 import { Message } from "@lumino/messaging";
 
@@ -28,6 +28,11 @@ interface IPlotlySpec {
   layout: PlotlyType.Layout;
   frames?: PlotlyType.Frame[];
 }
+
+// plotly.js emits "plotly_webglcontextlost" but doesn't declare it
+type PlotlyGraphDiv = PlotlyType.PlotlyHTMLElement & {
+  on(event: "plotly_webglcontextlost", callback: () => void): void;
+};
 
 export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   /**
@@ -163,7 +168,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
         }
 
         // Handle webgl context lost events
-        (<PlotlyType.PlotlyHTMLElement>this.node).on(
+        (<PlotlyGraphDiv>this.node).on(
           "plotly_webglcontextlost",
           () => {
             const png_data = <string>model.data["image/png"];
