@@ -822,19 +822,25 @@ The row_titles argument to make_subplots must be a list or tuple
 
     layout["annotations"] = plot_title_annotations
 
+    def _title_domain(r, c, span_key):
+        # Domain used to place a row/column title over grid cell (r, c). Use the
+        # subplot's own domain when it covers exactly this cell along the title's
+        # axis. If the cell is empty (e.g. covered by another subplot's colspan or
+        # rowspan) or the subplot spans several rows/columns, fall back to the
+        # cell's grid geometry so every title stays aligned with its own row/column.
+        spec = specs[r][c]
+        if spec is not None and spec[span_key] == 1:
+            return domains_grid[r][c]
+        x_s, y_s = grid[r][c]
+        height = heights[r] if row_dir > 0 else heights[-1 - r]
+        return [[x_s, x_s + widths[c]], [y_s, y_s + height]]
+
     # Add column titles
     if column_titles:
+        edge_row = rows - 1 if row_dir > 0 else 0
         domains_list = []
-        if row_dir > 0:
-            for c in range(cols):
-                domain_pair = domains_grid[-1][c]
-                if domain_pair:
-                    domains_list.extend(domain_pair)
-        else:
-            for c in range(cols):
-                domain_pair = domains_grid[0][c]
-                if domain_pair:
-                    domains_list.extend(domain_pair)
+        for c in range(cols):
+            domains_list.extend(_title_domain(edge_row, c, "colspan"))
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
@@ -846,9 +852,7 @@ The row_titles argument to make_subplots must be a list or tuple
     if row_titles:
         domains_list = []
         for r in range(rows):
-            domain_pair = domains_grid[r][-1]
-            if domain_pair:
-                domains_list.extend(domain_pair)
+            domains_list.extend(_title_domain(r, cols - 1, "rowspan"))
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
