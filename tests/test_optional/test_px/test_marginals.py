@@ -204,3 +204,29 @@ def test_unsupported_marginal_raises_clear_error():  # issue 4654
         px.scatter(x=[1, 2, 3], y=[2, 3, 4], marginal_y="density")
     with pytest.raises(ValueError, match="Supported marginal plot types"):
         px.histogram(x=[1, 2, 3], marginal="density")
+
+
+@pytest.mark.parametrize(
+    "color_continuous_scale, expected_color",
+    [
+        ("Viridis", px.colors.sequential.Viridis[0]),
+        ("magma", px.colors.sequential.Magma[0]),
+        ("Viridis_r", px.colors.sequential.Viridis[-1]),
+        (["red", "blue"], "red"),
+        ([[0, "red"], [1, "blue"]], "red"),
+    ],
+)
+@pytest.mark.parametrize("marginal", ["histogram", "box", "violin", "rug"])
+def test_marginal_color_with_continuous_color_scale(
+    color_continuous_scale, expected_color, marginal
+):  # issue 2059
+    fig = px.scatter(
+        x=[1, 2, 3],
+        y=[2, 3, 4],
+        color=[1, 2, 3],
+        marginal_x=marginal,
+        marginal_y=marginal,
+        color_continuous_scale=color_continuous_scale,
+    )
+    assert fig.data[1].marker.color == expected_color
+    assert fig.data[2].marker.color == expected_color
