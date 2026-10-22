@@ -1,6 +1,7 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
+from numbers import Number
 from ._special_inputs import IdentityMap, Constant, Range
 from .trendline_functions import ols, lowess, rolling, expanding, ewm
 
@@ -44,7 +45,11 @@ renameable_group_attrables = [
     "pattern_shape",  # renamed to marker.pattern.shape in infer_config
 ]
 all_attrables = (
-    direct_attrables + array_attrables + group_attrables + renameable_group_attrables
+    direct_attrables
+    + array_attrables
+    + group_attrables
+    + renameable_group_attrables
+    + ["opacity"]  # only refers to data when it isn't a number, see infer_config
 )
 
 cartesians = [go.Scatter, go.Scattergl, go.Bar, go.Funnel, go.Box, go.Violin]
@@ -352,6 +357,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 trace_patch["marker"]["sizemode"] = "area"
                 trace_patch["marker"]["sizeref"] = sizeref
                 mapping_labels[attr_label] = "%{marker.size}"
+            elif attr_name == "opacity":
+                if "marker" not in trace_patch:
+                    trace_patch["marker"] = dict()
+                trace_patch["marker"]["opacity"] = trace_data.get_column(attr_value)
             elif attr_name == "marginal_x":
                 if trace_spec.constructor == go.Histogram and args.get("z") is None:
                     mapping_labels["count"] = "%{y}"
@@ -1313,6 +1322,8 @@ def process_args_into_dataframe(
             length = len(df_output[next(iter(df_output))]) if len(df_output) else 0
             if argument is None:
                 continue
+            if field_name == "opacity" and isinstance(argument, Number):
+                continue  # a number is one opacity for all marks, not a column
             col_name = None
             # Case of multiindex
             if is_pd_like and isinstance(argument, native_namespace.MultiIndex):
@@ -2373,6 +2384,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             go.Funnelarea,
         ]:
             trace_patch["opacity"] = args["opacity"]
+        elif isinstance(args["opacity"], str):
+            # values from a column are split along with the rest of the data,
+            # so that each trace gets the opacities of its own marks
+            attrs.append("opacity")
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
     if (

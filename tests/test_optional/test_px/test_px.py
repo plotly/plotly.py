@@ -382,6 +382,61 @@ def test_marginal_ranges(backend):
     assert fig.layout.yaxis3.range is None
 
 
+@pytest.mark.parametrize(
+    "fn,kwargs",
+    [
+        (px.scatter, dict(x="x", y="y")),
+        (px.bar, dict(x="x", y="y")),
+        (px.scatter_matrix, dict(dimensions=["x", "y"])),
+    ],
+)
+def test_opacity_values_split_by_color(constructor, fn, kwargs):
+    # https://github.com/plotly/plotly.py/issues/4580
+    data = dict(
+        x=[1, 2, 3, 4, 5, 6],
+        y=[2, 3, 1, 5, 4, 6],
+        color=["a", "b", "a", "b", "a", "b"],
+    )
+    opacity = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+    fig = fn(constructor(data), color="color", opacity=opacity, **kwargs)
+    assert len(fig.data) == 2
+    for trace in fig.data:
+        expected = [o for o, c in zip(opacity, data["color"]) if c == trace.name]
+        assert list(trace.marker.opacity) == expected
+
+
+def test_opacity_column_split_by_facets(constructor):
+    data = dict(
+        x=[1, 2, 3, 4, 5, 6],
+        y=[2, 3, 1, 5, 4, 6],
+        row=["p", "p", "q", "q", "p", "q"],
+        col=["u", "v", "v", "u", "u", "v"],
+        alpha=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+    )
+    fig = px.scatter(
+        constructor(data),
+        x="x",
+        y="y",
+        facet_row="row",
+        facet_col="col",
+        opacity="alpha",
+    )
+    assert len(fig.data) == 4
+    alpha_by_x = dict(zip(data["x"], data["alpha"]))
+    for trace in fig.data:
+        assert list(trace.marker.opacity) == [alpha_by_x[x] for x in trace.x]
+
+
+@pytest.mark.parametrize("opacity", [0.5, 1, np.float64(0.25)])
+def test_opacity_scalar(opacity):
+    # a number applies to every trace, even if a column has the same name
+    df = pd.DataFrame({0: [1, 2, 3], 1: [3, 1, 2], "color": ["a", "b", "a"]})
+    fig = px.scatter(df, x=0, y=1, color="color", opacity=opacity)
+    assert len(fig.data) == 2
+    for trace in fig.data:
+        assert trace.marker.opacity == opacity
+
+
 def test_render_mode(backend):
     df = nw.from_native(px.data.gapminder(return_type=backend))
     df2007 = df.filter(nw.col("year") == 2007)
