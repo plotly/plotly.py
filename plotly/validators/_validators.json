@@ -4110,7 +4110,7 @@
                 }
             ]
         },
-        "superclass": "InfoArrayValidator"
+        "superclass": "MethodArgsValidator"
     },
     "layout.updatemenu.button.args": {
         "params": {
@@ -4133,7 +4133,7 @@
                 }
             ]
         },
-        "superclass": "InfoArrayValidator"
+        "superclass": "MethodArgsValidator"
     },
     "layout.updatemenu.borderwidth": {
         "params": {
@@ -8327,7 +8327,7 @@
                 }
             ]
         },
-        "superclass": "InfoArrayValidator"
+        "superclass": "MethodArgsValidator"
     },
     "layout.slider.pad": {
         "params": {
