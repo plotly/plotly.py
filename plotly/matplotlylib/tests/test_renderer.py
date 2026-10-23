@@ -1550,3 +1550,23 @@ def test_quiver_tip_pivot_converts():
     assert abs(anns[0].y - pivot[1]) < 1e-6
     assert abs(anns[0].ax + vector_px[0]) < 1e-6
     assert abs(anns[0].ay - vector_px[1]) < 1e-6
+
+
+def test_quiver_log_axis_arrows_start_at_data_points():
+    """Quiver arrows on a log x axis start at their data points, with the
+    annotation x given in log10 units as plotly log axes expect."""
+    fig, ax = plt.subplots()
+    ax.quiver([1, 10, 100], [1, 2, 3], [1, 1, 1], [1, 0, 1])
+    ax.set_xscale("log")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert plotly_fig.layout.xaxis.type == "log"
+    assert len(anns) == 3
+    for ann, log_x, y in zip(anns, [0, 1, 2], [1, 2, 3]):
+        # the annotation sits at the arrow tip, a short way from the tail
+        assert log_x <= ann.x < log_x + 0.5
+        assert y <= ann.y < y + 0.5
+        assert abs(ann.ax) < 100
+        assert abs(ann.ay) < 100

@@ -863,9 +863,11 @@ class PlotlyRenderer(Renderer):
         """Draw a matplotlib Quiver collection as layout annotations with
         arrows. The exporter reports the arrow path vertices in pixels
         relative to the pivot point, and the pivot positions as data
-        coordinates. The annotation arrowhead lands on the annotation
-        position, so each annotation is anchored at the arrow tip in data
-        coordinates and offset back to the tail in pixels."""
+        coordinates, or as display pixels when the offset transform is
+        nonlinear (e.g. on log axes). The annotation arrowhead lands on the
+        annotation position, so each annotation is anchored at the arrow tip
+        in data coordinates (log10 of the data on plotly log axes) and
+        offset back to the tail in pixels."""
         q = props["mplobj"]
         trans = q.get_offset_transform()
         ax = self.current_mpl_ax
@@ -873,12 +875,18 @@ class PlotlyRenderer(Renderer):
         box_max = np.asarray(trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
         axis_ref = str(self.axis_ct)
+        log_x = self.plotly_fig["layout"]["xaxis" + axis_ref]["type"] == "log"
+        log_y = self.plotly_fig["layout"]["yaxis" + axis_ref]["type"] == "log"
+        pivots_in_pixels = props["offset_coordinates"] == "display"
         annotations = []
         for i, (pivot, path) in enumerate(zip(props["offsets"], props["paths"])):
             verts = np.asarray(path[0], dtype=float)
             if len(verts) < 7 or not np.all(np.isfinite(pivot)):
                 continue
-            pivot_px = np.asarray(trans.transform(pivot))
+            if pivots_in_pixels:
+                pivot_px = np.asarray(pivot, dtype=float)
+            else:
+                pivot_px = np.asarray(trans.transform(pivot))
             # the tail is the midpoint of the tail cap, the tip is vertex 3
             tail_vertex = (verts[0] + verts[6]) / 2
             tip_vertex = verts[3]
@@ -903,8 +911,8 @@ class PlotlyRenderer(Renderer):
             arrowsize = max(0.3, head_width / (5.0 * arrowwidth))
             annotations.append(
                 go.layout.Annotation(
-                    x=tip[0],
-                    y=tip[1],
+                    x=np.log10(tip[0]) if log_x else tip[0],
+                    y=np.log10(tip[1]) if log_y else tip[1],
                     xref="x{0}".format(axis_ref),
                     yref="y{0}".format(axis_ref),
                     text="",
