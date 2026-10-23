@@ -1226,6 +1226,8 @@ def test_open_polygon_outline_ends_at_last_vertex():
             [[0, 0], [1, 0], [1, 1]], closed=False, fill=False, edgecolor="k"
         )
     )
+    ax.set_xlim(-1, 2)
+    ax.set_ylim(-1, 2)
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
