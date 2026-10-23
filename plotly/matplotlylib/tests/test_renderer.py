@@ -1269,7 +1269,7 @@ def test_fill_between_outline_ends_at_first_vertex_once():
 
 def test_unfilled_polygons_export_outline_only():
     """Polygons without a face (step histograms, fill=False, facecolor
-    "none") export as outline-only traces."""
+    "none") export as outline-only traces, with no fill color."""
     fig, ax = plt.subplots()
     ax.hist([1, 2, 2, 3], bins=3, histtype="step")
     ax.add_patch(
@@ -1283,6 +1283,7 @@ def test_unfilled_polygons_export_outline_only():
 
     assert len(plotly_fig.data) == 3
     assert [t.fill for t in plotly_fig.data] == [None, None, None]
+    assert [t.fillcolor for t in plotly_fig.data] == [None, None, None]
 
 
 def test_only_visible_fill_polygons_export():

@@ -945,6 +945,7 @@ class PlotlyRenderer(Renderer):
                 y.append(None)
             x.extend(self._convert_x_dates([v[0] for v in sub]))
             y.extend(v[1] for v in sub)
+        filled = facecolor != "none"
         self.plotly_fig.add_trace(
             go.Scatter(
                 name=name,
@@ -955,8 +956,8 @@ class PlotlyRenderer(Renderer):
                 line=go.scatter.Line(
                     color=_export_color(edgecolor), width=linewidth, dash=dash
                 ),
-                fill="toself" if facecolor != "none" else None,
-                fillcolor=_export_color(facecolor),
+                fill="toself" if filled else None,
+                fillcolor=_export_color(facecolor) if filled else None,
                 xaxis="x{0}".format(self.axis_ct),
                 yaxis="y{0}".format(self.axis_ct),
             )
