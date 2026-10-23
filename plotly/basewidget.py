@@ -64,7 +64,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     # appropriate _py2js_* property and then immediately assigning None to the
     # property.
     #
-    # See JSDoc comments in the FigureModel class in js/src/Figure.js for
+    # See JSDoc comments in the FigureModel class in js/src/widget.ts for
     # detailed descriptions of the messages.
     _py2js_addTraces = Dict(allow_none=True).tag(sync=True, **custom_serializers)
     _py2js_restyle = Dict(allow_none=True).tag(sync=True, **custom_serializers)
@@ -88,7 +88,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     # responsible for setting the message property to None after retreiving
     # the message data.
     #
-    # See JSDoc comments in the FigureModel class in js/src/Figure.js for
+    # See JSDoc comments in the FigureModel class in js/src/widget.ts for
     # detailed descriptions of the messages.
     _js2py_traceDeltas = Dict(allow_none=True).tag(sync=True, **custom_serializers)
     _js2py_layoutDelta = Dict(allow_none=True).tag(sync=True, **custom_serializers)
