@@ -1620,3 +1620,20 @@ def test_quiver_arrows_without_face_or_edge_width_are_transparent():
 
     anns = plotly_fig.layout.annotations
     assert [a.arrowcolor for a in anns] == ["rgba(0,0,0,0)"] * 2
+
+
+def test_quiver_date_axis_arrows_use_date_strings():
+    """Quiver arrows on a date x axis give their annotation x as date strings
+    on the day of each arrow."""
+    dates = [datetime.datetime(2020, 1, day) for day in (1, 2, 3)]
+    fig, ax = plt.subplots()
+    ax.quiver(dates, [0, 1, 2], [1, 1, 1], [1, 0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert plotly_fig.layout.xaxis.type == "date"
+    assert len(anns) == 3
+    for ann, day in zip(anns, ["2020-01-01", "2020-01-02", "2020-01-03"]):
+        assert isinstance(ann.x, str)
+        assert ann.x.startswith(day)

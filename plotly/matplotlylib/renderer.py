@@ -923,7 +923,7 @@ class PlotlyRenderer(Renderer):
             arrowsize = max(0.3, head_width / (5.0 * arrowwidth))
             annotations.append(
                 go.layout.Annotation(
-                    x=np.log10(tip[0]) if log_x else tip[0],
+                    x=np.log10(tip[0]) if log_x else self._convert_x_dates([tip[0]])[0],
                     y=np.log10(tip[1]) if log_y else tip[1],
                     xref="x{0}".format(axis_ref),
                     yref="y{0}".format(axis_ref),
