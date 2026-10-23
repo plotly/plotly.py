@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
 - Fix `mpl_to_plotly` conversion of matplotlib contour lines and line collections: close contour rings ending with `Z` codes, support dash styles, convert date x-axes, separate disjoint subpaths with `None` separators, hide line collection traces from the legend by default, and group consecutive same-style lines into single traces [[#5770](https://github.com/plotly/plotly.py/pull/5770)], with thanks to @robertoffmoura for the contribution!
 - Fix serialization of box/lasso select data for figures with multiple subplots [[#5710](https://github.com/plotly/plotly.py/pull/5710)], with thanks to @flpi-sun for the contribution!
+- Fix `px.ecdf` counting rows with a missing value as observations, so the curve no longer stops short of 1 (or 100%) and no longer adds a point at a missing x [[#5842](https://github.com/plotly/plotly.py/pull/5842)]
 
 ## [7.1.0] - 2026-09-15
 

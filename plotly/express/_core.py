@@ -2710,6 +2710,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 base = args["x"] if args["orientation"] == "v" else args["y"]
                 var = args["x"] if args["orientation"] == "h" else args["y"]
                 ascending = args.get("ecdfmode", "standard") != "reversed"
+                # missing values are not observations: exclude them from the ECDF
+                group = group.filter(~nw.col(base).is_null())
                 group = group.sort(by=base, descending=not ascending, nulls_last=True)
                 group_sum = group.get_column(
                     var
