@@ -1192,6 +1192,20 @@ def test_fill_with_legend_label():
     assert unlabeled_fill.showlegend is False
 
 
+@pytest.mark.parametrize(
+    "linestyle, dash",
+    [("-", "solid"), ("--", "dash"), (":", "dot"), ("-.", "dashdot")],
+)
+def test_fill_outline_exports_line_style(linestyle, dash):
+    """plt.fill polygon outlines export their matplotlib line style as dash."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 1], [0, 0, 1], edgecolor="k", linewidth=3, linestyle=linestyle)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].line.dash == dash
+
+
 def test_custom_date_xtickvals_given_as_numbers_are_converted():
     """Custom date ticks given as matplotlib date numbers must be converted
     to date strings."""

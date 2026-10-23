@@ -858,7 +858,14 @@ class PlotlyRenderer(Renderer):
         flush()
 
     def _add_filled_trace(
-        self, verts, facecolor, edgecolor, linewidth, name=None, showlegend=None
+        self,
+        verts,
+        facecolor,
+        edgecolor,
+        linewidth,
+        dash=None,
+        name=None,
+        showlegend=None,
     ):
         """Add a filled scatter trace outlining `verts` on the current axes."""
         self.plotly_fig.add_trace(
@@ -868,7 +875,9 @@ class PlotlyRenderer(Renderer):
                 x=self._convert_x_dates([v[0] for v in verts]),
                 y=[v[1] for v in verts],
                 mode="lines",
-                line=go.scatter.Line(color=_export_color(edgecolor), width=linewidth),
+                line=go.scatter.Line(
+                    color=_export_color(edgecolor), width=linewidth, dash=dash
+                ),
                 fill="toself",
                 fillcolor=_export_color(facecolor),
                 xaxis="x{0}".format(self.axis_ct),
@@ -995,6 +1004,7 @@ class PlotlyRenderer(Renderer):
             facecolor=style["facecolor"],
             edgecolor=style["edgecolor"],
             linewidth=style["edgewidth"],
+            dash=mpltools.convert_dash(style["dasharray"]),
             name=label,
             showlegend=showlegend,
         )
