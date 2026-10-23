@@ -982,8 +982,7 @@ class PlotlyRenderer(Renderer):
         verts = props["data"]
         facecolor = _export_color(style["facecolor"])
         edgecolor = _export_color(style["edgecolor"])
-        mplobj = props.get("mplobj")
-        label = mplobj.get_label() if mplobj is not None else None
+        label = props["mplobj"].get_label()
         if not label or (isinstance(label, str) and label.startswith("_")):
             label = None
             showlegend = False
