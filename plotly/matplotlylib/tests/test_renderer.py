@@ -1247,6 +1247,24 @@ def test_fill_between_outline_ends_at_first_vertex_once():
     assert plotly_fig.data[0].y == (1, 0, 1, 0, 1, 1, 2, 1)
 
 
+def test_unfilled_polygons_export_outline_only():
+    """Polygons without a face (step histograms, fill=False, facecolor
+    "none") export as outline-only traces."""
+    fig, ax = plt.subplots()
+    ax.hist([1, 2, 2, 3], bins=3, histtype="step")
+    ax.add_patch(
+        matplotlib.patches.Polygon(
+            [[1, 0.5], [2, 2.5], [3, 0.5]], fill=False, edgecolor="g"
+        )
+    )
+    ax.fill([0, 1, 1], [0, 0, 1], facecolor="none", edgecolor="k")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 3
+    assert [t.fill for t in plotly_fig.data] == [None, None, None]
+
+
 def test_custom_date_xtickvals_given_as_numbers_are_converted():
     """Custom date ticks given as matplotlib date numbers must be converted
     to date strings."""

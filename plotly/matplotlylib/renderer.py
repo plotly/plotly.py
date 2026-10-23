@@ -894,7 +894,11 @@ class PlotlyRenderer(Renderer):
         name=None,
         showlegend=None,
     ):
-        """Add a filled scatter trace outlining a path on the current axes."""
+        """Add a scatter trace outlining a path on the current axes.
+
+        The path is filled with `facecolor`; a facecolor of "none" gives an
+        outline-only trace.
+        """
         verts = _close_subpaths(verts, codes)
         self.plotly_fig.add_trace(
             go.Scatter(
@@ -906,7 +910,7 @@ class PlotlyRenderer(Renderer):
                 line=go.scatter.Line(
                     color=_export_color(edgecolor), width=linewidth, dash=dash
                 ),
-                fill="toself",
+                fill="toself" if facecolor != "none" else None,
                 fillcolor=_export_color(facecolor),
                 xaxis="x{0}".format(self.axis_ct),
                 yaxis="y{0}".format(self.axis_ct),
