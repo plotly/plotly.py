@@ -1591,3 +1591,32 @@ def test_quiver_axes_coordinates_arrows_start_at_their_positions():
         assert start <= ann.y < start + 2
         assert abs(ann.ax) < 100
         assert abs(ann.ay) < 100
+
+
+def test_quiver_outline_arrows_use_edge_color():
+    """Quiver arrows drawn as outlines (facecolor "none") take their arrow
+    color from the edge color."""
+    fig, ax = plt.subplots()
+    ax.quiver(
+        [0, 1], [0, 1], [1, 1], [1, 0], facecolor="none", edgecolor="r", linewidth=1
+    )
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert len(anns) == 2
+    assert [a.arrowcolor for a in anns] == ["rgba(255,0,0,1.0)"] * 2
+
+
+def test_quiver_arrows_without_face_or_edge_width_are_transparent():
+    """Quiver arrows with facecolor "none" and zero edge width, which are
+    invisible in matplotlib, get a transparent arrow color."""
+    fig, ax = plt.subplots()
+    ax.quiver(
+        [0, 1], [0, 1], [1, 1], [1, 0], facecolor="none", edgecolor="r", linewidth=0
+    )
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert [a.arrowcolor for a in anns] == ["rgba(0,0,0,0)"] * 2

@@ -880,6 +880,9 @@ class PlotlyRenderer(Renderer):
         box_min = np.asarray(data_trans.transform((ax.get_xlim()[0], ax.get_ylim()[0])))
         box_max = np.asarray(data_trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
+        face_rgba = np.asarray(props["styles"]["facecolor"], dtype=float).reshape(-1, 4)
+        edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
+        linewidths = np.atleast_1d(props["styles"]["linewidth"])
         axis_ref = str(self.axis_ct)
         log_x = self.plotly_fig["layout"]["xaxis" + axis_ref]["type"] == "log"
         log_y = self.plotly_fig["layout"]["yaxis" + axis_ref]["type"] == "log"
@@ -898,7 +901,14 @@ class PlotlyRenderer(Renderer):
             tip_px = np.clip(pivot_px + tip_vertex, box_min, box_max)
             tip = data_trans.inverted().transform(tip_px)
             tail_px = pivot_px + tail_vertex
-            color = _per_path(facecolors, i, "rgba(0,0,0,0)")
+            # plotly arrows have a single color: the face color, or the edge
+            # color for arrows drawn only as outlines
+            if _per_path(face_rgba, i, (0, 0, 0, 0))[3] > 0:
+                color = _per_path(facecolors, i, "rgba(0,0,0,0)")
+            elif _per_path(linewidths, i, 0) > 0:
+                color = _per_path(edgecolors, i, "rgba(0,0,0,0)")
+            else:
+                color = "rgba(0,0,0,0)"
             length = np.hypot(*arrow_vector)
             if length > 0:
                 along = arrow_vector / length
