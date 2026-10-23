@@ -736,7 +736,7 @@ class PlotlyRenderer(Renderer):
             "middle",
             "tip",
         ):
-            self.msg += "    Drawing a quiver as arrow annotations\n"
+            self.msg += "    Drawing a quiver as quiver traces\n"
             self._draw_quiver(props)
         elif props["offset_coordinates"] == "data":
             markerstyle = mpltools.get_markerstyle_from_collection(props)
@@ -860,15 +860,14 @@ class PlotlyRenderer(Renderer):
         flush()
 
     def _draw_quiver(self, props):
-        """Draw a matplotlib Quiver collection as layout annotations with
-        arrows. The exporter reports the arrow path vertices in pixels
-        relative to the pivot point, and the pivot positions in data, axes,
-        figure or display coordinates, as given by "offset_coordinates"
+        """Draw a matplotlib Quiver collection as plotly quiver traces, one
+        per arrow color. The exporter reports the arrow path vertices in
+        pixels relative to the pivot point, and the pivot positions in data,
+        axes, figure or display coordinates, as given by "offset_coordinates"
         (display pixels when the offset transform is nonlinear, e.g. on log
-        axes). The annotation arrowhead lands on the annotation position, so
-        each annotation is anchored at the arrow tip in data coordinates
-        (log10 of the data on plotly log axes) and offset back to the tail in
-        pixels."""
+        axes). Each arrow is anchored at its tail in data coordinates, with
+        u/v reaching its tip in axis units: data units on linear axes,
+        decades on log axes and milliseconds on date axes."""
         ax = self.current_mpl_ax
         pivot_trans = {
             "data": ax.transData,
@@ -876,9 +875,7 @@ class PlotlyRenderer(Renderer):
             "figure": ax.figure.transFigure,
             "display": transforms.IdentityTransform(),
         }[props["offset_coordinates"]]
-        data_trans = ax.transData
-        box_min = np.asarray(data_trans.transform((ax.get_xlim()[0], ax.get_ylim()[0])))
-        box_max = np.asarray(data_trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
+        to_data = ax.transData.inverted()
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
         face_rgba = np.asarray(props["styles"]["facecolor"], dtype=float).reshape(-1, 4)
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
@@ -886,7 +883,9 @@ class PlotlyRenderer(Renderer):
         axis_ref = str(self.axis_ct)
         log_x = self.plotly_fig["layout"]["xaxis" + axis_ref]["type"] == "log"
         log_y = self.plotly_fig["layout"]["yaxis" + axis_ref]["type"] == "log"
-        annotations = []
+        arrows = {}  # arrow color -> (tails, tips) in data coordinates
+        shaft_width = 0.0
+        head_width = 0.0
         for i, (pivot, path) in enumerate(zip(props["offsets"], props["paths"])):
             verts = np.asarray(path[0], dtype=float)
             if len(verts) < 7 or not np.all(np.isfinite(pivot)):
@@ -895,12 +894,6 @@ class PlotlyRenderer(Renderer):
             # the tail is the midpoint of the tail cap, the tip is vertex 3
             tail_vertex = (verts[0] + verts[6]) / 2
             tip_vertex = verts[3]
-            arrow_vector = tip_vertex - tail_vertex
-            # matplotlib clips arrowheads at the axes box, so clamp the
-            # arrowhead position into the axes range the same way
-            tip_px = np.clip(pivot_px + tip_vertex, box_min, box_max)
-            tip = data_trans.inverted().transform(tip_px)
-            tail_px = pivot_px + tail_vertex
             # plotly arrows have a single color: the face color, or the edge
             # color for arrows drawn only as outlines
             if _per_path(face_rgba, i, (0, 0, 0, 0))[3] > 0:
@@ -909,35 +902,61 @@ class PlotlyRenderer(Renderer):
                 color = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             else:
                 color = "rgba(0,0,0,0)"
+            tails, tips = arrows.setdefault(color, ([], []))
+            tails.append(to_data.transform(pivot_px + tail_vertex))
+            tips.append(to_data.transform(pivot_px + tip_vertex))
+            arrow_vector = tip_vertex - tail_vertex
             length = np.hypot(*arrow_vector)
             if length > 0:
                 along = arrow_vector / length
                 perp = np.array([-along[1], along[0]])
-                shaft_width = abs(verts[1] @ perp) + abs(verts[5] @ perp)
-                head_width = abs(verts[2] @ perp) + abs(verts[4] @ perp)
+                shaft_width = max(
+                    shaft_width, abs(verts[1] @ perp) + abs(verts[5] @ perp)
+                )
+                head_width = max(
+                    head_width, abs(verts[2] @ perp) + abs(verts[4] @ perp)
+                )
+        line_width = max(0.1, shaft_width)
+        # plotly draws the head as two barbs 5.8 * arrowsize * line width long
+        # at 15 degrees to the shaft, stroked with the line width
+        arrowsize = max(
+            0.3,
+            (head_width - line_width) / (2 * 5.8 * line_width * np.sin(np.pi / 12)),
+        )
+        for color, (tails, tips) in arrows.items():
+            tails = np.array(tails)
+            tips = np.array(tips)
+            if log_x:
+                u = np.log10(tips[:, 0]) - np.log10(tails[:, 0])
+            elif self.x_is_mpl_date:
+                # matplotlib dates count days, plotly date axes milliseconds
+                u = (tips[:, 0] - tails[:, 0]) * 86400000
             else:
-                shaft_width = 1.0
-                head_width = 3.0
-            arrowwidth = max(0.1, shaft_width)
-            # plotly draws the head 5x arrowwidth wide per unit arrowsize
-            arrowsize = max(0.3, head_width / (5.0 * arrowwidth))
-            annotations.append(
-                go.layout.Annotation(
-                    x=np.log10(tip[0]) if log_x else self._convert_x_dates([tip[0]])[0],
-                    y=np.log10(tip[1]) if log_y else tip[1],
-                    xref="x{0}".format(axis_ref),
-                    yref="y{0}".format(axis_ref),
-                    text="",
-                    showarrow=True,
-                    ax=tail_px[0] - tip_px[0],
-                    ay=tip_px[1] - tail_px[1],
-                    arrowhead=2,
-                    arrowsize=arrowsize,
-                    arrowwidth=arrowwidth,
-                    arrowcolor=color,
+                u = tips[:, 0] - tails[:, 0]
+            if log_y:
+                v = np.log10(tips[:, 1]) - np.log10(tails[:, 1])
+            else:
+                v = tips[:, 1] - tails[:, 1]
+            self.plotly_fig.add_trace(
+                go.Quiver(
+                    x=self._convert_x_dates(list(tails[:, 0])),
+                    y=tails[:, 1],
+                    u=u,
+                    v=v,
+                    anchor="tail",
+                    arrowref="data",
+                    lengthmode="raw",
+                    lengthfactor=1,
+                    showlegend=False,
+                    marker=go.quiver.Marker(
+                        color=color,
+                        arrowsize=arrowsize,
+                        line=go.quiver.marker.Line(width=line_width),
+                    ),
+                    xaxis="x{0}".format(axis_ref),
+                    yaxis="y{0}".format(axis_ref),
                 )
             )
-        self.plotly_fig["layout"]["annotations"] += tuple(annotations)
         self.msg += "    Heck yeah, I drew that quiver\n"
 
     def _draw_filled_path_collection(self, props):

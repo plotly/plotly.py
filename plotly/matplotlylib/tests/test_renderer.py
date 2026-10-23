@@ -1394,9 +1394,21 @@ def test_mixed_style_lines_group_consecutive_matches():
         assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2
 
 
+def _quiver_traces(plotly_fig):
+    return [t for t in plotly_fig.data if t.type == "quiver"]
+
+
+def _arrow_px(q, i=0):
+    """Return the tail and tip of the i-th quiver arrow in pixels relative
+    to its pivot."""
+    verts = q.get_paths()[i].vertices
+    trans = q.get_transform()
+    return trans.transform((verts[0] + verts[6]) / 2), trans.transform(verts[3])
+
+
 def test_quiver_converts():
-    """Quiver arrows convert to layout annotations with arrows anchored at
-    the arrow tails, pointing to the arrow tips."""
+    """Quiver arrows convert to a quiver trace with each arrow anchored at
+    its tail and u/v reaching its tip in data units."""
     x = np.arange(-2, 2.5, 1.0)
     X, Y = np.meshgrid(x, x)
     U = np.ones_like(X)
@@ -1406,65 +1418,67 @@ def test_quiver_converts():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
-    assert len(anns) == X.size
-    assert anns[0].showarrow is True
-    assert anns[0].xref == "x"
-    assert anns[0].yref == "y"
-    # the annotation anchor (the arrowhead) sits at the arrow tip and the
-    # pixel offset points back to the tail
-    tip_px = q.get_transform().transform(q.get_paths()[0].vertices[3])
-    tail_px = q.get_offset_transform().transform(q.get_offsets()[0])
-    tip_data = q.get_offset_transform().inverted().transform(tail_px + tip_px)
-    assert abs(anns[0].x - tip_data[0]) < 1e-6
-    assert abs(anns[0].y - tip_data[1]) < 1e-6
-    assert abs(anns[0].ax + tip_px[0]) < 1e-6
-    assert abs(anns[0].ay - tip_px[1]) < 1e-6
-    assert tip_px[0] > 0
-    assert abs(tip_px[1]) < 1e-6
-    # no marker traces
-    assert all(t.mode != "markers" for t in plotly_fig.data)
-
-
-def test_quiver_alpha_rides_in_arrow_color():
-    """Quiver arrows with alpha export the alpha in the arrow color."""
-    fig, ax = plt.subplots()
-    ax.quiver([0], [0], [1], [0], alpha=0.5)
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-
-    anns = plotly_fig.layout.annotations
-    assert len(anns) == 1
-    assert anns[0].opacity is None
-    assert anns[0].arrowcolor == "rgba(0,0,0,0.5)"
+    traces = _quiver_traces(plotly_fig)
+    assert len(traces) == 1
+    trace = traces[0]
+    assert len(trace.x) == X.size
+    assert trace.xaxis == "x"
+    assert trace.yaxis == "y"
+    assert trace.anchor == "tail"
+    assert trace.arrowref == "data"
+    assert trace.lengthmode == "raw"
+    assert trace.lengthfactor == 1
+    assert plotly_fig.layout.annotations == ()
+    tail_px, tip_px = _arrow_px(q)
+    pivot_px = ax.transData.transform(q.get_offsets()[0])
+    tail = ax.transData.inverted().transform(pivot_px + tail_px)
+    tip = ax.transData.inverted().transform(pivot_px + tip_px)
+    assert abs(trace.x[0] - tail[0]) < 1e-6
+    assert abs(trace.y[0] - tail[1]) < 1e-6
+    assert abs(trace.u[0] - (tip[0] - tail[0])) < 1e-6
+    assert abs(trace.v[0] - (tip[1] - tail[1])) < 1e-6
+    assert trace.u[0] > 0
 
 
 def test_quiver_per_arrow_colors():
-    """Quiver arrows keep their per-arrow colors."""
+    """Quiver arrows of each color convert to their own quiver trace with
+    the same arrow sizes."""
     fig, ax = plt.subplots()
     ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], color=["red", "blue"], linewidths=[1, 2])
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
-    assert [a.arrowcolor for a in anns] == ["rgba(255,0,0,1.0)", "rgba(0,0,255,1.0)"]
-    assert anns[0].arrowwidth == anns[1].arrowwidth
-    assert anns[0].arrowsize == anns[1].arrowsize
+    traces = _quiver_traces(plotly_fig)
+    assert [t.marker.color for t in traces] == [
+        "rgba(255,0,0,1.0)",
+        "rgba(0,0,255,1.0)",
+    ]
+    assert [t.x for t in traces] == [pytest.approx((0,)), pytest.approx((1,))]
+    assert traces[0].marker.line.width == traces[1].marker.line.width
+    assert traces[0].marker.arrowsize == traces[1].marker.arrowsize
 
 
-def test_quiver_arrow_head_size_uses_headwidth():
-    """Quiver arrow heads use the quiver's headwidth ratio."""
+@pytest.mark.parametrize("headwidth", [3, 6])
+def test_quiver_arrow_sizes_match_shaft_and_head_widths(headwidth):
+    """Quiver arrows take matplotlib's shaft width as the line width, and
+    an arrowsize that gives plotly's head (two barbs 5.8 * arrowsize * line
+    width long at 15 degrees to the shaft, plus the line width) matplotlib's
+    head width."""
     fig, ax = plt.subplots()
-    ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], linewidths=[1, 4])
+    q = ax.quiver([0], [0], [1], [0], headwidth=headwidth)
 
     plotly_fig = tls.mpl_to_plotly(fig)
-    anns = plotly_fig.layout.annotations
-    assert anns[0].arrowsize == anns[1].arrowsize
 
-    fig2, ax2 = plt.subplots()
-    ax2.quiver([0, 1], [0, 0], [1, 1], [0, 0], headwidth=6)
-    anns2 = tls.mpl_to_plotly(fig2).layout.annotations
-    assert abs(anns2[0].arrowsize / anns[0].arrowsize - 2.0) < 1e-9
+    marker = _quiver_traces(plotly_fig)[0].marker
+    verts = q.get_transform().transform(q.get_paths()[0].vertices)
+    shaft_width = verts[1][1] - verts[5][1]
+    head_width = verts[2][1] - verts[4][1]
+    assert abs(marker.line.width - shaft_width) < 1e-6
+    plotly_head_width = (
+        2 * 5.8 * marker.arrowsize * marker.line.width * np.sin(np.pi / 12)
+        + marker.line.width
+    )
+    assert abs(plotly_head_width - head_width) < 1e-6
 
 
 def test_quiver_masked_vectors_convert():
@@ -1479,7 +1493,7 @@ def test_quiver_masked_vectors_convert():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    assert len(plotly_fig.layout.annotations) == 1
+    assert [len(t.x) for t in _quiver_traces(plotly_fig)] == [1]
 
 
 def test_quiver_nan_vectors_convert():
@@ -1489,17 +1503,17 @@ def test_quiver_nan_vectors_convert():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    assert len(plotly_fig.layout.annotations) == 1
+    assert [len(t.x) for t in _quiver_traces(plotly_fig)] == [1]
 
 
 def test_quiver_zero_vectors_convert():
-    """Quiver arrows with zero-length vectors convert without arrows."""
+    """A quiver of zero-length vectors converts to zero quiver traces."""
     fig, ax = plt.subplots()
     ax.quiver([0], [0], [0], [0])
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    assert len(plotly_fig.layout.annotations) == 0
+    assert _quiver_traces(plotly_fig) == []
 
 
 def test_quiver_nan_tails_convert():
@@ -1509,67 +1523,77 @@ def test_quiver_nan_tails_convert():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    assert len(plotly_fig.layout.annotations) == 1
+    assert [len(t.x) for t in _quiver_traces(plotly_fig)] == [1]
 
 
 def test_quiver_mid_pivot_converts():
-    """Quiver arrows with pivot 'mid' convert to annotations centered on the
-    grid points."""
+    """Quiver arrows with pivot 'mid' are centered on the grid points."""
     fig, ax = plt.subplots()
     q = ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], pivot="mid")
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
-    assert len(anns) == 2
-    tip_px = q.get_transform().transform(q.get_paths()[0].vertices[3])
-    pivot_px = q.get_offset_transform().transform(q.get_offsets()[0])
-    tip_data = q.get_offset_transform().inverted().transform(pivot_px + tip_px)
-    assert abs(anns[0].x - tip_data[0]) < 1e-6
-    assert abs(anns[0].y - tip_data[1]) < 1e-6
-    assert abs(anns[0].ax + 2 * tip_px[0]) < 1e-6
-    assert abs(anns[0].ay - 2 * tip_px[1]) < 1e-6
+    trace = _quiver_traces(plotly_fig)[0]
+    assert len(trace.x) == 2
+    for i in range(2):
+        center_x = trace.x[i] + trace.u[i] / 2
+        center_y = trace.y[i] + trace.v[i] / 2
+        assert abs(center_x - q.get_offsets()[i][0]) < 1e-6
+        assert abs(center_y - q.get_offsets()[i][1]) < 1e-6
+    assert trace.u[0] > 0
 
 
 def test_quiver_tip_pivot_converts():
-    """Quiver arrows with pivot 'tip' convert to annotations anchored at the
-    grid points."""
+    """Quiver arrows with pivot 'tip' end at the grid points."""
     fig, ax = plt.subplots()
     q = ax.quiver([0, 1], [0, 0], [1, 1], [0, 0], pivot="tip")
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
-    assert len(anns) == 2
-    verts = q.get_paths()[0].vertices
-    tip_px = q.get_transform().transform(verts[3])
-    tail_px = q.get_transform().transform((verts[0] + verts[6]) / 2)
-    vector_px = tip_px - tail_px
-    pivot = q.get_offsets()[0]
-    assert abs(anns[0].x - pivot[0]) < 1e-6
-    assert abs(anns[0].y - pivot[1]) < 1e-6
-    assert abs(anns[0].ax + vector_px[0]) < 1e-6
-    assert abs(anns[0].ay - vector_px[1]) < 1e-6
+    trace = _quiver_traces(plotly_fig)[0]
+    assert len(trace.x) == 2
+    for i in range(2):
+        assert abs(trace.x[i] + trace.u[i] - q.get_offsets()[i][0]) < 1e-6
+        assert abs(trace.y[i] + trace.v[i] - q.get_offsets()[i][1]) < 1e-6
+    assert trace.u[0] > 0
+
+
+def test_quiver_arrows_past_the_axes_edge_keep_their_length():
+    """Quiver arrows running past the axes edge keep their full length."""
+    fig, ax = plt.subplots()
+    ax.quiver([1], [1], [1], [0], angles="xy", scale_units="xy", scale=1)
+    ax.set_xlim(0, 1.05)
+    ax.set_ylim(0, 2)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    trace = _quiver_traces(plotly_fig)[0]
+    assert abs(trace.x[0] - 1) < 1e-6
+    assert abs(trace.u[0] - 1) < 1e-6
 
 
 def test_quiver_log_axis_arrows_start_at_data_points():
-    """Quiver arrows on a log x axis start at their data points, with the
-    annotation x given in log10 units as plotly log axes expect."""
+    """Quiver arrows on a log x axis start at their data points, with u in
+    decades as plotly log axes expect."""
     fig, ax = plt.subplots()
-    ax.quiver([1, 10, 100], [1, 2, 3], [1, 1, 1], [1, 0, 1])
+    q = ax.quiver([1, 10, 100], [1, 2, 3], [1, 1, 1], [1, 0, 1])
     ax.set_xscale("log")
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
     assert plotly_fig.layout.xaxis.type == "log"
-    assert len(anns) == 3
-    for ann, log_x, y in zip(anns, [0, 1, 2], [1, 2, 3]):
-        # the annotation sits at the arrow tip, a short way from the tail
-        assert log_x <= ann.x < log_x + 0.5
-        assert y <= ann.y < y + 0.5
-        assert abs(ann.ax) < 100
-        assert abs(ann.ay) < 100
+    trace = _quiver_traces(plotly_fig)[0]
+    pivot_px = ax.transData.transform(q.get_offsets()[0])
+    tail_px, tip_px = _arrow_px(q)
+    tail = ax.transData.inverted().transform(pivot_px + tail_px)
+    tip = ax.transData.inverted().transform(pivot_px + tip_px)
+    assert abs(trace.u[0] - (np.log10(tip[0]) - np.log10(tail[0]))) < 1e-6
+    for x, y, u, start_x, start_y in zip(
+        trace.x, trace.y, trace.u, [1, 10, 100], [1, 2, 3]
+    ):
+        assert abs(x / start_x - 1) < 1e-6
+        assert abs(y - start_y) < 1e-6
+        assert 0 < u < 0.5
 
 
 def test_quiver_axes_coordinates_arrows_start_at_their_positions():
@@ -1582,15 +1606,12 @@ def test_quiver_axes_coordinates_arrows_start_at_their_positions():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
-    assert len(anns) == 2
+    trace = _quiver_traces(plotly_fig)[0]
     # axes positions (0.2, 0.2) and (0.5, 0.5) are data (12, 12) and (15, 15)
-    for ann, start in zip(anns, [12, 15]):
-        # the annotation sits at the arrow tip, a short way from the tail
-        assert start <= ann.x < start + 2
-        assert start <= ann.y < start + 2
-        assert abs(ann.ax) < 100
-        assert abs(ann.ay) < 100
+    for x, y, u, start in zip(trace.x, trace.y, trace.u, [12, 15]):
+        assert abs(x - start) < 1e-6
+        assert abs(y - start) < 1e-6
+        assert 0 < u < 2
 
 
 def test_quiver_outline_arrows_use_edge_color():
@@ -1603,37 +1624,27 @@ def test_quiver_outline_arrows_use_edge_color():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
-    assert len(anns) == 2
-    assert [a.arrowcolor for a in anns] == ["rgba(255,0,0,1.0)"] * 2
-
-
-def test_quiver_arrows_without_face_or_edge_width_are_transparent():
-    """Quiver arrows with facecolor "none" and zero edge width, which are
-    invisible in matplotlib, get a transparent arrow color."""
-    fig, ax = plt.subplots()
-    ax.quiver(
-        [0, 1], [0, 1], [1, 1], [1, 0], facecolor="none", edgecolor="r", linewidth=0
-    )
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-
-    anns = plotly_fig.layout.annotations
-    assert [a.arrowcolor for a in anns] == ["rgba(0,0,0,0)"] * 2
+    traces = _quiver_traces(plotly_fig)
+    assert [t.marker.color for t in traces] == ["rgba(255,0,0,1.0)"]
+    assert len(traces[0].x) == 2
 
 
 def test_quiver_date_axis_arrows_use_date_strings():
-    """Quiver arrows on a date x axis give their annotation x as date strings
-    on the day of each arrow."""
+    """Quiver arrows on a date x axis start at date strings on the day of
+    each arrow, with u in milliseconds as plotly date axes expect."""
     dates = [datetime.datetime(2020, 1, day) for day in (1, 2, 3)]
     fig, ax = plt.subplots()
-    ax.quiver(dates, [0, 1, 2], [1, 1, 1], [1, 0, 1])
+    q = ax.quiver(dates, [0, 1, 2], [1, 1, 1], [1, 0, 1])
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    anns = plotly_fig.layout.annotations
     assert plotly_fig.layout.xaxis.type == "date"
-    assert len(anns) == 3
-    for ann, day in zip(anns, ["2020-01-01", "2020-01-02", "2020-01-03"]):
-        assert isinstance(ann.x, str)
-        assert ann.x.startswith(day)
+    trace = _quiver_traces(plotly_fig)[0]
+    pivot_px = ax.transData.transform(q.get_offsets()[0])
+    tail_px, tip_px = _arrow_px(q)
+    tail = ax.transData.inverted().transform(pivot_px + tail_px)
+    tip = ax.transData.inverted().transform(pivot_px + tip_px)
+    assert abs(trace.u[0] - (tip[0] - tail[0]) * 86400000) < 1e-3
+    for x, day in zip(trace.x, ["2020-01-01", "2020-01-02", "2020-01-03"]):
+        assert isinstance(x, str)
+        assert x.startswith(day)
