@@ -862,31 +862,33 @@ class PlotlyRenderer(Renderer):
     def _draw_quiver(self, props):
         """Draw a matplotlib Quiver collection as layout annotations with
         arrows. The exporter reports the arrow path vertices in pixels
-        relative to the pivot point, and the pivot positions as data
-        coordinates, or as display pixels when the offset transform is
-        nonlinear (e.g. on log axes). The annotation arrowhead lands on the
-        annotation position, so each annotation is anchored at the arrow tip
-        in data coordinates (log10 of the data on plotly log axes) and
-        offset back to the tail in pixels."""
-        q = props["mplobj"]
-        trans = q.get_offset_transform()
+        relative to the pivot point, and the pivot positions in data, axes,
+        figure or display coordinates, as given by "offset_coordinates"
+        (display pixels when the offset transform is nonlinear, e.g. on log
+        axes). The annotation arrowhead lands on the annotation position, so
+        each annotation is anchored at the arrow tip in data coordinates
+        (log10 of the data on plotly log axes) and offset back to the tail in
+        pixels."""
         ax = self.current_mpl_ax
-        box_min = np.asarray(trans.transform((ax.get_xlim()[0], ax.get_ylim()[0])))
-        box_max = np.asarray(trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
+        pivot_trans = {
+            "data": ax.transData,
+            "axes": ax.transAxes,
+            "figure": ax.figure.transFigure,
+            "display": transforms.IdentityTransform(),
+        }[props["offset_coordinates"]]
+        data_trans = ax.transData
+        box_min = np.asarray(data_trans.transform((ax.get_xlim()[0], ax.get_ylim()[0])))
+        box_max = np.asarray(data_trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
         axis_ref = str(self.axis_ct)
         log_x = self.plotly_fig["layout"]["xaxis" + axis_ref]["type"] == "log"
         log_y = self.plotly_fig["layout"]["yaxis" + axis_ref]["type"] == "log"
-        pivots_in_pixels = props["offset_coordinates"] == "display"
         annotations = []
         for i, (pivot, path) in enumerate(zip(props["offsets"], props["paths"])):
             verts = np.asarray(path[0], dtype=float)
             if len(verts) < 7 or not np.all(np.isfinite(pivot)):
                 continue
-            if pivots_in_pixels:
-                pivot_px = np.asarray(pivot, dtype=float)
-            else:
-                pivot_px = np.asarray(trans.transform(pivot))
+            pivot_px = np.asarray(pivot_trans.transform(pivot), dtype=float)
             # the tail is the midpoint of the tail cap, the tip is vertex 3
             tail_vertex = (verts[0] + verts[6]) / 2
             tip_vertex = verts[3]
@@ -894,7 +896,7 @@ class PlotlyRenderer(Renderer):
             # matplotlib clips arrowheads at the axes box, so clamp the
             # arrowhead position into the axes range the same way
             tip_px = np.clip(pivot_px + tip_vertex, box_min, box_max)
-            tip = trans.inverted().transform(tip_px)
+            tip = data_trans.inverted().transform(tip_px)
             tail_px = pivot_px + tail_vertex
             color = _per_path(facecolors, i, "rgba(0,0,0,0)")
             length = np.hypot(*arrow_vector)

@@ -1570,3 +1570,24 @@ def test_quiver_log_axis_arrows_start_at_data_points():
         assert y <= ann.y < y + 0.5
         assert abs(ann.ax) < 100
         assert abs(ann.ay) < 100
+
+
+def test_quiver_axes_coordinates_arrows_start_at_their_positions():
+    """Quiver arrows placed in axes coordinates start at the matching data
+    positions."""
+    fig, ax = plt.subplots()
+    ax.quiver([0.2, 0.5], [0.2, 0.5], [1, 1], [1, 0], transform=ax.transAxes)
+    ax.set_xlim(10, 20)
+    ax.set_ylim(10, 20)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    anns = plotly_fig.layout.annotations
+    assert len(anns) == 2
+    # axes positions (0.2, 0.2) and (0.5, 0.5) are data (12, 12) and (15, 15)
+    for ann, start in zip(anns, [12, 15]):
+        # the annotation sits at the arrow tip, a short way from the tail
+        assert start <= ann.x < start + 2
+        assert start <= ann.y < start + 2
+        assert abs(ann.ax) < 100
+        assert abs(ann.ay) < 100
