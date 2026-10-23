@@ -74,15 +74,53 @@ def _split_subpaths(verts, codes):
     return subpaths
 
 
+def _bezier_point(points, t):
+    """Return the point at parameter `t` of the Bezier curve with the given
+    control points (de Casteljau's algorithm)."""
+    points = [tuple(p) for p in points]
+    while len(points) > 1:
+        points = [
+            ((1 - t) * a[0] + t * b[0], (1 - t) * a[1] + t * b[1])
+            for a, b in zip(points, points[1:])
+        ]
+    return points[0]
+
+
+def _flatten_curves(verts, codes, samples=16):
+    """Return the path vertices and codes with Bezier curves as line segments.
+
+    Each cubic ("C") or quadratic ("S") curve is sampled at `samples` points
+    along the curve, ending at its end point, and each sample becomes an "L"
+    segment. Other codes keep their vertices.
+    """
+    flat_verts = []
+    flat_codes = []
+    vi = 0
+    for c in codes:
+        step = _VERTICES_PER_CODE.get(c, 1)
+        points = list(verts[vi : vi + step])
+        vi += step
+        if c in ("C", "S") and flat_verts:
+            control = [flat_verts[-1]] + points
+            for k in range(1, samples + 1):
+                flat_verts.append(_bezier_point(control, k / samples))
+                flat_codes.append("L")
+        else:
+            flat_verts.extend(points)
+            flat_codes.append(c)
+    return flat_verts, flat_codes
+
+
 def _close_subpaths(verts, codes):
     """Return the path vertices with each closed subpath ending at its start.
 
-    The start vertex of each closed subpath is appended to it, which draws
-    the closing segment of the outline. Subpaths that already end at their
-    start vertex keep their vertices as given.
+    Bezier curves are flattened into line segments first. The start vertex
+    of each closed subpath is appended to it, which draws the closing
+    segment of the outline. Subpaths that already end at their start vertex
+    keep their vertices as given.
     """
     closed_verts = []
-    for sub, closed in _split_subpaths(verts, codes):
+    for sub, closed in _split_subpaths(*_flatten_curves(verts, codes)):
         if closed and tuple(sub[-1]) != tuple(sub[0]):
             sub = sub + [sub[0]]
         closed_verts.extend(sub)
@@ -933,11 +971,12 @@ class PlotlyRenderer(Renderer):
             )
 
     def draw_path(self, **props):
-        """Draw a bar chart path or a matplotlib step patch.
+        """Draw a bar chart path, a matplotlib step patch, or another patch.
 
         This function attempts to sort a given path into a collection of
-        horizontal or vertical bar charts, and draws matplotlib StepPatch
-        artists as step traces. Most of the actual code takes place in
+        horizontal or vertical bar charts, draws matplotlib StepPatch
+        artists as step traces, and draws other patches in data coordinates
+        as filled scatter traces. Most of the bar chart code takes place in
         functions from mpltools.py.
 
         props.keys() -- [
@@ -966,11 +1005,11 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Drawing a step path\n"
             self._draw_step_path(props)
         elif (
-            isinstance(props["mplobj"], mpatches.Polygon)
+            isinstance(props["mplobj"], mpatches.Patch)
             and props["coordinates"] == "data"
         ):
-            self.msg += "    Drawing a filled polygon\n"
-            self._draw_filled_polygon(props)
+            self.msg += "    Drawing a filled patch\n"
+            self._draw_filled_patch(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
@@ -1028,10 +1067,10 @@ class PlotlyRenderer(Renderer):
             )
         )
 
-    def _draw_filled_polygon(self, props):
-        """Draw a visible matplotlib Polygon patch as a filled scatter trace."""
+    def _draw_filled_patch(self, props):
+        """Draw a visible matplotlib patch as a filled scatter trace."""
         if not props["mplobj"].get_visible():
-            self.msg += "    Polygon is hidden, not drawing\n"
+            self.msg += "    Patch is hidden, not drawing\n"
             return
         style = props["style"]
         label, showlegend = _legend_label(props["mplobj"].get_label())

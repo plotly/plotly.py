@@ -1278,6 +1278,55 @@ def test_only_visible_fill_polygons_export():
     assert plotly_fig.data[0].fillcolor == "#0000FF"
 
 
+@pytest.mark.parametrize(
+    "make_patch",
+    [
+        lambda: matplotlib.patches.Circle((0.5, 0.5), 0.3, color="r"),
+        lambda: matplotlib.patches.Ellipse((0.5, 0.5), 0.6, 0.3, angle=30, color="r"),
+        lambda: matplotlib.patches.Wedge((0.5, 0.5), 0.4, 30, 270, color="r"),
+        lambda: matplotlib.patches.PathPatch(
+            matplotlib.path.Path(
+                [(0.2, 0.2), (0.8, 0.2), (0.8, 0.8), (0.5, 0.6), (0.2, 0.2)],
+                [
+                    matplotlib.path.Path.MOVETO,
+                    matplotlib.path.Path.LINETO,
+                    matplotlib.path.Path.LINETO,
+                    matplotlib.path.Path.LINETO,
+                    matplotlib.path.Path.CLOSEPOLY,
+                ],
+            ),
+            color="r",
+        ),
+        lambda: matplotlib.patches.Rectangle((0.2, 0.3), 0.5, 0.4, color="r"),
+    ],
+    ids=["circle", "ellipse", "wedge", "pathpatch", "rectangle"],
+)
+def test_data_patches_export_as_filled_traces(make_patch):
+    """Patches in data coordinates export as filled scatter traces."""
+    fig, ax = plt.subplots()
+    ax.add_patch(make_patch())
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].fill == "toself"
+    assert plotly_fig.data[0].fillcolor == "#FF0000"
+
+
+def test_circle_outline_points_lie_on_the_circle():
+    """Circle outlines export points on the circle: the Bezier curves of the
+    circle path are sampled along each curve."""
+    fig, ax = plt.subplots()
+    ax.add_patch(matplotlib.patches.Circle((0.5, 0.5), 0.3))
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    x = np.array(plotly_fig.data[0].x)
+    y = np.array(plotly_fig.data[0].y)
+    assert len(x) > 25
+    assert np.allclose(np.hypot(x - 0.5, y - 0.5), 0.3, atol=1e-3)
+
+
 def test_custom_date_xtickvals_given_as_numbers_are_converted():
     """Custom date ticks given as matplotlib date numbers must be converted
     to date strings."""
