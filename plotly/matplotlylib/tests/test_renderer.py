@@ -1170,6 +1170,206 @@ def test_custom_date_xtickvals_given_as_numbers_are_converted():
     )
 
 
+def test_fill_converts():
+    """plt.fill polygons convert to filled scatter traces."""
+    x = np.linspace(0, 2 * np.pi, 50)
+    fig, ax = plt.subplots()
+    ax.fill(x, np.sin(x), "g")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.type == "scatter"
+    assert trace.fill == "toself"
+    assert np.allclose(trace.x, np.append(x, x[0]))
+    assert np.allclose(trace.y, np.append(np.sin(x), np.sin(x[0])))
+    assert trace.fillcolor == "#007F00"
+    assert trace.line.color == "rgba(0,0,0,0)"
+
+
+def test_fill_with_legend_label():
+    """plt.fill polygons with labels export their name and show in legend."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 2], [0, 2, 0], "b", label="Shaded Area")
+    ax.fill([0, 1, 2], [0, 1, 0], "g")
+    ax.plot([0, 1, 2], [1, 1, 1], "r-", label="Threshold")
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    assert len(plotly_fig.data) == 3
+
+    labeled_fill = next(
+        t for t in plotly_fig.data if t.fill == "toself" and t.name == "Shaded Area"
+    )
+    assert labeled_fill.showlegend is not False
+
+    unlabeled_fill = next(
+        t for t in plotly_fig.data if t.fill == "toself" and t.name is None
+    )
+    assert unlabeled_fill.showlegend is False
+
+
+@pytest.mark.parametrize(
+    "linestyle, dash",
+    [("-", "solid"), ("--", "dash"), (":", "dot"), ("-.", "dashdot")],
+)
+def test_fill_outline_exports_line_style(linestyle, dash):
+    """plt.fill polygon outlines export their matplotlib line style as dash."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 1], [0, 0, 1], edgecolor="k", linewidth=3, linestyle=linestyle)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].line.dash == dash
+
+
+def test_fill_outline_returns_to_first_vertex():
+    """plt.fill polygon outlines end at their first vertex, so plotly draws
+    the closing edge."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 1], [0, 0, 1], edgecolor="k")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 1, 1, 0)
+    assert plotly_fig.data[0].y == (0, 0, 1, 0)
+
+
+def test_open_polygon_outline_ends_at_last_vertex():
+    """Polygons with closed=False export their vertices as given."""
+    fig, ax = plt.subplots()
+    ax.add_patch(
+        matplotlib.patches.Polygon(
+            [[0, 0], [1, 0], [1, 1]], closed=False, fill=False, edgecolor="k"
+        )
+    )
+    ax.set_xlim(-1, 2)
+    ax.set_ylim(-1, 2)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 1, 1)
+    assert plotly_fig.data[0].y == (0, 0, 1)
+
+
+def test_fill_between_outline_ends_at_first_vertex_once():
+    """fill_between paths, which end at their first vertex, export each
+    vertex once."""
+    fig, ax = plt.subplots()
+    ax.fill_between([0, 1, 2], [0, 1, 0], [1, 2, 1], edgecolor="k")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 0, 1, 2, 2, 2, 1, 0)
+    assert plotly_fig.data[0].y == (1, 0, 1, 0, 1, 1, 2, 1)
+
+
+def test_unfilled_polygons_export_outline_only():
+    """Polygons without a face (step histograms, fill=False, facecolor
+    "none") export as outline-only traces, with no fill color."""
+    fig, ax = plt.subplots()
+    ax.hist([1, 2, 2, 3], bins=3, histtype="step")
+    ax.add_patch(
+        matplotlib.patches.Polygon(
+            [[1, 0.5], [2, 2.5], [3, 0.5]], fill=False, edgecolor="g"
+        )
+    )
+    ax.fill([0, 1, 1], [0, 0, 1], facecolor="none", edgecolor="k")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 3
+    assert [t.fill for t in plotly_fig.data] == [None, None, None]
+    assert [t.fillcolor for t in plotly_fig.data] == [None, None, None]
+
+
+def test_only_visible_fill_polygons_export():
+    """Only visible plt.fill polygons export as traces."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 1], [0, 0, 1], "b")
+    hidden = ax.fill([0, 0, 1], [0, 1, 1], "r")
+    hidden[0].set_visible(False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].fillcolor == "#0000FF"
+
+
+@pytest.mark.parametrize(
+    "make_patch",
+    [
+        lambda: matplotlib.patches.Circle((0.5, 0.5), 0.3, color="r"),
+        lambda: matplotlib.patches.Ellipse((0.5, 0.5), 0.6, 0.3, angle=30, color="r"),
+        lambda: matplotlib.patches.Wedge((0.5, 0.5), 0.4, 30, 270, color="r"),
+        lambda: matplotlib.patches.PathPatch(
+            matplotlib.path.Path(
+                [(0.2, 0.2), (0.8, 0.2), (0.8, 0.8), (0.5, 0.6), (0.2, 0.2)],
+                [
+                    matplotlib.path.Path.MOVETO,
+                    matplotlib.path.Path.LINETO,
+                    matplotlib.path.Path.LINETO,
+                    matplotlib.path.Path.LINETO,
+                    matplotlib.path.Path.CLOSEPOLY,
+                ],
+            ),
+            color="r",
+        ),
+        lambda: matplotlib.patches.Rectangle((0.2, 0.3), 0.5, 0.4, color="r"),
+    ],
+    ids=["circle", "ellipse", "wedge", "pathpatch", "rectangle"],
+)
+def test_data_patches_export_as_filled_traces(make_patch):
+    """Patches in data coordinates export as filled scatter traces."""
+    fig, ax = plt.subplots()
+    ax.add_patch(make_patch())
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].fill == "toself"
+    assert plotly_fig.data[0].fillcolor == "#FF0000"
+
+
+def test_circle_outline_points_lie_on_the_circle():
+    """Circle outlines export points on the circle: the Bezier curves of the
+    circle path are sampled along each curve."""
+    fig, ax = plt.subplots()
+    ax.add_patch(matplotlib.patches.Circle((0.5, 0.5), 0.3))
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    x = np.array(plotly_fig.data[0].x)
+    y = np.array(plotly_fig.data[0].y)
+    assert len(x) > 25
+    assert np.allclose(np.hypot(x - 0.5, y - 0.5), 0.3, atol=1e-3)
+
+
+def test_patch_subpaths_export_separated_by_none():
+    """Each subpath of a patch exports as its own closed outline, with None
+    between subpaths."""
+    M, L, Z = (
+        matplotlib.path.Path.MOVETO,
+        matplotlib.path.Path.LINETO,
+        matplotlib.path.Path.CLOSEPOLY,
+    )
+    path = matplotlib.path.Path(
+        [(0, 0), (1, 0), (1, 1), (0, 1), (0, 0)]
+        + [(2, 2), (3, 2), (3, 3), (2, 3), (2, 2)],
+        [M, L, L, L, Z] * 2,
+    )
+    fig, ax = plt.subplots()
+    ax.add_patch(matplotlib.patches.PathPatch(path, edgecolor="k", facecolor="c"))
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 1, 1, 0, 0, None, 2, 3, 3, 2, 2)
+    assert plotly_fig.data[0].y == (0, 0, 1, 1, 0, None, 2, 2, 3, 3, 2)
+
+
 def test_tick_label_color_exports():
     """Tick label colors are exported to the plotly tickfont."""
     fig, ax = plt.subplots()
