@@ -1347,6 +1347,28 @@ def test_circle_outline_points_lie_on_the_circle():
     assert np.allclose(np.hypot(x - 0.5, y - 0.5), 0.3, atol=1e-3)
 
 
+def test_patch_subpaths_export_separated_by_none():
+    """Each subpath of a patch exports as its own closed outline, with None
+    between subpaths."""
+    M, L, Z = (
+        matplotlib.path.Path.MOVETO,
+        matplotlib.path.Path.LINETO,
+        matplotlib.path.Path.CLOSEPOLY,
+    )
+    path = matplotlib.path.Path(
+        [(0, 0), (1, 0), (1, 1), (0, 1), (0, 0)]
+        + [(2, 2), (3, 2), (3, 3), (2, 3), (2, 2)],
+        [M, L, L, L, Z] * 2,
+    )
+    fig, ax = plt.subplots()
+    ax.add_patch(matplotlib.patches.PathPatch(path, edgecolor="k", facecolor="c"))
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 1, 1, 0, 0, None, 2, 3, 3, 2, 2)
+    assert plotly_fig.data[0].y == (0, 0, 1, 1, 0, None, 2, 2, 3, 3, 2)
+
+
 def test_tick_label_color_exports():
     """Tick label colors are exported to the plotly tickfont."""
     fig, ax = plt.subplots()

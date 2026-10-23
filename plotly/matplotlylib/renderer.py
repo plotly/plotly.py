@@ -112,19 +112,19 @@ def _flatten_curves(verts, codes, samples=16):
 
 
 def _close_subpaths(verts, codes):
-    """Return the path vertices with each closed subpath ending at its start.
+    """Return the subpaths of a path, each closed subpath ending at its start.
 
     Bezier curves are flattened into line segments first. The start vertex
     of each closed subpath is appended to it, which draws the closing
     segment of the outline. Subpaths that already end at their start vertex
     keep their vertices as given.
     """
-    closed_verts = []
+    subpaths = []
     for sub, closed in _split_subpaths(*_flatten_curves(verts, codes)):
         if closed and tuple(sub[-1]) != tuple(sub[0]):
             sub = sub + [sub[0]]
-        closed_verts.extend(sub)
-    return closed_verts
+        subpaths.append(sub)
+    return subpaths
 
 
 def _legend_label(label):
@@ -934,16 +934,23 @@ class PlotlyRenderer(Renderer):
     ):
         """Add a scatter trace outlining a path on the current axes.
 
-        The path is filled with `facecolor`; a facecolor of "none" gives an
-        outline-only trace.
+        The subpaths of the path are separated by None. The path is filled
+        with `facecolor`; a facecolor of "none" gives an outline-only trace.
         """
-        verts = _close_subpaths(verts, codes)
+        x = []
+        y = []
+        for sub in _close_subpaths(verts, codes):
+            if x:
+                x.append(None)
+                y.append(None)
+            x.extend(self._convert_x_dates([v[0] for v in sub]))
+            y.extend(v[1] for v in sub)
         self.plotly_fig.add_trace(
             go.Scatter(
                 name=name,
                 showlegend=showlegend,
-                x=self._convert_x_dates([v[0] for v in verts]),
-                y=[v[1] for v in verts],
+                x=x,
+                y=y,
                 mode="lines",
                 line=go.scatter.Line(
                     color=_export_color(edgecolor), width=linewidth, dash=dash
