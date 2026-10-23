@@ -1029,7 +1029,10 @@ class PlotlyRenderer(Renderer):
         )
 
     def _draw_filled_polygon(self, props):
-        """Draw a matplotlib Polygon patch as a filled scatter trace."""
+        """Draw a visible matplotlib Polygon patch as a filled scatter trace."""
+        if not props["mplobj"].get_visible():
+            self.msg += "    Polygon is hidden, not drawing\n"
+            return
         style = props["style"]
         label, showlegend = _legend_label(props["mplobj"].get_label())
         self._add_filled_trace(

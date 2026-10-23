@@ -1265,6 +1265,19 @@ def test_unfilled_polygons_export_outline_only():
     assert [t.fill for t in plotly_fig.data] == [None, None, None]
 
 
+def test_only_visible_fill_polygons_export():
+    """Only visible plt.fill polygons export as traces."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 1], [0, 0, 1], "b")
+    hidden = ax.fill([0, 0, 1], [0, 1, 1], "r")
+    hidden[0].set_visible(False)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert plotly_fig.data[0].fillcolor == "#0000FF"
+
+
 def test_custom_date_xtickvals_given_as_numbers_are_converted():
     """Custom date ticks given as matplotlib date numbers must be converted
     to date strings."""
