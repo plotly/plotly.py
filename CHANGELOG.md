@@ -4,7 +4,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
-
 ### Added
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
 - Add support for converting matplotlib fill polygons (`plt.fill`) to filled scatter traces in `mpl_to_plotly` [[#5795](https://github.com/plotly/plotly.py/pull/5795)], with thanks to @robertoffmoura for the contribution!
