@@ -1150,6 +1150,26 @@ def test_uneven_custom_date_xtickvals_are_converted():
     )
 
 
+def test_custom_date_xtickvals_given_as_numbers_are_converted():
+    """Custom date ticks given as matplotlib date numbers must be converted
+    to date strings."""
+    import matplotlib.dates as mdates
+
+    dates = [datetime.datetime(2023, 1, i) for i in range(1, 11)]
+    fig, ax = plt.subplots()
+    ax.plot(dates, np.random.rand(10))
+    ax.set_xticks([mdates.date2num(d) for d in dates[::3]])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.tickvals == (
+        "2023-01-01 00:00:00",
+        "2023-01-04 00:00:00",
+        "2023-01-07 00:00:00",
+        "2023-01-10 00:00:00",
+    )
+
+
 def test_fill_converts():
     """plt.fill polygons convert to filled scatter traces."""
     x = np.linspace(0, 2 * np.pi, 50)
@@ -1325,26 +1345,6 @@ def test_circle_outline_points_lie_on_the_circle():
     y = np.array(plotly_fig.data[0].y)
     assert len(x) > 25
     assert np.allclose(np.hypot(x - 0.5, y - 0.5), 0.3, atol=1e-3)
-
-
-def test_custom_date_xtickvals_given_as_numbers_are_converted():
-    """Custom date ticks given as matplotlib date numbers must be converted
-    to date strings."""
-    import matplotlib.dates as mdates
-
-    dates = [datetime.datetime(2023, 1, i) for i in range(1, 11)]
-    fig, ax = plt.subplots()
-    ax.plot(dates, np.random.rand(10))
-    ax.set_xticks([mdates.date2num(d) for d in dates[::3]])
-
-    plotly_fig = tls.mpl_to_plotly(fig)
-
-    assert plotly_fig.layout.xaxis.tickvals == (
-        "2023-01-01 00:00:00",
-        "2023-01-04 00:00:00",
-        "2023-01-07 00:00:00",
-        "2023-01-10 00:00:00",
-    )
 
 
 def test_tick_label_color_exports():
