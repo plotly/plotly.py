@@ -41,6 +41,20 @@ def _per_path(values, i, default):
     return values[i % n] if n else default
 
 
+def _legend_label(label):
+    """Return the (name, showlegend) pair for a trace from an artist label.
+
+    matplotlib marks artists it leaves out of legends with "_nolegend_" and
+    auto-generated "_childN" labels. Empty labels and labels starting with
+    "_" give (None, False), which hides the trace from the plotly legend.
+    Other labels give (label, None), which keeps plotly's default legend
+    entry.
+    """
+    if not label or (isinstance(label, str) and label.startswith("_")):
+        return None, False
+    return label, None
+
+
 def _convert_collection_dash(linestyle):
     """Convert a matplotlib collection line style to a plotly dash string.
 
@@ -532,14 +546,7 @@ class PlotlyRenderer(Renderer):
                     ),
                 )
         if props["coordinates"] == "data":
-            label = props["label"]
-            # matplotlib uses "_nolegend_" and auto-generated "_childN"
-            # labels for artists that must not appear in a legend
-            if not label or (isinstance(label, str) and label.startswith("_")):
-                label = None
-                showlegend = False
-            else:
-                showlegend = None
+            label, showlegend = _legend_label(props["label"])
             marked_line = go.Scatter(
                 mode=mode,
                 name=label,
@@ -951,12 +958,7 @@ class PlotlyRenderer(Renderer):
         if len(x) < 2:
             self.msg += "    Step path has fewer than 2 points, not drawing\n"
             return
-        label = props["mplobj"].get_label()
-        if not label or (isinstance(label, str) and label.startswith("_")):
-            label = None
-            showlegend = False
-        else:
-            showlegend = None
+        label, showlegend = _legend_label(props["mplobj"].get_label())
         self.plotly_fig.add_trace(
             go.Scatter(
                 x=x,
@@ -982,12 +984,7 @@ class PlotlyRenderer(Renderer):
         verts = props["data"]
         facecolor = _export_color(style["facecolor"])
         edgecolor = _export_color(style["edgecolor"])
-        label = props["mplobj"].get_label()
-        if not label or (isinstance(label, str) and label.startswith("_")):
-            label = None
-            showlegend = False
-        else:
-            showlegend = None
+        label, showlegend = _legend_label(props["mplobj"].get_label())
         self.plotly_fig.add_trace(
             go.Scatter(
                 name=label,
