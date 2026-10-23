@@ -1178,7 +1178,7 @@ def test_fill_with_legend_label():
 
     plotly_fig = tls.mpl_to_plotly(fig)
 
-    assert plotly_fig.layout.showlegend == True
+    assert plotly_fig.layout.showlegend is True
     assert len(plotly_fig.data) == 3
 
     labeled_fill = next(
