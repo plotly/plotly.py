@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
-- Add support for converting matplotlib fill polygons (`plt.fill`) to filled scatter traces in `mpl_to_plotly` [[#5795](https://github.com/plotly/plotly.py/pull/5795)], with thanks to @robertoffmoura for the contribution!
+- Add support for converting matplotlib fill polygons (`plt.fill`) and other patches in data coordinates (such as `Circle`, `Ellipse`, `Wedge`, `Rectangle`, and `PathPatch`) to filled scatter traces in `mpl_to_plotly`, with closed outlines that keep the edge color, width, and line style; those without a face color export as outlines, and hidden ones are skipped [[#5795](https://github.com/plotly/plotly.py/pull/5795)], with thanks to @robertoffmoura for the contribution!
 
 ### Fixed
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
