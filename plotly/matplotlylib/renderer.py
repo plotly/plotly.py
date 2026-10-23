@@ -41,30 +41,52 @@ def _per_path(values, i, default):
     return values[i % n] if n else default
 
 
-_VERTICES_PER_CODE = {"M": 1, "L": 1, "S": 2, "C": 3, "Z": 0}
+# In SVG paths, codes carry different numbers of vertices:
+# M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
+_VERTICES_PER_CODE = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
+
+
+def _split_subpaths(verts, codes):
+    """Split SVG path vertices into subpaths, one per "M" code.
+
+    Returns a list of (vertices, closed) pairs; `closed` is True for
+    subpaths that have a "Z" code.
+    """
+    subpaths = []
+    current = []
+    closed = False
+    vi = 0
+    for c in codes:
+        step = _VERTICES_PER_CODE.get(c, 1)
+        if c == "M":
+            if current:
+                subpaths.append((current, closed))
+            current = [verts[vi]]
+            closed = False
+            vi += 1
+        elif c == "Z":
+            closed = True
+        else:
+            current.extend(verts[vi : vi + step])
+            vi += step
+    if current:
+        subpaths.append((current, closed))
+    return subpaths
 
 
 def _close_subpaths(verts, codes):
     """Return the path vertices with each closed subpath ending at its start.
 
-    At each "Z" code the start vertex of the subpath is appended, which
-    draws the closing segment of the outline. Subpaths that already end at
-    their start vertex keep their vertices as given.
+    The start vertex of each closed subpath is appended to it, which draws
+    the closing segment of the outline. Subpaths that already end at their
+    start vertex keep their vertices as given.
     """
-    closed = []
-    start = None
-    i = 0
-    for code in codes:
-        if code == "Z":
-            if start is not None and tuple(closed[-1]) != tuple(start):
-                closed.append(start)
-            continue
-        n = _VERTICES_PER_CODE[code]
-        if code == "M":
-            start = verts[i]
-        closed.extend(verts[i : i + n])
-        i += n
-    return closed
+    closed_verts = []
+    for sub, closed in _split_subpaths(verts, codes):
+        if closed and tuple(sub[-1]) != tuple(sub[0]):
+            sub = sub + [sub[0]]
+        closed_verts.extend(sub)
+    return closed_verts
 
 
 def _legend_label(label):
@@ -824,31 +846,9 @@ class PlotlyRenderer(Renderer):
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); separate disjoint subpaths with None so
             # plotly does not connect them.
-            # In SVG paths, codes carry different numbers of vertices:
-            # M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
-            code_steps = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
-            subpaths = []
-            current = []
-            closed = False
-            vi = 0
-            for c in codes:
-                step = code_steps.get(c, 1)
-                if c == "M":
-                    if current:
-                        subpaths.append((current, closed))
-                    current = [verts[vi]]
-                    closed = False
-                    vi += 1
-                elif c == "Z":
-                    closed = True
-                else:
-                    current.extend(verts[vi : vi + step])
-                    vi += step
-            if current:
-                subpaths.append((current, closed))
             path_x = []
             path_y = []
-            for sub, closed in subpaths:
+            for sub, closed in _split_subpaths(verts, codes):
                 if len(sub) < 2:
                     continue
                 # a closed subpath (Z code) must be closed explicitly since
