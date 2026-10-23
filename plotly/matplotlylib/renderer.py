@@ -857,6 +857,25 @@ class PlotlyRenderer(Renderer):
 
         flush()
 
+    def _add_filled_trace(
+        self, verts, facecolor, edgecolor, linewidth, name=None, showlegend=None
+    ):
+        """Add a filled scatter trace outlining `verts` on the current axes."""
+        self.plotly_fig.add_trace(
+            go.Scatter(
+                name=name,
+                showlegend=showlegend,
+                x=self._convert_x_dates([v[0] for v in verts]),
+                y=[v[1] for v in verts],
+                mode="lines",
+                line=go.scatter.Line(color=_export_color(edgecolor), width=linewidth),
+                fill="toself",
+                fillcolor=_export_color(facecolor),
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
+            )
+        )
+
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
@@ -864,22 +883,11 @@ class PlotlyRenderer(Renderer):
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
 
         for i, (verts, codes) in enumerate(props["paths"]):
-            facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
-            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
-            linewidth = _per_path(linewidths, i, 0)
-            self.plotly_fig.add_trace(
-                go.Scatter(
-                    x=self._convert_x_dates([v[0] for v in verts]),
-                    y=[v[1] for v in verts],
-                    mode="lines",
-                    line=go.scatter.Line(
-                        color=_export_color(edgecolor), width=linewidth
-                    ),
-                    fill="toself",
-                    fillcolor=_export_color(facecolor),
-                    xaxis="x{0}".format(self.axis_ct),
-                    yaxis="y{0}".format(self.axis_ct),
-                )
+            self._add_filled_trace(
+                verts,
+                facecolor=_per_path(facecolors, i, "rgba(0,0,0,0)"),
+                edgecolor=_per_path(edgecolors, i, "rgba(0,0,0,0)"),
+                linewidth=_per_path(linewidths, i, 0),
             )
 
     def draw_path(self, **props):
@@ -981,23 +989,14 @@ class PlotlyRenderer(Renderer):
     def _draw_filled_polygon(self, props):
         """Draw a matplotlib Polygon patch as a filled scatter trace."""
         style = props["style"]
-        verts = props["data"]
-        facecolor = _export_color(style["facecolor"])
-        edgecolor = _export_color(style["edgecolor"])
         label, showlegend = _legend_label(props["mplobj"].get_label())
-        self.plotly_fig.add_trace(
-            go.Scatter(
-                name=label,
-                showlegend=showlegend,
-                x=self._convert_x_dates([v[0] for v in verts]),
-                y=[v[1] for v in verts],
-                mode="lines",
-                line=go.scatter.Line(color=edgecolor, width=style["edgewidth"]),
-                fill="toself",
-                fillcolor=facecolor,
-                xaxis="x{0}".format(self.axis_ct),
-                yaxis="y{0}".format(self.axis_ct),
-            )
+        self._add_filled_trace(
+            props["data"],
+            facecolor=style["facecolor"],
+            edgecolor=style["edgecolor"],
+            linewidth=style["edgewidth"],
+            name=label,
+            showlegend=showlegend,
         )
 
     def draw_text(self, **props):
