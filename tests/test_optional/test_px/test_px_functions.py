@@ -688,3 +688,20 @@ def test_empty_histogram():
     fig = px.histogram()
     assert len(fig.data) == 1
     assert fig.data[0].type == "histogram"
+
+
+@pytest.mark.parametrize(
+    "ecdfmode,expected",
+    [
+        ("standard", [1 / 3, 2 / 3, 1]),
+        ("complementary", [2 / 3, 1 / 3, 0]),
+        ("reversed", [1, 2 / 3, 1 / 3]),
+    ],
+)
+def test_ecdf_ignores_missing_values(constructor, ecdfmode, expected):
+    # a missing value is not an observation: it must not count towards the total
+    # or produce a point of its own
+    data = constructor({"value": [3.0, 1.0, 2.0, None]})
+    fig = px.ecdf(data, x="value", ecdfmode=ecdfmode)
+    assert_array_equal(fig.data[0].x, [1.0, 2.0, 3.0])
+    assert np.allclose(fig.data[0].y, expected)
