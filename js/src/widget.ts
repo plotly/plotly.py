@@ -109,9 +109,7 @@ type Py2JsUpdateMsg = Py2JsMsg & {
 
 type Selector = {
   type: "box" | "lasso";
-  selector_state:
-    | { xrange: number[]; yrange: number[] }
-    | { xs: number[]; ys: number[] };
+  selector_state: Record<string, any>;
 };
 
 // Model
@@ -466,28 +464,13 @@ export class FigureModel {
        */
 
       /**
-       * @typedef {Object} BoxSelectorState
-       * @property {Array.<Number>} xrange
-       *  Two element array containing the x-range of the box selection
-       * @property {Array.<Number>} yrange
-       *  Two element array containing the y-range of the box selection
-       */
-
-      /**
-       * @typedef {Object} LassoSelectorState
-       * @property {Array.<Number>} xs
-       *  Array of the x-coordinates of the lasso selection region
-       * @property {Array.<Number>} ys
-       *  Array of the y-coordinates of the lasso selection region
-       */
-
-      /**
        * Object representing the state of the selection tool during a
        * plotly_select event
        * @typedef {Object} Selector
        * @property {String} type
        *  Selection type. One of: 'box', or 'lasso'
-       * @property {BoxSelectorState|LassoSelectorState} selector_state
+       * @property {Object.<String, Array>} selector_state
+       *  Selection geometry, keyed by plotly.js axis id
        */
 
       /**
@@ -1149,22 +1132,18 @@ export class FigureView {
     var selectorObject: Selector;
 
     if (data.hasOwnProperty("range")) {
-      // Box selection
+      // Box selection - preserve all subplot-specific axis keys (x, x2, x3, ... and y, y2, y3, ...)
+      var rangeData = data["range"];
       selectorObject = {
         type: "box",
-        selector_state: {
-          xrange: data["range"]["x"],
-          yrange: data["range"]["y"],
-        },
+        selector_state: rangeData,
       };
     } else if (data.hasOwnProperty("lassoPoints")) {
-      // Lasso selection
+      // Lasso selection - preserve all subplot-specific axis keys
+      var lassoData = data["lassoPoints"];
       selectorObject = {
         type: "lasso",
-        selector_state: {
-          xs: data["lassoPoints"]["x"],
-          ys: data["lassoPoints"]["y"],
-        },
+        selector_state: lassoData,
       };
     } else {
       selectorObject = null;
