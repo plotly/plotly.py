@@ -1162,8 +1162,8 @@ def test_fill_converts():
     trace = plotly_fig.data[0]
     assert trace.type == "scatter"
     assert trace.fill == "toself"
-    assert np.allclose(trace.x, x)
-    assert np.allclose(trace.y, np.sin(x))
+    assert np.allclose(trace.x, np.append(x, x[0]))
+    assert np.allclose(trace.y, np.append(np.sin(x), np.sin(x[0])))
     assert trace.fillcolor == "#007F00"
     assert trace.line.color == "rgba(0,0,0,0)"
 
@@ -1204,6 +1204,45 @@ def test_fill_outline_exports_line_style(linestyle, dash):
     plotly_fig = tls.mpl_to_plotly(fig)
 
     assert plotly_fig.data[0].line.dash == dash
+
+
+def test_fill_outline_returns_to_first_vertex():
+    """plt.fill polygon outlines end at their first vertex, so plotly draws
+    the closing edge."""
+    fig, ax = plt.subplots()
+    ax.fill([0, 1, 1], [0, 0, 1], edgecolor="k")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 1, 1, 0)
+    assert plotly_fig.data[0].y == (0, 0, 1, 0)
+
+
+def test_open_polygon_outline_ends_at_last_vertex():
+    """Polygons with closed=False export their vertices as given."""
+    fig, ax = plt.subplots()
+    ax.add_patch(
+        matplotlib.patches.Polygon(
+            [[0, 0], [1, 0], [1, 1]], closed=False, fill=False, edgecolor="k"
+        )
+    )
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 1, 1)
+    assert plotly_fig.data[0].y == (0, 0, 1)
+
+
+def test_fill_between_outline_ends_at_first_vertex_once():
+    """fill_between paths, which end at their first vertex, export each
+    vertex once."""
+    fig, ax = plt.subplots()
+    ax.fill_between([0, 1, 2], [0, 1, 0], [1, 2, 1], edgecolor="k")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.data[0].x == (0, 0, 1, 2, 2, 2, 1, 0)
+    assert plotly_fig.data[0].y == (1, 0, 1, 0, 1, 1, 2, 1)
 
 
 def test_custom_date_xtickvals_given_as_numbers_are_converted():

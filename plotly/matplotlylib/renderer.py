@@ -41,6 +41,32 @@ def _per_path(values, i, default):
     return values[i % n] if n else default
 
 
+_VERTICES_PER_CODE = {"M": 1, "L": 1, "S": 2, "C": 3, "Z": 0}
+
+
+def _close_subpaths(verts, codes):
+    """Return the path vertices with each closed subpath ending at its start.
+
+    At each "Z" code the start vertex of the subpath is appended, which
+    draws the closing segment of the outline. Subpaths that already end at
+    their start vertex keep their vertices as given.
+    """
+    closed = []
+    start = None
+    i = 0
+    for code in codes:
+        if code == "Z":
+            if start is not None and tuple(closed[-1]) != tuple(start):
+                closed.append(start)
+            continue
+        n = _VERTICES_PER_CODE[code]
+        if code == "M":
+            start = verts[i]
+        closed.extend(verts[i : i + n])
+        i += n
+    return closed
+
+
 def _legend_label(label):
     """Return the (name, showlegend) pair for a trace from an artist label.
 
@@ -860,6 +886,7 @@ class PlotlyRenderer(Renderer):
     def _add_filled_trace(
         self,
         verts,
+        codes,
         facecolor,
         edgecolor,
         linewidth,
@@ -867,7 +894,8 @@ class PlotlyRenderer(Renderer):
         name=None,
         showlegend=None,
     ):
-        """Add a filled scatter trace outlining `verts` on the current axes."""
+        """Add a filled scatter trace outlining a path on the current axes."""
+        verts = _close_subpaths(verts, codes)
         self.plotly_fig.add_trace(
             go.Scatter(
                 name=name,
@@ -894,6 +922,7 @@ class PlotlyRenderer(Renderer):
         for i, (verts, codes) in enumerate(props["paths"]):
             self._add_filled_trace(
                 verts,
+                codes,
                 facecolor=_per_path(facecolors, i, "rgba(0,0,0,0)"),
                 edgecolor=_per_path(edgecolors, i, "rgba(0,0,0,0)"),
                 linewidth=_per_path(linewidths, i, 0),
@@ -1001,6 +1030,7 @@ class PlotlyRenderer(Renderer):
         label, showlegend = _legend_label(props["mplobj"].get_label())
         self._add_filled_trace(
             props["data"],
+            props["pathcodes"],
             facecolor=style["facecolor"],
             edgecolor=style["edgecolor"],
             linewidth=style["edgewidth"],
