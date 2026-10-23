@@ -1648,3 +1648,30 @@ def test_quiver_date_axis_arrows_use_date_strings():
     for x, day in zip(trace.x, ["2020-01-01", "2020-01-02", "2020-01-03"]):
         assert isinstance(x, str)
         assert x.startswith(day)
+
+
+def test_quiver_colormapped_arrows_keep_their_colors():
+    """Colormapped quiver arrows convert to one quiver trace per color, with
+    each arrow starting at its grid point in its matplotlib color."""
+    x = np.linspace(-2, 2, 8)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    q = ax.quiver(X, Y, -Y, X, Y + X / 8)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    expected = {
+        (round(px, 6), round(py, 6)): "rgba({},{},{},{})".format(
+            int(r * 255), int(g * 255), int(b * 255), a
+        )
+        for (px, py), (r, g, b, a) in zip(q.get_offsets(), q.get_facecolors())
+    }
+    traces = _quiver_traces(plotly_fig)
+    assert len(traces) > 1
+    assert sum(len(t.x) for t in traces) == X.size
+    for trace in traces:
+        for tx, ty, u, v in zip(trace.x, trace.y, trace.u, trace.v):
+            assert trace.marker.color == expected[(round(tx, 6), round(ty, 6))]
+            # the field rotates counterclockwise: u follows -y and v follows x
+            assert np.sign(u) == np.sign(-ty)
+            assert np.sign(v) == np.sign(tx)
