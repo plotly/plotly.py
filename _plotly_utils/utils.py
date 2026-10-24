@@ -79,9 +79,15 @@ def to_typed_array_spec(v):
     dtype = str(v.dtype)
 
     if dtype in plotlyjsShortTypes:
+        # plotly.js decodes bdata with typed arrays (e.g. Float64Array),
+        # which always read in the platform's native order, little-endian
+        # on every real browser. Normalize to little-endian before encoding
+        # so bdata is correct regardless of the host's own byte order.
         arrObj = {
             "dtype": plotlyjsShortTypes[dtype],
-            "bdata": base64.b64encode(v).decode("ascii"),
+            "bdata": base64.b64encode(v.astype(v.dtype.newbyteorder("<"))).decode(
+                "ascii"
+            ),
         }
 
         if v.ndim > 1:
