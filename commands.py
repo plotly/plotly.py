@@ -88,6 +88,7 @@ def install_js_deps(local, build=True):
             cwd=NODE_ROOT,
             stdout=sys.stdout,
             stderr=sys.stderr,
+            env=env,
         )
         if local is not None:
             plotly_archive = os.path.join(local, "plotly.js.tgz")
@@ -96,6 +97,7 @@ def install_js_deps(local, build=True):
                 cwd=NODE_ROOT,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
+                env=env,
             )
         if build:
             check_call(
@@ -103,6 +105,7 @@ def install_js_deps(local, build=True):
                 cwd=NODE_ROOT,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
+                env=env,
             )
         os.utime(NODE_MODULES, None)
 
