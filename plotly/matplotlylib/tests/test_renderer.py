@@ -560,6 +560,43 @@ def test_contourf_bands_date_xaxis():
         assert all(isinstance(v, str) for v in t.x if v is not None)
 
 
+def test_filled_path_collection_curve_codes():
+    """Filled paths with Bezier curve codes export every vertex of each
+    subpath, so the curved outline spans its full extent and the following
+    subpath keeps its own vertices."""
+    from matplotlib.collections import PatchCollection
+    from matplotlib.patches import PathPatch
+    from matplotlib.path import Path
+
+    circle = Path.circle(center=(1, 1), radius=0.5)
+    square = Path(
+        [(2, 0.5), (3, 0.5), (3, 1.5), (2, 1.5), (2, 0.5)],
+        [Path.MOVETO, Path.LINETO, Path.LINETO, Path.LINETO, Path.CLOSEPOLY],
+    )
+    fig, ax = plt.subplots()
+    ax.add_collection(
+        PatchCollection([PathPatch(Path.make_compound_path(circle, square))])
+    )
+    ax.set_xlim(0, 4)
+    ax.set_ylim(0, 2)
+    plotly_fig = tls.mpl_to_plotly(fig)
+    (trace,) = [t for t in plotly_fig.data if t.fill == "toself"]
+    split = list(trace.x).index(None)
+    circle_x = trace.x[:split]
+    circle_y = trace.y[:split]
+    assert min(circle_x) == pytest.approx(0.5, abs=0.02)
+    assert max(circle_x) == pytest.approx(1.5, abs=0.02)
+    assert min(circle_y) == pytest.approx(0.5, abs=0.02)
+    assert max(circle_y) == pytest.approx(1.5, abs=0.02)
+    assert list(zip(trace.x[split + 1 :], trace.y[split + 1 :])) == [
+        (2, 0.5),
+        (3, 0.5),
+        (3, 1.5),
+        (2, 1.5),
+        (2, 0.5),
+    ]
+
+
 def test_axis_linecolor_defaults_to_black():
     fig, ax = plt.subplots()
     ax.plot([0, 1], [0, 1])
