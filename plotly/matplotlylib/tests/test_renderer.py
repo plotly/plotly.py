@@ -1583,3 +1583,21 @@ def test_plot3d_axis_off(axis_on):
     assert scene.xaxis.visible is expected
     assert scene.yaxis.visible is expected
     assert scene.zaxis.visible is expected
+
+
+def test_plot3d_unlabeled_line_hidden_from_legend():
+    """3D lines without a label stay out of the legend."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    ax.plot([0, 1], [0, 1], [0, 1], label="labeled")
+    ax.plot([0, 1], [1, 0], [0, 1])
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.showlegend is True
+    labeled, unlabeled = plotly_fig.data
+    assert labeled.name == "labeled"
+    assert labeled.showlegend is None
+    assert unlabeled.name is None
+    assert unlabeled.showlegend is False

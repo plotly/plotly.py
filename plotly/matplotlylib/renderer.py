@@ -729,6 +729,7 @@ class PlotlyRenderer(Renderer):
                     go.Scatter3d(
                         mode=mode,
                         name=label,
+                        showlegend=showlegend,
                         x=list(x),
                         y=list(y),
                         z=list(z),
