@@ -1395,7 +1395,7 @@ def test_mixed_style_lines_group_consecutive_matches():
 
 
 def test_axhspan_converts():
-    """axhspan converts to a layout shape spanning the axes width."""
+    """axhspan converts to a layout shape spanning the x axis domain."""
     fig, ax = plt.subplots()
     ax.axhspan(0.25, 0.75)
 
@@ -1405,19 +1405,18 @@ def test_axhspan_converts():
     assert len(plotly_fig.layout.shapes) == 1
     shape = plotly_fig.layout.shapes[0]
     assert shape.type == "rect"
-    x0, x1 = ax.get_xlim()
-    assert abs(shape.x0 - x0) < 1e-9
-    assert abs(shape.x1 - x1) < 1e-9
+    assert abs(shape.x0 - 0) < 1e-9
+    assert abs(shape.x1 - 1) < 1e-9
     assert abs(shape.y0 - 0.25) < 1e-9
     assert abs(shape.y1 - 0.75) < 1e-9
-    assert shape.xref == "x"
+    assert shape.xref == "x domain"
     assert shape.yref == "y"
     assert shape.fillcolor == "#1F77B4"
     assert shape.layer == "below"
 
 
 def test_axvspan_converts():
-    """axvspan converts to a layout shape spanning the axes height."""
+    """axvspan converts to a layout shape spanning the y axis domain."""
     fig, ax = plt.subplots()
     ax.axvspan(0.25, 0.75)
 
@@ -1427,15 +1426,45 @@ def test_axvspan_converts():
     assert len(plotly_fig.layout.shapes) == 1
     shape = plotly_fig.layout.shapes[0]
     assert shape.type == "rect"
-    y0, y1 = ax.get_ylim()
     assert abs(shape.x0 - 0.25) < 1e-9
     assert abs(shape.x1 - 0.75) < 1e-9
-    assert abs(shape.y0 - y0) < 1e-9
-    assert abs(shape.y1 - y1) < 1e-9
+    assert abs(shape.y0 - 0) < 1e-9
+    assert abs(shape.y1 - 1) < 1e-9
     assert shape.xref == "x"
-    assert shape.yref == "y"
+    assert shape.yref == "y domain"
     assert shape.fillcolor == "#1F77B4"
     assert shape.layer == "below"
+
+
+def test_axhspan_axes_fractions_convert():
+    """axhspan xmin/xmax convert to x axis domain fractions and axvspan
+    ymin/ymax convert to y axis domain fractions."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 10], [0, 10])
+    ax.axhspan(2, 4, xmin=0.2, xmax=0.6)
+    ax.axvspan(6, 8, ymin=0.1, ymax=0.5)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    hspan, vspan = plotly_fig.layout.shapes
+    assert hspan.xref == "x domain"
+    assert hspan.yref == "y"
+    assert np.allclose([hspan.x0, hspan.x1, hspan.y0, hspan.y1], [0.2, 0.6, 2, 4])
+    assert vspan.xref == "x"
+    assert vspan.yref == "y domain"
+    assert np.allclose([vspan.x0, vspan.x1, vspan.y0, vspan.y1], [6, 8, 0.1, 0.5])
+
+
+def test_axhspan_on_second_subplot_references_its_domain():
+    """Spans on a second subplot reference that subplot's axis domain."""
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax2.axhspan(2, 4)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    (shape,) = plotly_fig.layout.shapes
+    assert shape.xref == "x2 domain"
+    assert shape.yref == "y2"
 
 
 def test_axhspan_with_custom_style_converts():

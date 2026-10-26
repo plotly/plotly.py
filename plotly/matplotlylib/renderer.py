@@ -56,19 +56,26 @@ def _convert_collection_dash(linestyle):
     return ",".join("{0:g}px".format(d) for d in dashes)
 
 
-def _has_blended_transform(transform):
-    """Check whether a matplotlib transform contains a blended transform."""
+def _find_blended_transform(transform):
+    """Return the first blended transform within a matplotlib transform, or
+    None when it contains no blended transform."""
     if isinstance(
         transform, (transforms.BlendedGenericTransform, transforms.BlendedAffine2D)
     ):
-        return True
+        return transform
     if hasattr(transform, "_a") and hasattr(transform, "_b"):
-        return _has_blended_transform(transform._a) or _has_blended_transform(
-            transform._b
-        )
+        blended = _find_blended_transform(transform._a)
+        if blended is None:
+            blended = _find_blended_transform(transform._b)
+        return blended
     if hasattr(transform, "_transform"):
-        return _has_blended_transform(transform._transform)
-    return False
+        return _find_blended_transform(transform._transform)
+    return None
+
+
+def _has_blended_transform(transform):
+    """Check whether a matplotlib transform contains a blended transform."""
+    return _find_blended_transform(transform) is not None
 
 
 class PlotlyRenderer(Renderer):
@@ -699,15 +706,29 @@ class PlotlyRenderer(Renderer):
         return True
 
     def _draw_axes_span(self, props):
-        """Draw a reference span (axhspan/axvspan) as a layout shape spanning
-        the region in data coordinates."""
+        """Draw a reference span (axhspan/axvspan) as a layout shape.
+
+        Sides given in axes fractions (e.g. axhspan xmin/xmax) map onto the
+        axis domain, so they stay fixed to the axes on pan/zoom; sides given
+        in data coordinates map onto the data axis."""
         ax = self.current_mpl_ax
         px_points = props["data"]
-        data_points = [ax.transData.inverted().transform(pt) for pt in px_points]
-        xs = [pt[0] for pt in data_points]
-        ys = [pt[1] for pt in data_points]
+        blended = _find_blended_transform(props["mplobj"].get_transform())
+        x_in_axes = blended._x == ax.transAxes
+        y_in_axes = blended._y == ax.transAxes
+        axes_points = ax.transAxes.inverted().transform(px_points)
+        data_points = ax.transData.inverted().transform(px_points)
+        xs = (axes_points if x_in_axes else data_points)[:, 0]
+        ys = (axes_points if y_in_axes else data_points)[:, 1]
         x0, x1 = float(min(xs)), float(max(xs))
         y0, y1 = float(min(ys)), float(max(ys))
+        axis_suffix = str(self.axis_ct) if self.axis_ct > 1 else ""
+        xref = "x{0}".format(axis_suffix)
+        yref = "y{0}".format(axis_suffix)
+        if x_in_axes:
+            xref += " domain"
+        if y_in_axes:
+            yref += " domain"
         style = props["style"]
         fillcolor = _export_color(style["facecolor"])
         edgecolor = _export_color(style["edgecolor"])
@@ -718,8 +739,8 @@ class PlotlyRenderer(Renderer):
             y0=y0,
             x1=x1,
             y1=y1,
-            xref="x{0}".format(self.axis_ct),
-            yref="y{0}".format(self.axis_ct),
+            xref=xref,
+            yref=yref,
             fillcolor=fillcolor,
             line=go.layout.shape.Line(
                 color=edgecolor,
