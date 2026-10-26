@@ -24,6 +24,45 @@ from plotly.matplotlylib.mpltools import _export_color
 _AXLINE_CLASS = getattr(mlines, "AxLine", None) or getattr(mlines, "_AxLine", ())
 
 
+def _scene_camera(ax):
+    """Return the plotly scene camera matching the view angles of a 3d axes.
+
+    The eye lies along matplotlib's viewing direction set by the elevation
+    and azimuth. The up vector is the vertical axis, pointing down when the
+    elevation is past +-90 degrees like in matplotlib; with a roll angle, or
+    when looking straight along the vertical axis, it is the screen-up
+    direction computed like ``mpl_toolkits.mplot3d.proj3d._view_axes``.
+    """
+    elev = math.radians(ax.elev)
+    azim = math.radians(ax.azim)
+    roll = math.radians(ax.roll)
+    # unit vector from the scene center towards the eye
+    view = (
+        math.cos(elev) * math.cos(azim),
+        math.cos(elev) * math.sin(azim),
+        math.sin(elev),
+    )
+    if roll == 0 and abs(math.cos(elev)) > 1e-9:
+        up = (0.0, 0.0, math.copysign(1.0, math.cos(elev)))
+    else:
+        # screen-right and screen-up unit vectors at zero roll
+        right = (-math.sin(azim), math.cos(azim), 0.0)
+        screen_up = (
+            -math.sin(elev) * math.cos(azim),
+            -math.sin(elev) * math.sin(azim),
+            math.cos(elev),
+        )
+        up = tuple(
+            u * math.cos(roll) + r * math.sin(roll) for u, r in zip(screen_up, right)
+        )
+    # the eye distance keeps the whole default box in view
+    distance = 1.65 * math.sqrt(3)
+    return dict(
+        eye=dict(zip("xyz", (distance * c for c in view))),
+        up=dict(zip("xyz", up)),
+    )
+
+
 def _per_path(values, i, default):
     """Return the style value for the i-th path of a path collection.
 
@@ -179,9 +218,7 @@ class PlotlyRenderer(Renderer):
                 d["showbackground"] = show_bg
             return d
 
-        camera = dict(
-            eye=dict(x=1.65, y=-1.65, z=1.65),
-        )
+        camera = _scene_camera(ax)
         scene_kwargs = dict(
             domain=domain,
             bgcolor=_export_color(props["axesbg"]),
@@ -190,6 +227,9 @@ class PlotlyRenderer(Renderer):
             zaxis=_axis_dict("z"),
             camera=camera,
         )
+        if camera["up"] != dict(x=0.0, y=0.0, z=1.0):
+            # plotly's turntable drag mode resets the up vector to +z
+            scene_kwargs["dragmode"] = "orbit"
         if hasattr(ax, "get_box_aspect"):
             aspect = ax.get_box_aspect()
             scene_kwargs["aspectmode"] = "manual"

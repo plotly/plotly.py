@@ -1394,6 +1394,11 @@ def test_mixed_style_lines_group_consecutive_matches():
         assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2
 
 
+def _unit(vec):
+    vec = np.array([vec.x, vec.y, vec.z], dtype=float)
+    return vec / np.linalg.norm(vec)
+
+
 def test_plot3d_converts():
     """plot3d converts 3D line plots to scatter3d traces and scene layout."""
     fig = plt.figure()
@@ -1427,13 +1432,15 @@ def test_plot3d_converts():
     assert plotly_fig.layout.margin.r == 0
     assert plotly_fig.layout.margin.b == 0
     assert plotly_fig.layout.margin.t == 0
-    assert scene.camera.eye.x == 1.65
-    assert scene.camera.eye.y == -1.65
-    assert scene.camera.eye.z == 1.65
+    # matplotlib's default view: elevation 30, azimuth -60
+    elev, azim = np.radians(30), np.radians(-60)
+    np.testing.assert_allclose(
+        _unit(scene.camera.eye),
+        [np.cos(elev) * np.cos(azim), np.cos(elev) * np.sin(azim), np.sin(elev)],
+        atol=1e-9,
+    )
     tmpl_scene = plotly_fig.layout.template.layout.scene
-    assert tmpl_scene.camera.eye.x == 1.65
-    assert tmpl_scene.camera.eye.y == -1.65
-    assert tmpl_scene.camera.eye.z == 1.65
+    assert tmpl_scene.camera == scene.camera
     assert scene.xaxis.backgroundcolor == "rgb(249, 249, 249)"
     assert scene.yaxis.backgroundcolor == "rgb(242, 242, 242)"
     assert scene.zaxis.backgroundcolor == "rgb(245, 245, 245)"
@@ -1461,3 +1468,59 @@ def test_plot3d_labels_and_dark_background():
         assert scene.zaxis.backgroundcolor == "rgb(118, 118, 118)"
         assert scene.xaxis.showbackground is True
         assert plotly_fig.layout.paper_bgcolor == "#000000"
+
+
+def test_plot3d_camera_follows_view_init():
+    """The scene camera eye looks from the elevation and azimuth of the axes."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    ax.plot([0, 1], [0, 1], [0, 1])
+    ax.view_init(elev=15, azim=40)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    camera = plotly_fig.layout.scene.camera
+    elev, azim = np.radians(15), np.radians(40)
+    expected = [
+        np.cos(elev) * np.cos(azim),
+        np.cos(elev) * np.sin(azim),
+        np.sin(elev),
+    ]
+    np.testing.assert_allclose(_unit(camera.eye), expected, atol=1e-9)
+    np.testing.assert_allclose(_unit(camera.up), [0, 0, 1], atol=1e-9)
+    assert plotly_fig.layout.scene.dragmode is None
+    tmpl_camera = plotly_fig.layout.template.layout.scene.camera
+    assert tmpl_camera.eye == camera.eye
+    assert tmpl_camera.up == camera.up
+
+
+@pytest.mark.parametrize(
+    "elev, azim, roll, up",
+    [
+        # looking along -x with a 90 degree roll, +y points up on screen
+        (0, 0, 90, [0, 1, 0]),
+        # looking straight down with azimuth -90, +y points up on screen
+        (90, -90, 0, [0, 1, 0]),
+        # past 90 degrees of elevation the view is upside down
+        (150, 30, 0, [0, 0, -1]),
+    ],
+)
+def test_plot3d_camera_up_vector(elev, azim, roll, up):
+    """The scene camera up vector is the screen-up direction of the axes."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    ax.plot([0, 1], [0, 1], [0, 1])
+    ax.view_init(elev=elev, azim=azim, roll=roll)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    camera = plotly_fig.layout.scene.camera
+    elev, azim = np.radians(elev), np.radians(azim)
+    expected_eye = [
+        np.cos(elev) * np.cos(azim),
+        np.cos(elev) * np.sin(azim),
+        np.sin(elev),
+    ]
+    np.testing.assert_allclose(_unit(camera.eye), expected_eye, atol=1e-9)
+    np.testing.assert_allclose(_unit(camera.up), up, atol=1e-9)
+    assert plotly_fig.layout.scene.dragmode == "orbit"
