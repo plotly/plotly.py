@@ -78,6 +78,27 @@ def _has_blended_transform(transform):
     return _find_blended_transform(transform) is not None
 
 
+def _is_axis_aligned_rectangle(points):
+    """Check whether polygon vertices trace an axis-aligned rectangle: every
+    vertex is a corner of the bounding box and all four corners appear."""
+    xs = [float(x) for x, _ in points]
+    ys = [float(y) for _, y in points]
+    if not xs:
+        return False
+    x_min, x_max = min(xs), max(xs)
+    y_min, y_max = min(ys), max(ys)
+    corners = set()
+    for x, y in zip(xs, ys):
+        at_x_min = math.isclose(x, x_min, abs_tol=1e-9)
+        at_x_max = math.isclose(x, x_max, abs_tol=1e-9)
+        at_y_min = math.isclose(y, y_min, abs_tol=1e-9)
+        at_y_max = math.isclose(y, y_max, abs_tol=1e-9)
+        if not (at_x_min or at_x_max) or not (at_y_min or at_y_max):
+            return False
+        corners.add((at_x_max, at_y_max))
+    return len(corners) == 4
+
+
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -705,6 +726,19 @@ class PlotlyRenderer(Renderer):
         self.msg += "    Heck yeah, I drew that reference line\n"
         return True
 
+    def _is_axes_span(self, props):
+        """Check whether a path qualifies as a reference span (e.g. axhspan,
+        axvspan): an axis-aligned rectangle in a blended axes/data
+        transform."""
+        if not isinstance(props["mplobj"], (mpatches.Rectangle, mpatches.Polygon)):
+            return False
+        if not (
+            props["coordinates"] == "display"
+            and _has_blended_transform(props["mplobj"].get_transform())
+        ):
+            return False
+        return _is_axis_aligned_rectangle(props["data"])
+
     def _draw_axes_span(self, props):
         """Draw a reference span (axhspan/axvspan) as a layout shape.
 
@@ -977,11 +1011,7 @@ class PlotlyRenderer(Renderer):
         elif isinstance(props["mplobj"], mpatches.StepPatch):
             self.msg += "    Drawing a step path\n"
             self._draw_step_path(props)
-        elif (
-            isinstance(props["mplobj"], (mpatches.Rectangle, mpatches.Polygon))
-            and props["coordinates"] == "display"
-            and _has_blended_transform(props["mplobj"].get_transform())
-        ):
+        elif self._is_axes_span(props):
             if self._processing_legend:
                 self.msg += "    Using native legend\n"
             else:

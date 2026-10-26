@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.patches as mpatches
 from packaging.version import Version
 from matplotlib import transforms
 import plotly.tools as tls
@@ -1482,3 +1483,27 @@ def test_axhspan_with_custom_style_converts():
     assert shape.line.color == "rgba(0, 0, 255, 0.5)"
     assert shape.line.dash == "dash"
     assert shape.line.width == 1.0
+
+
+def test_blended_unaligned_shapes_do_not_convert_to_spans():
+    """A triangle and a rotated rectangle in a blended axes/data transform
+    warn and leave the layout shapes empty."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 10], [0, 10])
+    ax.add_patch(
+        mpatches.Polygon(
+            [[5, 0.1], [9, 0.1], [7, 0.5]],
+            transform=ax.get_xaxis_transform(),
+            color="b",
+        )
+    )
+    ax.add_patch(
+        mpatches.Rectangle(
+            (6, 0.6), 2, 0.2, angle=30, transform=ax.get_xaxis_transform(), color="g"
+        )
+    )
+
+    with pytest.warns(UserWarning, match="path object"):
+        plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.layout.shapes) == 0
