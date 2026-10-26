@@ -231,6 +231,9 @@ class PlotlyRenderer(Renderer):
             if pane_color:
                 d["backgroundcolor"] = pane_color
                 d["showbackground"] = show_bg
+            # Axes3D keeps its 3D axis on/off state in _axis3don
+            if not getattr(ax, "_axis3don", True):
+                d["visible"] = False
             return d
 
         camera = _scene_camera(ax)

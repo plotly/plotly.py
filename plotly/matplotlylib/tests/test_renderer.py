@@ -1565,3 +1565,21 @@ def test_plot3d_log_axis():
     np.testing.assert_allclose(scene.zaxis.range, [0, 3])
     assert scene.xaxis.type is None
     assert scene.yaxis.type is None
+
+
+@pytest.mark.parametrize("axis_on", [True, False])
+def test_plot3d_axis_off(axis_on):
+    """A 3D axes with its axis turned off exports hidden scene axes."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    ax.plot([0, 1], [0, 1], [0, 1])
+    if not axis_on:
+        ax.set_axis_off()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    scene = plotly_fig.layout.scene
+    expected = None if axis_on else False
+    assert scene.xaxis.visible is expected
+    assert scene.yaxis.visible is expected
+    assert scene.zaxis.visible is expected
