@@ -23,6 +23,18 @@ from plotly.matplotlylib.mpltools import _export_color
 # ``_AxLine`` in earlier versions.
 _AXLINE_CLASS = getattr(mlines, "AxLine", None) or getattr(mlines, "_AxLine", ())
 
+# marker symbols available on scatter3d traces
+_SCATTER3D_SYMBOLS = (
+    "circle",
+    "circle-open",
+    "cross",
+    "diamond",
+    "diamond-open",
+    "square",
+    "square-open",
+    "x",
+)
+
 
 def _scene_camera(ax):
     """Return the plotly scene camera matching the view angles of a 3d axes.
@@ -728,7 +740,11 @@ class PlotlyRenderer(Renderer):
                             go.scatter3d.Marker(
                                 opacity=marker.opacity,
                                 color=marker.color,
-                                symbol=marker.symbol,
+                                symbol=(
+                                    marker.symbol
+                                    if marker.symbol in _SCATTER3D_SYMBOLS
+                                    else "circle"
+                                ),
                                 size=marker.size,
                                 line=dict(
                                     color=marker.line.color,

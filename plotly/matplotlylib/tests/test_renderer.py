@@ -1524,3 +1524,26 @@ def test_plot3d_camera_up_vector(elev, azim, roll, up):
     np.testing.assert_allclose(_unit(camera.eye), expected_eye, atol=1e-9)
     np.testing.assert_allclose(_unit(camera.up), up, atol=1e-9)
     assert plotly_fig.layout.scene.dragmode == "orbit"
+
+
+def test_plot3d_marker_symbols():
+    """3D line markers export as scatter3d symbols; triangles and stars export
+    as circles."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    for marker in ["o", "s", "D", "x", "+", "^", "v", "*"]:
+        ax.plot([0, 1], [0, 1], [0, 1], marker=marker)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    symbols = [trace.marker.symbol for trace in plotly_fig.data]
+    assert symbols == [
+        "circle",
+        "square",
+        "diamond",
+        "x",
+        "cross",
+        "circle",
+        "circle",
+        "circle",
+    ]
