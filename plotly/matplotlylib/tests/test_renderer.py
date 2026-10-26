@@ -1525,3 +1525,19 @@ def test_axvspan_on_date_xaxis_converts_to_dates():
     assert vspan.x1.startswith("2023-01-06")
     assert hspan.xref == "x domain"
     assert np.allclose([hspan.x0, hspan.x1], [0, 1])
+
+
+def test_labeled_axvspan_shows_in_legend():
+    """A labeled span exports its label as the shape legend entry."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 10], [0, 10], label="line")
+    ax.axvspan(2, 4, label="span")
+    ax.axhspan(6, 8)
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    labeled, unlabeled = plotly_fig.layout.shapes
+    assert labeled.name == "span"
+    assert labeled.showlegend is True
+    assert unlabeled.showlegend is None

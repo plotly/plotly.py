@@ -769,6 +769,9 @@ class PlotlyRenderer(Renderer):
         fillcolor = _export_color(style["facecolor"])
         edgecolor = _export_color(style["edgecolor"])
         linewidth = style["edgewidth"] if style["edgecolor"] != "none" else 0
+        label = props["mplobj"].get_label()
+        if not label or (isinstance(label, str) and label.startswith("_")):
+            label = None
         shape = go.layout.Shape(
             type="rect",
             x0=x0,
@@ -784,6 +787,8 @@ class PlotlyRenderer(Renderer):
                 dash=mpltools.convert_dash(style["dasharray"]),
             ),
             layer="below" if style.get("zorder", 1) < 2 else "above",
+            name=label,
+            showlegend=True if label is not None else None,
         )
         self.plotly_fig["layout"]["shapes"] += (shape,)
         self.msg += "    Heck yeah, I drew that reference span\n"
