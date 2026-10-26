@@ -221,6 +221,9 @@ class PlotlyRenderer(Renderer):
                 showline=True,
                 linecolor=line_color,
             )
+            if axis_obj.get_scale() == "log":
+                d["type"] = "log"
+                d["range"] = [math.log10(lim[0]), math.log10(lim[1])]
             if label:
                 d["title"] = dict(text=label)
             if tick_color:

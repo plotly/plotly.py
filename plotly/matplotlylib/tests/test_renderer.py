@@ -1547,3 +1547,21 @@ def test_plot3d_marker_symbols():
         "circle",
         "circle",
     ]
+
+
+def test_plot3d_log_axis():
+    """A log-scaled 3D axis exports as a log scene axis with a log10 range."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    t = np.linspace(0, 1, 20)
+    ax.plot(t, t, 10 ** (3 * t))
+    ax.set_zscale("log")
+    ax.set_zlim(1, 1000)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    scene = plotly_fig.layout.scene
+    assert scene.zaxis.type == "log"
+    np.testing.assert_allclose(scene.zaxis.range, [0, 3])
+    assert scene.xaxis.type is None
+    assert scene.yaxis.type is None
