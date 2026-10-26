@@ -756,6 +756,8 @@ class PlotlyRenderer(Renderer):
         ys = (axes_points if y_in_axes else data_points)[:, 1]
         x0, x1 = float(min(xs)), float(max(xs))
         y0, y1 = float(min(ys)), float(max(ys))
+        if self.x_is_mpl_date and not x_in_axes:
+            x0, x1 = self._convert_x_dates([x0, x1])
         axis_suffix = str(self.axis_ct) if self.axis_ct > 1 else ""
         xref = "x{0}".format(axis_suffix)
         yref = "y{0}".format(axis_suffix)

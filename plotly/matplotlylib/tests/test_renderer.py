@@ -1507,3 +1507,21 @@ def test_blended_unaligned_shapes_do_not_convert_to_spans():
         plotly_fig = tls.mpl_to_plotly(fig)
 
     assert len(plotly_fig.layout.shapes) == 0
+
+
+def test_axvspan_on_date_xaxis_converts_to_dates():
+    """axvspan on a date x axis exports its x extent as date strings."""
+    dates = [datetime.datetime(2023, 1, i) for i in range(1, 10)]
+    fig, ax = plt.subplots()
+    ax.plot(dates, range(len(dates)))
+    ax.axvspan(dates[2], dates[5])
+    ax.axhspan(2, 4)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    vspan, hspan = plotly_fig.layout.shapes
+    assert vspan.xref == "x"
+    assert vspan.x0.startswith("2023-01-03")
+    assert vspan.x1.startswith("2023-01-06")
+    assert hspan.xref == "x domain"
+    assert np.allclose([hspan.x0, hspan.x1], [0, 1])
