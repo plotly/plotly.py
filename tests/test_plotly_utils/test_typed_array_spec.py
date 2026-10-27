@@ -37,7 +37,9 @@ from _plotly_utils.utils import to_typed_array_spec
 )
 def test_bdata_is_little_endian(dtype, np_dtype):
     v = np.array([1, 2, 3, 4, 5], dtype=dtype)
-    assert str(v.dtype) == dtype  # sanity: native order, routes through the real dispatch
+    assert (
+        str(v.dtype) == dtype
+    )  # sanity: native order, routes through the real dispatch
 
     spec = to_typed_array_spec(v)
     assert isinstance(spec, dict), "did not reach the typed-array-spec encoding path"
