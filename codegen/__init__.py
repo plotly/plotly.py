@@ -307,6 +307,11 @@ else:
         "..graph_objs." + rel_path.split(".")[-1]
         for rel_path in datatype_rel_class_imports[()]
     ]
+    # FigureWidget is owned by graph_objs, which handles the optional
+    # ipywidgets import and the missing_* fallback. Re-export it from
+    # graph_objs like every other class instead of duplicating the optional
+    # import block in graph_objects.
+    graph_objects_rel_classes.append("..graph_objs.FigureWidget")
     graph_objects_rel_modules = [
         "..graph_objs." + rel_module.split(".")[-1]
         for rel_module in datatype_rel_module_imports[()]
@@ -315,7 +320,6 @@ else:
     graph_objects_init_source = build_from_imports_py(
         graph_objects_rel_modules,
         graph_objects_rel_classes,
-        init_extra=optional_figure_widget_import,
     )
     graph_objects_path = opath.join(outdir, "graph_objects", "__init__.py")
     os.makedirs(opath.join(outdir, "graph_objects"), exist_ok=True)
