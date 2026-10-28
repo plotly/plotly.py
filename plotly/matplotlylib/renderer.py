@@ -74,6 +74,29 @@ def _split_subpaths(verts, codes):
     return subpaths
 
 
+def _join_subpaths(verts, codes):
+    """Return the x and y values of a path's subpaths as two lists, with
+    None between consecutive subpaths.
+
+    A closed subpath (Z code) ends with its first vertex repeated, since
+    plotly's lines mode draws only the segments between the given points.
+    Subpaths with fewer than 2 vertices are skipped.
+    """
+    xs = []
+    ys = []
+    for sub, closed in _split_subpaths(verts, codes):
+        if len(sub) < 2:
+            continue
+        if closed:
+            sub = sub + [sub[0]]
+        if xs:
+            xs.append(None)
+            ys.append(None)
+        xs.extend(v[0] for v in sub)
+        ys.extend(v[1] for v in sub)
+    return xs, ys
+
+
 def _convert_collection_dash(linestyle):
     """Convert a matplotlib collection line style to a plotly dash string.
 
@@ -831,26 +854,11 @@ class PlotlyRenderer(Renderer):
 
         for i, (verts, codes) in enumerate(props["paths"]):
             # a path may contain several disjoint lines (e.g. contour lines
-            # of the same level); separate disjoint subpaths with None so
-            # plotly does not connect them.
-            path_x = []
-            path_y = []
-            for sub, closed in _split_subpaths(verts, codes):
-                if len(sub) < 2:
-                    continue
-                # a closed subpath (Z code) must be closed explicitly since
-                # plotly's lines mode does not close the loop
-                if closed:
-                    sub = sub + [sub[0]]
-                sub_x = self._convert_x_dates([v[0] for v in sub])
-                sub_y = [v[1] for v in sub]
-                if path_x:
-                    path_x.append(None)
-                    path_y.append(None)
-                path_x.extend(sub_x)
-                path_y.extend(sub_y)
+            # of the same level), separated by None
+            path_x, path_y = _join_subpaths(verts, codes)
             if not path_x:
                 continue
+            path_x = self._convert_x_dates(path_x)
 
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
@@ -884,19 +892,7 @@ class PlotlyRenderer(Renderer):
             facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
-            xs = []
-            ys = []
-            for sub, cl in _split_subpaths(verts, codes):
-                if len(sub) < 2:
-                    continue
-                if xs:
-                    xs.append(None)
-                    ys.append(None)
-                if cl:
-                    sub = sub + [sub[0]]
-                xs.extend([v[0] for v in sub])
-                ys.extend([v[1] for v in sub])
-
+            xs, ys = _join_subpaths(verts, codes)
             if not xs and len(verts) > 0:
                 xs = [v[0] for v in verts]
                 ys = [v[1] for v in verts]
