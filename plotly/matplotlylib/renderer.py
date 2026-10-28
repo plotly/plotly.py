@@ -74,7 +74,7 @@ def _split_subpaths(verts, codes):
     return subpaths
 
 
-def _join_subpaths(verts, codes):
+def _join_subpaths(x, y, codes):
     """Return the x and y values of a path's subpaths as two lists, with
     None between consecutive subpaths.
 
@@ -84,7 +84,7 @@ def _join_subpaths(verts, codes):
     """
     xs = []
     ys = []
-    for sub, closed in _split_subpaths(verts, codes):
+    for sub, closed in _split_subpaths(list(zip(x, y)), codes):
         if len(sub) < 2:
             continue
         if closed:
@@ -155,21 +155,12 @@ class PlotlyRenderer(Renderer):
         self.axes_list = []
 
     def _convert_x_dates(self, x):
-        """Convert x values to date strings when the x-axis is a date axis.
-
-        None values (subpath separators) stay None.
-        """
+        """Convert x values to date strings when the x-axis is a date axis."""
         if self.x_is_mpl_date:
             formatter = (
                 self.current_mpl_ax.get_xaxis().get_major_formatter().__class__.__name__
             )
-            if any(val is None for val in x):
-                valid_x = [val for val in x if val is not None]
-                converted = mpltools.mpl_dates_to_datestrings(valid_x, formatter)
-                conv_iter = iter(converted)
-                x = [next(conv_iter) if val is not None else None for val in x]
-            else:
-                x = mpltools.mpl_dates_to_datestrings(x, formatter)
+            x = mpltools.mpl_dates_to_datestrings(x, formatter)
         return x
 
     def open_figure(self, fig, props):
@@ -855,10 +846,13 @@ class PlotlyRenderer(Renderer):
         for i, (verts, codes) in enumerate(props["paths"]):
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level), separated by None
-            path_x, path_y = _join_subpaths(verts, codes)
+            path_x, path_y = _join_subpaths(
+                self._convert_x_dates([v[0] for v in verts]),
+                [v[1] for v in verts],
+                codes,
+            )
             if not path_x:
                 continue
-            path_x = self._convert_x_dates(path_x)
 
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
@@ -892,14 +886,15 @@ class PlotlyRenderer(Renderer):
             facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
-            xs, ys = _join_subpaths(verts, codes)
+            x = self._convert_x_dates([v[0] for v in verts])
+            y = [v[1] for v in verts]
+            xs, ys = _join_subpaths(x, y, codes)
             if not xs and len(verts) > 0:
-                xs = [v[0] for v in verts]
-                ys = [v[1] for v in verts]
+                xs, ys = x, y
 
             self.plotly_fig.add_trace(
                 go.Scatter(
-                    x=self._convert_x_dates(xs),
+                    x=xs,
                     y=ys,
                     mode="lines",
                     line=go.scatter.Line(
