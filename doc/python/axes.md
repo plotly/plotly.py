@@ -64,7 +64,7 @@ The axis type is auto-detected by looking at data from the first [trace](/python
 	* Both of these test an evenly-spaced sample of at most 1000 values
 
 
-### Forcing an axis to be categorical
+### Forcing an Axis to be Categorical
 
 It is possible to force the axis type by setting explicitly `xaxis_type`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
 
@@ -91,7 +91,7 @@ The examples on this page apply to axes of any type, but extra attributes are av
 
 #### Set and Style Axes Title Labels
 
-##### Set axis title text with Plotly Express
+##### Set Axis Title Text with Plotly Express
 
 Axis titles are automatically set to the column names when [using Plotly Express with a data frame as input](/python/px-arguments/).
 
@@ -124,11 +124,11 @@ fig = px.bar(x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
 fig.show()
 ```
 
-##### Rotating tick labels in Dash
+##### Rotating Tick Labels in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -173,7 +173,7 @@ fig.update_xaxes(labelalias=dict(Sat="Saturday", Sun="Sunday"))
 fig.show()
 ```
 
-##### Set axis title text with Graph Objects
+##### Set Axis Title Text with Graph Objects
 
 Axis titles are set using the nested `title.text` property of the x or y axis. Here is an example of creating a new figure and using `update_xaxes` and `update_yaxes`, with magic underscore notation, to set the axis titles.
 
@@ -188,7 +188,7 @@ fig.update_yaxes(title_text='Value A')
 fig.show()
 ```
 
-### Set axis title position
+### Set Axis Title Position
 
 This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
@@ -213,7 +213,7 @@ fig.update_yaxes(
 fig.show()
 ```
 
-##### Set axis title font
+##### Set Axis Title Font
 
 Here is an example that configures the font family, size, and color for the axis titles in a figure created using Plotly Express.
 
@@ -230,7 +230,7 @@ fig.show()
 
 #### Tick Placement, Color, and Style
 
-##### Toggling axis tick marks
+##### Toggling Axis Tick Marks
 
 Axis tick marks are disabled by default for the default `plotly` theme, but they can easily be turned on by setting the `ticks` axis property to `"inside"` (to place ticks inside plotting area) or `"outside"` (to place ticks outside the plotting area).
 
@@ -247,7 +247,7 @@ fig.update_yaxes(ticks="inside", col=1)
 fig.show()
 ```
 
-##### Set number of tick marks (and grid lines)
+##### Set Number of Tick Marks (and Grid Lines)
 
 The approximate number of ticks displayed for an axis can be specified using the `nticks` axis property.
 
@@ -263,7 +263,7 @@ fig.update_yaxes(nticks=20)
 fig.show()
 ```
 
-##### Set start position and distance between ticks
+##### Set Start Position and Distance Between Ticks
 
 The `tick0` and `dtick` axis properties can be used to control to placement of axis ticks as follows: If specified, a tick will fall exactly on the location of `tick0` and additional ticks will be added in both directions at intervals of `dtick`.
 
@@ -279,7 +279,7 @@ fig.update_yaxes(tick0=0.25, dtick=0.5)
 fig.show()
 ```
 
-##### Set exact location of axis ticks
+##### Set Exact Location of Axis Ticks
 
 It is possible to configure an axis to display ticks at a set of predefined locations by setting the `tickvals` property to an array of positions.
 
@@ -295,7 +295,7 @@ fig.update_yaxes(tickvals=[5.1, 5.9, 6.3, 7.5])
 fig.show()
 ```
 
-##### Style tick marks
+##### Style Tick Marks
 
 As discussed above, tick marks are disabled by default in the default `plotly` theme, but they can be enabled by setting the `ticks` axis property to `"inside"` (to place ticks inside plotting area) or `"outside"` (to place ticks outside the plotting area).
 
@@ -314,7 +314,7 @@ fig.update_yaxes(ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
 fig.show()
 ```
 
-##### Step for tick labels
+##### Step for Tick Labels
 
 *New in v5.6*
 
@@ -330,7 +330,7 @@ fig.update_yaxes(ticklabelstep=2)
 fig.show()
 ```
 
-##### Toggling axis labels
+##### Toggling Axis Labels
 
 The axis tick mark labels can be disabled by setting the `showticklabels` axis property to `False`.
 
@@ -347,7 +347,7 @@ fig.update_yaxes(showticklabels=False)
 fig.show()
 ```
 
-##### Set axis label rotation and font
+##### Set Axis Label Rotation and Font
 
 The orientation of the axis tick mark labels is configured using the `tickangle` axis property. The value of `tickangle` is the angle of rotation, in the clockwise direction, of the labels from vertical in units of degrees. The font family, size, and color for the tick labels are stored under the `tickfont` axis property.
 
@@ -426,7 +426,7 @@ fig.update_layout(title_text="Apple Stock Price")
 fig.show()
 ```
 
-#### Adding minor ticks
+#### Adding Minor Ticks
 
 _new in 5.8_
 
@@ -506,9 +506,9 @@ fig.update_layout(
 fig.show()
 ```
 
-### Axis lines: grid and zerolines
+### Axis Lines: Grid and Zero Lines
 
-##### Toggling Axis grid lines
+##### Toggling Axis Grid Lines
 
 Axis grid lines can be disabled by setting the `showgrid` property to `False` for the x and/or y axis.
 
@@ -523,7 +523,7 @@ fig.update_yaxes(showgrid=False)
 fig.show()
 ```
 
-##### Toggling Axis zero lines
+##### Toggling Axis Zero Lines
 
 The lines passing through zero can be disabled as well by setting the `zeroline` axis property to `False`
 
@@ -537,9 +537,9 @@ fig.update_yaxes(showgrid=False, zeroline=False)
 fig.show()
 ```
 
-#### Styling and Coloring Axes and the Zero-Line
+#### Styling and Coloring Axes and the Zero Line
 
-##### Styling axis lines
+##### Styling Axis Lines
 
 The `showline` axis property controls the visibility of the axis line, and the `linecolor` and `linewidth` axis properties control the color and width of the axis line.
 
@@ -556,7 +556,7 @@ fig.update_yaxes(showline=True, linewidth=2, linecolor='black')
 fig.show()
 ```
 
-##### Mirroring axis lines
+##### Mirroring Axis Lines
 
 Axis lines can be mirrored to the opposite side of the plotting area by setting the `mirror` axis property to `True`.
 
@@ -573,7 +573,7 @@ fig.update_yaxes(showline=True, linewidth=2, linecolor='black', mirror=True)
 fig.show()
 ```
 
-##### Styling grid lines
+##### Styling Grid Lines
 
 The width and color of axis grid lines are controlled by the `gridwidth` and `gridcolor` axis properties.
 
@@ -604,7 +604,7 @@ fig.update_xaxes(gridcolor='black', griddash='dash', minor_griddash="dot")
 fig.show()
 ```
 
-##### Styling zero lines
+##### Styling Zero Lines
 
 The width and color of axis zero lines are controlled by the `zerolinewidth` and `zerolinecolor` axis properties.
 
@@ -689,7 +689,7 @@ fig.update_xaxes(insiderange=['2018-10-01', '2019-01-01'], title=dict(text="Date
 fig.show()
 ```
 
-#### Setting only a Lower or Upper Bound for Range
+#### Setting Only a Lower or Upper Bound for Range
 
 *New in 5.17*
 
@@ -767,7 +767,7 @@ fig.update_yaxes(
 fig.show()
 ```
 
-### Fixed Ratio Axes with Compressed domain
+### Fixed Ratio Axes with Compressed Domain
 
 If an axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), `constrain` determines how that happens: by increasing the "range" (default), or by decreasing the "domain".
 
@@ -794,7 +794,7 @@ fig.update_yaxes(
 fig.show()
 ```
 
-##### Decreasing the domain spanned by an axis
+##### Decreasing the Domain Spanned by an Axis
 
 In the example below, the x and y axis are anchored together, and the range of the `xaxis` is set manually. By default, plotly extends the range of the axis (overriding the `range` parameter) to fit in the figure `domain`. You can restrict the `domain` to force the axis to span only the set range, by setting `constrain='domain'` as below.
 
@@ -842,7 +842,7 @@ fig.update_yaxes(autorange="reversed")
 fig.show()
 ```
 
-#### Reversed Axes with Range ( Min/Max ) Specified
+#### Reversed Axes with Range (Min/Max) Specified
 
 The direction of an axis can be reversed when manually setting the range extents by specifying a list containing the upper bound followed by the lower bound (rather that the lower followed by the upper) as the `range` axis property.
 
@@ -888,7 +888,7 @@ fig.update_yaxes(range=[None, 3], autorange="max reversed")
 fig.show()
 ```
 
-### Axis range for log axis type
+### Axis Range for Log Axis Type
 
 If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.update_xaxes` or `fig.update_layout`. However, with `plotly.express` functions you pass directly the values of the range bounds (`plotly.express` then computes the appropriate values to pass to the figure layout).
 
@@ -928,7 +928,7 @@ fig.update_yaxes(domain=(0.25, 0.75))
 fig.show()
 ```
 
-#### Synchronizing axes in subplots with `matches`
+#### Synchronizing Axes in Subplots with `matches`
 
 Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly.
 
@@ -1008,7 +1008,7 @@ fig.update_xaxes(autorangeoptions=dict(clipmax=4))
 fig.show()
 ```
 
-##### Specify Values to be Included
+##### Specify Values to Be Included
 
 Use `autorangeoptions.include` to specify a value that should always be included within the calculated autorange. In this example, we specify that for the autorange calculated on the x-axis, 5 should be included.
 
