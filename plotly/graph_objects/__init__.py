@@ -77,6 +77,7 @@ if TYPE_CHECKING:
     from ..graph_objs import YBins
     from ..graph_objs import Trace
     from ..graph_objs import Histogram2dcontour
+    from ..graph_objs import FigureWidget
     from ..graph_objs import waterfall
     from ..graph_objs import volume
     from ..graph_objs import violin
@@ -255,42 +256,6 @@ else:
             "..graph_objs.YBins",
             "..graph_objs.Trace",
             "..graph_objs.Histogram2dcontour",
+            "..graph_objs.FigureWidget",
         ],
     )
-
-
-if sys.version_info < (3, 7) or TYPE_CHECKING:
-    try:
-        import ipywidgets as _ipywidgets
-        from packaging.version import Version as _Version
-
-        if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
-            from ..graph_objs._figurewidget import FigureWidget
-        else:
-            raise ImportError()
-    except Exception:
-        from ..missing_anywidget import FigureWidget
-else:
-    __all__.append("FigureWidget")
-    orig_getattr = __getattr__
-
-    def __getattr__(import_name):
-        if import_name == "FigureWidget":
-            try:
-                import ipywidgets
-                from packaging.version import Version
-
-                if Version(ipywidgets.__version__) >= Version("7.0.0"):
-                    from ..graph_objs._figurewidget import FigureWidget
-
-                    return FigureWidget
-                else:
-                    raise ImportError()
-            except Exception:
-                from ..missing_anywidget import FigureWidget
-
-                return FigureWidget
-            else:
-                raise ImportError()
-
-        return orig_getattr(import_name)
