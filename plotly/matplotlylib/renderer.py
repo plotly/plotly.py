@@ -13,7 +13,6 @@ import warnings
 import matplotlib.patches as mpatches
 from matplotlib import lines as mlines
 from matplotlib import transforms
-import numpy as np
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -893,7 +892,7 @@ class PlotlyRenderer(Renderer):
                 if xs:
                     xs.append(None)
                     ys.append(None)
-                if cl and not np.allclose(sub[0], sub[-1]):
+                if cl:
                     sub = sub + [sub[0]]
                 xs.extend([v[0] for v in sub])
                 ys.extend([v[1] for v in sub])
