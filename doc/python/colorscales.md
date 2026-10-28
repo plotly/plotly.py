@@ -443,7 +443,7 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 response = urllib.request.urlopen(
@@ -535,7 +535,7 @@ Like axes, you can customize the color bar ticks, labels, and values with `ticks
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 # Load heatmap data
@@ -570,7 +570,7 @@ By default, color bars are displayed vertically. You can change a color bar to b
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 # Load heatmap data
@@ -647,7 +647,7 @@ See the positioning section of [the figure data structure page](/python/figure-s
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 # Load heatmap data
