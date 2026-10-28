@@ -335,3 +335,24 @@ def test_width_height_priority():
     assert height == pio.defaults.default_height, (
         "Default height should be used when no layout or argument"
     )
+
+
+def test_write_images_width_height_priority(tmp_path):
+    """write_images uses the same width/height priority as to_image:
+    arguments > layout.width/height > defaults."""
+    paths = [tmp_path / f"fig{i}.svg" for i in range(3)]
+    pio.write_images(
+        [
+            create_figure(width=800, height=600),
+            create_figure(width=800, height=600),
+            create_figure(),
+        ],
+        paths,
+        width=[None, 1200, None],
+    )
+    dimensions = [parse_svg_dimensions(path.read_bytes()) for path in paths]
+    assert dimensions[0] == (800, 600), "Layout dimensions should be used"
+    assert dimensions[1] == (1200, 600), (
+        "Width argument should override layout, height should use layout"
+    )
+    assert dimensions[2] == (pio.defaults.default_width, pio.defaults.default_height)
