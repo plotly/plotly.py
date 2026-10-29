@@ -1626,6 +1626,28 @@ def test_plot3d_axis_title_fonts():
     ]
 
 
+def test_plot3d_shorthand_axis_colors():
+    """3D axis line and tick label colors given as matplotlib shorthand
+    color strings export as hex colors."""
+    with plt.style.context("seaborn-v0_8-whitegrid"):
+        fig = plt.figure()
+        ax = fig.add_subplot(projection="3d")
+        ax.plot([0, 1], [0, 1], [0, 1])
+        styled = tls.mpl_to_plotly(fig).layout.scene
+
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    ax.plot([0, 1], [0, 1], [0, 1])
+    ax.tick_params(colors="C1")
+    cycled = tls.mpl_to_plotly(fig).layout.scene
+
+    for axis in (styled.xaxis, styled.yaxis, styled.zaxis):
+        assert axis.linecolor == "#CCCCCC"
+        assert axis.tickfont.color == "#262626"
+    for axis in (cycled.xaxis, cycled.yaxis, cycled.zaxis):
+        assert axis.tickfont.color == "#FF7F0E"
+
+
 def _add_scatter3d(ax):
     ax.scatter([0, 1], [0, 1], [0, 1])
 

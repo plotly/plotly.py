@@ -180,9 +180,9 @@ class PlotlyRenderer(Renderer):
             axis_obj = getattr(ax, axis_name + "axis")
             lim = getattr(ax, "get_{0}lim".format(axis_name))()
             label = getattr(ax, "get_{0}label".format(axis_name))()
-            line_color = _export_color(axis_obj.line.get_color())
+            line_color = _export_color(mcolors.to_rgba(axis_obj.line.get_color()))
             tick_color = (
-                _export_color(axis_obj.get_ticklabels()[0].get_color())
+                _export_color(mcolors.to_rgba(axis_obj.get_ticklabels()[0].get_color()))
                 if axis_obj.get_ticklabels()
                 else None
             )
