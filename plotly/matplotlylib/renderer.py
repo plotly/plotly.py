@@ -1257,7 +1257,10 @@ class PlotlyRenderer(Renderer):
             align = props["style"]["halign"]  # mpl default
         if "annotations" not in self.plotly_fig["layout"]:
             self.plotly_fig["layout"]["annotations"] = []
-        if props["text_type"] == "xlabel":
+        if self.current_is_3d and props["text_type"] in ("xlabel", "ylabel"):
+            # _open_3d_axes exports the axis titles of 3d axes
+            self.msg += "      Text object is a 3d axis label\n"
+        elif props["text_type"] == "xlabel":
             self.msg += "      Text object is an xlabel\n"
             self.draw_xlabel(**props)
         elif props["text_type"] == "ylabel":
@@ -1423,17 +1426,6 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "        Adding xlabel\n"
-        if self.current_is_3d:
-            self.plotly_fig["layout"][self.current_3d_subplot]["xaxis"]["title"] = dict(
-                text=str(props["text"])
-            )
-            title_font = dict(
-                size=props["style"]["fontsize"], color=props["style"]["color"]
-            )
-            self.plotly_fig["layout"][self.current_3d_subplot]["xaxis"][
-                "title_font"
-            ] = title_font
-            return
         axis_key = "xaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = str(props["text"])
         title_font = dict(
@@ -1466,17 +1458,6 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "        Adding ylabel\n"
-        if self.current_is_3d:
-            self.plotly_fig["layout"][self.current_3d_subplot]["yaxis"]["title"] = dict(
-                text=str(props["text"])
-            )
-            title_font = dict(
-                size=props["style"]["fontsize"], color=props["style"]["color"]
-            )
-            self.plotly_fig["layout"][self.current_3d_subplot]["yaxis"][
-                "title_font"
-            ] = title_font
-            return
         axis_key = "yaxis{0}".format(self.axis_ct)
         self.plotly_fig["layout"][axis_key]["title"] = props["text"]
         title_font = dict(
