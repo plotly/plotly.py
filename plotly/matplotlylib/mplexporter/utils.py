@@ -303,7 +303,9 @@ def get_axes_properties(ax):
         "bounds": ax.get_position().bounds,
         "dynamic": ax.get_navigate(),
         "axison": ax.axison,
-        "frame_on": ax.get_frame_on(),
+        "frame_on": (
+            ax.get_frame_on() if callable(getattr(ax, "get_frame_on", None)) else True
+        ),
         "patch_visible": ax.patch.get_visible(),
         "axes": [get_axis_properties(ax.xaxis), get_axis_properties(ax.yaxis)],
     }

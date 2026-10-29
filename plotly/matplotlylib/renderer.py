@@ -12,6 +12,7 @@ import warnings
 
 import matplotlib.patches as mpatches
 from matplotlib import lines as mlines
+from matplotlib import colors as mcolors
 from matplotlib import transforms
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
@@ -21,6 +22,57 @@ from plotly.matplotlylib.mpltools import _export_color
 # Artist class created by ``Axes.axline``: ``AxLine`` in matplotlib >= 3.8,
 # ``_AxLine`` in earlier versions.
 _AXLINE_CLASS = getattr(mlines, "AxLine", None) or getattr(mlines, "_AxLine", ())
+
+# marker symbols available on scatter3d traces
+_SCATTER3D_SYMBOLS = (
+    "circle",
+    "circle-open",
+    "cross",
+    "diamond",
+    "diamond-open",
+    "square",
+    "square-open",
+    "x",
+)
+
+
+def _scene_camera(ax):
+    """Return the plotly scene camera matching the view angles of a 3d axes.
+
+    The eye lies along matplotlib's viewing direction set by the elevation
+    and azimuth. The up vector is the vertical axis, pointing down when the
+    elevation is past +-90 degrees like in matplotlib; with a roll angle, or
+    when looking straight along the vertical axis, it is the screen-up
+    direction computed like ``mpl_toolkits.mplot3d.proj3d._view_axes``.
+    """
+    elev = math.radians(ax.elev)
+    azim = math.radians(ax.azim)
+    roll = math.radians(ax.roll)
+    # unit vector from the scene center towards the eye
+    view = (
+        math.cos(elev) * math.cos(azim),
+        math.cos(elev) * math.sin(azim),
+        math.sin(elev),
+    )
+    if roll == 0 and abs(math.cos(elev)) > 1e-9:
+        up = (0.0, 0.0, math.copysign(1.0, math.cos(elev)))
+    else:
+        # screen-right and screen-up unit vectors at zero roll
+        right = (-math.sin(azim), math.cos(azim), 0.0)
+        screen_up = (
+            -math.sin(elev) * math.cos(azim),
+            -math.sin(elev) * math.sin(azim),
+            math.cos(elev),
+        )
+        up = tuple(
+            u * math.cos(roll) + r * math.sin(roll) for u, r in zip(screen_up, right)
+        )
+    # the eye distance keeps the whole default box in view
+    distance = 1.65 * math.sqrt(3)
+    return dict(
+        eye=dict(zip("xyz", (distance * c for c in view))),
+        up=dict(zip("xyz", up)),
+    )
 
 
 def _per_path(values, i, default):
@@ -91,6 +143,10 @@ class PlotlyRenderer(Renderer):
         self.current_bars = []
         self.axis_ct = 0
         self.x_is_mpl_date = False
+        self.scene_ct = 0
+        self.current_3d_subplot = None
+        self.current_is_3d = False
+        self.all_3d = False
         self.mpl_x_bounds = (0, 1)
         self.mpl_y_bounds = (0, 1)
         self.msg = "Initialized PlotlyRenderer\n"
@@ -106,6 +162,103 @@ class PlotlyRenderer(Renderer):
             )
             x = mpltools.mpl_dates_to_datestrings(x, formatter)
         return x
+
+    def _open_3d_axes(self, ax, props):
+        """Create a plotly scene layout object for a matplotlib 3d axes."""
+        self.scene_ct += 1
+        self.current_3d_subplot = (
+            "scene{0}".format(self.scene_ct) if self.scene_ct > 1 else "scene"
+        )
+        bounds = props["bounds"]
+        domain = dict(
+            x=mpltools.convert_x_domain(bounds, self.mpl_x_bounds),
+            y=mpltools.convert_y_domain(bounds, self.mpl_y_bounds),
+        )
+
+        bg_rgba = ax.patch.get_facecolor()
+
+        def _axis_dict(axis_name):
+            axis_obj = getattr(ax, axis_name + "axis")
+            lim = getattr(ax, "get_{0}lim".format(axis_name))()
+            label = getattr(ax, "get_{0}label".format(axis_name))()
+            line_color = _export_color(mcolors.to_rgba(axis_obj.line.get_color()))
+            tick_color = (
+                _export_color(mcolors.to_rgba(axis_obj.get_ticklabels()[0].get_color()))
+                if axis_obj.get_ticklabels()
+                else None
+            )
+            fc = axis_obj.pane.get_facecolor()
+            alpha = fc[3]
+            show_bg = axis_obj.pane.get_visible() and alpha > 0.0
+            if alpha < 1.0:
+                blended = tuple(
+                    fc[i] * alpha + bg_rgba[i] * (1.0 - alpha) for i in range(3)
+                )
+                pane_color = "rgb({0}, {1}, {2})".format(
+                    int(round(blended[0] * 255)),
+                    int(round(blended[1] * 255)),
+                    int(round(blended[2] * 255)),
+                )
+            else:
+                pane_color = _export_color(fc)
+            d = dict(
+                range=[float(lim[0]), float(lim[1])],
+                showline=True,
+                linecolor=line_color,
+            )
+            if axis_obj.get_scale() == "log":
+                d["type"] = "log"
+                d["range"] = [math.log10(lim[0]), math.log10(lim[1])]
+            if label:
+                d["title"] = dict(
+                    text=label,
+                    font=dict(
+                        size=axis_obj.label.get_size(),
+                        color=_export_color(
+                            mcolors.to_rgba(axis_obj.label.get_color())
+                        ),
+                    ),
+                )
+            if tick_color:
+                d["tickfont"] = dict(color=tick_color)
+            d["backgroundcolor"] = pane_color
+            d["showbackground"] = show_bg
+            # Axes3D keeps its 3D axis on/off state in _axis3don
+            if not getattr(ax, "_axis3don", True):
+                d["visible"] = False
+            return d
+
+        camera = _scene_camera(ax)
+        scene_kwargs = dict(
+            domain=domain,
+            bgcolor=_export_color(props["axesbg"]),
+            xaxis=_axis_dict("x"),
+            yaxis=_axis_dict("y"),
+            zaxis=_axis_dict("z"),
+            camera=camera,
+        )
+        if camera["up"] != dict(x=0.0, y=0.0, z=1.0):
+            # plotly's turntable drag mode resets the up vector to +z
+            scene_kwargs["dragmode"] = "orbit"
+        if hasattr(ax, "get_box_aspect"):
+            aspect = ax.get_box_aspect()
+            scene_kwargs["aspectmode"] = "manual"
+            scene_kwargs["aspectratio"] = dict(
+                x=float(aspect[0]),
+                y=float(aspect[1]),
+                z=float(aspect[2]),
+            )
+        self.plotly_fig["layout"][self.current_3d_subplot] = go.layout.Scene(
+            **scene_kwargs
+        )
+        layout = self.plotly_fig["layout"]
+        if layout.template and hasattr(layout.template, "layout"):
+            tmpl_layout = layout.template.layout
+            if hasattr(tmpl_layout, self.current_3d_subplot):
+                getattr(tmpl_layout, self.current_3d_subplot).camera = camera
+            else:
+                tmpl_layout[self.current_3d_subplot] = dict(camera=camera)
+        self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
 
     def open_figure(self, fig, props):
         """Creates a new figure by beginning to fill out layout dict.
@@ -137,13 +290,24 @@ class PlotlyRenderer(Renderer):
         )
         self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
-        margin = go.layout.Margin(
-            l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
-            r=int((1 - self.mpl_x_bounds[1]) * self.plotly_fig["layout"]["width"]),
-            t=int((1 - self.mpl_y_bounds[1]) * self.plotly_fig["layout"]["height"]),
-            b=int(self.mpl_y_bounds[0] * self.plotly_fig["layout"]["height"]),
-            pad=0,
+        self.all_3d = bool(fig.get_axes()) and all(
+            getattr(ax, "name", None) == "3d" for ax in fig.get_axes()
         )
+        if self.all_3d:
+            has_title = any(
+                getattr(ax, "title", None) and ax.title.get_text()
+                for ax in fig.get_axes()
+            ) or bool(fig.texts)
+            top_margin = 40 if has_title else 0
+            margin = go.layout.Margin(l=0, r=0, t=top_margin, b=0, pad=0)
+        else:
+            margin = go.layout.Margin(
+                l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
+                r=int((1 - self.mpl_x_bounds[1]) * self.plotly_fig["layout"]["width"]),
+                t=int((1 - self.mpl_y_bounds[1]) * self.plotly_fig["layout"]["height"]),
+                b=int(self.mpl_y_bounds[0] * self.plotly_fig["layout"]["height"]),
+                pad=0,
+            )
         self.plotly_fig["layout"]["margin"] = margin
 
     def close_figure(self, fig):
@@ -200,6 +364,13 @@ class PlotlyRenderer(Renderer):
             if c.__class__.__name__ == "BarContainer"
         ]
         self.current_bars = []
+        self.current_is_3d = getattr(ax, "name", None) == "3d"
+        if self.current_is_3d:
+            self.msg += "  Opening 3d axes\n"
+            # draw_path skips the patches of bar containers on 3d axes
+            self.bar_containers = []
+            self._open_3d_axes(ax, props)
+            return
         self.axis_ct += 1
         if props.get("patch_visible", True):
             self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
@@ -306,6 +477,7 @@ class PlotlyRenderer(Renderer):
         self.draw_bars(self.current_bars)
         self.msg += "  Closing axes\n"
         self.x_is_mpl_date = False
+        self.current_is_3d = False
 
     def open_legend(self, legend, props):
         """Enable Plotly's native legend when matplotlib legend is detected.
@@ -540,6 +712,53 @@ class PlotlyRenderer(Renderer):
                 showlegend = False
             else:
                 showlegend = None
+            if self.current_is_3d:
+                if hasattr(props["mplobj"], "get_data_3d"):
+                    x, y, z = props["mplobj"].get_data_3d()
+                else:
+                    x = [xy_pair[0] for xy_pair in props["data"]]
+                    y = [xy_pair[1] for xy_pair in props["data"]]
+                    z = [0] * len(x)
+                self.plotly_fig.add_trace(
+                    go.Scatter3d(
+                        mode=mode,
+                        name=label,
+                        showlegend=showlegend,
+                        x=list(x),
+                        y=list(y),
+                        z=list(z),
+                        scene=self.current_3d_subplot,
+                        line=(
+                            go.scatter3d.Line(
+                                color=line.color,
+                                width=line.width,
+                                dash=line.dash,
+                            )
+                            if props["linestyle"]
+                            else None
+                        ),
+                        marker=(
+                            go.scatter3d.Marker(
+                                opacity=marker.opacity,
+                                color=marker.color,
+                                symbol=(
+                                    marker.symbol
+                                    if marker.symbol in _SCATTER3D_SYMBOLS
+                                    else "circle"
+                                ),
+                                size=marker.size,
+                                line=dict(
+                                    color=marker.line.color,
+                                    width=marker.line.width,
+                                ),
+                            )
+                            if props["markerstyle"]
+                            else None
+                        ),
+                    )
+                )
+                self.msg += "    Heck yeah, I drew that line on 3d axes\n"
+                return
             marked_line = go.Scatter(
                 mode=mode,
                 name=label,
@@ -729,7 +948,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path collection\n"
-        if props["offset_coordinates"] == "data":
+        if self.current_is_3d:
+            self.msg += "    3d path collection, not drawing\n"
+            warnings.warn("3d path collections are not supported yet. Not drawing.")
+        elif props["offset_coordinates"] == "data":
             markerstyle = mpltools.get_markerstyle_from_collection(props)
             scatter_props = {
                 "coordinates": "data",
@@ -902,6 +1124,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path\n"
+        if self.current_is_3d:
+            self.msg += "    3d path, not drawing\n"
+            warnings.warn("3d paths are not supported yet. Not drawing.")
+            return
         is_bar = mpltools.is_bar(self.current_mpl_ax.containers, **props)
         if is_bar:
             self.current_bars += [props]
@@ -1015,7 +1241,10 @@ class PlotlyRenderer(Renderer):
             align = props["style"]["halign"]  # mpl default
         if "annotations" not in self.plotly_fig["layout"]:
             self.plotly_fig["layout"]["annotations"] = []
-        if props["text_type"] == "xlabel":
+        if self.current_is_3d and props["text_type"] in ("xlabel", "ylabel"):
+            # _open_3d_axes exports the axis titles of 3d axes
+            self.msg += "      Text object is a 3d axis label\n"
+        elif props["text_type"] == "xlabel":
             self.msg += "      Text object is an xlabel\n"
             self.draw_xlabel(**props)
         elif props["text_type"] == "ylabel":
@@ -1034,6 +1263,12 @@ class PlotlyRenderer(Renderer):
             ):
                 self.msg += (
                     "        Skipping legend text annotation (using native legend)\n"
+                )
+                return
+            if self.current_is_3d and props["coordinates"] == "data":
+                self.msg += "        3d text in 'data' coordinates, not drawing\n"
+                warnings.warn(
+                    "3d text in data coordinates is not supported yet. Not drawing."
                 )
                 return
             if props["coordinates"] != "data":
@@ -1127,6 +1362,11 @@ class PlotlyRenderer(Renderer):
             self.msg += "          More than one subplot, adding title as annotation\n"
             x_px, y_px = props["mplobj"].get_transform().transform(props["position"])
             x, y = mpltools.display_to_paper(x_px, y_px, self.plotly_fig["layout"])
+            if self.all_3d:
+                # the scene domains of all-3d figures span the horizontal
+                # axes bounds of the figure
+                x0, x1 = self.mpl_x_bounds
+                x = (x_px / self.mpl_fig.bbox.width - x0) / (x1 - x0)
             annotation = go.layout.Annotation(
                 text=props["text"],
                 font=go.layout.annotation.Font(
