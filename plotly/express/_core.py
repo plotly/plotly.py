@@ -2530,6 +2530,60 @@ def get_groups_and_orders(args, grouper):
     return groups, orders
 
 
+def _default_category_orders_for_axes(args, groups, orders, constructor):
+    """
+    Add data-appearance order for the categorical x axis.
+
+    When the data is split into several traces (e.g. by `color`), plotly.js
+    orders categories by first appearance across traces, which can differ from
+    the order in the underlying data. Recording the data-appearance order here
+    lets `set_cartesian_axis_opts` emit an explicit `categoryarray`, matching
+    the documented behavior that Plotly Express lays out categorical data in
+    the order in which it appears in the data. See #3198.
+
+    The default is only emitted for figures with a single subplot, so the one
+    x axis it touches spans the whole data-frame:
+
+    - With facets each subplot only carries its own categories and the
+      documented independent-axes technique (disabling `matches`, see
+      `doc/python/facet-plots.md`) must keep listing each axis only its own
+      categories, which an explicit data-wide `categoryarray` would break. See
+      https://github.com/plotly/plotly.py/pull/5776#pullrequestreview-5701715902
+
+    - With marginals the extra subplots span the y dimension, so an explicit
+      x `categoryarray` on their axes would be wrong.
+
+    Figures with subplots could get per-axis data orders in a follow up.
+
+    Only the x axis is handled: y categoricals are intentionally left alone
+    because `set_cartesian_axis_opts` reverses y orders for top-down display
+    and figures such as `px.timeline` / horizontal `px.bar` pair that with
+    `autorange="reversed"` (see `doc/python/gantt.md`), so an explicit y
+    `categoryarray` would double-reverse and flip the documented order.
+    """
+    if constructor not in cartesians:
+        return orders
+    if len(groups) <= 1:
+        return orders
+    if args.get("facet_row") or args.get("facet_col"):
+        return orders
+    if args.get("marginal_x") or args.get("marginal_y"):
+        return orders
+    df = args["data_frame"]
+    col = args.get("x")
+    if not isinstance(col, str) or col in orders or col not in df.columns:
+        return orders
+    uniques = df.get_column(col).unique(maintain_order=True).to_list()
+    categories = [
+        value
+        for value in uniques
+        if value is not None and not (isinstance(value, float) and math.isnan(value))
+    ]
+    if categories and all(isinstance(value, str) for value in categories):
+        orders[col] = categories
+    return orders
+
+
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
@@ -2556,6 +2610,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     groups, orders = get_groups_and_orders(args, grouper)
+    orders = _default_category_orders_for_axes(args, groups, orders, constructor)
 
     col_labels = []
     row_labels = []
