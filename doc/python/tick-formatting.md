@@ -80,11 +80,11 @@ fig.update_layout(
 fig.show()
 ```
 
-### Dynamic tickmode in Dash
+### Dynamic Tickmode in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -160,7 +160,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Tickformatstops to customize for different zoom levels
+#### Tickformatstops to Customize for Different Zoom Levels
 
 ```python
 import plotly.graph_objects as go
@@ -190,7 +190,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Placing ticks and gridlines between categories
+#### Placing Ticks and Gridlines Between Categories
 
 ```python
 import plotly.graph_objects as go

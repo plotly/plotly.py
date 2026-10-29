@@ -283,7 +283,7 @@ Steps to update plotly.js:
 
     This command does the following:
 
-    - Downloads new versions of `plot-schema.json` and `plotly.min.js` from the [plotly.js GitHub repository](https://github.com/plotly/plotly.js)
+    - Downloads new versions of `plot-schema.json` and `plotly.min.js` from the [`plotly.js` npm package](https://www.npmjs.com/package/plotly.js)
 and places them in `codegen/resources/` and `plotly/package_data/`, respectively.
     - Updates `plotly/offline/_plotlyjs_version.py` with the new version
     - Regenerates all of the classes under `graph_objs/` (`go.Figure`, `go.Layout`, etc.), and `plotly/validators/_validators.json`, based on the new schema 
@@ -318,23 +318,9 @@ and places them in `codegen/resources/` and `plotly/package_data/`, respectively
 
 7. Add a changelog entry to `CHANGELOG.md` with a link to the PR. We typically mention the version update, link to the plotly.js GitHub release page, and list out the most important changes. Follow the format of previous plotly.js version bump changelog updates.
 
-### Using a Development Branch of Plotly.js
+### Using a Development Version of Plotly.js
 
-If your development branch is in [the plotly.js repository](https://github.com/plotly/plotly.js)
-you can update to development versions of `plotly.js` with this command:
-
-```bash
-python commands.py updateplotlyjsdev --devrepo reponame --devbranch branchname
-```
-
-This downloads `dist/plotly.min.js` and `dist/plot-schema.json` from the latest commit of the branch `branchname` of the repo `reponame`.
-If `--devrepo` or `--devbranch` are omitted,
-`updateplotlyjsdev` defaults to `plotly/plotly.js` and `main` respectively.
-
-### Local Repository
-
-If you have a local repository of `plotly.js` you'd like to try,
-you can prepare the package by running the following commands
+To test plotly.py against a local repository of `plotly.js`, prepare the package by running the following commands
 *in your local plotly.js repository*:
 
 ```bash
@@ -347,7 +333,7 @@ You can then run the following command
 *in your local plotly.py repository*:
 
 ```bash
-python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
+python commands.py updateplotlyjsdev /path/to/your/plotly.js/
 ```
 
 ## Documentation for `commands.py`
@@ -362,5 +348,5 @@ Usage: `python commands.py <subcommand> <args>`
 | `lint` | Lint all Python code in `plotly/`. |
 | `format` | Format all Python code in `plotly/`. |
 | `updateplotlyjs` | Update `plotly.min.js` and `plot-schema.json` to match the `plotly.js` version specified in `js/package.json`, run codegen to regenerate the Python files, then run `npm install` in `js/` to refresh `js/package-lock.json`. Set `SKIP_NPM=1` to skip the npm step. |
-| `updateplotlyjsdev [--devrepo REPONAME --devbranch BRANCHNAME] \| [--local PATH]` | Update `plot-schema.json` and `plotly.min.js` to match the version in the provided plotly.js repo name and branch name, OR local path. Then, run codegen to regenerate the Python files. |
+| `updateplotlyjsdev PATH` | Update `plot-schema.json` and `plotly.min.js` from the local plotly.js repository at `PATH`. Then, run codegen to regenerate the Python files. |
 | `bumpversion X.Y.Z` | Update the plotly.py version number to X.Y.Z across all files where it needs to be updated. |

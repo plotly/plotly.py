@@ -94,7 +94,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -157,7 +157,7 @@ fig.show()
 
 ### Explicitly Constructing a Color scale
 
-The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed color scales as well.  
+The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed color scales as well.
 
 The Graph Objects `colorscale` parameter also accepts an explicitly-constructed color scale, as shown in the example [below](#custom-heatmap-color-scale-with-graph-objects).
 
@@ -443,7 +443,7 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 response = urllib.request.urlopen(
@@ -535,7 +535,7 @@ Like axes, you can customize the color bar ticks, labels, and values with `ticks
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 # Load heatmap data
@@ -570,7 +570,7 @@ By default, color bars are displayed vertically. You can change a color bar to b
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 # Load heatmap data
@@ -647,7 +647,7 @@ See the positioning section of [the figure data structure page](/python/figure-s
 ```python
 import plotly.graph_objects as go
 
-import urllib
+import urllib.request
 import json
 
 # Load heatmap data

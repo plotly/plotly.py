@@ -45,7 +45,7 @@ The differences between these two approaches are that:
 * Traces also be used to [draw shapes](/python/shapes/), although there is a [shape equivalent to text annotations](/python/shapes/).
 
 
-### Text on scatter plots with Plotly Express
+### Text on Scatter Plots with Plotly Express
 
 Here is an example that creates a scatter plot with text labels using Plotly Express.
 
@@ -66,7 +66,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Text on scatter plots with Graph Objects
+### Text on Scatter Plots with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -103,11 +103,11 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-### Text positioning in Dash
+### Text Positioning in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
