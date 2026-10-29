@@ -375,6 +375,8 @@ class PlotlyRenderer(Renderer):
         self.current_is_3d = getattr(ax, "name", None) == "3d"
         if self.current_is_3d:
             self.msg += "  Opening 3d axes\n"
+            # draw_path skips the patches of bar containers on 3d axes
+            self.bar_containers = []
             self._open_3d_axes(ax, props)
             return
         self.axis_ct += 1
@@ -954,7 +956,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path collection\n"
-        if props["offset_coordinates"] == "data":
+        if self.current_is_3d:
+            self.msg += "    3d path collection, not drawing\n"
+            warnings.warn("3d path collections are not supported yet. Not drawing.")
+        elif props["offset_coordinates"] == "data":
             markerstyle = mpltools.get_markerstyle_from_collection(props)
             scatter_props = {
                 "coordinates": "data",
@@ -1127,6 +1132,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path\n"
+        if self.current_is_3d:
+            self.msg += "    3d path, not drawing\n"
+            warnings.warn("3d paths are not supported yet. Not drawing.")
+            return
         is_bar = mpltools.is_bar(self.current_mpl_ax.containers, **props)
         if is_bar:
             self.current_bars += [props]
@@ -1262,6 +1271,12 @@ class PlotlyRenderer(Renderer):
             ):
                 self.msg += (
                     "        Skipping legend text annotation (using native legend)\n"
+                )
+                return
+            if self.current_is_3d and props["coordinates"] == "data":
+                self.msg += "        3d text in 'data' coordinates, not drawing\n"
+                warnings.warn(
+                    "3d text in data coordinates is not supported yet. Not drawing."
                 )
                 return
             if props["coordinates"] != "data":
