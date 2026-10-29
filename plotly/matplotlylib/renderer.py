@@ -225,7 +225,15 @@ class PlotlyRenderer(Renderer):
                 d["type"] = "log"
                 d["range"] = [math.log10(lim[0]), math.log10(lim[1])]
             if label:
-                d["title"] = dict(text=label)
+                d["title"] = dict(
+                    text=label,
+                    font=dict(
+                        size=axis_obj.label.get_size(),
+                        color=_export_color(
+                            mcolors.to_rgba(axis_obj.label.get_color())
+                        ),
+                    ),
+                )
             if tick_color:
                 d["tickfont"] = dict(color=tick_color)
             if pane_color:
@@ -1255,9 +1263,6 @@ class PlotlyRenderer(Renderer):
         elif props["text_type"] == "ylabel":
             self.msg += "      Text object is a ylabel\n"
             self.draw_ylabel(**props)
-        elif props["text_type"] == "zlabel":
-            self.msg += "      Text object is a zlabel\n"
-            self.draw_zlabel(**props)
         elif props["text_type"] == "title":
             self.msg += "      Text object is a title\n"
             self.draw_title(**props)
@@ -1479,20 +1484,6 @@ class PlotlyRenderer(Renderer):
             color=_export_color(props["style"]["color"]),
         )
         self.plotly_fig["layout"][axis_key]["title_font"] = title_font
-
-    def draw_zlabel(self, **props):
-        """Add a zaxis label to the current 3d subplot in layout dictionary."""
-        self.msg += "        Adding zlabel\n"
-        if self.current_is_3d:
-            self.plotly_fig["layout"][self.current_3d_subplot]["zaxis"]["title"] = dict(
-                text=str(props["text"])
-            )
-            title_font = dict(
-                size=props["style"]["fontsize"], color=props["style"]["color"]
-            )
-            self.plotly_fig["layout"][self.current_3d_subplot]["zaxis"][
-                "title_font"
-            ] = title_font
 
     def resize(self):
         """Revert figure layout to allow plotly to resize.

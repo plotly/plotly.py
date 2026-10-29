@@ -125,12 +125,10 @@ class Exporter(object):
                 self.draw_line(ax, line)
             for text in ax.texts:
                 self.draw_text(ax, text)
-            text_targets = [ax.xaxis.label, ax.yaxis.label, ax.title]
-            text_types = ["xlabel", "ylabel", "title"]
-            if hasattr(ax, "zaxis") and getattr(ax.zaxis, "label", None) is not None:
-                text_targets.append(ax.zaxis.label)
-                text_types.append("zlabel")
-            for text, ttp in zip(text_targets, text_types):
+            for text, ttp in zip(
+                [ax.xaxis.label, ax.yaxis.label, ax.title],
+                ["xlabel", "ylabel", "title"],
+            ):
                 if hasattr(text, "get_text") and text.get_text():
                     self.draw_text(ax, text, force_trans=ax.transAxes, text_type=ttp)
             for artist in ax.artists:

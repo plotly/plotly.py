@@ -297,9 +297,6 @@ def get_figure_properties(fig):
 
 
 def get_axes_properties(ax):
-    axes_list = [get_axis_properties(ax.xaxis), get_axis_properties(ax.yaxis)]
-    if hasattr(ax, "zaxis"):
-        axes_list.append(get_axis_properties(ax.zaxis))
     props = {
         "axesbg": export_color(ax.patch.get_facecolor()),
         "axesbgalpha": ax.patch.get_alpha(),
@@ -310,13 +307,10 @@ def get_axes_properties(ax):
             ax.get_frame_on() if callable(getattr(ax, "get_frame_on", None)) else True
         ),
         "patch_visible": ax.patch.get_visible(),
-        "axes": axes_list,
+        "axes": [get_axis_properties(ax.xaxis), get_axis_properties(ax.yaxis)],
     }
 
-    axnames = ["x", "y"]
-    if hasattr(ax, "zaxis"):
-        axnames.append("z")
-    for axname in axnames:
+    for axname in ["x", "y"]:
         axis = getattr(ax, axname + "axis")
         domain = getattr(ax, "get_{0}lim".format(axname))()
         lim = domain

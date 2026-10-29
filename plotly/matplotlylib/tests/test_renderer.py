@@ -1603,6 +1603,29 @@ def test_plot3d_unlabeled_line_hidden_from_legend():
     assert unlabeled.showlegend is False
 
 
+def test_plot3d_axis_title_fonts():
+    """3D axis titles export the font size and color of the axis labels."""
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+    ax.plot([0, 1], [0, 1], [0, 1])
+    ax.set_xlabel("X", fontsize=14, color="blue")
+    ax.set_ylabel("Y", fontsize=16, color="green")
+    ax.set_zlabel("Z", fontsize=20, color="red")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    scene = plotly_fig.layout.scene
+    titles = [
+        (axis.title.text, axis.title.font.size, axis.title.font.color)
+        for axis in (scene.xaxis, scene.yaxis, scene.zaxis)
+    ]
+    assert titles == [
+        ("X", 14, "#0000FF"),
+        ("Y", 16, "#008000"),
+        ("Z", 20, "#FF0000"),
+    ]
+
+
 def _add_scatter3d(ax):
     ax.scatter([0, 1], [0, 1], [0, 1])
 
