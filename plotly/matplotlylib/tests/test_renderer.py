@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.patches as mpatches
 from packaging.version import Version
 from matplotlib import transforms
 import plotly.tools as tls
@@ -1392,3 +1393,151 @@ def test_mixed_style_lines_group_consecutive_matches():
     else:
         # older matplotlib emits one collection per level
         assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2
+
+
+def test_axhspan_converts():
+    """axhspan converts to a layout shape spanning the x axis domain."""
+    fig, ax = plt.subplots()
+    ax.axhspan(0.25, 0.75)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "rect"
+    assert abs(shape.x0 - 0) < 1e-9
+    assert abs(shape.x1 - 1) < 1e-9
+    assert abs(shape.y0 - 0.25) < 1e-9
+    assert abs(shape.y1 - 0.75) < 1e-9
+    assert shape.xref == "x domain"
+    assert shape.yref == "y"
+    assert shape.fillcolor == "#1F77B4"
+    assert shape.layer == "below"
+
+
+def test_axvspan_converts():
+    """axvspan converts to a layout shape spanning the y axis domain."""
+    fig, ax = plt.subplots()
+    ax.axvspan(0.25, 0.75)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "rect"
+    assert abs(shape.x0 - 0.25) < 1e-9
+    assert abs(shape.x1 - 0.75) < 1e-9
+    assert abs(shape.y0 - 0) < 1e-9
+    assert abs(shape.y1 - 1) < 1e-9
+    assert shape.xref == "x"
+    assert shape.yref == "y domain"
+    assert shape.fillcolor == "#1F77B4"
+    assert shape.layer == "below"
+
+
+def test_axhspan_axes_fractions_convert():
+    """axhspan xmin/xmax convert to x axis domain fractions and axvspan
+    ymin/ymax convert to y axis domain fractions."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 10], [0, 10])
+    ax.axhspan(2, 4, xmin=0.2, xmax=0.6)
+    ax.axvspan(6, 8, ymin=0.1, ymax=0.5)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    hspan, vspan = plotly_fig.layout.shapes
+    assert hspan.xref == "x domain"
+    assert hspan.yref == "y"
+    assert np.allclose([hspan.x0, hspan.x1, hspan.y0, hspan.y1], [0.2, 0.6, 2, 4])
+    assert vspan.xref == "x"
+    assert vspan.yref == "y domain"
+    assert np.allclose([vspan.x0, vspan.x1, vspan.y0, vspan.y1], [6, 8, 0.1, 0.5])
+
+
+def test_axhspan_on_second_subplot_references_its_domain():
+    """Spans on a second subplot reference that subplot's axis domain."""
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax2.axhspan(2, 4)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    (shape,) = plotly_fig.layout.shapes
+    assert shape.xref == "x2 domain"
+    assert shape.yref == "y2"
+
+
+def test_axhspan_with_custom_style_converts():
+    """axhspan with custom colors and alpha converts to a styled layout shape."""
+    fig, ax = plt.subplots()
+    ax.axhspan(0.25, 0.75, facecolor="red", edgecolor="blue", alpha=0.5, linestyle="--")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "rect"
+    assert shape.fillcolor == "rgba(255, 0, 0, 0.5)"
+    assert shape.line.color == "rgba(0, 0, 255, 0.5)"
+    assert shape.line.dash == "dash"
+    assert shape.line.width == 1.0
+
+
+def test_blended_unaligned_shapes_do_not_convert_to_spans():
+    """A triangle and a rotated rectangle in a blended axes/data transform
+    warn and leave the layout shapes empty."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 10], [0, 10])
+    ax.add_patch(
+        mpatches.Polygon(
+            [[5, 0.1], [9, 0.1], [7, 0.5]],
+            transform=ax.get_xaxis_transform(),
+            color="b",
+        )
+    )
+    ax.add_patch(
+        mpatches.Rectangle(
+            (6, 0.6), 2, 0.2, angle=30, transform=ax.get_xaxis_transform(), color="g"
+        )
+    )
+
+    with pytest.warns(UserWarning, match="path object"):
+        plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.layout.shapes) == 0
+
+
+def test_axvspan_on_date_xaxis_converts_to_dates():
+    """axvspan on a date x axis exports its x extent as date strings."""
+    dates = [datetime.datetime(2023, 1, i) for i in range(1, 10)]
+    fig, ax = plt.subplots()
+    ax.plot(dates, range(len(dates)))
+    ax.axvspan(dates[2], dates[5])
+    ax.axhspan(2, 4)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    vspan, hspan = plotly_fig.layout.shapes
+    assert vspan.xref == "x"
+    assert vspan.x0.startswith("2023-01-03")
+    assert vspan.x1.startswith("2023-01-06")
+    assert hspan.xref == "x domain"
+    assert np.allclose([hspan.x0, hspan.x1], [0, 1])
+
+
+def test_labeled_axvspan_shows_in_legend():
+    """A labeled span exports its label as the shape legend entry."""
+    fig, ax = plt.subplots()
+    ax.plot([0, 10], [0, 10], label="line")
+    ax.axvspan(2, 4, label="span")
+    ax.axhspan(6, 8)
+    ax.legend()
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    labeled, unlabeled = plotly_fig.layout.shapes
+    assert labeled.name == "span"
+    assert labeled.showlegend is True
+    assert unlabeled.showlegend is None

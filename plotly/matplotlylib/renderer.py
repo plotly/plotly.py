@@ -56,6 +56,49 @@ def _convert_collection_dash(linestyle):
     return ",".join("{0:g}px".format(d) for d in dashes)
 
 
+def _find_blended_transform(transform):
+    """Return the first blended transform within a matplotlib transform, or
+    None when it contains no blended transform."""
+    if isinstance(
+        transform, (transforms.BlendedGenericTransform, transforms.BlendedAffine2D)
+    ):
+        return transform
+    if hasattr(transform, "_a") and hasattr(transform, "_b"):
+        blended = _find_blended_transform(transform._a)
+        if blended is None:
+            blended = _find_blended_transform(transform._b)
+        return blended
+    if hasattr(transform, "_transform"):
+        return _find_blended_transform(transform._transform)
+    return None
+
+
+def _has_blended_transform(transform):
+    """Check whether a matplotlib transform contains a blended transform."""
+    return _find_blended_transform(transform) is not None
+
+
+def _is_axis_aligned_rectangle(points):
+    """Check whether polygon vertices trace an axis-aligned rectangle: every
+    vertex is a corner of the bounding box and all four corners appear."""
+    xs = [float(x) for x, _ in points]
+    ys = [float(y) for _, y in points]
+    if not xs:
+        return False
+    x_min, x_max = min(xs), max(xs)
+    y_min, y_max = min(ys), max(ys)
+    corners = set()
+    for x, y in zip(xs, ys):
+        at_x_min = math.isclose(x, x_min, abs_tol=1e-9)
+        at_x_max = math.isclose(x, x_max, abs_tol=1e-9)
+        at_y_min = math.isclose(y, y_min, abs_tol=1e-9)
+        at_y_max = math.isclose(y, y_max, abs_tol=1e-9)
+        if not (at_x_min or at_x_max) or not (at_y_min or at_y_max):
+            return False
+        corners.add((at_x_max, at_y_max))
+    return len(corners) == 4
+
+
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -683,6 +726,73 @@ class PlotlyRenderer(Renderer):
         self.msg += "    Heck yeah, I drew that reference line\n"
         return True
 
+    def _is_axes_span(self, props):
+        """Check whether a path qualifies as a reference span (e.g. axhspan,
+        axvspan): an axis-aligned rectangle in a blended axes/data
+        transform."""
+        if not isinstance(props["mplobj"], (mpatches.Rectangle, mpatches.Polygon)):
+            return False
+        if not (
+            props["coordinates"] == "display"
+            and _has_blended_transform(props["mplobj"].get_transform())
+        ):
+            return False
+        return _is_axis_aligned_rectangle(props["data"])
+
+    def _draw_axes_span(self, props):
+        """Draw a reference span (axhspan/axvspan) as a layout shape.
+
+        Sides given in axes fractions (e.g. axhspan xmin/xmax) map onto the
+        axis domain, so they stay fixed to the axes on pan/zoom; sides given
+        in data coordinates map onto the data axis."""
+        ax = self.current_mpl_ax
+        px_points = props["data"]
+        blended = _find_blended_transform(props["mplobj"].get_transform())
+        x_in_axes = blended._x == ax.transAxes
+        y_in_axes = blended._y == ax.transAxes
+        axes_points = ax.transAxes.inverted().transform(px_points)
+        data_points = ax.transData.inverted().transform(px_points)
+        xs = (axes_points if x_in_axes else data_points)[:, 0]
+        ys = (axes_points if y_in_axes else data_points)[:, 1]
+        x0, x1 = float(min(xs)), float(max(xs))
+        y0, y1 = float(min(ys)), float(max(ys))
+        if self.x_is_mpl_date and not x_in_axes:
+            x0, x1 = self._convert_x_dates([x0, x1])
+        axis_suffix = str(self.axis_ct) if self.axis_ct > 1 else ""
+        xref = "x{0}".format(axis_suffix)
+        yref = "y{0}".format(axis_suffix)
+        if x_in_axes:
+            xref += " domain"
+        if y_in_axes:
+            yref += " domain"
+        style = props["style"]
+        fillcolor = _export_color(style["facecolor"])
+        edgecolor = _export_color(style["edgecolor"])
+        linewidth = style["edgewidth"] if style["edgecolor"] != "none" else 0
+        label = props["mplobj"].get_label()
+        if not label or (isinstance(label, str) and label.startswith("_")):
+            label = None
+        shape = go.layout.Shape(
+            type="rect",
+            x0=x0,
+            y0=y0,
+            x1=x1,
+            y1=y1,
+            xref=xref,
+            yref=yref,
+            fillcolor=fillcolor,
+            line=go.layout.shape.Line(
+                color=edgecolor,
+                width=linewidth,
+                dash=mpltools.convert_dash(style["dasharray"]),
+            ),
+            layer="below" if style.get("zorder", 1) < 2 else "above",
+            name=label,
+            showlegend=True if label is not None else None,
+        )
+        self.plotly_fig["layout"]["shapes"] += (shape,)
+        self.msg += "    Heck yeah, I drew that reference span\n"
+
     def draw_image(self, **props):
         """Draw image.
 
@@ -908,6 +1018,12 @@ class PlotlyRenderer(Renderer):
         elif isinstance(props["mplobj"], mpatches.StepPatch):
             self.msg += "    Drawing a step path\n"
             self._draw_step_path(props)
+        elif self._is_axes_span(props):
+            if self._processing_legend:
+                self.msg += "    Using native legend\n"
+            else:
+                self.msg += "    Drawing an axes span\n"
+                self._draw_axes_span(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
