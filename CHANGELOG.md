@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `mpl_to_plotly` conversion of matplotlib contour lines and line collections: close contour rings ending with `Z` codes, support dash styles, convert date x-axes, separate disjoint subpaths with `None` separators, hide line collection traces from the legend by default, and group consecutive same-style lines into single traces [[#5770](https://github.com/plotly/plotly.py/pull/5770)], with thanks to @robertoffmoura for the contribution!
 - Fix serialization of box/lasso select data for figures with multiple subplots [[#5710](https://github.com/plotly/plotly.py/pull/5710)], with thanks to @flpi-sun for the contribution!
 - Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
+- Fix graph object properties rejecting NumPy scalars: integer properties (such as `nticks`, `nbinsx` and `updatemenus[].active`) now accept NumPy integers, and string properties (such as `name` and `text`) now accept NumPy numbers, as they already did Python `int` and `float` values [[#5828](https://github.com/plotly/plotly.py/pull/5828)], with thanks to @RaphaelFakhri for the contribution!
 
 ## [7.1.0] - 2026-09-15
 
