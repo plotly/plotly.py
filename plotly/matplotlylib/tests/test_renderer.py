@@ -1648,6 +1648,36 @@ def test_plot3d_shorthand_axis_colors():
         assert axis.tickfont.color == "#FF7F0E"
 
 
+@pytest.mark.parametrize("nrows,ncols", [(1, 2), (2, 2)])
+def test_plot3d_subplot_titles_centered_on_their_scenes(nrows, ncols):
+    """In figures of 3D subplots, each title sits at the horizontal
+    position across its scene domain that the matplotlib title has
+    across its axes."""
+    fig = plt.figure(figsize=(4 * ncols, 4 * nrows))
+    axes = []
+    for i in range(nrows * ncols):
+        ax = fig.add_subplot(nrows, ncols, i + 1, projection="3d")
+        ax.plot([0, 1], [0, 1], [0, 1])
+        ax.set_title("title {0}".format(i))
+        axes.append(ax)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    layout = plotly_fig.layout
+    scenes = [layout.scene] + [
+        layout["scene{0}".format(i + 1)] for i in range(1, len(axes))
+    ]
+    for ax, scene, annotation in zip(axes, scenes, layout.annotations):
+        x_px, _ = ax.title.get_transform().transform(ax.title.get_position())
+        bounds = ax.get_position()
+        mpl_rel_x = (x_px / fig.bbox.width - bounds.x0) / bounds.width
+        rel_x = (annotation.x - scene.domain.x[0]) / (
+            scene.domain.x[1] - scene.domain.x[0]
+        )
+        assert annotation.text == ax.get_title()
+        assert rel_x == pytest.approx(mpl_rel_x, abs=1e-6)
+
+
 def _add_scatter3d(ax):
     ax.scatter([0, 1], [0, 1], [0, 1])
 

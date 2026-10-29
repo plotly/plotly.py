@@ -146,6 +146,7 @@ class PlotlyRenderer(Renderer):
         self.scene_ct = 0
         self.current_3d_subplot = None
         self.current_is_3d = False
+        self.all_3d = False
         self.mpl_x_bounds = (0, 1)
         self.mpl_y_bounds = (0, 1)
         self.msg = "Initialized PlotlyRenderer\n"
@@ -289,10 +290,10 @@ class PlotlyRenderer(Renderer):
         )
         self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
-        all_3d = fig.get_axes() and all(
+        self.all_3d = bool(fig.get_axes()) and all(
             getattr(ax, "name", None) == "3d" for ax in fig.get_axes()
         )
-        if all_3d:
+        if self.all_3d:
             has_title = any(
                 getattr(ax, "title", None) and ax.title.get_text()
                 for ax in fig.get_axes()
@@ -1361,6 +1362,11 @@ class PlotlyRenderer(Renderer):
             self.msg += "          More than one subplot, adding title as annotation\n"
             x_px, y_px = props["mplobj"].get_transform().transform(props["position"])
             x, y = mpltools.display_to_paper(x_px, y_px, self.plotly_fig["layout"])
+            if self.all_3d:
+                # the scene domains of all-3d figures span the horizontal
+                # axes bounds of the figure
+                x0, x1 = self.mpl_x_bounds
+                x = (x_px / self.mpl_fig.bbox.width - x0) / (x1 - x0)
             annotation = go.layout.Annotation(
                 text=props["text"],
                 font=go.layout.annotation.Font(
