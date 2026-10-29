@@ -399,8 +399,12 @@ def test_no_default_category_array_for_y_with_color():
     # pattern from doc/python/gantt.md keeps listing tasks top-down.
     df = pd.DataFrame(
         [
-            dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28", Resource="Alex"),
-            dict(Task="Job B", Start="2009-03-05", Finish="2009-04-15", Resource="Alex"),
+            dict(
+                Task="Job A", Start="2009-01-01", Finish="2009-02-28", Resource="Alex"
+            ),
+            dict(
+                Task="Job B", Start="2009-03-05", Finish="2009-04-15", Resource="Alex"
+            ),
             dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30", Resource="Max"),
         ]
     )
@@ -410,6 +414,52 @@ def test_no_default_category_array_for_y_with_color():
     fig = px.bar(x=[1, 2, 3, 4], y=list("abcd"), color=list("ppqq"), orientation="h")
     assert fig["layout"]["yaxis"]["categoryorder"] is None
     assert fig["layout"]["yaxis"]["categoryarray"] is None
+
+
+def test_unlinked_facet_axes_only_list_their_own_categories():
+    df = pd.DataFrame(
+        {
+            "panel": ["left", "right", "left", "right", "left"],
+            "fruit": ["apple", "banana", "cherry", "date", "elderberry"],
+            "sold": [5, 3, 4, 6, 2],
+        }
+    )
+    fig = px.bar(df, x="fruit", y="sold", facet_col="panel")
+    fig.update_xaxes(matches=None)
+    for trace in fig.data:
+        axis = fig.layout["xaxis" + trace.xaxis[1:]]
+        assert axis.categoryarray is None or set(axis.categoryarray) <= set(trace.x)
+
+
+def test_no_default_category_array_with_subplots():
+    # https://github.com/plotly/plotly.py/pull/5776#pullrequestreview-5701715902
+    # Facet axes list their own categories (the `matches=None` technique in
+    # doc/python/facet-plots.md), and marginal subplots span the y dimension,
+    # so no axis of a faceted or marginal figure may get a data-wide default.
+    df = pd.DataFrame(
+        {
+            "panel": ["left", "right", "left", "right", "left"],
+            "fruit": ["apple", "banana", "cherry", "date", "elderberry"],
+            "sold": [5, 3, 4, 6, 2],
+        }
+    )
+    fig = px.bar(df, x="fruit", y="sold", facet_col="panel")
+    for axname in fig.layout:
+        if axname.startswith("xaxis"):
+            assert fig.layout[axname].categoryorder is None
+            assert fig.layout[axname].categoryarray is None
+    fig = px.scatter(
+        df,
+        x="fruit",
+        y="sold",
+        color="panel",
+        marginal_y="rug",
+        marginal_x="rug",
+    )
+    for axname in fig.layout:
+        if axname.startswith("xaxis"):
+            assert fig.layout[axname].categoryorder is None
+            assert fig.layout[axname].categoryarray is None
 
 
 def test_permissive_defaults():
