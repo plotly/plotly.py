@@ -59,6 +59,32 @@ class TestColors(TestCase):
             colortype,
         )
 
+    def test_color_conversions_do_not_modify_input(self):
+        default_colors = list(colors.DEFAULT_PLOTLY_COLORS)
+
+        colors.validate_colors(None)
+        self.assertEqual(colors.DEFAULT_PLOTLY_COLORS, default_colors)
+
+        color_list = ["rgb(255, 0, 0)", "#0000ff"]
+        colors.validate_colors(color_list)
+        self.assertEqual(color_list, ["rgb(255, 0, 0)", "#0000ff"])
+
+        colors.convert_colors_to_same_type(color_list, colortype="tuple")
+        self.assertEqual(color_list, ["rgb(255, 0, 0)", "#0000ff"])
+
+        color_dict = {"a": "rgb(255, 0, 0)", "b": "#0000ff", "c": (0.5, 0.5, 0.5)}
+        expected_dict = dict(color_dict)
+
+        colors.validate_colors_dict(color_dict, colortype="rgb")
+        self.assertEqual(color_dict, expected_dict)
+
+        colors.convert_dict_colors_to_same_type(color_dict, colortype="tuple")
+        self.assertEqual(color_dict, expected_dict)
+
+        colorscale = [[0, (0.0, 0.0, 0.0)], [1, (1.0, 1.0, 1.0)]]
+        colors.convert_colorscale_to_rgb(colorscale)
+        self.assertEqual(colorscale, [[0, (0.0, 0.0, 0.0)], [1, (1.0, 1.0, 1.0)]])
+
     def test_convert_dict_colors_to_same_type(self):
         # test colortype
         color_dict = dict(apple="rgb(1, 1, 1)")

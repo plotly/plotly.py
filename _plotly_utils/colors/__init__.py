@@ -338,6 +338,11 @@ def validate_colors(colors, colortype="tuple"):
         else:
             colors = list(colors)
 
+    else:
+        # copy the list so that neither the caller's list nor
+        # DEFAULT_PLOTLY_COLORS is modified in place below
+        colors = list(colors)
+
     # convert color elements in list to tuple color
     for j, each_color in enumerate(colors):
         if "rgb" in each_color:
@@ -377,6 +382,9 @@ def validate_colors_dict(colors, colortype="tuple"):
     """
     Validates dictionary of color(s)
     """
+    # copy the dict so that the caller's dict is not modified in place below
+    colors = dict(colors)
+
     # validate each color element in the dictionary
     for key in colors:
         if "rgb" in colors[key]:
@@ -454,7 +462,7 @@ def convert_colors_to_same_type(
             colors_list = list(colors)
 
     elif isinstance(colors, list):
-        colors_list = colors
+        colors_list = list(colors)
 
     # validate scale
     if scale is not None:
@@ -498,6 +506,9 @@ def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
 
     :param (dict) colors_dict: a dictionary whose values are single colors
     """
+    # copy the dict so that the caller's dict is not modified in place below
+    colors_dict = dict(colors_dict)
+
     for key in colors_dict:
         if "#" in colors_dict[key]:
             colors_dict[key] = color_parser(colors_dict[key], hex_to_rgb)
@@ -818,6 +829,10 @@ def convert_colorscale_to_rgb(colorscale):
     converting a colorscale with tuple colors (each coordinate between 0
     and 1) into a colorscale with the colors transformed into rgb colors
     """
+    # copy the colorscale and its [scale, color] pairs so that the caller's
+    # colorscale is not modified in place below
+    colorscale = [list(color) for color in colorscale]
+
     for color in colorscale:
         color[1] = convert_to_RGB_255(color[1])
 
