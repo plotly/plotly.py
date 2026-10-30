@@ -66,7 +66,7 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-import urllib, json
+import urllib.request, json
 
 url = 'https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy.json'
 response = urllib.request.urlopen(url)
@@ -126,7 +126,7 @@ This example also uses [hovermode](https://plotly.com/python/reference/layout/#l
 
 ```python
 import plotly.graph_objects as go
-import urllib, json
+import urllib.request, json
 
 url = 'https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy.json'
 response = urllib.request.urlopen(url)
