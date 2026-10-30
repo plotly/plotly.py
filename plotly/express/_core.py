@@ -2594,7 +2594,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 if not isinstance(m.val_map, IdentityMap):
                     mapping_labels[key] = str(val)
                     if m.show_in_trace_name:
-                        trace_name_labels[key] = str(val)
+                        trace_name_labels[col] = str(val)
                 if m.variable == "animation_frame":
                     frame_name = val
         trace_name = ", ".join(trace_name_labels.values())
@@ -2768,7 +2768,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             layout_patch[v] = args[v]
     layout_patch["legend"] = dict(tracegroupgap=0)
     if trace_name_labels:
-        layout_patch["legend"]["title_text"] = ", ".join(trace_name_labels)
+        layout_patch["legend"]["title_text"] = ", ".join(
+            get_label(args, column) for column in trace_name_labels
+        )
     if args["title"]:
         layout_patch["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
