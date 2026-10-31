@@ -473,3 +473,37 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
 )
 def test_custom_sized_subplots(test_input, expected, custom_sized_subplots):
     _check_figure_shapes_custom_sized(test_input, expected, custom_sized_subplots)
+
+
+@pytest.mark.parametrize(
+    "f,kwargs,refs",
+    [
+        (go.Figure.add_vline, dict(x=0.5), ("x", "y domain")),
+        (go.Figure.add_hline, dict(y=0.5), ("x domain", "y")),
+        (go.Figure.add_vrect, dict(x0=0.2, x1=0.8), ("x", "y domain")),
+        (go.Figure.add_hrect, dict(y0=0.2, y1=0.8), ("x domain", "y")),
+    ],
+)
+@pytest.mark.parametrize(
+    "other_trace",
+    [
+        go.Scatter3d(x=[0, 1], y=[0, 1], z=[0, 1]),
+        go.Table(cells=dict(values=[[1, 2]])),
+    ],
+)
+@pytest.mark.parametrize("populated", [False, True])
+def test_axis_spanning_shapes_with_non_cartesian_trace(
+    f, kwargs, refs, other_trace, populated
+):
+    fig = make_subplots(rows=1, cols=2, specs=[[{}, {"type": other_trace.type}]])
+    fig.add_trace(other_trace, row=1, col=2)
+    if populated:
+        fig.add_scatter(x=[0, 1], y=[0, 1], row=1, col=1)
+
+    f(fig, **kwargs, row=1, col=1, annotation_text="reference")
+
+    assert len(fig.layout.shapes) == int(populated)
+    assert len(fig.layout.annotations) == int(populated)
+    if populated:
+        shape = fig.layout.shapes[0]
+        assert (shape.xref, shape.yref) == refs

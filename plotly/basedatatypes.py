@@ -4198,6 +4198,7 @@ Invalid property path '{key_path_str}' for layout
                             "y" if d[yaxiskw] is None else d[yaxiskw],
                         )
                         for d in obj
+                        if xaxiskw in d and yaxiskw in d
                     ]
                 )
         return ret
