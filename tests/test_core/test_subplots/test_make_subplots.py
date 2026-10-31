@@ -81,6 +81,16 @@ class TestMakeSubplots(TestCase):
         with self.assertRaises(Exception):
             tls.make_subplots(rows=3, specs=[[{}], [None], [{"rowspan": 2}]])
 
+    def test_specs_colspan_overlaps_subplot(self):
+        with pytest.raises(ValueError, match=r"specs\[0\]\[1\] must be None"):
+            subplots.make_subplots(cols=3, specs=[[{"colspan": 2}, {}, None]])
+
+    def test_specs_rowspan_overlaps_subplot(self):
+        with pytest.raises(ValueError, match=r"specs\[1\]\[0\] must be None"):
+            subplots.make_subplots(
+                rows=2, cols=2, specs=[[{"rowspan": 2}, {}], [{}, {}]]
+            )
+
     def test_insets_wrong_type(self):
         with self.assertRaises(Exception):
             tls.make_subplots(insets="not going to work")
