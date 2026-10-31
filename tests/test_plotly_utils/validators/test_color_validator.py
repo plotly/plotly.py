@@ -219,6 +219,25 @@ def test_rejection_aok_2D(val, validator_aok):
     assert "Invalid element(s)" in str(validation_failure.value)
 
 
+# None elements (null in figure JSON) are kept
+@pytest.mark.parametrize(
+    "val",
+    [
+        ["red", None],
+        [None],
+        [["red", None], [None, "blue"]],
+        np.array(["red", None], dtype="object"),
+    ],
+)
+def test_acceptance_aok_none_elements(val, validator_aok):
+    coerce_val = validator_aok.validate_coerce(val)
+
+    if isinstance(val, np.ndarray):
+        assert coerce_val.tolist() == val.tolist()
+    else:
+        assert coerce_val == val
+
+
 # Array ok, numbers ok
 
 
@@ -238,6 +257,23 @@ def test_acceptance_aok_colorscale(val, validator_aok_colorscale):
     coerce_val = validator_aok_colorscale.validate_coerce(val)
     if isinstance(val, (list, np.ndarray)):
         assert np.array_equal(list(coerce_val), val)
+    else:
+        assert coerce_val == val
+
+
+@pytest.mark.parametrize(
+    "val",
+    [
+        [0, None],
+        ["red", None, 0.5],
+        np.array([0, None], dtype="object"),
+    ],
+)
+def test_acceptance_aok_colorscale_none_elements(val, validator_aok_colorscale):
+    coerce_val = validator_aok_colorscale.validate_coerce(val)
+
+    if isinstance(val, np.ndarray):
+        assert coerce_val.tolist() == val.tolist()
     else:
         assert coerce_val == val
 

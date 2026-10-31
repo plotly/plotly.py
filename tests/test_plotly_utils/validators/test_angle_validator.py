@@ -65,6 +65,14 @@ def test_aok_coercion(val, expected, validator_aok):
     )
 
 
+# None elements (null in figure JSON) are kept
+@pytest.mark.parametrize(
+    "val,expected", [([190, None], [-170, None]), ((None,), [None])]
+)
+def test_aok_none_elements(val, expected, validator_aok):
+    assert validator_aok.validate_coerce(val) == expected
+
+
 # Test rejection
 @pytest.mark.parametrize("val", [["hello"], [()], [[]], [set()], ["34"]])
 def test_aok_rejection(val, validator_aok):
@@ -72,3 +80,10 @@ def test_aok_rejection(val, validator_aok):
         validator_aok.validate_coerce(val)
 
     assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_aok_rejection_skips_none(validator_aok):
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce([None, "34", None])
+
+    assert "Invalid elements include: ['34']" in str(validation_failure.value)
