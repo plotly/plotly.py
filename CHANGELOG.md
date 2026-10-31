@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `mpl_to_plotly` conversion of matplotlib contour lines and line collections: close contour rings ending with `Z` codes, support dash styles, convert date x-axes, separate disjoint subpaths with `None` separators, hide line collection traces from the legend by default, and group consecutive same-style lines into single traces [[#5770](https://github.com/plotly/plotly.py/pull/5770)], with thanks to @robertoffmoura for the contribution!
 - Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
 - Fix color utilities mutating the list of colors passed to them [[#5836](https://github.com/plotly/plotly.py/pull/5836)], with thanks to @Enesuygurs for the contribution!
-- Fix `plotly.io.from_json` failing on figures whose color, number or angle arrays contained NaN (written to JSON as `null`), such as `marker.color=[0, np.nan]`; `None` elements in these arrays are now accepted and kept [[#4280](https://github.com/plotly/plotly.py/issues/4280)], with thanks to @Thanatos9404 for the contribution!
+- Fix `plotly.io.from_json` failing on figures whose color, number or angle arrays contained NaN (written to JSON as `null`), such as `marker.color=[0, np.nan]`; `None` elements in these arrays are now accepted and kept [[#5856](https://github.com/plotly/plotly.py/pull/5856)], with thanks to @Thanatos9404 for the contribution!
 
 
 ## [7.1.0] - 2026-09-15
