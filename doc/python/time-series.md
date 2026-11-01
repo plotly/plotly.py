@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/time-series.jpg
 ---
 
-### Time Series using Axes of type `date`
+### Time Series Using Axes of Type `date`
 
 Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`, `px.bar` etc) or `plotly.graph_objects` charts objects (`go.Scatter`, `go.Bar` etc). For more examples of such charts, see the documentation of [line and scatter plots](https://plotly.com/python/line-and-scatter/) or [bar charts](/python/bar-charts/).
 
@@ -65,7 +65,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -159,7 +159,7 @@ fig.update_xaxes(minor=dict(ticks="inside", showgrid=True))
 fig.show()
 ```
 
-#### Monthly Period Labels With Weekly Minor Ticks
+#### Monthly Period Labels with Weekly Minor Ticks
 
 _new in 5.8_
 
@@ -188,7 +188,7 @@ fig.update_xaxes(ticks= "outside",
 fig.show()
 ```
 
-### Summarizing Time-series Data with Histograms
+### Summarizing Time Series Data with Histograms
 
 Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
 
@@ -256,7 +256,7 @@ fig.update_xaxes(showgrid=True, ticklabelmode="period")
 fig.show()
 ```
 
-### Hover Templates with Mixtures of Period data
+### Hover Templates with Mixtures of Period Data
 
 *New in v5.0*
 

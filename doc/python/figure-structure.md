@@ -53,7 +53,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -68,7 +68,7 @@ IFrame(snippet_url + 'figure-structure', width='100%', height=1200)
 
 ### Figures as Trees of Attributes
 
-Plotly.js supports inputs adhering to a well-defined schema, whose overall architecture is explained in this page and which is exhaustively documented in the [Figure Reference](/python/reference/index/) (which is itself generated from a [machine-readable JSON representation of the schema](https://raw.githubusercontent.com/plotly/plotly.js/master/dist/plot-schema.json)). Figures are represented as trees with named nodes called "attributes". The root node of the tree has three top-level attributes: `data`, `layout` and `frames` (see below).
+Plotly.js supports inputs adhering to a well-defined schema, whose overall architecture is explained in this page and which is exhaustively documented in the [Figure Reference](/python/reference/index/) (which is itself generated from a [machine-readable JSON representation of the schema](https://raw.githubusercontent.com/plotly/plotly.js/main/test/plot-schema.json)). Figures are represented as trees with named nodes called "attributes". The root node of the tree has three top-level attributes: `data`, `layout` and `frames` (see below).
 
 Attributes are referred to in text and in the [Figure Reference](/python/reference/index/) by their full "path" i.e. the dot-delimited concatenation of their parents. For example `"layout.width"` refers to the attribute whose key is `"width"` inside a dict which is the value associated with a key `"layout"` at the root of the figure. If one of the parents is a list rather than a dict, a set of brackets is inserted in the path when referring to the attribute in the abstract, e.g. `"layout.annotations[].text"`. Finally, as explained below, the top-level "data" attribute defines a list of typed objects called "traces" with the schema dependent upon the type, and these attributes' paths are listed in the [Figure Reference](/python/reference/index/) as `"data[type=scatter].name"`.
 
@@ -192,7 +192,7 @@ The following trace types are compatible with tile map subplots via the `map` at
 
 * [`scattermap`](/python/tile-scatter-maps/), which can be used to draw [individual markers](/python/tile-scatter-maps/), [lines and curves](/python/lines-on-tile-maps/) and [filled areas](/python/filled-area-tile-maps/) on tile maps
 * [`choroplethmap`](/python/tile-county-choropleth/): colored polygons on tile maps
-* [`densitymap`](/python/tile-density-heatmaps/): density heatmaps on tile maps
+* [`densitymap`](/python/density-heatmaps/): density heatmaps on tile maps
 
 ### Traces Which Are Their Own Subplots
 

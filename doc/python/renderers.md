@@ -233,7 +233,7 @@ fig.show(renderer="png", width=800, height=300)
 
 ### Displaying figures in Plotly Studio
 
-Use [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers) or [Dash Enterprise](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers).
+Use [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers) or [Dash Enterprise](https://plotly.com/dash-enterprise/?utm_medium=graphing_libraries&utm_content=python_renderers).
 
 ```python hide_code=true
 from IPython.display import HTML
@@ -244,7 +244,7 @@ HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embe
 
 [Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/?utm_medium=graphing_libraries&utm_content=python_renderers) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/?utm_medium=graphing_libraries&utm_content=python_renderers) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/?utm_medium=graphing_libraries&utm_content=python_renderers">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
