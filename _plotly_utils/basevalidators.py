@@ -417,6 +417,17 @@ class DataArrayValidator(BaseValidator):
         if is_none_or_typed_array_spec(v):
             pass
         elif is_homogeneous_array(v):
+            ma = get_module("numpy.ma", should_load=False)
+            if ma and ma.isMaskedArray(v) and v.dtype.kind in "biufU" and v.mask.any():
+                np = get_module("numpy")
+                # Replace masked values with NaN (numeric arrays) or None (boolean
+                # and string arrays) so that they are treated as missing values
+                if v.dtype.kind in "iu":
+                    v = v.astype("float64")
+                if v.dtype.kind == "f":
+                    v = v.filled(np.nan)
+                else:
+                    v = np.where(v.mask, None, v.data.astype("object"))
             v = copy_to_readonly_numpy_array(v)
         elif is_simple_array(v):
             v = to_scalar_or_list(v)
