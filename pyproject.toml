@@ -48,6 +48,10 @@ dev_core = [
     # pin precise version of ruff to prevent accidental reformatting in case its defaults are updated
     "ruff==0.11.12"
 ]
+dev_matplotlib = [
+    "plotly[dev_core]",
+    "matplotlib"
+]
 dev_build = [
     "plotly[dev_core]",
     "build",

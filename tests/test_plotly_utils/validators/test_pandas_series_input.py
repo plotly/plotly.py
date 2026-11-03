@@ -180,7 +180,7 @@ def test_data_array_validator_dates_series(
     assert isinstance(res, np.ndarray)
 
     # Check dtype
-    assert res.dtype == "<M8[ns]"
+    assert res.dtype == dates_array.dtype
 
     # Check values
     np.testing.assert_array_equal(res, dates_array)
@@ -196,7 +196,7 @@ def test_data_array_validator_dates_dataframe(
     assert isinstance(res, np.ndarray)
 
     # Check dtype
-    assert res.dtype == "<M8[ns]"
+    assert res.dtype == dates_array.dtype
 
     # Check values
     np.testing.assert_array_equal(res, dates_array.reshape(len(dates_array), 1))
