@@ -82,6 +82,26 @@ def test_from_json(fig1):
     assert pio.to_json(fig1_loaded) == pio.to_json(fig1.to_dict())
 
 
+def test_from_json_nan_in_arrays():
+    # to_json writes NaN as null, which from_json loads back as None
+    fig = go.Figure(
+        data=[
+            go.Scatter(
+                x=[0, 1],
+                y=[0, 1],
+                marker={"color": [0, np.nan], "angle": [45, np.nan]},
+            ),
+            go.Bar(x=[0, 1], y=[1, 2], offset=[0.1, np.nan]),
+        ]
+    )
+    fig_loaded = pio.from_json(fig.to_json())
+
+    assert fig_loaded.data[0].marker.color == (0, None)
+    assert fig_loaded.data[0].marker.angle == (45, None)
+    assert fig_loaded.data[1].offset == (0.1, None)
+    assert json.loads(fig_loaded.to_json())["data"] == json.loads(fig.to_json())["data"]
+
+
 @pytest.mark.parametrize(
     "fig_type_spec,fig_type",
     [
