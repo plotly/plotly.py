@@ -186,6 +186,15 @@ def test_data_array_validator_dates_series(
     np.testing.assert_array_equal(res, dates_array)
 
 
+def test_data_array_validator_tz_aware_datetime_index(data_array_validator):
+    index = pd.date_range("2024-03-30", periods=3, freq="D", tz="Europe/Berlin")
+    res = data_array_validator.validate_coerce(index)
+
+    assert isinstance(res, np.ndarray)
+    assert res.dtype.kind == "M"
+    np.testing.assert_array_equal(res, index.tz_localize(None).to_numpy())
+
+
 def test_data_array_validator_dates_dataframe(
     data_array_validator, datetime_pandas, dates_array
 ):
