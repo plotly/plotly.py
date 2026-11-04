@@ -105,6 +105,12 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
+    pd = get_module("pandas", should_load=False)
+    if pd is not None and isinstance(v, pd.DatetimeIndex) and v.tz is not None:
+        # Remove time zone so that local time is displayed, and so that converting
+        # to numpy doesn't result in object dtype
+        v = v.tz_localize(None)
+
     # With `pass_through=True`, the original object will be returned if unable to convert
     # to a Narwhals DataFrame or Series.
     v = nw.from_native(v, allow_series=True, pass_through=True)
