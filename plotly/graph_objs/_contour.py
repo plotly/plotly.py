@@ -2344,6 +2344,16 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
+        # If user passed contours as a dict with `size` but didn't explicitly
+        # set autocontour, default autocontour to False so the size is honored
+        # on initial render.  JS defaults autocontour to True, which ignores
+        # contours.size / contours.start / contours.end in favor of ncontours.
+        _contours_provided_as_dict = (
+            isinstance(contours, dict) and "size" in contours
+        ) or (isinstance(arg, dict) and "contours" in arg and isinstance(arg["contours"], dict) and "size" in arg["contours"])
+        if _contours_provided_as_dict and autocontour is None and "autocontour" not in arg:
+            autocontour = False
+
         self._set_property("autocolorscale", arg, autocolorscale)
         self._set_property("autocontour", arg, autocontour)
         self._set_property("coloraxis", arg, coloraxis)
