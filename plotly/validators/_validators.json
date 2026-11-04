@@ -77687,6 +77687,7 @@
             "plotly_name": "zmin",
             "parent_name": "image",
             "edit_type": "calc",
+            "free_length": true,
             "items": [
                 {
                     "editType": "calc",
@@ -77713,6 +77714,7 @@
             "plotly_name": "zmax",
             "parent_name": "image",
             "edit_type": "calc",
+            "free_length": true,
             "items": [
                 {
                     "editType": "calc",

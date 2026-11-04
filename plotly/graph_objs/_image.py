@@ -650,7 +650,7 @@ class Image(_BaseTraceType):
 
             The 'zmax' property is an info array that may be specified as:
 
-            * a list or tuple of 4 elements where:
+            * a list or tuple of up to 4 elements where:
         (0) The 'zmax[0]' property is a number and may be specified as:
               - An int or float
         (1) The 'zmax[1]' property is a number and may be specified as:
@@ -682,7 +682,7 @@ class Image(_BaseTraceType):
 
             The 'zmin' property is an info array that may be specified as:
 
-            * a list or tuple of 4 elements where:
+            * a list or tuple of up to 4 elements where:
         (0) The 'zmin[0]' property is a number and may be specified as:
               - An int or float
         (1) The 'zmin[1]' property is a number and may be specified as:

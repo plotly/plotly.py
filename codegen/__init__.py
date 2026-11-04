@@ -86,6 +86,19 @@ an item with matching `templateitemname` and `visible: false`.""",
     if "concentrationscales" in items:
         items["colorscale"] = items.pop("concentrationscales")
 
+    # The number of color components in the image trace's zmin/zmax
+    # depends on the colormodel (3 for rgb/hsl, 4 for rgba/rgba256/hsla),
+    # as described in the attributes' own descriptions. Validators are
+    # stateless and cannot see the colormodel of the trace being
+    # validated, so the fixed 4-element length from the plotly.js schema
+    # rejects valid 3-element values. Mark both properties as freeLength
+    # (accept up to 4 elements), as the schema already does for e.g.
+    # updatemenu button args and parcoords constraintrange.
+    # See https://github.com/plotly/plotly.py/issues/1973
+    image_attributes = plotly_schema["traces"]["image"]["attributes"]
+    for prop in ("zmin", "zmax"):
+        image_attributes[prop]["freeLength"] = True
+
 
 def make_paths(outdir):
     """Make various paths needed for formatting and linting."""
