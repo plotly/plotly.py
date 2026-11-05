@@ -93,6 +93,41 @@ def test_labels(backend):
 
 
 @pytest.mark.parametrize(
+    "labels", [{"color": "Group", "symbol": "Group"}, {"color": "symbol"}]
+)
+def test_legend_with_duplicate_labels(constructor, labels):
+    df = constructor(
+        {
+            "x": [1, 2, 3, 4],
+            "y": [4, 3, 2, 1],
+            "color": ["A", "A", "B", "B"],
+            "symbol": ["one", "two", "one", "two"],
+        }
+    )
+    fig = px.scatter(df, x="x", y="y", color="color", symbol="symbol", labels=labels)
+
+    expected_names = ["A, one", "A, two", "B, one", "B, two"]
+    assert [trace.name for trace in fig.data] == expected_names
+    assert [trace.legendgroup for trace in fig.data] == expected_names
+    assert all(trace.showlegend for trace in fig.data)
+    assert fig.layout.legend.title.text == ", ".join(
+        labels.get(column, column) for column in ["color", "symbol"]
+    )
+
+
+def test_legend_with_same_column_for_color_and_symbol(constructor):
+    df = constructor({"x": [1, 2], "y": [3, 4], "group": ["A", "B"]})
+    fig = px.scatter(
+        df, x="x", y="y", color="group", symbol="group", labels={"group": "Group"}
+    )
+
+    assert [trace.name for trace in fig.data] == ["A", "B"]
+    assert [trace.legendgroup for trace in fig.data] == ["A", "B"]
+    assert all(trace.showlegend for trace in fig.data)
+    assert fig.layout.legend.title.text == "Group"
+
+
+@pytest.mark.parametrize(
     ["extra_kwargs", "expected_mode"],
     [
         ({}, "lines"),
