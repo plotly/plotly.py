@@ -13,7 +13,7 @@ jupyter
 jupyter-client<7
 jupytext==1.16.4
 kaleido
-nbconvert==5.6.1
+nbconvert==7.17.2
 networkx==2.8.0
 notebook
 numpy==1.22.4
@@ -31,7 +31,7 @@ requests
 scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
-setuptools<=81
+setuptools<=84.2.1
 sphinx==3.5.4
 sphinx_bootstrap_theme
 sphinxcontrib-applehelp==1.0.2
