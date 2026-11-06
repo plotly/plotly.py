@@ -94,7 +94,7 @@ dev = [
 dev_pandas1 = [
     "pandas>=1,<2",
     "numpy>=1,<2",
-    "setuptools<82"
+    "setuptools<85"
 ]
 dev_pandas2 = [
     "pandas>=2,<3",
