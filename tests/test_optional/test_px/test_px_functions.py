@@ -680,6 +680,32 @@ def test_timeline_cols_already_temporal(constructor, datetime_columns):
     assert fig.layout.xaxis.title.text is None
 
 
+@pytest.mark.parametrize("time_zone", [None, "UTC", "US/Pacific"])
+def test_timeline_daylight_saving(constructor, time_zone):
+    # Regression for https://github.com/plotly/plotly.py/issues/4611
+    starts = ["2024-03-09", "2024-03-10", "2024-03-11", "2023-11-05"]
+    finishes = ["2024-03-10", "2024-03-11", "2024-03-12", "2023-11-06"]
+    df = nw.from_native(
+        constructor({"Start": starts, "Finish": finishes, "Task": ["Job A"] * 4})
+    ).with_columns(
+        nw.col("Start", "Finish")
+        .str.to_datetime(format="%Y-%m-%d")
+        .dt.replace_time_zone(time_zone)
+    )
+
+    fig = px.timeline(df.to_native(), x_start="Start", x_end="Finish", y="Task")
+
+    # Date axes use local wall-clock coordinates: consecutive midnights are
+    # 24 hours apart even when the elapsed time is 23 or 25 hours.
+    assert_array_equal(fig.data[0].x, [24 * 60 * 60 * 1000] * 4)
+    base = np.asarray(fig.data[0].base, dtype="datetime64[ms]")
+    assert_array_equal(base, np.array(starts, dtype="datetime64[ms]"))
+    assert_array_equal(
+        base + fig.data[0].x.astype("timedelta64[ms]"),
+        np.array(finishes, dtype="datetime64[ms]"),
+    )
+
+
 def test_empty_histogram():
     """Empty px.histogram() should not raise, matching scatter/bar/pie behavior.
 
