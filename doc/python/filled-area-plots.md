@@ -129,6 +129,50 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
+#### Filled Areas with Missing Data
+
+Missing values (`None` or `NaN`) break a line into separate segments unless `connectgaps=True` is set. Currently, `fill='tozeroy'` and `fill='tozerox'` still draw one filled shape for the whole trace, so the fill spans the gaps. This rendering behavior comes from plotly.js and is tracked in [plotly.js#2736](https://github.com/plotly/plotly.js/issues/2736).
+
+To keep the gaps unfilled, you can draw each run of non-missing values as its own trace. The values are not modified; they are only split at the missing points. Giving the traces the same `legendgroup` and showing only the first one in the legend keeps them behaving like a single series.
+
+```python
+import math
+import plotly.graph_objects as go
+
+x = list(range(1, 11))
+y = [2, 3, 4, None, None, 5, 6, 4, None, 3]
+
+def is_missing(value):
+    return value is None or (isinstance(value, float) and math.isnan(value))
+
+# Split (x, y) into runs of consecutive non-missing values
+segments, current = [], []
+for xi, yi in zip(x, y):
+    if is_missing(yi):
+        if current:
+            segments.append(current)
+        current = []
+    else:
+        current.append((xi, yi))
+if current:
+    segments.append(current)
+
+fig = go.Figure()
+for i, segment in enumerate(segments):
+    seg_x, seg_y = zip(*segment)
+    fig.add_trace(go.Scatter(
+        x=seg_x, y=seg_y,
+        fill='tozeroy',
+        mode='lines+markers',
+        line_color='royalblue',
+        name='measurement',
+        legendgroup='measurement',
+        showlegend=(i == 0),
+    ))
+
+fig.show()
+```
+
 #### Gradient Fill
 
 *New in 5.20*
