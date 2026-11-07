@@ -4050,6 +4050,20 @@ Invalid property path '{key_path_str}' for layout
                 self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
             )
 
+    def _axis_spanning_line_target_is_explicit(self, row, col):
+        """
+        Returns True when the subplot targeted by add_hline/add_vline is
+        unambiguous: the grid has a single subplot, or both row and col were
+        given explicitly. In these cases the line is kept even if the
+        subplot does not contain any data yet.
+        """
+        if not self._has_subplots():
+            return False
+        rows, cols = self._get_subplot_rows_columns()
+        if len(rows) * len(cols) == 1:
+            return True
+        return all(rc is not None and rc != "all" for rc in (row, col))
+
     def add_vline(
         self,
         x,
@@ -4064,7 +4078,8 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "vline",
-            exclude_empty_subplots=exclude_empty_subplots,
+            exclude_empty_subplots=exclude_empty_subplots
+            and not self._axis_spanning_line_target_is_explicit(row, col),
             annotation=annotation,
             **kwargs,
         )
@@ -4092,7 +4107,8 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "hline",
-            exclude_empty_subplots=exclude_empty_subplots,
+            exclude_empty_subplots=exclude_empty_subplots
+            and not self._axis_spanning_line_target_is_explicit(row, col),
             annotation=annotation,
             **kwargs,
         )
