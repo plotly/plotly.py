@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
 
 ### Fixed
-- Fix `add_hline` and `add_vline` dropping lines on empty subplots when the target is unambiguous (the grid has a single subplot, or both `row` and `col` are given) [[#5136](https://github.com/plotly/plotly.py/issues/5136)]
+- Fix figures in JupyterLab not redrawing when their output is updated with `update_display_data` (for example `DisplayHandle.update`), which also kept animations in other kernels on their first frame [[#5865](https://github.com/plotly/plotly.py/pull/5865)], with thanks to @AllenDowney for the contribution!
+- Fix `add_hline` and `add_vline` dropping lines on empty subplots when the target is unambiguous (the grid has a single subplot, or both `row` and `col` are given) [[#5873](https://github.com/plotly/plotly.py/pull/5873)]
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the color of each axis's displayed spine to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!

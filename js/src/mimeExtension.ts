@@ -54,8 +54,16 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
     if (this.hasGraphElement()) {
-      // We already have a graph, don't overwrite it
-      return Promise.resolve();
+      // We already have a graph. Redraw it only if the figure has changed,
+      // as it does when a kernel sends update_display_data. (createGraph
+      // stores a PNG of the figure in the model, which calls renderModel
+      // again with the same figure.)
+      const previous = this._model?.data[this._mimeType];
+      if (JSON.stringify(previous) === JSON.stringify(model.data[this._mimeType])) {
+        return Promise.resolve();
+      }
+      this._model = model;
+      return this.createGraph(model);
     }
 
     // Save off reference to model so that we can regenerate the plot later
