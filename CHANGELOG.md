@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
+- Add support for converting matplotlib 3D line plots (`ax.plot` on `projection="3d"` axes) to scatter3d traces in `mpl_to_plotly`, with a plotly scene per 3D axes carrying the axis limits, labels, log scales, pane colors, box aspect and the camera view from `view_init`, with thanks to @robertoffmoura for the contribution!
 
 ### Fixed
 - Fix figures in JupyterLab not redrawing when their output is updated with `update_display_data` (for example `DisplayHandle.update`), which also kept animations in other kernels on their first frame [[#5865](https://github.com/plotly/plotly.py/pull/5865)], with thanks to @AllenDowney for the contribution!
