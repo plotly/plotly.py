@@ -56,7 +56,18 @@ def validator_no_blanks_aok():
 # Not strict
 # Acceptance
 @pytest.mark.parametrize(
-    "val", ["bar", 234, np_nan(), "HELLO!!!", "world!@#$%^&*()", "", "\u03bc"]
+    "val",
+    [
+        "bar",
+        234,
+        np_nan(),
+        np.int64(234),
+        np.float32(1.5),
+        "HELLO!!!",
+        "world!@#$%^&*()",
+        "",
+        "\u03bc",
+    ],
 )
 def test_acceptance(val, validator):
     expected = str(val) if not isinstance(val, str) else val

@@ -918,7 +918,9 @@ class IntegerValidator(BaseValidator):
         elif self.array_ok and is_simple_array(v):
             # Check integer type
             invalid_els = [
-                e for e in v if not isinstance(e, int) and e not in self.extras
+                e
+                for e in v
+                if not isinstance(e, numbers.Integral) and e not in self.extras
             ]
 
             if invalid_els:
@@ -929,7 +931,10 @@ class IntegerValidator(BaseValidator):
                 invalid_els = [
                     e
                     for e in v
-                    if not (isinstance(e, int) and self.min_val <= e <= self.max_val)
+                    if not (
+                        isinstance(e, numbers.Integral)
+                        and self.min_val <= e <= self.max_val
+                    )
                     and e not in self.extras
                 ]
 
@@ -939,7 +944,7 @@ class IntegerValidator(BaseValidator):
             v = to_scalar_or_list(v)
         else:
             # Check int
-            if not isinstance(v, int):
+            if not isinstance(v, numbers.Integral):
                 # don't let int() cast strings to ints
                 self.raise_invalid_val(v)
 
@@ -1100,7 +1105,7 @@ class StringValidator(BaseValidator):
             else:
                 if isinstance(v, str):
                     pass
-                elif isinstance(v, (int, float)):
+                elif isinstance(v, numbers.Number):
                     # Convert value to a string
                     v = str(v)
                 else:
