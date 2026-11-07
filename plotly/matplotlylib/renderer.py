@@ -41,6 +41,106 @@ def _per_path(values, i, default):
     return values[i % n] if n else default
 
 
+# In SVG paths, codes carry different numbers of vertices:
+# M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
+_VERTICES_PER_CODE = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
+
+
+def _split_subpaths(verts, codes):
+    """Split SVG path vertices into subpaths, one per "M" code.
+
+    Returns a list of (vertices, closed) pairs; `closed` is True for
+    subpaths that have a "Z" code.
+    """
+    subpaths = []
+    current = []
+    closed = False
+    vi = 0
+    for c in codes:
+        step = _VERTICES_PER_CODE.get(c, 1)
+        if c == "M":
+            if current:
+                subpaths.append((current, closed))
+            current = [verts[vi]]
+            closed = False
+            vi += 1
+        elif c == "Z":
+            closed = True
+        else:
+            current.extend(verts[vi : vi + step])
+            vi += step
+    if current:
+        subpaths.append((current, closed))
+    return subpaths
+
+
+def _bezier_point(points, t):
+    """Return the point at parameter `t` of the Bezier curve with the given
+    control points (de Casteljau's algorithm)."""
+    points = [tuple(p) for p in points]
+    while len(points) > 1:
+        points = [
+            ((1 - t) * a[0] + t * b[0], (1 - t) * a[1] + t * b[1])
+            for a, b in zip(points, points[1:])
+        ]
+    return points[0]
+
+
+def _flatten_curves(verts, codes, samples=16):
+    """Return the path vertices and codes with Bezier curves as line segments.
+
+    Each cubic ("C") or quadratic ("S") curve is sampled at `samples` points
+    along the curve, ending at its end point, and each sample becomes an "L"
+    segment. Other codes keep their vertices.
+    """
+    flat_verts = []
+    flat_codes = []
+    vi = 0
+    for c in codes:
+        step = _VERTICES_PER_CODE.get(c, 1)
+        points = list(verts[vi : vi + step])
+        vi += step
+        if c in ("C", "S") and flat_verts:
+            control = [flat_verts[-1]] + points
+            for k in range(1, samples + 1):
+                flat_verts.append(_bezier_point(control, k / samples))
+                flat_codes.append("L")
+        else:
+            flat_verts.extend(points)
+            flat_codes.append(c)
+    return flat_verts, flat_codes
+
+
+def _close_subpaths(verts, codes):
+    """Return the subpaths of a path, each closed subpath ending at its start.
+
+    Bezier curves are flattened into line segments first. The start vertex
+    of each closed subpath is appended to it, which draws the closing
+    segment of the outline. Subpaths that already end at their start vertex
+    keep their vertices as given.
+    """
+    subpaths = []
+    for sub, closed in _split_subpaths(*_flatten_curves(verts, codes)):
+        if closed and tuple(sub[-1]) != tuple(sub[0]):
+            sub = sub + [sub[0]]
+        subpaths.append(sub)
+    return subpaths
+
+
+def _legend_label(label):
+    """Return the (name, showlegend) pair for a trace from an artist label.
+
+    matplotlib marks artists it leaves out of legends with "_nolegend_" and
+    auto-generated "_childN" labels. Empty labels and labels starting with
+    "_" give (None, False), which hides the trace from the plotly legend.
+    Other labels give (label, None), which keeps plotly's default legend
+    entry.
+    """
+    if not label or (isinstance(label, str) and label.startswith("_")):
+        return None, False
+    return label, None
+
+
 def _convert_collection_dash(linestyle):
     """Convert a matplotlib collection line style to a plotly dash string.
 
@@ -532,14 +632,7 @@ class PlotlyRenderer(Renderer):
                     ),
                 )
         if props["coordinates"] == "data":
-            label = props["label"]
-            # matplotlib uses "_nolegend_" and auto-generated "_childN"
-            # labels for artists that must not appear in a legend
-            if not label or (isinstance(label, str) and label.startswith("_")):
-                label = None
-                showlegend = False
-            else:
-                showlegend = None
+            label, showlegend = _legend_label(props["label"])
             marked_line = go.Scatter(
                 mode=mode,
                 name=label,
@@ -791,31 +884,9 @@ class PlotlyRenderer(Renderer):
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); separate disjoint subpaths with None so
             # plotly does not connect them.
-            # In SVG paths, codes carry different numbers of vertices:
-            # M/L: 1, C: 3 (cubic curve), S: 2 (smooth/quad curve), Z: 0.
-            code_steps = {"M": 1, "L": 1, "C": 3, "S": 2, "Z": 0}
-            subpaths = []
-            current = []
-            closed = False
-            vi = 0
-            for c in codes:
-                step = code_steps.get(c, 1)
-                if c == "M":
-                    if current:
-                        subpaths.append((current, closed))
-                    current = [verts[vi]]
-                    closed = False
-                    vi += 1
-                elif c == "Z":
-                    closed = True
-                else:
-                    current.extend(verts[vi : vi + step])
-                    vi += step
-            if current:
-                subpaths.append((current, closed))
             path_x = []
             path_y = []
-            for sub, closed in subpaths:
+            for sub, closed in _split_subpaths(verts, codes):
                 if len(sub) < 2:
                     continue
                 # a closed subpath (Z code) must be closed explicitly since
@@ -850,6 +921,48 @@ class PlotlyRenderer(Renderer):
 
         flush()
 
+    def _add_filled_trace(
+        self,
+        verts,
+        codes,
+        facecolor,
+        edgecolor,
+        linewidth,
+        dash=None,
+        name=None,
+        showlegend=None,
+    ):
+        """Add a scatter trace outlining a path on the current axes.
+
+        The subpaths of the path are separated by None. The path is filled
+        with `facecolor`; a facecolor of "none" gives an outline-only trace.
+        """
+        x = []
+        y = []
+        for sub in _close_subpaths(verts, codes):
+            if x:
+                x.append(None)
+                y.append(None)
+            x.extend(self._convert_x_dates([v[0] for v in sub]))
+            y.extend(v[1] for v in sub)
+        filled = facecolor != "none"
+        self.plotly_fig.add_trace(
+            go.Scatter(
+                name=name,
+                showlegend=showlegend,
+                x=x,
+                y=y,
+                mode="lines",
+                line=go.scatter.Line(
+                    color=_export_color(edgecolor), width=linewidth, dash=dash
+                ),
+                fill="toself" if filled else None,
+                fillcolor=_export_color(facecolor) if filled else None,
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
+            )
+        )
+
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
@@ -857,30 +970,21 @@ class PlotlyRenderer(Renderer):
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
 
         for i, (verts, codes) in enumerate(props["paths"]):
-            facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
-            edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
-            linewidth = _per_path(linewidths, i, 0)
-            self.plotly_fig.add_trace(
-                go.Scatter(
-                    x=self._convert_x_dates([v[0] for v in verts]),
-                    y=[v[1] for v in verts],
-                    mode="lines",
-                    line=go.scatter.Line(
-                        color=_export_color(edgecolor), width=linewidth
-                    ),
-                    fill="toself",
-                    fillcolor=_export_color(facecolor),
-                    xaxis="x{0}".format(self.axis_ct),
-                    yaxis="y{0}".format(self.axis_ct),
-                )
+            self._add_filled_trace(
+                verts,
+                codes,
+                facecolor=_per_path(facecolors, i, "rgba(0,0,0,0)"),
+                edgecolor=_per_path(edgecolors, i, "rgba(0,0,0,0)"),
+                linewidth=_per_path(linewidths, i, 0),
             )
 
     def draw_path(self, **props):
-        """Draw a bar chart path or a matplotlib step patch.
+        """Draw a bar chart path, a matplotlib step patch, or another patch.
 
         This function attempts to sort a given path into a collection of
-        horizontal or vertical bar charts, and draws matplotlib StepPatch
-        artists as step traces. Most of the actual code takes place in
+        horizontal or vertical bar charts, draws matplotlib StepPatch
+        artists as step traces, and draws other patches in data coordinates
+        as filled scatter traces. Most of the bar chart code takes place in
         functions from mpltools.py.
 
         props.keys() -- [
@@ -908,6 +1012,12 @@ class PlotlyRenderer(Renderer):
         elif isinstance(props["mplobj"], mpatches.StepPatch):
             self.msg += "    Drawing a step path\n"
             self._draw_step_path(props)
+        elif (
+            isinstance(props["mplobj"], mpatches.Patch)
+            and props["coordinates"] == "data"
+        ):
+            self.msg += "    Drawing a filled patch\n"
+            self._draw_filled_patch(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
@@ -945,12 +1055,7 @@ class PlotlyRenderer(Renderer):
         if len(x) < 2:
             self.msg += "    Step path has fewer than 2 points, not drawing\n"
             return
-        label = props["mplobj"].get_label()
-        if not label or (isinstance(label, str) and label.startswith("_")):
-            label = None
-            showlegend = False
-        else:
-            showlegend = None
+        label, showlegend = _legend_label(props["mplobj"].get_label())
         self.plotly_fig.add_trace(
             go.Scatter(
                 x=x,
@@ -968,6 +1073,24 @@ class PlotlyRenderer(Renderer):
                 xaxis="x{0}".format(self.axis_ct),
                 yaxis="y{0}".format(self.axis_ct),
             )
+        )
+
+    def _draw_filled_patch(self, props):
+        """Draw a visible matplotlib patch as a filled scatter trace."""
+        if not props["mplobj"].get_visible():
+            self.msg += "    Patch is hidden, not drawing\n"
+            return
+        style = props["style"]
+        label, showlegend = _legend_label(props["mplobj"].get_label())
+        self._add_filled_trace(
+            props["data"],
+            props["pathcodes"],
+            facecolor=style["facecolor"],
+            edgecolor=style["edgecolor"],
+            linewidth=style["edgewidth"],
+            dash=mpltools.convert_dash(style["dasharray"]),
+            name=label,
+            showlegend=showlegend,
         )
 
     def draw_text(self, **props):
