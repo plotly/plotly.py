@@ -105,6 +105,11 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         "O": "object",
     }
 
+    pd = get_module("pandas", should_load=False)
+    if pd is not None and isinstance(v, pd.Index):
+        # Narwhals passes an Index through unchanged, so use the Series path for it
+        v = v.to_series()
+
     # With `pass_through=True`, the original object will be returned if unable to convert
     # to a Narwhals DataFrame or Series.
     v = nw.from_native(v, allow_series=True, pass_through=True)
