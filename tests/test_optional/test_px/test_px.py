@@ -361,6 +361,202 @@ def test_category_order_with_category_as_x(backend):
         assert set(trace["x"]) == {"Thur", "Fri", "Sat", "Sun"}
 
 
+def test_category_order_defaults_to_data_order_with_color():
+    # https://github.com/plotly/plotly.py/issues/3198
+    # Splitting into one trace per color must not change the axis order:
+    # it should follow first appearance in the underlying data.
+    fig = px.line(
+        x=["A", "B", None, "B", "C", None, "C", "D", None, "D", "E", None],
+        y=[1, 1, None, 2, 2, None, 3, 3, None, 4, 4, None],
+        color=[1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1],
+    )
+    assert fig["layout"]["xaxis"]["categoryorder"] == "array"
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("A", "B", "C", "D", "E")
+
+
+def test_category_order_defaults_to_data_order_with_color_bar():
+    # https://github.com/plotly/plotly.py/issues/3291
+    df = pd.DataFrame(
+        {"x": ["a", "b", "c", "d"], "y": [1, 2, 3, 4], "z": ["p", "q", "p", "q"]}
+    )
+    fig = px.bar(df, x="x", y="y", color="z")
+    assert fig["layout"]["xaxis"]["categoryorder"] == "array"
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("a", "b", "c", "d")
+
+
+def test_no_default_category_array_for_single_trace_or_numeric():
+    # A single trace already follows data order, and numeric axes
+    # must never get a category array.
+    fig = px.line(x=["A", "B", "C"], y=[1, 2, 3])
+    assert fig["layout"]["xaxis"]["categoryorder"] is None
+    fig = px.line(x=[1, 2, 3], y=[1, 2, 3], color=["a", "b", "a"])
+    assert fig["layout"]["xaxis"]["categoryorder"] is None
+
+
+def test_no_default_category_array_for_y_with_color():
+    # https://github.com/plotly/plotly.py/pull/5776#pullrequestreview-5478271667
+    # y categoricals must stay untouched so the `autorange="reversed"`
+    # pattern from doc/python/gantt.md keeps listing tasks top-down.
+    df = pd.DataFrame(
+        [
+            dict(
+                Task="Job A", Start="2009-01-01", Finish="2009-02-28", Resource="Alex"
+            ),
+            dict(
+                Task="Job B", Start="2009-03-05", Finish="2009-04-15", Resource="Alex"
+            ),
+            dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30", Resource="Max"),
+        ]
+    )
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Resource")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis"]["categoryarray"] is None
+    fig = px.bar(x=[1, 2, 3, 4], y=list("abcd"), color=list("ppqq"), orientation="h")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis"]["categoryarray"] is None
+
+
+def test_unlinked_facet_axes_only_list_their_own_categories():
+    df = pd.DataFrame(
+        {
+            "panel": ["left", "right", "left", "right", "left"],
+            "fruit": ["apple", "banana", "cherry", "date", "elderberry"],
+            "sold": [5, 3, 4, 6, 2],
+        }
+    )
+    fig = px.bar(df, x="fruit", y="sold", facet_col="panel")
+    fig.update_xaxes(matches=None)
+    for trace in fig.data:
+        axis = fig.layout["xaxis" + trace.xaxis[1:]]
+        assert axis.categoryarray is None or set(axis.categoryarray) <= set(trace.x)
+
+
+def test_default_category_order_applies_to_facets():
+    # https://github.com/plotly/plotly.py/pull/5776#discussion_r4429048272
+    # A facet must not change the x order relative to the same chart without
+    # facets: every facet axis follows the data order of its own rows, and
+    # the y axes stay untouched.
+    df = pd.DataFrame(
+        {
+            "month": ["Jan", "Feb", "Mar", "Apr", "Jan", "Feb", "Mar", "Apr"],
+            "product": [
+                "Basic",
+                "Basic",
+                "Pro",
+                "Basic",
+                "Basic",
+                "Basic",
+                "Pro",
+                "Basic",
+            ],
+            "region": ["East", "East", "East", "East", "West", "West", "West", "West"],
+            "units": [10, 12, 8, 15, 11, 13, 9, 16],
+        }
+    )
+    fig = px.bar(df, x="month", y="units", color="product")
+    assert fig["layout"]["xaxis"]["categoryorder"] == "array"
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    fig = px.bar(df, x="month", y="units", color="product", facet_col="region")
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    assert fig["layout"]["xaxis2"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    fig = px.bar(df, x="month", y="units", color="product", facet_row="region")
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    assert fig["layout"]["xaxis2"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    assert fig["layout"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["yaxis2"]["categoryorder"] is None
+    # numeric axes never get a category array, faceted or not
+    fig = px.bar(df, x="units", y="units", color="product", facet_col="region")
+    assert fig["layout"]["xaxis"]["categoryorder"] is None
+    assert fig["layout"]["xaxis2"]["categoryorder"] is None
+
+
+def test_facet_axes_list_their_own_categories_in_data_order():
+    df = pd.DataFrame(
+        {
+            "region": ["E", "E", "W", "E", "W"],
+            "cat": ["a", "b", "a", "c", "b"],
+            "kind": ["p", "q", "q", "q", "p"],
+            "val": [1, 2, 3, 4, 5],
+        }
+    )
+    fig = px.bar(df, x="cat", y="val", color="kind", facet_col="region")
+    # each facet lists only its own categories, in the order of the whole
+    # data frame: the trace-derived order scrambles the second facet because
+    # its "kind=p" trace carries "b" and is created before its "kind=q" trace
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("a", "b", "c")
+    assert fig["layout"]["xaxis2"]["categoryarray"] == ("a", "b")
+
+
+def test_default_category_order_with_marginals():
+    # The top marginal of `marginal_x` shares the x dimension with the main
+    # subplot and gets the same data order. The right marginal of
+    # `marginal_y` spans the y dimension and carries the binned y values, so
+    # it must not receive the x order.
+    df = pd.DataFrame(
+        {
+            "month": ["Jan", "Feb", "Mar", "Apr", "Jan", "Feb", "Mar", "Apr"],
+            "product": [
+                "Basic",
+                "Basic",
+                "Pro",
+                "Basic",
+                "Basic",
+                "Basic",
+                "Pro",
+                "Basic",
+            ],
+            "units": [10, 12, 8, 15, 11, 13, 9, 16],
+        }
+    )
+    fig = px.scatter(df, x="month", y="units", color="product", marginal_x="rug")
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    assert fig["layout"]["xaxis2"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    fig = px.scatter(df, x="month", y="units", color="product", marginal_y="rug")
+    assert fig["layout"]["xaxis"]["categoryarray"] == ("Jan", "Feb", "Mar", "Apr")
+    assert fig["layout"]["xaxis2"]["categoryarray"] is None
+
+
+def test_default_category_order_for_3d():
+    df = pd.DataFrame(
+        {
+            "month": ["Jan", "Feb", "Mar", "Apr", "Jan", "Feb", "Mar", "Apr"],
+            "product": [
+                "Basic",
+                "Basic",
+                "Pro",
+                "Basic",
+                "Basic",
+                "Basic",
+                "Pro",
+                "Basic",
+            ],
+            "units": [10, 12, 8, 15, 11, 13, 9, 16],
+        }
+    )
+    fig = px.scatter_3d(df, x="month", y="units", z="units", color="product")
+    assert fig["layout"]["scene"]["xaxis"]["categoryorder"] == "array"
+    assert fig["layout"]["scene"]["xaxis"]["categoryarray"] == (
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+    )
+    assert fig["layout"]["scene"]["yaxis"]["categoryorder"] is None
+    assert fig["layout"]["scene"]["zaxis"]["categoryorder"] is None
+
+
+def test_no_default_category_array_for_ecdf():
+    # px.ecdf sorts the x values inside each trace, so its categorical axis
+    # must keep the trace-derived order for the step function to read in
+    # sequence.
+    df = pd.DataFrame(
+        {"x": ["b", "a", "c", "a", "b", "c"], "g": ["p", "p", "p", "q", "q", "q"]}
+    )
+    fig = px.ecdf(df, x="x", color="g")
+    assert fig["layout"]["xaxis"]["categoryorder"] is None
+    assert fig["layout"]["xaxis"]["categoryarray"] is None
+
+
 def test_permissive_defaults():
     msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
