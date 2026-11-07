@@ -35,6 +35,11 @@ def validator_aok():
     return NumberValidator("prop", "parent", min=-1, max=1.5, array_ok=True)
 
 
+@pytest.fixture
+def validator_aok_no_min_max():
+    return NumberValidator("prop", "parent", array_ok=True)
+
+
 # Array not ok
 
 
@@ -134,6 +139,13 @@ def test_coercion_aok_list(val, expected, validator_aok):
         assert validator_aok.present(v) == tuple(val)
 
 
+# None elements (null in figure JSON) are kept, with or without min/max
+@pytest.mark.parametrize("val", [[1, None], [None], (None, -0.5, None)])
+def test_acceptance_aok_none_elements(val, validator_aok, validator_aok_no_min_max):
+    assert validator_aok.validate_coerce(val) == list(val)
+    assert validator_aok_no_min_max.validate_coerce(val) == list(val)
+
+
 # Rejection
 @pytest.mark.parametrize("val", [["a", 4]])
 def test_rejection_aok(val, validator_aok):
@@ -141,6 +153,13 @@ def test_rejection_aok(val, validator_aok):
         validator_aok.validate_coerce(val)
 
     assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_rejection_aok_skips_none(validator_aok):
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce([None, "a", None])
+
+    assert "Invalid elements include: ['a']" in str(validation_failure.value)
 
 
 # Rejection by element
@@ -152,6 +171,7 @@ def test_rejection_aok(val, validator_aok):
         [-0.1234, 0.41, np_nan()],
         [0, np_inf()],
         [0, -np_inf()],
+        [None, 2],
     ],
 )
 def test_rejection_aok_min_max(val, validator_aok):
