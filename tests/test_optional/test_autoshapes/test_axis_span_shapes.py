@@ -473,3 +473,72 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
 )
 def test_custom_sized_subplots(test_input, expected, custom_sized_subplots):
     _check_figure_shapes_custom_sized(test_input, expected, custom_sized_subplots)
+
+
+@pytest.mark.parametrize(
+    "add_shape,kwargs",
+    [
+        (go.Figure.add_hline, dict(y=1)),
+        (go.Figure.add_vline, dict(x=1)),
+        (go.Figure.add_hrect, dict(y0=1, y1=2)),
+        (go.Figure.add_vrect, dict(x0=1, x1=2)),
+    ],
+)
+@pytest.mark.parametrize(
+    "rows,cols,selection,expected_xref",
+    [
+        (1, 1, dict(), "x"),
+        (2, 2, dict(row=2, col=1), "x3"),
+        (2, 1, dict(row=2, col="all"), "x2"),
+        (2, 2, dict(row=[1], col=[2]), "x2"),
+    ],
+)
+def test_single_empty_subplot_gets_shape(
+    add_shape, kwargs, rows, cols, selection, expected_xref
+):
+    fig = make_subplots(rows=rows, cols=cols)
+    add_shape(fig, annotation_text="A", **kwargs, **selection)
+    assert len(fig.layout.shapes) == 1
+    assert fig.layout.shapes[0].xref.split()[0] == expected_xref
+    assert len(fig.layout.annotations) == 1
+
+
+def test_single_subplot_with_none_cell_gets_shape():
+    fig = make_subplots(rows=1, cols=2, specs=[[{}, None]])
+    fig.add_hline(y=1)
+    assert len(fig.layout.shapes) == 1
+
+
+@pytest.mark.parametrize("selection", [dict(), dict(row=1, col="all")])
+def test_multiple_empty_subplots_are_still_excluded(selection):
+    fig = make_subplots(rows=1, cols=2)
+    fig.add_hline(y=1, **selection)
+    assert len(fig.layout.shapes) == 0
+
+
+def test_out_of_range_row_keeps_its_error():
+    fig = make_subplots(rows=1, cols=1)
+    with pytest.raises(IndexError, match="row index 2 out-of-bounds"):
+        fig.add_hline(y=1, row=2, col=1)
+
+
+def test_empty_secondary_y_gets_shape():
+    fig = make_subplots(rows=1, cols=1, specs=[[{"secondary_y": True}]])
+    fig.add_hline(y=1, row=1, col=1, secondary_y=True)
+    assert fig.layout.shapes[0].yref == "y2"
+
+
+def test_explicit_empty_facet_gets_shape(subplot_empty_traces_fig_fixture):
+    fig = subplot_empty_traces_fig_fixture
+    empty = next(
+        (r, c)
+        for r, c in fig._get_subplot_coordinates()
+        if not fig._subplot_not_empty(*_xy_refs(fig, r, c))
+    )
+    fig.add_hline(y=1, row=empty[0], col=empty[1])
+    assert len(fig.layout.shapes) == 1
+
+
+def _xy_refs(fig, row, col):
+    xaxis, yaxis = fig._grid_ref[row - 1][col - 1][0].layout_keys
+    return xaxis.replace("axis", ""), yaxis.replace("axis", "")

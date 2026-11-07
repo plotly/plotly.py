@@ -441,7 +441,7 @@ class FigureWidget(BaseFigureWidget):
             A number representing the x coordinate of the vertical line.
         exclude_empty_subplots: Boolean
             If True (default) do not place the shape on subplots that have no data
-            plotted on them.
+            plotted on them. Ignored when row and col select a single subplot.
         row: None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
@@ -493,7 +493,7 @@ class FigureWidget(BaseFigureWidget):
             A number representing the y coordinate of the horizontal line.
         exclude_empty_subplots: Boolean
             If True (default) do not place the shape on subplots that have no data
-            plotted on them.
+            plotted on them. Ignored when row and col select a single subplot.
         row: None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
@@ -548,7 +548,7 @@ class FigureWidget(BaseFigureWidget):
             A number representing the x coordinate of the other side of the rectangle.
         exclude_empty_subplots: Boolean
             If True (default) do not place the shape on subplots that have no data
-            plotted on them.
+            plotted on them. Ignored when row and col select a single subplot.
         row: None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
@@ -604,7 +604,7 @@ class FigureWidget(BaseFigureWidget):
             A number representing the y coordinate of the other side of the rectangle.
         exclude_empty_subplots: Boolean
             If True (default) do not place the shape on subplots that have no data
-            plotted on them.
+            plotted on them. Ignored when row and col select a single subplot.
         row: None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
