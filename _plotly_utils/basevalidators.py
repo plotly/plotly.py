@@ -1145,7 +1145,7 @@ class ColorValidator(BaseValidator):
     # A CSS color function argument: a number (which may be signed or use an
     # exponent) with an optional percent sign or angle unit, or `none`.
     _re_css_value = (
-        r"(?:[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?(?:%|deg|grad|rad|turn)?|none)"
+        r"(?:[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?(?:%|deg|grad|rad|turn)?|none)"
     )
     _re_css_sep = r"(?:\s*,\s*|\s+)"
     _re_css_alpha_sep = r"(?:\s*[,/]\s*|\s+)"
