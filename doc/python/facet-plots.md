@@ -111,6 +111,8 @@ fig.show()
 
 It is possible to add [labelled horizontal and vertical lines and rectangles](/python/horizontal-vertical-shapes/) to facet plots using `.add_hline()`, `.add_vline()`, `.add_hrect()` or `.add_vrect()`. The default `row` and `col` values are `"all"` but this can be overridden, as with the rectangle below, which only appears in the first column.
 
+Note that `row` numbers count from the bottom: in a figure made with `facet_row` or `facet_col_wrap`, `row=1` is the bottom row of facets, not the top one.
+
 ```python
 import plotly.express as px
 
