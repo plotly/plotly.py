@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
 - Fix color utilities mutating the list of colors passed to them [[#5836](https://github.com/plotly/plotly.py/pull/5836)], with thanks to @Enesuygurs for the contribution!
 - Accept CSS color formats that plotly.js supports but the color validator rejected, such as negative `lab()`/`oklab()` components, `color()` values, angle units other than `deg`, the `none` keyword and `transparent` [[#5868](https://github.com/plotly/plotly.py/pull/5868)], with thanks to @ShawnNotFound for the contribution!
+- Reject color strings with spaces that CSS does not allow, such as `"light blue"`, `"# ff0000"` and `"hsl(0, 100 %, 50%)"`. The color validator used to remove these spaces and accept the strings, but plotly.js does not parse them [[#5868](https://github.com/plotly/plotly.py/pull/5868)], with thanks to @ShawnNotFound for the contribution!
 
 
 ## [7.1.0] - 2026-09-15
