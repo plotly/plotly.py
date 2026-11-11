@@ -304,14 +304,13 @@ else:
 
     # Output graph_objects.py alias
     graph_objects_rel_classes = [
-        "..graph_objs." + rel_path.split(".")[-1]
-        for rel_path in datatype_rel_class_imports[()]
+        *(
+            "..graph_objs." + rel_path.split(".")[-1]
+            for rel_path in datatype_rel_class_imports[()]
+        ),
+        # graph_objs owns the optional ipywidgets import and the fallback
+        "..graph_objs.FigureWidget",
     ]
-    # FigureWidget is owned by graph_objs, which handles the optional
-    # ipywidgets import and the missing_* fallback. Re-export it from
-    # graph_objs like every other class instead of duplicating the optional
-    # import block in graph_objects.
-    graph_objects_rel_classes.append("..graph_objs.FigureWidget")
     graph_objects_rel_modules = [
         "..graph_objs." + rel_module.split(".")[-1]
         for rel_module in datatype_rel_module_imports[()]
