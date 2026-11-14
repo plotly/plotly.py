@@ -2869,6 +2869,8 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
     column_widths = [1.0] * ncols
     row_heights = [1.0] * nrows
     facet_col_wrap = args.get("facet_col_wrap", 0)
+    facet_row_spacing = args.get("facet_row_spacing")
+    facet_col_spacing = args.get("facet_col_spacing")
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
@@ -2881,9 +2883,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
         elif facet_col_wrap:
-            vertical_spacing = args.get("facet_row_spacing") or 0.07
+            vertical_spacing = 0.07 if facet_row_spacing is None else facet_row_spacing
         else:
-            vertical_spacing = args.get("facet_row_spacing") or 0.03
+            vertical_spacing = 0.03 if facet_row_spacing is None else facet_row_spacing
 
         if args.get("marginal_y") is not None:
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
@@ -2894,7 +2896,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = args.get("facet_col_spacing") or 0.02
+            horizontal_spacing = (
+                0.02 if facet_col_spacing is None else facet_col_spacing
+            )
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'map', 'domain', None
@@ -2902,10 +2906,10 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types
         if facet_col_wrap:
-            vertical_spacing = args.get("facet_row_spacing") or 0.07
+            vertical_spacing = 0.07 if facet_row_spacing is None else facet_row_spacing
         else:
-            vertical_spacing = args.get("facet_row_spacing") or 0.03
-        horizontal_spacing = args.get("facet_col_spacing") or 0.02
+            vertical_spacing = 0.03 if facet_row_spacing is None else facet_row_spacing
+        horizontal_spacing = 0.02 if facet_col_spacing is None else facet_col_spacing
 
     if facet_col_wrap:
         subplot_labels = [None] * nrows * ncols
