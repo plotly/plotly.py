@@ -103,6 +103,45 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
+### Making A Chart Editable
+
+Setting `editable` to `True` lets users change parts of a figure directly in the browser. With it enabled, users can:
+
+- click the chart title, axis titles, colorbar titles, annotation text, or trace names in the legend to edit the text
+- drag the legend, colorbars, shapes, and annotations to move them (for an annotation with an arrow, drag the arrowhead)
+- drag the text of an annotation with an arrow to change the arrow's length and direction
+
+Text that isn't set yet, such as the subtitle, shows a grey placeholder (for example, "Click to enter Plot subtitle") that users can click to add it. These edits only change the figure displayed in the browser. They do not update the `fig` object in Python.
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+
+fig = px.scatter(df, x="total_bill", y="tip", color="sex",
+                 title="Tips by total bill (click to edit this title)")
+fig.add_annotation(x=50.81, y=10, text="Largest bill")
+
+fig.show(config={'editable': True})
+```
+
+### Choosing Which Parts Of A Chart Are Editable
+
+To allow only some kinds of edits, use the `edits` option. Each key turns on one kind of edit: `annotationPosition`, `annotationTail`, `annotationText`, `axisTitleText`, `colorbarPosition`, `colorbarTitleText`, `legendPosition`, `legendText`, `shapePosition`, and `titleText`. Setting `editable` to `True` turns on all of them, and any key you set in `edits` overrides it. In this example, users can move the legend and the annotation, but can't edit any text.
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+
+fig = px.scatter(df, x="total_bill", y="tip", color="sex")
+fig.add_annotation(x=50.81, y=10, text="Largest bill")
+
+fig.show(config={'edits': {'legendPosition': True, 'annotationPosition': True}})
+```
+
+To let users edit individual shapes, including moving their corners, set `editable=True` on the shape instead. See [Drawing shapes with a Mouse on Cartesian plots](/python/shapes/#drawing-shapes-with-a-mouse-on-cartesian-plots).
+
 ### Forcing The Modebar to Always Be Visible
 
 When users hover over a figure generated with plotly.py, a **modebar** appears in the top-right of the figure. This presents users with several options for interacting with the figure.
