@@ -553,3 +553,12 @@ def test_imshow_xarray_facet_row_and_col():
     annotations = [a.text for a in fig.layout.annotations]
     assert any("row_dim=R1" in a for a in annotations)
     assert any("col_dim=C1" in a for a in annotations)
+
+
+def test_imshow_facet_spacing_zero():
+    img = np.random.random((2, 3, 5, 6))
+    fig = px.imshow(
+        img, facet_row=0, facet_col=1, facet_row_spacing=0, facet_col_spacing=0
+    )
+    assert fig.layout.xaxis2.domain[0] - fig.layout.xaxis.domain[1] == pytest.approx(0)
+    assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == pytest.approx(0)

@@ -46,6 +46,37 @@ def test_facets(backend):
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
+def test_facets_zero_spacing(backend):
+    df = px.data.tips(return_type=backend)
+
+    fig = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        facet_row="sex",
+        facet_col="smoker",
+        facet_col_spacing=0,
+        facet_row_spacing=0,
+    )
+    assert fig.layout.xaxis4.domain[0] - fig.layout.xaxis.domain[1] == approx(0)
+    assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0)
+
+    fig = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        facet_col="day",
+        facet_col_wrap=2,
+        facet_col_spacing=0,
+        facet_row_spacing=0,
+    )
+    assert fig.layout.xaxis4.domain[0] - fig.layout.xaxis.domain[1] == approx(0)
+    assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0)
+
+    fig = px.pie(df, values="tip", names="day", facet_col="smoker", facet_col_spacing=0)
+    assert fig.data[1].domain.x[0] - fig.data[0].domain.x[1] == approx(0)
+
+
 def test_facets_with_marginals(backend):
     df = px.data.tips(return_type=backend)
 
