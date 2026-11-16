@@ -40,7 +40,7 @@ jobs:
 
   test-optional:
     name: Optional tests (Python ${{ matrix.python-version }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -88,7 +88,7 @@ jobs:
 
   test-optional-legacy-pandas:
     name: Optional tests (Python ${{ matrix.python-version }}, pandas ${{ matrix.pandas-version }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:

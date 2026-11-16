@@ -49,7 +49,9 @@ dev_core = [
 ]
 dev_matplotlib = [
     "plotly[dev_core]",
-    "matplotlib"
+    "matplotlib",
+    "contourpy>=1.3.3; python_version>='3.14'",
+    "kiwisolver>=1.4.9"
 ]
 dev_build = [
     "plotly[dev_core]",
