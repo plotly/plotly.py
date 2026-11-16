@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix color utilities mutating the list of colors passed to them [[#5836](https://github.com/plotly/plotly.py/pull/5836)], with thanks to @Enesuygurs for the contribution!
 
 ### Updated
-- Removed Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later
+- Removed Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later [[#5883](https://github.com/plotly/plotly.py/pull/5883)]
 
 
 ## [7.1.0] - 2026-09-15
