@@ -27,6 +27,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
 - Fix color utilities mutating the list of colors passed to them [[#5836](https://github.com/plotly/plotly.py/pull/5836)], with thanks to @Enesuygurs for the contribution!
 
+### Updated
+- Removed Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later
+
 
 ## [7.1.0] - 2026-09-15
 

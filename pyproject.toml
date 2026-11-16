@@ -21,16 +21,15 @@ description = "An open-source interactive data visualization library for Python"
 readme = "README.md"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering :: Visualization",
     "License :: OSI Approved :: MIT License"
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE.txt"]
 version = "7.1.0"
@@ -68,8 +67,6 @@ dev_optional = [
     "plotly[kaleido]",
     "anywidget",
     "colorcet",
-    # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
-    "fiona<=1.9.6;python_version<='3.8'",
     "geopandas",
     "jupyterlab",
     "orjson",
@@ -83,7 +80,6 @@ dev_optional = [
     "scipy",
     "sphinx-gallery",
     "statsmodels",
-    "vaex;python_version<='3.9'",
     "xarray"
 ]
 dev = [
