@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Set up Python
@@ -40,11 +40,12 @@ jobs:
 
   test-optional:
     name: Optional tests (Python ${{ matrix.python-version }})
-    runs-on: ubuntu-latest
+    # ubuntu is pinned due to timezone-related test failures on ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Set up Python
@@ -88,12 +89,13 @@ jobs:
 
   test-optional-legacy-pandas:
     name: Optional tests (Python ${{ matrix.python-version }}, pandas ${{ matrix.pandas-version }})
-    runs-on: ubuntu-latest
+    # ubuntu is pinned due to timezone-related test failures on ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         include:
-          - python-version: "3.9"
+          - python-version: "3.10"
             pandas-version: "1"
           - python-version: "3.11"
             pandas-version: "2"
@@ -171,7 +173,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Set up Python
