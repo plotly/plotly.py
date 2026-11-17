@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
 
+### Changed
+- Remove Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later. [[#5883](https://github.com/plotly/plotly.py/pull/5883)]
+
 ### Fixed
 - Fix figures in JupyterLab not redrawing when their output is updated with `update_display_data` (for example `DisplayHandle.update`), which also kept animations in other kernels on their first frame [[#5865](https://github.com/plotly/plotly.py/pull/5865)], with thanks to @AllenDowney for the contribution!
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
