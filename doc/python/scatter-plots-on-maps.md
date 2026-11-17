@@ -73,9 +73,11 @@ fig.show()
 ```python
 import plotly.express as px
 import geopandas as gpd
-from geodatasets import get_url
 
-geo_df = gpd.read_file(get_url("naturalearth.cities"))
+geo_df = gpd.read_file(
+    "https://naciscdn.org/naturalearth/110m/cultural/"
+    "ne_110m_populated_places_simple.zip"
+)
 
 fig = px.scatter_geo(geo_df,
                     lat=geo_df.geometry.y,
