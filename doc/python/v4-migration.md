@@ -39,12 +39,12 @@ Upgrading to version 4 of `plotly` is a matter of following the instructions in 
 
 ### Getting Help
 
-If you encounter issues in upgrading from version 3 to version 4, please reach out in our [Community Forum](https://community.plotly.com/c/api/python) or if you've found an issue or regression in version 4, please report a [Github Issue](https://github.com/plotly/plotly.py/issues/new)
+If you encounter issues in upgrading from version 3 to version 4, please reach out in our [Community Forum](https://community.plotly.com/c/plotly-python/5) or if you've found an issue or regression in version 4, please report a [GitHub Issue](https://github.com/plotly/plotly.py/issues/new).
 
 <!-- #region -->
 ### Online features (`plotly.plotly`) moved to `chart-studio` package
 
-Prior versions of plotly.py contained functionality for creating figures in both "online" and "offline" modes.  In "online" mode figures were uploaded to the Chart Studio cloud (or on-premise) service, whereas in "offline" mode figures were rendered locally.  **Version 4 of `plotly` is "offline"-only: all "online" functionality has been removed from the main `plotly` distribution package and moved to the new `chart-studio` distribution package.**
+Prior versions of plotly.py contained functionality for creating figures in both "online" and "offline" modes. In "online" mode figures were uploaded to the Chart Studio cloud (or on-premise) service, whereas in "offline" mode figures were rendered locally. **Version 4 of `plotly` is "offline"-only: all "online" functionality has been removed from the main `plotly` distribution package and moved to the new `chart-studio` distribution package**.
 
 To migrate version 3 "online" functionality, first install the `chart-studio` package using pip...
 
@@ -58,7 +58,7 @@ or conda.
 $ conda install -c plotly chart-studio
 ```
 
-Then, update your Python import statements to import "online" functionality from the top-level `chart_studio` package, rather than the top-level `plotly` package.  For example. replace
+Then, update your Python import statements to import "online" functionality from the top-level `chart_studio` package, rather than the top-level `plotly` package. For example, replace
 
 ```python
 from plotly.plotly import plot, iplot
@@ -81,10 +81,10 @@ Similarly,
 <!-- #region -->
 ### Offline features (`plotly.offline`) replaced by Renderers framework & HTML export
 
-Version 4 introduces a new renderers framework that is a generalization of version 3's `plotly.offline.init_notebook_mode` and `plotly.offline.iplot` functions for displaying figures.  *This is a non-breaking change*: the `plotly.offline.iplot` function is still available and has been reimplemented on top of the renderers framework, so no changes are required when porting to version 4.  Going forward, we recommend using the renderers framework directly. See [Displaying plotly figures](/python/renderers) for more information.
+Version 4 introduces a new renderers framework that is a generalization of version 3's `plotly.offline.init_notebook_mode` and `plotly.offline.iplot` functions for displaying figures. *This is a non-breaking change*: the `plotly.offline.iplot` function is still available and has been reimplemented on top of the renderers framework, so no changes are required when porting to version 4. Going forward, we recommend using the renderers framework directly. See [Displaying plotly figures](/python/renderers) for more information.
 
 
-In version 3, the `plotly.offline.plot` function was used to export figures to HTML files.  In version 4, this function has been reimplemented on top of the new `to_html` and `write_html` functions from the `plotly.io` module.  These functions have a slightly more consistent API (see docstrings for details), and going forward we recommend using them directly when performing HTML export. When working with a graph object figure, these functions are also available as the `.to_html` and `.write_html` figure methods.
+In version 3, the `plotly.offline.plot` function was used to export figures to HTML files. In version 4, this function has been reimplemented on top of the new `to_html` and `write_html` functions from the `plotly.io` module. These functions have a slightly more consistent API (see docstrings for details), and going forward we recommend using them directly when performing HTML export. When working with a graph object figure, these functions are also available as the `.to_html` and `.write_html` figure methods.
 <!-- #endregion -->
 
 ### New default theme
@@ -163,7 +163,7 @@ pio.templates.default = "plotly"
 See [Theming and templates](/python/templates) for more information on theming in plotly.py version 4.
 
 ### Add trace return value
-In version 3, the `add_trace` graph object figure method returned a reference to the newly created trace. This was also the case for the `add_{trace_type}` methods (e.g. `add_scatter`, `add_bar`, etc.).  In version 4, these methods return a reference to the calling figure.  This change was made to support method chaining of figure operations. For example
+In version 3, the `add_trace` graph object figure method returned a reference to the newly created trace. This was also the case for the `add_{trace_type}` methods (e.g. `add_scatter`, `add_bar`, etc.). In version 4, these methods return a reference to the calling figure. This change was made to support method chaining of figure operations. For example
 
 ```python
 from plotly.subplots import make_subplots
@@ -180,7 +180,7 @@ from plotly.subplots import make_subplots
 ```
 
 <!-- #region -->
-Code that relied on the `add_*` methods to return a reference to the newly created trace will need to be updated to access the trace from the returned figure.  This can be done by appending `.data[-1]` to the add trace expression.
+Code that relied on the `add_*` methods to return a reference to the newly created trace will need to be updated to access the trace from the returned figure. This can be done by appending `.data[-1]` to the add trace expression.
 
 Here is an example of a version 3 code snippet that adds a scatter trace to a figure, assigns the result to a variable named `scatter`, and then modifies the marker size of the scatter trace.
 
@@ -201,10 +201,10 @@ scatter.marker.size = 20
 <!-- #endregion -->
 
 ### `make_subplots` updates
-The `make_subplots` function has been overhauled to support all trace types and to support the integration of Plotly Express.  Here are a few changes to be aware of when porting code that uses `make_subplots` to version 4.
+The `make_subplots` function has been overhauled to support all trace types and to support the integration of Plotly Express. Here are a few changes to be aware of when porting code that uses `make_subplots` to version 4.
 
 #### New preferred import location
-The preferred import location of the `make_subplots` function is now `plotly.subplots.make_subplots`.  For compatibility, this function is still available as `plotly.tools.make_subplots`.
+The preferred import location of the `make_subplots` function is now `plotly.subplots.make_subplots`. For compatibility, this function is still available as `plotly.tools.make_subplots`.
 
 #### Grid no longer printed by default
 When the `print_grid` argument to `make_subplots` is set to `True`, a text representation of the subplot grid is printed by the `make_subplots` function.  In version 3, the default value of `print_grid` was `True`. In version 4, the default value of `print_grid` is `False`.
@@ -249,11 +249,11 @@ fig.show()
 ```
 
 #### Implementation of shared axes with `make_subplots`
-The implementation of shared axis support in the `make_subplots` function has been simplified.  Prior to version 4, shared y-axes were implemented by associating a single `yaxis` object with multiple `xaxis` objects, and vice versa.
+The implementation of shared axis support in the `make_subplots` function has been simplified. Prior to version 4, shared y-axes were implemented by associating a single `yaxis` object with multiple `xaxis` objects, and vice versa.
 
 In version 4, every 2D Cartesian subplot has a dedicated x-axis and a dedicated y-axis. Axes are now "shared" by being linked together using the `matches` axis property.
 
-For legacy code that makes use of the `make_subplots` and add trace APIs, this change does not require any action on the user's part.  However, legacy code that uses `make_subplots` to create a figure with shared axes, and then manipulates the axes directly, may require updates.  The output of the `.print_grid` method on a figure created using `make_subplots` can be used to identify which axis objects are associated with each subplot.
+For legacy code that makes use of the `make_subplots` and add trace APIs, this change does not require any action on the user's part. However, legacy code that uses `make_subplots` to create a figure with shared axes, and then manipulates the axes directly, may require updates. The output of the `.print_grid` method on a figure created using `make_subplots` can be used to identify which axis objects are associated with each subplot.
 
 ```python
 from plotly.subplots import make_subplots
@@ -263,14 +263,14 @@ print(fig)
 ```
 
 ### Trace UIDs
-In version 3, all trace graph objects were copied and assigned a new `uid` property when being added to a `Figure`. In version 4, these `uid` properties are only generated automatically when a trace is added to a `FigureWidget`.  When a trace is added to a standard `Figure` graph object the input `uid`, if provided, is accepted as is.
+In version 3, all trace graph objects were copied and assigned a new `uid` property when being added to a `Figure`. In version 4, these `uid` properties are only generated automatically when a trace is added to a `FigureWidget`. When a trace is added to a standard `Figure` graph object the input `uid`, if provided, is accepted as is.
 
 ### Timezones
-Prior to version 4, when plotly.py was passed a `datetime` that included a timezone, the `datetime` was automatically converted to UTC.  In version 4, this conversion is no longer performed, and `datetime` objects are accepted and displayed in local time.
+Prior to version 4, when plotly.py was passed a `datetime` that included a timezone, the `datetime` was automatically converted to UTC. In version 4, this conversion is no longer performed, and `datetime` objects are accepted and displayed in local time.
 
 <!-- #region -->
 ### Headless image export on Linux with Xvfb.
-In version 4, the static image export logic attempts to automatically detect whether to call the orca image export utility using Xvfb.  Xvfb is needed for orca to work in a Linux environment if an X11 display server is not available. By default, Xvfb is used if plotly.py is running on Linux if no X11 display server is detected and `Xvfb` is available on the system `PATH`.
+In version 4, the static image export logic attempts to automatically detect whether to call the orca image export utility using Xvfb. Xvfb is needed for orca to work in a Linux environment if an X11 display server is not available. By default, Xvfb is used if plotly.py is running on Linux if no X11 display server is detected and `Xvfb` is available on the system `PATH`.
 
 This new behavior can be disabled by setting the `use_xvfb` orca configuration option to `False` as follows:
 
@@ -286,7 +286,7 @@ pio.orca.config.use_xvfb = False
 The `fileopt` argument to `chart_studio.plotly.plot` has been removed, so in-place modifications to previously published figures are no longer supported.
 
 #### Legacy online `GraphWidget`
-The legacy online-only `GraphWidget` class has been removed.  Please use the `plotly.graph_objects.FigureWidget` class instead. See the [Figure Widget Overview](/python/figurewidget/) for more information.
+The legacy online-only `GraphWidget` class has been removed. Please use the `plotly.graph_objects.FigureWidget` class instead. See the [Figure Widget Overview](/python/figurewidget/) for more information.
 
 ### Recommended style updates
 

@@ -200,18 +200,36 @@ def get_text_style(text):
 def get_axis_properties(axis):
     """Return the property dictionary for a matplotlib.Axis instance"""
     props = {}
-    label1On = axis.get_tick_params().get("label1On", True)
+    tick_params = axis.get_tick_params()
 
     if isinstance(axis, matplotlib.axis.XAxis):
-        if label1On:
-            props["position"] = "bottom"
-        else:
+        if (
+            axis.get_ticks_position() == "top"
+            or axis.get_label_position() == "top"
+            or (
+                tick_params.get("labeltop", False)
+                and not tick_params.get("labelbottom", False)
+            )
+            or (tick_params.get("top", False) and not tick_params.get("bottom", False))
+            or not tick_params.get("label1On", True)
+        ):
             props["position"] = "top"
-    elif isinstance(axis, matplotlib.axis.YAxis):
-        if label1On:
-            props["position"] = "left"
         else:
+            props["position"] = "bottom"
+    elif isinstance(axis, matplotlib.axis.YAxis):
+        if (
+            axis.get_ticks_position() == "right"
+            or axis.get_label_position() == "right"
+            or (
+                tick_params.get("labelright", False)
+                and not tick_params.get("labelleft", False)
+            )
+            or (tick_params.get("right", False) and not tick_params.get("left", False))
+            or not tick_params.get("label1On", True)
+        ):
             props["position"] = "right"
+        else:
+            props["position"] = "left"
     else:
         raise ValueError("{0} should be an Axis instance".format(axis))
 
@@ -239,12 +257,15 @@ def get_axis_properties(axis):
     # Get axis scale
     props["scale"] = axis.get_scale()
 
-    # Get major tick label size (assumes that's all we really care about!)
+    # Get major tick label size and color (assumes that's all we really
+    # care about!)
     labels = axis.get_ticklabels()
     if labels:
         props["fontsize"] = labels[0].get_fontsize()
+        props["fontcolor"] = export_color(labels[0].get_color())
     else:
         props["fontsize"] = None
+        props["fontcolor"] = None
 
     # Get associated grid
     props["grid"] = get_grid_style(axis)

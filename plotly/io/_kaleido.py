@@ -90,6 +90,31 @@ For example:
     return format
 
 
+def _resolve_width_height(
+    fig_dict: dict, width: Union[int, None], height: Union[int, None]
+) -> tuple:
+    """
+    Return the image width and height to request from Kaleido, in priority order:
+    the `width`/`height` arguments, then `layout.width`/`layout.height`, then the
+    template's `layout.width`/`layout.height`, then the plotly.io defaults.
+    """
+    layout = fig_dict.get("layout", {})
+    template_layout = layout.get("template", {}).get("layout", {})
+    width = (
+        width
+        or layout.get("width")
+        or template_layout.get("width")
+        or defaults.default_width
+    )
+    height = (
+        height
+        or layout.get("height")
+        or template_layout.get("height")
+        or defaults.default_height
+    )
+    return width, height
+
+
 def to_image(
     fig: Union[dict, plotly.graph_objects.Figure],
     format: Union[str, None] = None,
@@ -163,24 +188,7 @@ def to_image(
         if defaults.headers:
             kopts["headers"] = defaults.headers
 
-        width = (
-            width
-            or fig_dict.get("layout", {}).get("width")
-            or fig_dict.get("layout", {})
-            .get("template", {})
-            .get("layout", {})
-            .get("width")
-            or defaults.default_width
-        )
-        height = (
-            height
-            or fig_dict.get("layout", {}).get("height")
-            or fig_dict.get("layout", {})
-            .get("template", {})
-            .get("layout", {})
-            .get("height")
-            or defaults.default_height
-        )
+        width, height = _resolve_width_height(fig_dict, width, height)
 
         img_bytes = kaleido.calc_fig_sync(
             fig_dict,
@@ -405,20 +413,23 @@ def write_images(
     # We call infer_format() here rather than above so that the `file` argument
     # has already been cast to a Path object.
     # Also insert defaults for any missing arguments as needed
-    kaleido_specs = [
-        dict(
-            fig=d["fig"],
-            path=d["file"],
-            opts=dict(
-                format=infer_format(d["file"], d["format"]) or defaults.default_format,
-                width=d["width"] or defaults.default_width,
-                height=d["height"] or defaults.default_height,
-                scale=d["scale"] or defaults.default_scale,
-            ),
-            topojson=defaults.topojson,
+    kaleido_specs = []
+    for d in arg_dicts:
+        width, height = _resolve_width_height(d["fig"], d["width"], d["height"])
+        kaleido_specs.append(
+            dict(
+                fig=d["fig"],
+                path=d["file"],
+                opts=dict(
+                    format=infer_format(d["file"], d["format"])
+                    or defaults.default_format,
+                    width=width,
+                    height=height,
+                    scale=d["scale"] or defaults.default_scale,
+                ),
+                topojson=defaults.topojson,
+            )
         )
-        for d in arg_dicts
-    ]
 
     from kaleido.errors import ChromeNotFoundError
 
