@@ -13,6 +13,8 @@ jupyter
 jupyter-client<7
 jupytext==1.16.4
 kaleido
+# narwhals>=2.27.0 raises a TypeError in our docs usage
+narwhals==2.21.0
 nbconvert==5.6.1
 networkx==2.8.0
 notebook
@@ -32,6 +34,8 @@ scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
 setuptools<=81
+# geopandas (pinned above) uses a deprecated shapely method, so we require a pin to ensure the deprecated method exists
+shapely==2.0.7
 sphinx==3.5.4
 sphinx_bootstrap_theme
 sphinxcontrib-applehelp==1.0.2
