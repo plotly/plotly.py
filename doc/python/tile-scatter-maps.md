@@ -55,8 +55,9 @@ fig.show()
 ```python
 import plotly.express as px
 import geopandas as gpd
+from geodatasets import get_url
 
-geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+geo_df = gpd.read_file(get_url("naturalearth.cities"))
 
 fig = px.scatter_map(geo_df,
                         lat=geo_df.geometry.y,
