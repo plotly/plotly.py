@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [7.1.0] - 2026-09-15
 
 ### Added
-- Support `marginal_x`/`marginal_y="heatmap"` in `density_heatmap`, drawing a single-row/column heatmap strip in the margin colored by the same `z`/`histfunc` aggregate as the main plot and sharing its color scale [[#5706](https://github.com/plotly/plotly.py/issues/5706)], with thanks to @lucasjamar for the contribution!
+- Support `marginal_x`/`marginal_y="heatmap"` in `density_heatmap`, drawing a single-row/column heatmap strip in the margin colored by the same `z`/`histfunc` aggregate as the main plot and sharing its color scale [[#5707](https://github.com/plotly/plotly.py/pull/5707)], with thanks to @lucasjamar for the contribution!
 - Add support for custom tick values in `mpl_to_plotly` when the matplotlib tick positions don't follow an arithmetic progression, including custom tick labels and tick values on date axes [[#5262](https://github.com/plotly/plotly.py/pull/5262)], with thanks to @robertoffmoura for the contribution!
 
 ### Changed
@@ -45,7 +45,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Update `hex_to_rgb` function to raise error for invalid-length hex codes, and emit warning for hex codes containing alpha [[#5729](https://github.com/plotly/plotly.py/pull/5729)], with thanks to @dylanpulver for the contribution!
 
 ### Fixed
-- Fix Plotly Express treating unsigned integer columns (`uint8`, `uint16`, `uint32`, `uint64`) in pandas DataFrames as categorical, which caused `px.bar` and other functions to pick the wrong orientation and render unexpected plots [[#4291](https://github.com/plotly/plotly.py/issues/4291), [#4344](https://github.com/plotly/plotly.py/issues/4344)], with thanks to @Belagum for the contribution!
+- Fix Plotly Express treating unsigned integer columns (`uint8`, `uint16`, `uint32`, `uint64`) in pandas DataFrames as categorical, which caused `px.bar` and other functions to pick the wrong orientation and render unexpected plots [[#5726](https://github.com/plotly/plotly.py/pull/5726)], with thanks to @Belagum for the contribution!
 - Fix `mpl_to_plotly` not setting `paper_bgcolor` and `plot_bgcolor` from the matplotlib figure and axes backgrounds, so converted figures match the source figure's background colors [[#5285](https://github.com/plotly/plotly.py/pull/5285)], with thanks to @robertoffmoura for the contribution!
 - Fix rendering issue causing a too-large div when calling `Figure.show()` in Google Colab [[#5718](https://github.com/plotly/plotly.py/pull/5718)]
 - Fix the sphinx-gallery scraper so that it generates thumbnails for figures shown with `fig.show()` or displayed as the last expression of a code block [[#5701](https://github.com/plotly/plotly.py/pull/5701)], with thanks to @larsoner for the contribution!
@@ -56,7 +56,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Update plotly.js from version 3.6.0 to version 4.0.0 [[#5673](https://github.com/plotly/plotly.py/pull/5673)]. This is a major-version release with many changes. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.0.0) for the full list. The most significant changes include:
-  - Add `quiver` trace type to visualize vector fields using arrows [[#7710](https://github.com/plotly/plotly.js/pull/7710), [#7945](https://github.com/plotly/plotly.js/issues/7945)]
+  - Add `quiver` trace type to visualize vector fields using arrows [[#7710](https://github.com/plotly/plotly.js/pull/7710), [#7945](https://github.com/plotly/plotly.js/pull/7945)]
   - Add "Share Chart" modebar button for generating a chart-sharing link via Plotly Cloud [[#7909](https://github.com/plotly/plotly.js/pull/7909)]
   - Remove `scattermapbox`, `choroplethmapbox`, `densitymapbox` trace types, the `mapbox` subplot, and the `mapboxAccessToken` config option [[#7860](https://github.com/plotly/plotly.js/pull/7860)]. Use the equivalent `*map` traces instead.
     - The corresponding `graph_objects` and Plotly Express functions have also been removed in plotly.py; use the `map` versions instead
@@ -75,7 +75,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `hex_to_rgb` parsing of 3-digit shorthand hexadecimal colors such as `#FFF` [[#5662](https://github.com/plotly/plotly.py/pull/5662)], with thanks to @genrichez for the contribution!
 - Improve `px.*_map()` auto-fitting behavior when `zoom` and `center` are not specified [[#5686](https://github.com/plotly/plotly.py/pull/5686)]
 - Add `<!doctype html>` to the `to_html()` template to comply with modern web standards [[#5693](https://github.com/plotly/plotly.py/pull/5693)], with thanks to @mishrakushal for the contribution!
-- Apply `histfunc`/`z` aggregation to `marginal_x`/`marginal_y="histogram"` subplots in `density_heatmap`/`density_contour`, instead of always showing raw bin counts [[#3521](https://github.com/plotly/plotly.py/issues/3521)], with thanks to @lucasjamar for the contribution!
+- Apply `histfunc`/`z` aggregation to `marginal_x`/`marginal_y="histogram"` subplots in `density_heatmap`/`density_contour`, instead of always showing raw bin counts [[#5705](https://github.com/plotly/plotly.py/pull/5705)], with thanks to @lucasjamar for the contribution!
 - Fix `mpl_to_plotly` silently dropping matplotlib path collections in data coordinates (such as violin plots, pcolor, event plots, stack plots, fill_between, and stem plots) by rendering them as filled polygons or lines [[#5702](https://github.com/plotly/plotly.py/pull/5702)], with thanks to @robertoffmoura for the contribution!
 
 ## [7.0.0rc0] - 2026-07-29
@@ -132,7 +132,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
 - Fix issue where `js/` directory was unintentionally installed as a top-level Python package when installing `plotly` [[#5587](https://github.com/plotly/plotly.py/pull/5587)] 
 - Add default headers to be passed in to Kaleido v1.3.0 to avoid blocked Open Street Map tiles [[#5588](https://github.com/plotly/plotly.py/pull/5588)]
-- Propagate the requested `default_height`/`default_width` to the outer wrapper div produced by `to_html` so that responsive (percentage) dimensions inherit from a sized parent container instead of collapsing to the plotly.js 450px fallback [[#5591](https://github.com/plotly/plotly.py/issues/5591)], with thanks to @SharadhNaidu for the contribution!
+- Propagate the requested `default_height`/`default_width` to the outer wrapper div produced by `to_html` so that responsive (percentage) dimensions inherit from a sized parent container instead of collapsing to the plotly.js 450px fallback [[#5596](https://github.com/plotly/plotly.py/pull/5596)], with thanks to @SharadhNaidu for the contribution!
 
 ## [6.7.0] - 2026-04-09
 
@@ -191,17 +191,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [6.4.0] - 2025-11-02
 
 ### Changed
-- Update plotly.js from version 3.1.1 to version 3.2.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5388)]. Notable changes include:
+- Update plotly.js from version 3.1.1 to version 3.2.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.2.0) for more information. [[#5388](https://github.com/plotly/plotly.py/pull/5388)]. Notable changes include:
   - Add `hovertemplatefallback` and `texttemplatefallback` attributes [[#7577](https://github.com/plotly/plotly.js/pull/7577)]
   - Add "SI extended" formatting rule for tick exponents on axis labels, allowing values to be displayed with extended SI prefixes (e.g., femto, pico, atto) [[#7249](https://github.com/plotly/plotly.js/pull/7249)]
 
 ### Deprecated
-- Deprecate `create_hexbin_mapbox` in favor of `create_hexbin_map`, update related function calls [[5358](https://github.com/plotly/plotly.py/pull/5358)], with thanks to @ajlien for the contribution!
+- Deprecate `create_hexbin_mapbox` in favor of `create_hexbin_map`, update related function calls [[#5358](https://github.com/plotly/plotly.py/pull/5358)], with thanks to @ajlien for the contribution!
 
 ## [6.3.1] - 2025-10-02
 
 ### Changed
-- Update Plotly.js from version 3.1.0 to version 3.1.1. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5357)]. Notable changes include:
+- Update Plotly.js from version 3.1.0 to version 3.1.1. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.1.1) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5357)]. Notable changes include:
   - Fix issue preventing Scattergl plots with text elements from rendering [[plotly.js#7563](https://github.com/plotly/plotly.js/pull/7563)]
 - Use native legends when converting from matplotlib [[#5312](https://github.com/plotly/plotly.py/pull/5312)], with thanks to @robertoffmoura to the contribution!
 - Allow `shared_yaxes` to work with secondary axes [[#5180](https://github.com/plotly/plotly.py/pull/5180)], with thanks to @gmjw for the contribution!
@@ -229,7 +229,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Refactor validation code to reduce bundle size [[#5214](https://github.com/plotly/plotly.py/pull/5214)] (with thanks to @bmaranville)
-- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5177](https://github.com/plotly/plotly.py/pull/5236)]
+- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5236](https://github.com/plotly/plotly.py/pull/5236)]
 
 ### Fixed
 - Allow setting Plotly.js path via `pio.defaults` [[#5207](https://github.com/plotly/plotly.py/pull/5207)]
@@ -256,7 +256,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]
-- Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104/files)]
+- Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104)]
 - Fix issue causing Plotly.js script to be embedded multiple times in Jupyter notebooks [[#5112](https://github.com/plotly/plotly.py/pull/5112)]
 - Re-add MIME renderer JupyterLab extension with JupyterLab 4 support to reduce file sizes for offline notebooks [[#5096](https://github.com/plotly/plotly.py/pull/5096)]
 - Fix issue preventing plots from rendering in HTML notebook export when using 'vscode+notebook' renderer [[#5154](https://github.com/plotly/plotly.py/pull/5154)]
@@ -286,7 +286,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Drop deprecated pointcloud and heatmapgl traces and gl2d subplots [[#7213](https://github.com/plotly/plotly.js/pull/7213)]
   - Drop support for deprecated `bardir` attribute (use `orientation` instead) [[#7214](https://github.com/plotly/plotly.js/pull/7214)]
   - Drop support for deprecated `annotation.ref` attribute (use `annotation.xref` and `annotation.yref` instead) [[#7215](https://github.com/plotly/plotly.js/pull/7215)]
-  - Drop support for deprecated error bar `opacity` attribute (use alpha channel of error bar `color` attribute instead) [[#7214](https://github.com/plotly/plotly.js/pull/7216)]
+  - Drop support for deprecated error bar `opacity` attribute (use alpha channel of error bar `color` attribute instead) [[#7216](https://github.com/plotly/plotly.js/pull/7216)]
   - Drop support for deprecated attribute `gl3d.cameraposition` (use `gl3d.camera` instead) [[#7217](https://github.com/plotly/plotly.js/pull/7217)]
   - Drop deprecated `plot3dPixelRatio` from config [[#7231](https://github.com/plotly/plotly.js/pull/7231)]
   - Drop deprecated `zauto`, `zmin` and `zmax` from the surface trace [[#7234](https://github.com/plotly/plotly.js/pull/7234)]
@@ -296,7 +296,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Update plotly.py to use base64 encoding of typed arrays e.g. numpy in plotly JSON to keep precision intact and improve performance [[#4470](https://github.com/plotly/plotly.py/pull/4470)].
 - Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
 - Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]
-- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4736](https://github.com/plotly/plotly.py/pull/4763)]
+- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4763](https://github.com/plotly/plotly.py/pull/4763)]
 
 ### Removed
 - Drop deprecated `pointcloud` and `heatmapgl` traces from the API [[#4815](https://github.com/plotly/plotly.py/pull/4815)]
@@ -342,16 +342,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Add `x0shift`, `x1shift`, `y0shift`, `y1shift` to shapes to add control over positioning of shape vertices on (multi-)category axes,
    with thanks to @my-tien for the contribution! [[#7005](https://github.com/plotly/plotly.js/pull/7005)]
 - Specify Python version 3.8-3.11 for development virtual environments and pin `pytest` at version 8.1.1 to match.
-- Update `IntegerValidator` to handle `extras` option to allow supporting additional keyword values. For example, 'bold' and 'normal' as well as integers as used in font weights [#4612].
+- Update `IntegerValidator` to handle `extras` option to allow supporting additional keyword values. For example, 'bold' and 'normal' as well as integers as used in font weights [[#4612](https://github.com/plotly/plotly.py/pull/4612)].
 
 
 ## [5.22.0] - 2024-05-01
 
 ### Changed
 - Updated Plotly.js from version 2.31.1 to version 2.32.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2320----2024-04-23) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
-  - Add "bold" weight, "italic" style and "small-caps" variant options to fonts [#6956]
-  - Fix applying autotickangles on axes with showdividers as well as cases where tickson is set to "boundaries" [#6967], with thanks to @my-tien for the contribution!
-  - Fix positioning of multi-line axis titles with standoff [#6970], with thanks to @my-tien for the contribution!
+  - Add "bold" weight, "italic" style and "small-caps" variant options to fonts [[#6956](https://github.com/plotly/plotly.js/pull/6956)]
+  - Fix applying autotickangles on axes with showdividers as well as cases where tickson is set to "boundaries" [[#6967](https://github.com/plotly/plotly.js/pull/6967)], with thanks to @my-tien for the contribution!
+  - Fix positioning of multi-line axis titles with standoff [[#6970](https://github.com/plotly/plotly.js/pull/6970)], with thanks to @my-tien for the contribution!
 
 ## [5.21.0] - 2024-04-17
 
@@ -394,8 +394,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix issue with creating dendrogram in subplots [[#4411](https://github.com/plotly/plotly.py/pull/4411)],
 - Fix issue with px.line not accepting "spline" line shape [[#2812](https://github.com/plotly/plotly.py/issues/2812)]
 - Fix KeyError when using column of `pd.Categorical` dtype with unobserved categories [[#4437](https://github.com/plotly/plotly.py/pull/4437)]
-- Fix dataframe interchange in case `column_names` returns an unmaterialized object: generator, iterator, etc. [[#4442]](https://github.com/plotly/plotly.py/pull/4442)
-- Fix issue with `FutureWarning` being displayed when setting the `color` argument in `plotly.express` [[#4519]](https://github.com/plotly/plotly.py/pull/4519)
+- Fix dataframe interchange in case `column_names` returns an unmaterialized object: generator, iterator, etc. [[#4442](https://github.com/plotly/plotly.py/pull/4442)]
+- Fix issue with `FutureWarning` being displayed when setting the `color` argument in `plotly.express` [[#4519](https://github.com/plotly/plotly.py/pull/4519)]
 
 ## [5.18.0] - 2023-10-25
 
@@ -480,7 +480,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [5.14.0] - 2023-03-29
 
 ### Added
-- Added option to allow passing a column name as a `str` in `hover_data` and `custom_data` in `plotly.express` [[4083](https://github.com/plotly/plotly.py/pull/4083)]
+- Added option to allow passing a column name as a `str` in `hover_data` and `custom_data` in `plotly.express` [[#4083](https://github.com/plotly/plotly.py/pull/4083)]
 
 ### Changed
   - Updated Plotly.js from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
@@ -536,7 +536,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Updated Plotly.js to from version 2.14.0 to version 2.16.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2161----2022-10-21) for more information. Notable changes include:
     - Add clustering options to `scattermapbox` [[#5827](https://github.com/plotly/plotly.js/pull/5827)],
       with thanks to @elben10 for the contribution!
-    - Add bounds to mapbox suplots [[6339](https://github.com/plotly/plotly.js/pull/6339)]
+    - Add bounds to mapbox suplots [[#6339](https://github.com/plotly/plotly.js/pull/6339)]
     - Add `angle`, `angleref` and `standoff` to `marker` and add `backoff` to `line`; also introduce new arrow symbols to facilitate drawing networks [[#6297](https://github.com/plotly/plotly.js/pull/6297)]
     - Add `minreducedwidth` and `minreducedheight` to layout for increasing control over automargin [[#6307](https://github.com/plotly/plotly.js/pull/6307)]
     - Add `entrywidth` and `entrywidthmode` to legend [[#6202](https://github.com/plotly/plotly.js/pull/6202), [#6324](https://github.com/plotly/plotly.js/pull/6324)]
@@ -689,7 +689,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Additions due to bumping Plotly.js from 1.58.4 to 2.1.0 (see [changelog]((https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#210----2021-06-18))):
+- Additions due to bumping Plotly.js from 1.58.4 to 2.1.0 (see [changelog](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#210----2021-06-18)):
   - New `icicle` trace type, with thanks to [@Kully](https://github.com/Kully) and [@mtwichan](https://github.com/mtwichan) of [Zyphr](https://www.zyphr.ca/) for their contribution!
   - New `marker.pattern` options for `bar`-like trace types with thanks to [@s417-lama](https://github.com/s417-lama) for the contribution!
   - New `legendrank` attribute to control rank of traces within legends
@@ -951,7 +951,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 ### Changed
 
 - Updated Plotly.js to version 1.54.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.1/CHANGELOG.md) for more information. The main new feature of this version of Plotly.js is the possibility to draw layout shapes, using custom dragmodes and corresponding modebar buttons.
-- The sphinx-gallery scraper has been updated to work with different structures of galleries [#2149](https://github.com/plotly/plotly.py/pull/2419)
+- The sphinx-gallery scraper has been updated to work with different structures of galleries [#2419](https://github.com/plotly/plotly.py/pull/2419)
 
 This version includes several performance improvements ([#2368](https://github.com/plotly/plotly.py/pull/2368), [#2403](https://github.com/plotly/plotly.py/pull/2403)).
 
@@ -1177,7 +1177,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
 ### Fixed
  - Fixed incorrect facet row ordering in figures generated by plotly.express functions ([plotly/plotly_express#129](https://github.com/plotly/plotly_express/issues/129))
  - Fixed "The truth value of an array with more than one element is ambiguous" error when specifying subplot titles as numpy array of strings ([#1685](https://github.com/plotly/plotly.py/pull/1685)). Special thanks to [@MrQubo](https://github.com/MrQubo) for this contribution!
- - The `line_3d` plotly express function was not visible by default when importing `*` from `plotly.express` ([#1667](https://github.com/plotly/plotly.py/pull/1667/files))
+ - The `line_3d` plotly express function was not visible by default when importing `*` from `plotly.express` ([#1667](https://github.com/plotly/plotly.py/pull/1667))
 
 ## [4.0.0] - 2019-07-16
 
