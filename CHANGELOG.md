@@ -112,7 +112,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
-- Read and write figure JSON files as UTF-8 in `read_json`/`write_json` so figures containing non-ASCII text are handled correctly on platforms whose default encoding is not UTF-8 (e.g. cp1252 on Windows) [[#5633](https://github.com/plotly/plotly.py/pull/5633)]
+- Read and write figure JSON files as UTF-8 in `read_json`/`write_json` so figures containing non-ASCII text are handled correctly on platforms whose default encoding is not UTF-8 (e.g. cp1252 on Windows) [[#5633](https://github.com/plotly/plotly.py/pull/5633)], with thanks to @LukeTheoJohnson for the contribution!
 
 ## [6.8.0] - 2026-06-03
 
@@ -225,10 +225,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [6.2.0] - 2025-06-26
 
 ### Added
-- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#5165](https://github.com/plotly/plotly.py/pull/5165)] (with thanks to @ddworken)
+- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#5165](https://github.com/plotly/plotly.py/pull/5165)], with thanks to @ddworken for the contribution!
 
 ### Changed
-- Refactor validation code to reduce bundle size [[#5214](https://github.com/plotly/plotly.py/pull/5214)] (with thanks to @bmaranville)
+- Refactor validation code to reduce bundle size [[#5214](https://github.com/plotly/plotly.py/pull/5214)], with thanks to @bmaranville for the contribution!
 - Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5236](https://github.com/plotly/plotly.py/pull/5236)]
 
 ### Fixed
@@ -243,7 +243,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [6.1.1] - 2025-05-20
 
 ### Fixed
-- Prevent swallowing of `ValueError` when creating a figure with subplots [[#3888](https://github.com/plotly/plotly.py/pull/3888)]
+- Prevent swallowing of `ValueError` when creating a figure with subplots [[#3888](https://github.com/plotly/plotly.py/pull/3888)], with thanks to @haydenflinner for the contribution!
 - Fix issue causing `fig.write_image()` to not generate an image [[#5193](https://github.com/plotly/plotly.py/pull/5193)]
 
 ## [6.1.0] - 2025-05-15
@@ -268,8 +268,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ### Fixed
-- Fix `TypeError` when using `orjson` to serialize `pandas.NA` [[#5040](https://github.com/plotly/plotly.py/pull/5040)].
-- Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError` [[#5000](https://github.com/plotly/plotly.py/pull/5000)].
+- Fix `TypeError` when using `orjson` to serialize `pandas.NA` [[#5040](https://github.com/plotly/plotly.py/pull/5040)], with thanks to @DavidKatz-il for the contribution!
+- Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError` [[#5000](https://github.com/plotly/plotly.py/pull/5000)], with thanks to @MarcoGorelli for the contribution!
 - Fix incorrect `DeprecationWarning` shown when creating a `px` chart [[#5080](https://github.com/plotly/plotly.py/pull/5080), [#5086](https://github.com/plotly/plotly.py/pull/5086)]
 
 
@@ -294,7 +294,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Drop `transforms` from the API [[#7240](https://github.com/plotly/plotly.js/pull/7240), [#7254](https://github.com/plotly/plotly.js/pull/7254)]
 - Deprecate Mapbox-based traces [[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to MapLibre.
 - Update plotly.py to use base64 encoding of typed arrays e.g. numpy in plotly JSON to keep precision intact and improve performance [[#4470](https://github.com/plotly/plotly.py/pull/4470)].
-- Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
+- Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)], with thanks to @FBruzzesi for the contribution!
 - Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]
 - Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4763](https://github.com/plotly/plotly.py/pull/4763)]
 
