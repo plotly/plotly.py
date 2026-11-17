@@ -240,7 +240,7 @@ fig.show()
 
 #### Ridgeline plot
 
-A ridgeline plot ([previously known as Joy Plot](https://serialmentor.com/blog/2017/9/15/goodbye-joyplots)) shows the distribution of a numerical value for several groups. They can be used for visualizing changes in distributions over time or space.
+A ridgeline plot ([previously known as Joy Plot](https://clauswilke.com/blog/2017/09/15/goodbye-joyplots/)) shows the distribution of a numerical value for several groups. They can be used for visualizing changes in distributions over time or space.
 
 ```python
 import plotly.graph_objects as go
