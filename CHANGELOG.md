@@ -42,7 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - The scaper now warns once (instead of failing the build) when static image export is unavailable
 - The sphinx-gallery scraper no longer scrapes files belonging to other examples during parallel builds [[#5701](https://github.com/plotly/plotly.py/pull/5701)], with thanks to @larsoner for the contribution!
 
-### Updated
+### Changed
 - Update plotly.js from version 4.0.0 to version 4.1.1 [[#5722](https://github.com/plotly/plotly.py/pull/5722), [#5730](https://github.com/plotly/plotly.py/pull/5730)]. See the plotly.js release notes for [v4.1.0](https://github.com/plotly/plotly.js/releases/tag/v4.1.0) and [v4.1.1](https://github.com/plotly/plotly.js/releases/tag/v4.1.1) for details. Notable changes include:
   - Add an opt-in modebar button for downloading Plotly figures as JSON [[#7990](https://github.com/plotly/plotly.js/pull/7990), [#8022](https://github.com/plotly/plotly.js/pull/8022)]
   - Add `legend.groupdoubleclick` to set the group behavior for a legend double-click [[#7997](https://github.com/plotly/plotly.js/pull/7997)]
@@ -61,7 +61,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Apply `histfunc`/`z` aggregation to `marginal_x`/`marginal_y="histogram"` subplots in `density_heatmap`/`density_contour`, instead of always showing raw bin counts [[#3521](https://github.com/plotly/plotly.py/issues/3521)], with thanks to @lucasjamar for the contribution!
 - Fix `mpl_to_plotly` silently dropping matplotlib path collections in data coordinates (such as violin plots, pcolor, event plots, stack plots, fill_between, and stem plots) by rendering them as filled polygons or lines [[#5702](https://github.com/plotly/plotly.py/pull/5702)], with thanks to @robertoffmoura for the contribution!
 
-### Updated
+### Changed
 - Update plotly.js from version 3.6.0 to version 4.0.0 [[#5673](https://github.com/plotly/plotly.py/pull/5673)]. This is a major-version release with many changes. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.0.0) for the full list. The most significant changes include:
   - Add `quiver` trace type to visualize vector fields using arrows [[#7710](https://github.com/plotly/plotly.js/pull/7710), [#7945](https://github.com/plotly/plotly.js/issues/7945)]
   - Add "Share Chart" modebar button for generating a chart-sharing link via Plotly Cloud [[#7909](https://github.com/plotly/plotly.js/pull/7909)]
@@ -86,7 +86,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove support for Orca for static image generation [[#5677](https://github.com/plotly/plotly.py/pull/5677)]
 - Remove `engine` argument from functions `fig.write_image()`,`fig.to_image()`, `pio.write_image()`, `pio.write_images()`, `pio.to_image()`, `pio.full_figure_for_development()`, and from renderer constructors [[#5677](https://github.com/plotly/plotly.py/pull/5677)]
 
-### Updated
+### Changed
 - Update plotly.js from version 3.6.0 to version 4.0.0-rc.0 [[#5673](https://github.com/plotly/plotly.py/pull/5673)]. This is a major-version release candidate with many changes. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.0.0-rc.0) for the full list. The most significant changes include:
   - Add `quiver` trace type to visualize vector fields using arrows [[#7710](https://github.com/plotly/plotly.js/pull/7710)]
   - Add "Share Chart" modebar button for generating a chart-sharing link via Plotly Cloud [[#7909](https://github.com/plotly/plotly.js/pull/7909)]
@@ -109,7 +109,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Read and write figure JSON files as UTF-8 in `read_json`/`write_json` so figures containing non-ASCII text are handled correctly on platforms whose default encoding is not UTF-8 (e.g. cp1252 on Windows) [[#5633](https://github.com/plotly/plotly.py/pull/5633)]
 
 
-### Updated
+### Changed
 - Update plotly.js from version 3.6.0 to version 3.7.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.7.0) for more information [[#5639](https://github.com/plotly/plotly.py/pull/5639)]. Notable changes include:
   - Rename `sendDataToCloud` modebar button to `sendChartToCloud`, and update to upload chart to Plotly Cloud [[#7802](https://github.com/plotly/plotly.js/pull/7802), [#7852](https://github.com/plotly/plotly.js/pull/7852), [#7854](https://github.com/plotly/plotly.js/pull/7854)]
   - Fix stale `scattergl` error bars after toggling traces with mixed error bar visibility [[#7773](https://github.com/plotly/plotly.js/issues/7773)]
@@ -129,7 +129,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add default headers to be passed in to Kaleido v1.3.0 to avoid blocked Open Street Map tiles [[#5588](https://github.com/plotly/plotly.py/pull/5588)]
 - Propagate the requested `default_height`/`default_width` to the outer wrapper div produced by `to_html` so that responsive (percentage) dimensions inherit from a sized parent container instead of collapsing to the plotly.js 450px fallback [[#5591](https://github.com/plotly/plotly.py/issues/5591)], with thanks to @SharadhNaidu for the contribution!
 
-### Updated
+### Changed
 - The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
 - Update plotly.js from version 3.5.0 to version 3.6.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.6.0) for more information [[#5608](https://github.com/plotly/plotly.py/pull/5608)]. Notable changes include:
   - Add support for arrays for the pie property `legendrank`, so that it can be configured per slice [[#7723](https://github.com/plotly/plotly.js/pull/7723)]
@@ -145,7 +145,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `numpy` with a version less than 1.22 is no longer supported.
 - Handle empty `px.histogram` by skipping `None` label in hover template [[#5535](https://github.com/plotly/plotly.py/pull/5535)], with thanks to @tysoncung for the contribution!
 
-### Updated
+### Changed
 - Update plotly.js from version 3.4.0 to version 3.5.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.5.0) for more information. [[#5565](https://github.com/plotly/plotly.py/pull/5565)]. Notable changes include:
   - Add `hoveranywhere` and `clickanywhere` layout attributes to enable emitting hover and click events anywhere in the plot area, not just over traces [[#7707](https://github.com/plotly/plotly.js/pull/7707)]
   - Add `displayNotifier` configuration property to set the display of notifier in the top right area of the viewport [[#7730](https://github.com/plotly/plotly.js/pull/7730)]
@@ -158,7 +158,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove global warning format side effect [[#5481](https://github.com/plotly/plotly.py/pull/5481)], with thanks to @emmanuel-ferdman for the contribution!
 - Fix spurious engine deprecation warning in write_image [[#5517](https://github.com/plotly/plotly.py/pull/5517)], with thanks to @mosh3eb for the contribution!
 
-### Updated
+### Changed
 - Update plotly.js from version 3.3.1 to version 3.4.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.4.0) for more information. [[#5527](https://github.com/plotly/plotly.py/pull/5527)]. Notable changes include:
   - Add support for clicking legend titles to toggle visibility of all traces in legend [[#7698](https://github.com/plotly/plotly.js/pull/7698)]
   - Add support for shapes to reference multiple axes [[#7666](https://github.com/plotly/plotly.js/pull/7666)]
@@ -175,14 +175,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix issue where Plotly Express ignored trace-specific color sequences defined in templates via `template.data.<trace_type>` [[#5437](https://github.com/plotly/plotly.py/pull/5437)], with thanks to @antonymilne for the contribution!
 
-### Updated
+### Changed
 - Speed up `validate_gantt` function [[#5386](https://github.com/plotly/plotly.py/pull/5386)], with thanks to @misrasaurabh1 for the contribution!
 - Update plotly.js from version 3.3.0 to version 3.3.1. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.1) for more information. [[#5456](https://github.com/plotly/plotly.py/pull/5456)]. Notable changes include:
   - Add support for arrays for the pie properties `showlegend` and `legend`, so that these can be configured per slice. [[#7580](https://github.com/plotly/plotly.js/pull/7580)]
 
 ## [6.5.0] - 2025-11-17
 
-### Updated
+### Changed
 - Update plotly.js from version 3.2.0 to version 3.3.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.0) for more information. [[#5421](https://github.com/plotly/plotly.py/pull/5421)]. Notable changes include:
   - Add `hovertemplate` for `candlestick` and `ohlc` traces [[#7619](https://github.com/plotly/plotly.js/pull/7619)]
 
@@ -191,7 +191,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [6.4.0] - 2025-11-02
 
-### Updated
+### Changed
 - Update plotly.js from version 3.1.1 to version 3.2.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5388)]. Notable changes include:
   - Add `hovertemplatefallback` and `texttemplatefallback` attributes [[#7577](https://github.com/plotly/plotly.js/pull/7577)]
   - Add "SI extended" formatting rule for tick exponents on axis labels, allowing values to be displayed with extended SI prefixes (e.g., femto, pico, atto) [[#7249](https://github.com/plotly/plotly.js/pull/7249)]
@@ -201,7 +201,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [6.3.1] - 2025-10-02
 
-### Updated
+### Changed
 - Update Plotly.js from version 3.1.0 to version 3.1.1. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5357)]. Notable changes include:
   - Fix issue preventing Scattergl plots with text elements from rendering [[plotly.js#7563](https://github.com/plotly/plotly.js/pull/7563)]
 - Use native legends when converting from matplotlib [[#5312](https://github.com/plotly/plotly.py/pull/5312)], with thanks to @robertoffmoura to the contribution!
@@ -214,7 +214,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [6.3.0] - 2025-08-12
 
-### Updated
+### Changed
 - Updated Plotly.js from version 3.0.1 to version 3.1.0. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5318](https://github.com/plotly/plotly.py/pull/5318)]
 
 ### Added
@@ -249,8 +249,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [6.1.0] - 2025-05-15
 
-### Updated
+### Added
 - Add support for Kaleido>=v1.0.0 for image generation [[#5062](https://github.com/plotly/plotly.py/pull/5062), [#5177](https://github.com/plotly/plotly.py/pull/5177)]
+
+### Changed
 - Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
 
 ### Fixed
@@ -262,7 +264,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [6.0.1] - 2025-03-14
 
-### Updated
+### Changed
 - Updated Plotly.js from version 3.0.0 to version 3.0.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#301----2025-02-18) for more information.
 
 
@@ -283,7 +285,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Drop `tenacity` dependency [[#4831](https://github.com/plotly/plotly.py/pull/4831)]
 - Drop support for Jupyter Notebook version 6 and earlier [[#4822](https://github.com/plotly/plotly.py/pull/4822)]. The minimum supported version is now 7.0.0.
 
-### Updated
+### Changed
 - Update Plotly.js from version 2.34.2 to version 3.0.0 See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#300----2025-01-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Make offsetgroup work with barmode "stacked" and "relative" for bar traces [[#7009](https://github.com/plotly/plotly.js/pull/7009)]
   - Drop support for deprecated attributes `titlefont`, `titleposition`, `titleside`, and `titleoffset` [[#7212](https://github.com/plotly/plotly.js/pull/7212)].
@@ -308,7 +310,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.24.1] - 2024-09-12
 
-### Updated
+### Changed
 
 - Updated Plotly.js from version 2.35.0 to version 3.0.0-rc.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2352----2024-11-11) for more information.
 
@@ -317,17 +319,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - New `px` functions for maps: `scatter_map`, `line_map`, `choropleth_map`, and `density_map`.
 
-### Updated
+### Changed
 
 - Updated Plotly.js from version 2.34.0 to version 2.35.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2350----2024-08-29) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add new traces: scattermap, choroplethmap and densitymap and map subplots which use maplibre to render maps [[#7015](https://github.com/plotly/plotly.js/pull/7015), [#7060](https://github.com/plotly/plotly.js/pull/7060), [#7085](https://github.com/plotly/plotly.js/pull/7085), [#7088](https://github.com/plotly/plotly.js/pull/7088), [#7090](https://github.com/plotly/plotly.js/pull/7090), [#7092](https://github.com/plotly/plotly.js/pull/7092), [#7094](https://github.com/plotly/plotly.js/pull/7094), [#7134](https://github.com/plotly/plotly.js/pull/7134)]
   - Deprecate mapbox traces and mapbox subplot [[#7087](https://github.com/plotly/plotly.js/pull/7087)]
 
+### Fixed
 - Fixed a bug in integer validation of arrays that threw an error when an array contained a mix of strings and integers.
 
 ## [5.23.0] - 2024-07-23
 
-### Updated
+### Changed
 - Updated Plotly.js from version 2.32.0 to version 2.34.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2340----2024-07-18) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add `subtitle` attribute to `layout.title` to enable adding subtitles to plots [[#7012](https://github.com/plotly/plotly.js/pull/7012)]
   - Introduce "u" and "s" pseudo html tags to add partial underline and strike-through styles to SVG text elements [[#7043](https://github.com/plotly/plotly.js/pull/7043)]
@@ -345,7 +348,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.22.0] - 2024-05-01
 
-### Updated
+### Changed
 - Updated Plotly.js from version 2.31.1 to version 2.32.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2320----2024-04-23) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add "bold" weight, "italic" style and "small-caps" variant options to fonts [#6956]
   - Fix applying autotickangles on axes with showdividers as well as cases where tickson is set to "boundaries" [#6967], with thanks to @my-tien for the contribution!
@@ -353,7 +356,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.21.0] - 2024-04-17
 
-### Updated
+### Changed
 - Updated Plotly.js from version 2.30.0 to version 2.31.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2311----2024-04-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add `zorder` attribute to various cartesian traces for controlling stacking order of SVG traces drawn into a subplot [[#6918](https://github.com/plotly/plotly.js/pull/6918), [#6953](https://github.com/plotly/plotly.js/pull/6953)],
     This feature was anonymously sponsored: thank you to our sponsor!
@@ -367,14 +370,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.20.0] - 2024-03-13
 
-### Updated
+### Changed
 - Updated Plotly.js from version 2.29.1 to version 2.30.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2300----2024-03-06) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add fill gradients for scatter traces [[#6905](https://github.com/plotly/plotly.js/pull/6905)], with thanks to @lumip for the contribution!
   - Add `indentation` to legend [[#6874](https://github.com/plotly/plotly.js/pull/6874)], with thanks to @my-tien for the contribution!
 
 ## [5.19.0] - 2024-02-15
 
-### Updated
+### Changed
 
 - Updated Plotly.js from version 2.27.0 to version 2.29.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2291----2024-02-12) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add `layout.barcornerradius` and `trace.marker.cornerradius` properties to support rounding the corners of bar traces [[#6761](https://github.com/plotly/plotly.js/pull/6761)],
@@ -397,7 +400,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.18.0] - 2023-10-25
 
-### Updated
+### Changed
 - Updated Plotly.js from version 2.26.0 to version 2.27.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2270----2023-10-20) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Add `insiderange` to cartesian axes to help avoid overlap between visible grid lines and tick labels of the counter axis when they are positioned inside [[#6735](https://github.com/plotly/plotly.js/pull/6735)], this feature was anonymously sponsored: thank you to our sponsor!
   - Fix column order changes on hover [[#6718](https://github.com/plotly/plotly.js/pull/6718)],
@@ -412,7 +415,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.17.0] - 2023-09-15
 
-### Updated
+### Changed
 - Improved json docstrings, added `BasePlotlyType.to_json()` method [[#4301](https://github.com/plotly/plotly.py/pull/4301)]
 - Updated Plotly.js from version 2.25.2 to version 2.26.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2260----2023-08-24) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
    - Add "min", "max", "min reversed" and "max reversed" autorange options and handle partial ranges (i.e. one end being null), add `autorangeoptions` (`clipmin`, `clipmax`, `minallowed`, `maxallowed`, `include`) as well as `minallowed` and `maxallowed` to cartesian, gl3d and radial axes [[#6547](https://github.com/plotly/plotly.js/pull/6547)]
@@ -431,7 +434,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.16.0] - 2023-08-11
 
-### Updated
+### Changed
 - Updated Plotly.js from version 2.24.1 to version 2.25.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2252----2023-08-11) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   -  Add "Equal Earth" projection to geo subplots [[#6670](https://github.com/plotly/plotly.js/pull/6670)],
    with thanks to @apparebit for the contribution!
@@ -444,7 +447,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.15.0] - 2023-06-08
 
-### Updated
+### Changed
   - Updated Plotly.js from version 2.20.0 to version 2.24.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2241----2023-06-07) for more information. Notable changes include:
     - Add pattern to pie, funnelarea, sunburst, icicle and treemap traces [[#6601](https://github.com/plotly/plotly.js/pull/6601), [#6619](https://github.com/plotly/plotly.js/pull/6619), [#6622](https://github.com/plotly/plotly.js/pull/6622), [#6626](https://github.com/plotly/plotly.js/pull/6626), [#6627](https://github.com/plotly/plotly.js/pull/6627), [#6628](https://github.com/plotly/plotly.js/pull/6628), [#6629](https://github.com/plotly/plotly.js/pull/6629)], with thanks to @thierryVergult for the contribution!
     - Add `texttemplate` to shape.label for parametric shapes i.e. line, rect and circle [[#6527](https://github.com/plotly/plotly.js/pull/6527)],
@@ -477,7 +480,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.14.0] - 2023-03-29
 
-### Updated
+### Changed
   - Updated Plotly.js from version 2.18.2 to version 2.20.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2200----2023-03-15) for more information. Notable changes include:
     - Add `title.automargin` to enable automatic top and bottom margining for both container and paper referenced titles [[#6428](https://github.com/plotly/plotly.js/pull/6428)],
    with thanks to [Gamma Technologies](https://www.gtisoft.com/) for sponsoring the related development.
@@ -496,13 +499,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.13.1] - 2023-02-24
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.18.0 to version 2.18.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2182----2023-02-15) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
   - Updated distutils.Version to packaging.Version [#3897](https://github.com/plotly/plotly.py/pull/3897)] and [#4055](https://github.com/plotly/plotly.py/pull/4055)]
 
 ## [5.13.0] - 2023-01-23
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.17.1 to version 2.18.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2180----2023-01-19) for more information. Notable changes include:
     - Add `sync` tickmode option [[#6356](https://github.com/plotly/plotly.js/pull/6356), [#6443](https://github.com/plotly/plotly.js/pull/6443)], with thanks to @filipesantiagoAM and @VictorBezak for the contribution!
   - Build process now uses Node 18.x and version 2 lockfile (should be an invisible change for users) [[#4034](https://github.com/plotly/plotly.py/pull/4034)]
@@ -514,7 +517,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.12.0] - 2023-01-12
 
-### Updated
+### Changed
   - Support for ipywidgets 8 [[#3930](https://github.com/plotly/plotly.py/pull/3930)]
   - Updated Plotly.js to from version 2.16.1 to version 2.17.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2170----2022-12-22) for more information. Notable changes include:
     - Add `shift` and `autoshift` to cartesian y axes to help avoid overlapping of multiple axes [[#6334](https://github.com/plotly/plotly.js/pull/6334)],
@@ -530,7 +533,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.11.0] - 2022-10-27
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.14.0 to version 2.16.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2161----2022-10-21) for more information. Notable changes include:
     - Add clustering options to `scattermapbox` [[#5827](https://github.com/plotly/plotly.js/pull/5827)],
       with thanks to @elben10 for the contribution!
@@ -541,7 +544,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.10.0] - 2022-08-11
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.12.1 to version 2.14.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2140----2022-08-10) for more information. Notable changes include:
     - Add support for `sankey` links with arrows
     - Add `selections`, `newselection` and `activeselection` layout attributes to have persistent and editable selections over cartesian subplots
@@ -555,11 +558,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `pattern_shape` options now available in `px.timeline()` [#3774](https://github.com/plotly/plotly.py/pull/3774)
   - `facet_*` and `category_orders` now available in `px.pie()` [#3775](https://github.com/plotly/plotly.py/pull/3775)
 
-### Performance
+### Changed
 
   - `px` methods no longer call `groupby` on the input dataframe when the result would be a single group, and no longer groups by a lambda, for significant speedups [#3765](https://github.com/plotly/plotly.py/pull/3765) with thanks to [@jvdd](https://github.com/jvdd)
 
-### Updated
+### Changed
 
   - Allow non-string extras in `flaglist` attributes, to support upcoming changes to `ax.automargin` in plotly.js [plotly.js#6193](https://github.com/plotly/plotly.js/pull/6193), [#3749](https://github.com/plotly/plotly.py/pull/3749)
 
@@ -586,7 +589,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
   - Type annotations for Plotly Express functions and chainable `go.Figure` methods, for better IDE auto-completion [#3708](https://github.com/plotly/plotly.py/pull/3708)
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.11.1 to version 2.12.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v2.12.1/CHANGELOG.md#2121----2022-05-09) for more information. Notable changes include:
     - Add `minor` ticks to cartesian axes
     - Add `griddash` option to most axes
@@ -596,14 +599,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
   - added `pattern_shape` options to `px.area()` [#3668](https://github.com/plotly/plotly.py/issues/3668)
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.9.0 to version 2.11.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#2111----2022-03-15) for more information. Notable changes include:
     - Add `fillpattern` options to `scatter` trace
     - Various JS-specific improvements such as MathJax 3.0 support
 
 ##  [5.6.0] - 2022-02-09
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.8.3 to version 2.9.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#290----2022-02-04) for more information. Notable changes include:
     - Implement `ticklabelstep` to reduce labels on cartesian axes and colorbars
     - Display the version of plotly.js when hovering over the modebar
@@ -620,7 +623,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
   - Fixed ValueError when `ff.create_annotated_heatmap` passes `rgba()` colors into `to_rgb_color_list` [#3478](https://github.com/plotly/plotly.py/issues/3478) with thanks to [@janosh](https://github.com/janosh)
 
-### Updated
+### Changed
   - Updated Plotly.js to from version 2.6.3 to version 2.8.3. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#280----2021-12-10) for more information. Notable changes include:
     - Horizontal color bars
     - `texttemplate` for histogram-like and heatmap-like traces
@@ -631,7 +634,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
   - Fixed error when serializing dict with mix of string and non-string keys [#3380](https://github.com/plotly/plotly.py/issues/3380)
 
-### Updated
+### Changed
   - The JSON serialization engines no longer sort their keys [#3380](https://github.com/plotly/plotly.py/issues/3380)
   - Updated Plotly.js to from version 2.4.2 to version 2.6.3. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#263----2021-11-12) for more information. Notable changes include:
     - New subplot type `smith` that supports `scattersmith` trace types for visualizing data in the complex domain
@@ -640,14 +643,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.3.1] - 2021-08-31
 
-### Updated
+### Changed
 
 - Updated Plotly.js to from version 2.4.1 to version 2.4.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#240----2021-08-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Bug fix for rendering unified hover labels in classic Jupyter Notebooks
 
 ## [5.3.0] - 2021-08-29
 
-### Updated
+### Changed
 
 - Updated Plotly.js to from version 2.3.1 to version 2.4.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#240----2021-08-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Added `legend.groupclick` options
@@ -660,7 +663,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.2.1] - 2021-08-13
 
-### Updated
+### Changed
 
 - Updated Plotly.js to from version 2.2.0 to version 2.3.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#231----2021-07-30) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - new projections in `geo` subplots from a more recent version of `d3-geo`
@@ -690,7 +693,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.0.0] - 2021-06-21
 
-### Updated/Changed
+### Changed
 
 Items in this section may be considered backwards-incompatible changes for the purposes of [Semantic Versioning](http://semver.org/) but we expect the vast majority of users to be able to upgrade to version 5.0 without encountering any issues.
 
@@ -736,7 +739,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 ## [4.14.2] - 2021-01-11
 
-### Updated
+### Changed
 
 - JupyterLab extensions now compatible with JupyterLab 3.x [3016](https://github.com/plotly/plotly.py/pull/3016)
 - Updated Plotly.js to version 1.58.4. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.4/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
@@ -752,7 +755,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 ## [4.14.1] - 2020-12-09
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.58.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - fixes for new `ticklabelposition` attribute
@@ -770,7 +773,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 - axes will now auto-type numeric strings as categorical data rather than linear in the default templates [2951](https://github.com/plotly/plotly.py/pull/2951)
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.58.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - a new `ticklabelposition` attribute to enable positioning tick labels inside the plotting area
@@ -797,7 +800,7 @@ Items in this section may be considered backwards-incompatible changes for the p
   [2894](https://github.com/plotly/plotly.py/pull/2894)
 
 
-### Updated
+### Changed
 
 - the JSON serialization of plotly figures has been accelerated thanks to a
   different handling of Infinity and NaN values. For example, a figure with a
@@ -830,13 +833,13 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 - Better magic underscore error messages. For example, `some_fig.update_layout(geo_ltaxis_showgrid=True)` shows `Bad property path:\ngeo_ltaxis_showgrid\n   ^` and lists the valid properties for `geo`.
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.57.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.1/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 
 ## [4.11.0] - 2020-10-01
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.56.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.56.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 
@@ -846,12 +849,12 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 - Added `plotly.io.full_figure_for_development()` and `plotly.graph_objects.Figure.full_figure_for_development()` ([#2737](https://github.com/plotly/plotly.py/pull/2737))
 
-### Updated
+### Changed
 
 - The JSON serialization of plotly figures had been accelerated by handling
   differently figures with and without NaN and Inf values ([#2880](https://github.com/plotly/plotly.py/pull/2880)).
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.55.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.55.2/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 - `px.imshow` has a new `binary_string` boolean argument, which passes the
@@ -890,7 +893,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 - regression from 4.8.1 whereby `"parent"` was not accepted as part of `path` for `px.sunburst()` and `px.treemap()` ([#2640](https://github.com/plotly/plotly.py/pull/2640))
 - `create_dendrogram()` figure factory now works correctly with `scipy` 1.5.1 ([#2627](https://github.com/plotly/plotly.py/pull/2627))
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.54.6. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.6/CHANGELOG.md) for more information.
 - Added all cartesian-2d Plotly Express functions, plus `imshow`, to Pandas backend with `kind` option ([#2541](https://github.com/plotly/plotly.py/pull/2541))
@@ -900,7 +903,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 ## [4.8.2] - 2020-06-26
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.54.5. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.5/CHANGELOG.md) for more information.
 - `add_traces()` now accepts bare `int`-like values for `rows`/`cols` as well as lists thereof ([#2546](https://github.com/plotly/plotly.py/pull/2546)), with thanks to [@MCBoarder289](https://github.com/MCBoarder289) for the contribution!
@@ -932,7 +935,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 - New datasets have been added to `plotly.express.data`: `stocks`, `experiment`, `medals_wide` and `medals_long`. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
 - plotly `go.Figure` and `go.FigureWidget` now have a `_repr_html_` and a `_repr_mimebundle_` method, which are [standard hooks for integration in systems based on IPython](https://ipython.readthedocs.io/en/stable/config/integrating.html). In particular, with `_repr_html_` plotly figures can now be used within [sphinx-gallery](https://sphinx-gallery.github.io/stable/index.html) without any scraper. These additions should not change anything to the way plotly figures are displayed in notebook environments, since the `_ipython_display_` method (already present in earlier versions) takes precedence over the new methods.
 
-### Updated
+### Changed
 
 - The behaviour of the `x`, `y`, `orientation`, `histfunc`, `violinmode`, `boxmode` and `stripmode` arguments for 2d-cartesian functions in Plotly Express (i.e. `scatter`, `line`, `area`, `bar`, `histogram`, `violin`, `box`, `strip`, `funnel`, `density_heatmap` and `density_contour`) has been refined ([#2336](https://github.com/plotly/plotly.py/pull/2336)):
     - if `x` or `y` is missing, it is inferred to be the index of `data_frame` if `data_frame` provided, otherwise a stable index of integers starting at 0. In the case of `px.bar`, if the provided value is not continuous, the missing value is treated as a column of 1s named "count", so as to behave more like `px.histogram` and to avoid sizing the resulting bars differently based on their position in the column. Previously, missing values defaulted to integers starting at 0 *per trace* which made it potentially inconsistent or misleading.
@@ -956,7 +959,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 ## [4.7.0] - 2020-05-06
 
-### Updated
+### Changed
 
 - Updated Plotly.js to version 1.54.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.1/CHANGELOG.md) for more information. The main new feature of this version of Plotly.js is the possibility to draw layout shapes, using custom dragmodes and corresponding modebar buttons.
 - The sphinx-gallery scraper has been updated to work with different structures of galleries [#2149](https://github.com/plotly/plotly.py/pull/2419)
@@ -970,7 +973,7 @@ Items in this section may be considered backwards-incompatible changes for the p
 
 - Plotly Express trendlines now handle missing data correctly [#2357](https://github.com/plotly/plotly.py/pull/2357)
 
-### Performance
+### Changed
 
 This version includes several performance improvements ([#2368](https://github.com/plotly/plotly.py/pull/2368), [#2403](https://github.com/plotly/plotly.py/pull/2403)).
 
@@ -980,7 +983,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 ## [4.6.0] - 2020-03-31
 
-### Updated
+### Changed
 
  - Updated Plotly.js to version 1.53.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.53.0/CHANGELOG.md) for more information on the numerous new features and bug fixes of this release. The main features of the Plotly.js release are
     - Introduce range breaks on date axes (for example, to remove week-ends) via `layout.xaxis.rangebreaks`
@@ -1002,7 +1005,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 ## [4.5.4] - 2020-03-11
 
-### Updated
+### Changed
 
 - The documentation of the API https://plot.ly/python-api-reference/ now
   documents the full API [#2243](https://github.com/plotly/plotly.py/pull/2243)
@@ -1019,7 +1022,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 ## [4.5.3] - 2020-03-05
 
-### Updated
+### Changed
 
 - Removed development dependency on `nose` testing framework [#2217](https://github.com/plotly/plotly.py/pull/2217)
 
@@ -1035,7 +1038,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 ## [4.5.1] - 2020-02-19
 
-### Updated
+### Changed
 
  - Updated Plotly.js to version 1.52.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/releases/tag/v1.52.2) for more information on bug fixes.
 
@@ -1050,7 +1053,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 ## [4.5.0] - 2020-01-22
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.52.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.52.0/CHANGELOG.md#1520----2020-01-08) for more information on numerous new attribute and bug fixes.
  - Plotly Express uses the new `legend.title` attribute and so now has shorter trace `name`s [#2051](https://github.com/plotly/plotly.py/pull/2051)
  - The heuristic used by `px.parallel_categories` to determine which columns of the data frame to draw has been changed and made more configurable with the `dimensions_max_cardinality` argument [#2102](https://github.com/plotly/plotly.py/pull/2102)
@@ -1083,7 +1086,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 ## [4.4.0] - 2019-12-10
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.51.2. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1512----2019-11-25)
  for more information
@@ -1114,7 +1117,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
 
 ## [4.3.0] - 2019-11-11
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.51.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1511----2019-11-04)
  for more information
@@ -1136,7 +1139,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
 
 ## [4.2.0] - 2019-10-16
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.50.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1501----2019-10-15)
  for more information
@@ -1156,7 +1159,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
 
 ## [4.1.1] - 2019-09-02
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.49.4. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1494----2019-08-22)
  for more information
@@ -1168,7 +1171,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
 
 ## [4.1.0] - 2019-08-06
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.49.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1491----2019-07-31)
  for more information.
@@ -1202,7 +1205,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
 
 This is a major release that includes many new features, and a few breaking changes. See the [version 4 announcement](https://community.plot.ly/t/introducing-plotly-py-4-0-0rc1/25639) for a summary of the important changes.
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.48.3. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1483----2019-06-13)
  for more information.
@@ -1247,7 +1250,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.10.0] - 2019-05-31
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.48.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1481----2019-05-30)
  for more information.
@@ -1290,7 +1293,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.9.0] - 2019-04-19
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.47.4. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1474----2019-04-25)
  for more information.
@@ -1341,7 +1344,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.8.1] - 2019-04-19
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.47.3. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#plotlyjs-changelog)
  for more information.
@@ -1359,7 +1362,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.8.0] - 2019-04-15
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.47.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1471----2019-04-10)
  for more information.
@@ -1385,7 +1388,7 @@ This is a major release that includes many new features, and a few breaking chan
  ([#1402](https://github.com/plotly/plotly.py/issues/1402),
  [#1501](https://github.com/plotly/plotly.py/pull/1501))
 
-### Updated
+### Changed
  - Align hoverlabels left and set legend items to constant-size in builtin
  themes ([#1520](https://github.com/plotly/plotly.py/pull/1520))
 
@@ -1398,7 +1401,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.7.0] - 2019-03-08
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.45.2. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1452----2019-03-07)
  for more information.
@@ -1412,7 +1415,7 @@ This is a major release that includes many new features, and a few breaking chan
  arrays rather than grid references) to Chart Studio using `plotly.plotly.create_animations`
  ([#1432](https://github.com/plotly/plotly.py/pull/1432))
 
-### Updated
+### Changed
  - Updated implementation of the `ternary_contour` figure factory that was
  added in 3.6.0. The new implementation uses the native plotly.js ternary axes
  and provides ILR transform support.
@@ -1428,7 +1431,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.6.1] - 2019-02-08
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.44.3. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1443----2019-02-06)
  for more information.
@@ -1442,7 +1445,7 @@ This is a major release that includes many new features, and a few breaking chan
  ([#1428](https://github.com/plotly/plotly.py/pull/1428))
 
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.44.1. Select highlights included below.
  See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1441----2019-01-24)
@@ -1450,7 +1453,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.6.0] - 2019-02-01
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.44.1. Select highlights included below.
  See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1441----2019-01-24)
@@ -1494,7 +1497,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.5.0] - 2019-01-04
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.43.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1431----2018-12-21)
  for more information.
@@ -1562,7 +1565,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.4.1] - 2018-11-09
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.42.5. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1423----2018-11-06)
  for more information.
@@ -1586,7 +1589,7 @@ This is a major release that includes many new features, and a few breaking chan
 
 ## [3.4.0] - 2018-11-02
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.42.2. Select highlights included below, see
  the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1422----2018-11-01)
  for more information.
@@ -1707,7 +1710,7 @@ This is a major release that includes many new features, and a few breaking chan
   [plotly/plotly.js#3180](https://github.com/plotly/plotly.js/pull/3180))
 
 
-### JupyterLab Versions
+**JupyterLab Versions**
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
@@ -1724,7 +1727,7 @@ must be installed:
 
 ## [3.3.0] - 2018-09-28
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.41.3.  Select highlights included below, see
  [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1413----2018-09-25)
  for more information.
@@ -1773,7 +1776,7 @@ must be installed:
  - Added missing LICENSE.txt file to PyPI source distribution
  ([#765](https://github.com/plotly/plotly.py/issues/765))
 
-### JupyterLab Versions
+**JupyterLab Versions**
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
@@ -1794,7 +1797,7 @@ version 2 features that were not supported in version 3.
 
 The bundled version of plotly.js remains at 1.40.1
 
-### JupyterLab Versions
+**JupyterLab Versions**
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
@@ -1840,7 +1843,7 @@ This release introduces the long-anticipated ability to programmatically
 export figures as high quality static images in both raster and vector
 formats.
 
-### JupyterLab Versions (Python 3.5+)
+**JupyterLab Versions (Python 3.5+)**
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
@@ -1888,7 +1891,7 @@ must be installed:
    - In addition to the existing installation approaches, orca is now also available as a
      [conda package](https://anaconda.org/plotly/plotly-orca) from the plotly anaconda channel.
 
-### Updated
+### Changed
  - Show traces at the top of the Gantt chart's colorbar ([#1110](https://github.com/plotly/plotly.py/pull/1110))
  - Significantly improved validation performance for numeric pandas `Series` objects ([#1149](https://github.com/plotly/plotly.py/pull/1149))
  - Specialize auto-generated docstrings for Python syntax
@@ -1906,7 +1909,7 @@ must be installed:
 ## [3.1.1] - 2018-08-10
 This release is a minor bug-fix update to version 3.1.0
 
-### JupyterLab Versions
+**JupyterLab Versions**
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
@@ -1921,7 +1924,7 @@ must be installed:
    - @jupyter-widgets/jupyterlab-manager@0.36
    - @jupyterlab/plotly-extension@0.16
 
-### Updated
+### Changed
  - Updated plotly.js to version 1.39.4.
    - This is a bug-fix release of plotly.js
    - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1394----2018-08-02) for more information
@@ -1944,7 +1947,7 @@ must be installed:
 
 ## [3.1.0] - 2018-07-20
 
-### JupyterLab Versions
+**JupyterLab Versions**
 For use with JupyterLab, the following versions of the following packages
 must be installed. See [README.md](packages/python/plotly-geo/README.md) for instructions.
 
@@ -1959,7 +1962,7 @@ must be installed. See [README.md](packages/python/plotly-geo/README.md) for ins
    - @jupyter-widgets/jupyterlab-manager@0.35
    - @jupyterlab/plotly-extension@0.16
 
-### Updated
+### Changed
  - Updated Plotly.js to version 1.39.2
  - See highlights below
  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1392----2018-07-16) for more information.
@@ -1974,9 +1977,9 @@ must be installed. See [README.md](packages/python/plotly-geo/README.md) for ins
 ## [3.0.2] - 2018-07-17
 This is a minor bug-fix release to 3.0.0
 
-### JupyterLab plotlywidget version: 0.1.1
+JupyterLab plotlywidget version: 0.1.1
 
-### Plotly.js version: 1.38.3
+Plotly.js version: 1.38.3
 
 ### Fixed
  - Several errors related to numbered subplot labels (e.g. xaxis2, polar3, etc.)
@@ -1993,9 +1996,9 @@ Note: This release's installation was broken. It has been removed from PyPI
 
 This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
 
-### JupyterLab plotlywidget version: 0.1.1
+JupyterLab plotlywidget version: 0.1.1
 
-### Plotly.js version: 1.38.3
+Plotly.js version: 1.38.3
 
 ### Added
 - Full Jupyter ipywidgets integration with the new `graph_objs.FigureWidget` class
@@ -2007,19 +2010,19 @@ This is a major version with many exciting updates. See the [Introducing plotly.
 - Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the available properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
 - Error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
 
-### Changed / Deprecated
+### Changed
 Please see the [migration guide](MIGRATION_GUIDE.md) for a full list of the changes and deprecations in version 3.0.0
 
 
 
 ## [2.7.0] - 2018-05-23
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.38.0.
   - New features include a `3D cone` trace to visualize vector fields.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1380----2018-05-23) for additional information regarding the updates.
 
 ## [2.6.0] - 2018-05-09
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.37.1.
   - New features include a `splom` (scatter plot matrix) trace type.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1371----2018-05-02) for additional information regarding the updates.
@@ -2034,7 +2037,7 @@ Please see the [migration guide](MIGRATION_GUIDE.md) for a full list of the chan
 - `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
 ### Added
 - New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.35.2.
   - New features include adding an `automargin` attribute to cartesian axes and a layout `grids` attribute for easy subplot generation.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1352----2018-03-09) for additional information regarding the updates.
@@ -2057,7 +2060,7 @@ Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOErro
 ## [2.3.0] - 2018-01-25
 ### Fixed
 - Merged [pull request](https://github.com/plotly/plotly.py/commit/a226e07393c158e01c34c050aaf492da9d77679a) that fixes `GraphWidget` for IPython > v6
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.33.1.
   - New plot types include a `violin` trace type.
   - New features include completely rewritten `scattergl` using `regl` and a completely rewritten polar chart renderer.
@@ -2066,7 +2069,7 @@ Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOErro
 ## [2.2.3] - 2017-12-04
 ### Added
 -`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Call `help(plotly.tools.make_subplots)` for documentation.
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.31.2.
   - Fixes include adjustments to `table` trace for offline plotting.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1312----2017-10-23) for additional information regarding the updates.
@@ -2084,18 +2087,18 @@ Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOErro
 - NEW Presentations API for Python! Run `help(plotly.presentation_objs.Presentations)` for help or check out the new [documentation](https://plot.ly/python/presentations-api/)
 
 ## [2.1.0] - 2017-10-10
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.31.0.
   - New features include a `table` trace type.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1310----2017-10-05) for additional information regarding the updates.
 
 ## [2.0.16] - 2017-10-06
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.31.0 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1310----2017-10-05) for additional information regarding the updates.
 
 ## [2.0.15] - 2017-08-22
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.30.0 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1300----2017-08-21) for additional information regarding the updates.
 
@@ -2105,21 +2108,21 @@ Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOErro
 - Issue removing rug plots from violin plots with multiple traces.
 
 ## [2.0.13] - 2017-08-04
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.29.1 for `plotly.offline`.
   - See [the plotly.js CHANGELOG]() for additional information regarding the updates.
 - `figure_factory.create_gantt` and `figure_factory.create_dendrogram` now return a Plotly figure (consistent with other figure factory chart types).
 - `offline.init_notebook_mode()` is now optional when using `offline.iplot()`.
 
 ## [2.0.12] - 2017-06-30
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.28.3 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1283----2017-06-26) for additional information regarding the updates.
 ### Added
 - `figure_factory.create_facet_grid` now supports histogram, bar, and box traces.
 
 ## [2.0.11] - 2017-06-20
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.28.1 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1281----2017-06-20) for additional information regarding the updates.
 
@@ -2145,15 +2148,15 @@ help(ff.create_facet_grid)
 - Offline embedded plots are now responsive to window resizing when `output_type == "div"` is set in `plotly.offline.iplot()`.
 - Offline animations are now supported on Plotly Cloud.
 
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.26.0 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
 
-### Updated
+### Changed
 - `plotly.offline.plot` and `plotly.offline.iplot` now accept various [configuration options](https://plot.ly/javascript/configuration-options/) for their arguments.
 
 ## [2.0.7] - 2017-04-07
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.25.0 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
 
@@ -2221,7 +2224,7 @@ gone.
 ### Added
 - Python 3.5 has been added as a tested environment for this package.
 
-### Updated
+### Changed
 - `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` now return appropriate error messages if the response is not successful.
 - `frames` are now integrated into GRAPH_REFERENCE and figure validation.
 
@@ -2229,7 +2232,7 @@ gone.
 - The plot-schema from `https://api.plot.ly/plot-schema` is no longer updated on import.
 
 ## [1.12.12] - 2016-12-06
-### Updated
+### Changed
 - Updated `plotly.min.js` to version 1.20.5 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
 - `FF.create_scatterplotmatrix` now by default does not show the trace labels for the box plots, only if `diag=box` is selected for the diagonal subplot type.
@@ -2239,7 +2242,7 @@ gone.
 - The `link text` in the bottom right corner of the offline plots now properly displays `Export to [Domain Name]` for the given domain name set in the users' `.config` file.
 
 ## [1.12.10] - 2016-11-28
-### Updated
+### Changed
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
 - Removed alert that occurred when downloading plot images offline. Please note: for higher resolution images and more export options, consider making requests to our image servers. See: `help(py.image)` for more details.
 
@@ -2353,7 +2356,7 @@ Then, whenever you update the data in `'my-grid'`, the associated plot will upda
 ### Fixed
 - the colorbar in `.create_trisurf` now displays properly in `offline mode`.
 
-### Updated
+### Changed
 - the colorbar in `.create_trisurf` now displays the appropriate max and min values on the ends of the bar which corresponding to the coloring metric of the figure
 - `edges_color` is now a param in `.create_trisurf` which only takes `rgb` values at the moment
 
@@ -2367,14 +2370,14 @@ Then, whenever you update the data in `'my-grid'`, the associated plot will upda
   - Please note that `plotly.min.js` may be cached in your Jupyter Notebook. Therefore, if you continue to experience this issue after upgrading the Plotly package please open a new notebook or clear the cache to ensure the correct `plotly.min.js` is referenced.
 
 ## [1.12.6] - 2016-08-09
-### Updated
+### Changed
 - Updated `plotly.min.js` from 1.14.1 to 1.16.2
   - Trace type scattermapbox is now part of the main bundle
   - Add updatemenus (aka dropdowns) layout components
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
 
 ## [1.12.5] - 2016-08-03
-### Updated
+### Changed
 - `.create_trisurf` now supports a visible colorbar for the trisurf plots. Check out the docs for help:
 ```
 import plotly.tools as tls
@@ -2390,7 +2393,7 @@ help(tls.FigureFactory.create_2D_density)
 ```
 
 ## [1.12.3] - 2016-06-30
-### Updated
+### Changed
 - Updated `plotly.min.js` from 1.13.0 to 1.14.1
   - Numerous additions and changes where made to the mapbox layout layers attributes
   - Attribute line.color in scatter3d traces now support color scales
@@ -2402,7 +2405,7 @@ help(tls.FigureFactory.create_2D_density)
 - Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
 
 ## [1.12.2] - 2016-06-20
-### Updated
+### Changed
 - Updated plotly.min.js so the offline mode is using plotly.js v1.13.0
   - Fix `Plotly.toImage` and `Plotly.downloadImage` bug specific to Chrome 51 on OSX
   - Beta version of the scattermapbox trace type - which allows users to create mapbox-gl maps using the plotly.js API. Note that scattermapbox is only available through custom bundling in this release.
@@ -2434,7 +2437,7 @@ help(tls.FigureFactory.create_violin)
 - Added ability to enable/disable SSL certificate verification for streaming. Disabling SSL certification verification requires Python v2.7.9 / v3.4.3 (or above). This feature can be toggled via the `plotly_ssl_verification` configuration setting.
 
 ## [1.11.0] - 2016-05-27
-### Updated
+### Changed
 - Changed the default option for `create_distplot` in the figure factory from `probability` to `probability density` and also added the `histnorm` parameter to allow the user to choose between the two options.
 Note: This is a backwards incompatible change.
 
@@ -2497,7 +2500,7 @@ help(tls.FigureFactory.create_scatterplotmatrix)
 ```
 
 ## [1.9.10] - 2016-04-27
-### Updated
+### Changed
 - Updated plotly.min.js so the offline mode is using plotly.js v1.10.0
   - Added beta versions of two new 2D WebGL trace types: heatmapgl, contourgl
   - Added fills for scatterternary traces
@@ -2511,7 +2514,7 @@ help(tls.FigureFactory.create_scatterplotmatrix)
 ### Fixed
 - Error no longer results from a "Run All" cells when working in a Jupyter Notebook.
 
-### Updated
+### Changed
 - Updated plotly.min.js so offline is using plotly.js v1.9.0
   - Added Ternary plots with support for scatter traces (trace type `scatterternary`, currently only available in offline mode)
   - For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
@@ -2520,7 +2523,7 @@ help(tls.FigureFactory.create_scatterplotmatrix)
 ### Fixed
 - Offline mode will no longer delete the Jupyter Notebook's require, requirejs, and define variables.
 
-### Updated
+### Changed
 - Updated plotly.min.js so offline is using plotly.js v1.8.0
   - Added range selector functionality for cartesian plots
   - Added range slider functionality for scatter traces
@@ -2529,7 +2532,7 @@ help(tls.FigureFactory.create_scatterplotmatrix)
   - For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
 
 ## [1.9.6] - 2016-02-18
-### Updated
+### Changed
 - Updated plotly.min.js so offline is using plotly.js v1.5.2
 
 ## [1.9.5] - 2016-01-17
