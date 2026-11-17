@@ -49,7 +49,7 @@ The differences between these two approaches are that:
 
 
 
-### Shape-drawing with Scatter traces
+### Shape-Drawing with Scatter Traces
 
 There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermap](https://plotly.com/python/filled-area-tile-maps/#filled-scattermap-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
 
@@ -73,7 +73,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash-enterprise/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -714,7 +714,7 @@ fig.show()
 
 ```
 
-### Drawing shapes with a Mouse on Cartesian plots
+### Drawing Shapes with a Mouse on Cartesian Plots
 
 _introduced in plotly 4.7_
 
@@ -759,7 +759,7 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
                                        ]})
 ```
 
-### Style of user-drawn shapes
+### Style of User-Drawn Shapes
 
 The layout `newshape` attribute controls the visual appearance of new shapes drawn by the user. `newshape` attributes have the same names as layout shapes.
 

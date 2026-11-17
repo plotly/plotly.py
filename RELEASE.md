@@ -5,12 +5,27 @@
 
 This is the release process for releasing plotly.py version `X.Y.Z`, including changelogs, GitHub release and forum announcement.
 
+### Prerequisites
+
+Ensure you have the following installed:
+
+* `uv>=0.12.15`
+* `twine>=7.0.0`
+* A virtual environment: `uv venv`
+
+### Prepare local environment
+
+* `git switch main && git pull`
+* `git status`: ensure your working tree is clean
+* `uv pip install -e ".[dev_optional]"`
+* `cd js && npm ci && cd ..`
+
 ### Finalize changelog
 
 Review the contents of `CHANGELOG.md` under the **Unreleased** header. We try to follow
 the [keepachangelog](https://keepachangelog.com/en/1.0.0/) guidelines.
 
-**Note: You don't need to update the header itself with the new version number,
+**Note: You don't need to update the "Unreleased" header with the new version number,
 as that will be done automatically as part of the next step.**
 
 Use the `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`
@@ -44,7 +59,7 @@ a link to the plotly.js CHANGELOG.
 
 - Commit and push the changed files to the release branch:
     ```sh
-    $ git add -u
+    $ git add -A
     $ git commit -m "version changes for vX.Y.Z"
     $ git push
     ```
@@ -117,6 +132,7 @@ You must first install [Twine](https://pypi.org/project/twine/) (`pip install tw
 Publishing to PyPI:
 ```bash
 (plotly_dev) $ cd path/to/output
+(plotly_dev) $ twine check plotly-X.Y.Z*
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
 

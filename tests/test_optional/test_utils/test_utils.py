@@ -487,14 +487,11 @@ class TestNumpyIntegerBaseType(TestCase):
 class TestNoNumpyIntegerBaseType(TestCase):
     def test_no_numpy_int_type(self):
         import sys
+        from unittest import mock
         from _plotly_utils.utils import _get_int_type
-        from _plotly_utils.optional_imports import get_module
 
-        np = get_module("numpy", should_load=False)
-        if np:
-            sys.modules.pop("numpy")
+        with mock.patch.dict(sys.modules, {"numpy": None}):
+            int_type_tuple = _get_int_type()
+            expected_tuple = (int,)
 
-        int_type_tuple = _get_int_type()
-        expected_tuple = (int,)
-
-        self.assertEqual(int_type_tuple, expected_tuple)
+            self.assertEqual(int_type_tuple, expected_tuple)
