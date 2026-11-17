@@ -40,6 +40,7 @@ jobs:
 
   test-optional:
     name: Optional tests (Python ${{ matrix.python-version }})
+    # ubuntu is pinned due to timezone-related test failures on ubuntu-latest
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
@@ -88,6 +89,7 @@ jobs:
 
   test-optional-legacy-pandas:
     name: Optional tests (Python ${{ matrix.python-version }}, pandas ${{ matrix.pandas-version }})
+    # ubuntu is pinned due to timezone-related test failures on ubuntu-latest
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false

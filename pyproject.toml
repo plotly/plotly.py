@@ -50,6 +50,7 @@ dev_core = [
 dev_matplotlib = [
     "plotly[dev_core]",
     "matplotlib",
+    # Ensure we use a new-enough version that a pre-built Python 3.14 whl exists
     "contourpy>=1.3.3; python_version>='3.14'",
     "kiwisolver>=1.4.9"
 ]

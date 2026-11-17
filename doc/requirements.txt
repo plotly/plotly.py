@@ -34,7 +34,7 @@ scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
 setuptools<=81
-# geopandas pin also requires a transitive dependency pin for python>=3.10
+# geopandas (pinned above) uses a deprecated shapely method, so we require a pin to ensure the deprecated method exists
 shapely==2.0.7
 sphinx==3.5.4
 sphinx_bootstrap_theme
