@@ -42,6 +42,37 @@ def test_validator_acceptance_homogeneous(val, validator):
     assert np.array_equal(validator.present(coerce_val), val)
 
 
+@pytest.mark.parametrize(
+    "val,expected",
+    [
+        (np.ma.array([1, 2, 3], mask=[0, 1, 0]), np.array([1, np.nan, 3])),
+        (
+            np.ma.array([1, 2, 3], mask=[0, 1, 0], dtype="float32"),
+            np.array([1, np.nan, 3], dtype="float32"),
+        ),
+        (np.ma.array([1, 2, 3], mask=True), np.array([np.nan, np.nan, np.nan])),
+        (np.ma.array([1, 2, 3], mask=False), np.array([1, 2, 3])),
+        (
+            np.ma.array([[1, 2], [3, 4]], mask=[[0, 1], [0, 0]]),
+            np.array([[1, np.nan], [3, 4]]),
+        ),
+        (
+            np.ma.array(["a", "b", "c"], mask=[0, 1, 0]),
+            np.array(["a", None, "c"], dtype="object"),
+        ),
+        (
+            np.ma.array([True, False, True], mask=[0, 1, 0]),
+            np.array([True, None, True], dtype="object"),
+        ),
+    ],
+)
+def test_validator_acceptance_masked(val, expected, validator):
+    coerce_val = validator.validate_coerce(val)
+    assert not np.ma.isMaskedArray(coerce_val)
+    assert coerce_val.dtype == expected.dtype
+    np.testing.assert_array_equal(coerce_val, expected)
+
+
 # Rejection
 @pytest.mark.parametrize("val", ["Hello", 23, set(), {}])
 def test_rejection(val, validator):
