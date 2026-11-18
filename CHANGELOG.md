@@ -4,8 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
 ### Added
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
+- Add support for converting matplotlib quiver plots (`plt.quiver`) to quiver traces in `mpl_to_plotly`, with thanks to @robertoffmoura for the contribution!
+
 
 ### Changed
 - Remove Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later. [[#5883](https://github.com/plotly/plotly.py/pull/5883)]
