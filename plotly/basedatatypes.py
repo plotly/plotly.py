@@ -339,7 +339,7 @@ x1: float or int
     docstr += """
 exclude_empty_subplots: Boolean
     If True (default) do not place the shape on subplots that have no data
-    plotted on them.
+    plotted on them. Ignored when row and col select a single subplot.
 row: None, int or 'all'
     Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
@@ -4003,6 +4003,15 @@ Invalid property path '{key_path_str}' for layout
         augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
             annotation, shape_type, shape_args, annotation_kwargs
         )
+        if (
+            row is not None
+            and col is not None
+            and (
+                not _is_select_subplot_coordinates_arg(row, col)
+                or len(self._select_subplot_coordinates(row, col)) == 1
+            )
+        ):
+            exclude_empty_subplots = False
         self.add_shape(
             row=row,
             col=col,
