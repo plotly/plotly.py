@@ -428,3 +428,38 @@ def test_select_annotations_integer(select_annotations_integer):
     assert (len(anns) == 1) and anns[0]["text"] == "B"
     with pytest.raises(IndexError):
         fig.select_annotations(row=2, col=2, selector=3)
+
+
+@pytest.mark.parametrize("method", ["add_hline", "add_vline"])
+def test_axis_spanning_line_kept_on_single_empty_subplot(method):
+    fig = make_subplots(rows=1, cols=1)
+    getattr(fig, method)(1)
+    assert len(fig.layout.shapes) == 1
+
+
+@pytest.mark.parametrize("method", ["add_hline", "add_vline"])
+def test_axis_spanning_line_kept_on_explicit_empty_subplot(method):
+    fig = make_subplots(rows=2, cols=2)
+    getattr(fig, method)(1, row=2, col=1)
+    assert len(fig.layout.shapes) == 1
+    shape = fig.layout.shapes[0]
+    assert (shape.xref, shape.yref) in [("x3", "y3 domain"), ("x3 domain", "y3")]
+
+
+@pytest.mark.parametrize("method", ["add_hline", "add_vline"])
+def test_axis_spanning_line_excludes_unspecified_empty_subplots(method):
+    fig = make_subplots(rows=2, cols=2)
+    getattr(fig, method)(1)
+    getattr(fig, method)(1, row=1)
+    assert len(fig.layout.shapes) == 0
+
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2]), row=1, col=2)
+    getattr(fig, method)(1)
+    assert len(fig.layout.shapes) == 1
+
+
+@pytest.mark.parametrize("method", ["add_hrect", "add_vrect"])
+def test_axis_spanning_rect_still_excluded_on_explicit_empty_subplot(method):
+    fig = make_subplots(rows=2, cols=2)
+    getattr(fig, method)(0, 1, row=2, col=1)
+    assert len(fig.layout.shapes) == 0
