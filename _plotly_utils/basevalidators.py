@@ -1138,13 +1138,24 @@ class ColorValidator(BaseValidator):
     },
     """
 
-    re_spaces_to_remove = re.compile(r"(?<!(\d|%|g)) | (?!\d)")
-
     re_hex = re.compile(
         r"#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})"
     )
+
+    # A CSS color function argument: a number (which may be signed or use an
+    # exponent) with an optional percent sign or angle unit, or `none`.
+    _re_css_value = (
+        r"(?:[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?(?:%|deg|grad|rad|turn)?|none)"
+    )
+    _re_css_sep = r"(?:\s*,\s*|\s+)"
+    _re_css_alpha_sep = r"(?:\s*[,/]\s*|\s+)"
     re_rgb_etc = re.compile(
-        r"((rgb|hsl)a?|hwb|(ok)?(lab|lch))\([\d.]+(%|deg)?([ ,] ?[\d.]+%?){2}([ /,] ?[\d.]+%?)?\)|color\([\w-]+([ ,] ?[\d.]+){3,4}\)"
+        r"(?:(?:rgb|hsl)a?|hwb|(?:ok)?(?:lab|lch))\s*\(\s*"
+        rf"{_re_css_value}{_re_css_sep}{_re_css_value}{_re_css_sep}{_re_css_value}"
+        rf"(?:{_re_css_alpha_sep}{_re_css_value})?\s*\)"
+        r"|color\s*\(\s*[a-z][\w-]*"
+        rf"(?:{_re_css_sep}{_re_css_value}){{3}}"
+        rf"(?:{_re_css_alpha_sep}{_re_css_value})?\s*\)"
     )
     re_ddk = re.compile(r"var\(\-\-.*\)")
 
@@ -1290,6 +1301,7 @@ class ColorValidator(BaseValidator):
         "teal",
         "thistle",
         "tomato",
+        "transparent",
         "turquoise",
         "violet",
         "wheat",
@@ -1443,12 +1455,7 @@ class ColorValidator(BaseValidator):
             # If not allow_numbers then value must be a string
             return None
         else:
-            # Remove spaces so regexes don't need to bother with them.
-            # Don't remove spaces between two digits, though.
-            v_normalized = v.strip()
-            v_normalized = re.sub(" +", " ", v_normalized)
-            v_normalized = re.sub(ColorValidator.re_spaces_to_remove, "", v_normalized)
-            v_normalized = v_normalized.lower()
+            v_normalized = v.strip().lower()
 
             # if ColorValidator.re_hex.fullmatch(v_normalized):
             if fullmatch(ColorValidator.re_hex, v_normalized):

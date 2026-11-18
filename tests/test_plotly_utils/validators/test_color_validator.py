@@ -57,6 +57,18 @@ VALID_COLORS = [
     "lab(70 15 50)",
     "lch(70 15 180)",
     "color(display-p3 1 0 0)",
+    "color(srgb 1 0 0)",
+    "color(a98-rgb 1 0 0 / 0.5)",
+    "lab(50% -40 59.5)",
+    "oklab(0.6 0.1 -0.05)",
+    "lch(52% 72 -30)",
+    "hsl(-30, 50%, 50%)",
+    "hsl(0.5turn 60% 40%)",
+    "hsl(1rad 60% 40%)",
+    "hsl(none 60% 40%)",
+    "rgb(255 0 0 / none)",
+    "rgb(1e2, 0, 0)",
+    "transparent",
 ]
 
 INVALID_COLORS_WRONG_TYPE = [
@@ -72,6 +84,12 @@ INVALID_COLORS_WRONG_FORMAT = [
     "hsl(0, 1%0000%, 50%)",
     "hsv(0, 100%, 100%)",
     "hsva(0, 100%, 100%, 50%)",
+    "currentcolor",
+    "rgb(255, 0)",
+    "rgb(255 0 0 /)",
+    "rgb(1-2 3 4)",
+    "color(1 0 0)",
+    "color(srgb 1 0)",
 ]
 
 
