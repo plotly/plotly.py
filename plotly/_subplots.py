@@ -681,6 +681,15 @@ The row_titles argument to make_subplots must be a list or tuple
                     "Some 'rowspan' value is too large for this subplot grid."
                 )
 
+            for rr in range(r, r_spanned + 1):
+                for cc in range(c, c_spanned + 1):
+                    if (rr, cc) != (r, c) and specs[rr][cc] is not None:
+                        raise ValueError(
+                            f"The subplot at grid position ({r + 1}, {c + 1}) "
+                            f"spans the cell at ({rr + 1}, {cc + 1}), so "
+                            f"specs[{rr}][{cc}] must be None."
+                        )
+
             # Get x domain using grid and colspan
             x_s = grid[r][c][0] + spec["l"]
 
