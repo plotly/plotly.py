@@ -2530,6 +2530,66 @@ def get_groups_and_orders(args, grouper):
     return groups, orders
 
 
+def _default_x_category_order(args, groups, orders, constructor):
+    """
+    Return the data-appearance order of the categorical x column, or None.
+
+    When the data is split into several traces (e.g. by `color`), plotly.js
+    orders categories by first appearance across traces, which can differ from
+    the order in the underlying data. Recording the data-appearance order here
+    lets the axis configurators emit an explicit `categoryarray`, matching the
+    documented behavior that Plotly Express lays out categorical data in the
+    order in which it appears in the data. See #3198.
+
+    The default only applies to string categoricals the user did not order
+    explicitly, to figures split into more than one trace, and to the x axis:
+
+    - Cartesian figures with facets or marginals apply the default per axis
+      in `make_figure`: each x axis gets the whole-data-frame order
+      restricted to the categories carried by the traces on its subplot,
+      exactly the order its single-subplot counterpart would use with the
+      categories absent from the subplot dropped. Shared categories keep the
+      same relative positions on matched facet axes, and the documented
+      independent-axes technique (disabling `matches`, see
+      `doc/python/facet-plots.md`) still lists each axis only its own
+      categories. The right-hand marginal of `marginal_y` spans the y
+      dimension and carries the binned y values, so it never receives the x
+      order.
+
+    - `px.ecdf` sorts the x values inside each trace, so its categorical
+      axis must keep the trace-derived order for the step function to read
+      in sequence.
+
+    - `px.scatter_3d` has a single scene, so the whole-data-frame order is
+      applied through the per-column mechanism in `configure_3d_axes`.
+
+    Only the x axis is handled: y categoricals are intentionally left alone
+    because `set_cartesian_axis_opts` reverses y orders for top-down display
+    and figures such as `px.timeline` / horizontal `px.bar` pair that with
+    `autorange="reversed"` (see `doc/python/gantt.md`), so an explicit y
+    `categoryarray` would double-reverse and flip the documented order.
+    """
+    if constructor not in cartesians and constructor is not go.Scatter3d:
+        return None
+    if len(groups) <= 1:
+        return None
+    if args.get("ecdfmode") is not None:
+        return None
+    df = args["data_frame"]
+    col = args.get("x")
+    if not isinstance(col, str) or col in orders or col not in df.columns:
+        return None
+    uniques = df.get_column(col).unique(maintain_order=True).to_list()
+    categories = [
+        value
+        for value in uniques
+        if value is not None and not (isinstance(value, float) and math.isnan(value))
+    ]
+    if categories and all(isinstance(value, str) for value in categories):
+        return categories
+    return None
+
+
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
@@ -2556,7 +2616,25 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     groups, orders = get_groups_and_orders(args, grouper)
+    default_x_categories = _default_x_category_order(args, groups, orders, constructor)
+    per_axis_order = (
+        default_x_categories is not None
+        and constructor in cartesians
+        and (
+            args.get("facet_row") is not None
+            or args.get("facet_col") is not None
+            or args.get("marginal_x") is not None
+            or args.get("marginal_y") is not None
+        )
+    )
+    if default_x_categories is not None and not per_axis_order:
+        # The figure has a single x axis spanning the whole data frame (a
+        # plain cartesian subplot or a 3D scene), so the per-column
+        # mechanism in `set_cartesian_axis_opts` / `configure_3d_axes`
+        # applies the data order directly.
+        orders[args["x"]] = default_x_categories
 
+    trace_axes_rows = []
     col_labels = []
     row_labels = []
     nrows = ncols = 1
@@ -2605,6 +2683,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         for trace_spec in trace_specs:
             # Create the trace
             trace = trace_spec.constructor(name=trace_name)
+            if per_axis_order:
+                # Remember the rows feeding this trace so the data order can
+                # be computed per x axis once the traces are placed on their
+                # subplots.
+                trace_axes_rows.append((trace, group, trace_spec.marginal))
             if trace_spec.constructor not in [
                 go.Parcats,
                 go.Parcoords,
@@ -2857,6 +2940,27 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         fig._px_trendlines = []
 
     configure_axes(args, constructor, fig, orders)
+    if per_axis_order:
+        # Each x axis gets the whole-data-frame order restricted to the
+        # categories carried by the traces placed on it: the same order its
+        # single-subplot counterpart would use, with the categories absent
+        # from the subplot dropped, so matched facet axes agree on the
+        # relative positions of shared categories. Marginal axes spanning
+        # the y dimension do not carry the x column and get no default.
+        axis_x_values = {}
+        for trace, group, marginal in trace_axes_rows:
+            xaxis_id = getattr(trace, "xaxis", None)
+            if xaxis_id is None or marginal == "y":
+                continue
+            axis_x_values.setdefault(xaxis_id, set()).update(
+                group.get_column(args["x"]).to_list()
+            )
+        for xaxis_id, values in axis_x_values.items():
+            categories = [value for value in default_x_categories if value in values]
+            if categories:
+                axis = fig.layout["xaxis" + xaxis_id[1:]]
+                axis["categoryorder"] = "array"
+                axis["categoryarray"] = categories
     configure_animation_controls(args, constructor, fig)
     return fig
 
