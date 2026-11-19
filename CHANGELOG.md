@@ -7,7 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add support for converting matplotlib reference lines (`axhline`, `axvline`, and horizontal/vertical `axline`) as well as axes-coordinate lines into Plotly layout shapes in `mpl_to_plotly`, including support for date axes [[#5719](https://github.com/plotly/plotly.py/pull/5719)], with thanks to @robertoffmoura for the contribution!
 
+### Changed
+- Remove Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later. [[#5883](https://github.com/plotly/plotly.py/pull/5883)]
+
 ### Fixed
+- Fix figures in JupyterLab not redrawing when their output is updated with `update_display_data` (for example `DisplayHandle.update`), which also kept animations in other kernels on their first frame [[#5865](https://github.com/plotly/plotly.py/pull/5865)], with thanks to @AllenDowney for the contribution!
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the color of each axis's displayed spine to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!
 - Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#5691](https://github.com/plotly/plotly.py/pull/5691)], with thanks to @hb1915 for the contribution!
@@ -21,10 +25,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `convert_dash` mapping dotted lines (`linestyle=':'`) to invalid `'circle'` in Plotly, correctly converting them to `'dot'` and preserving custom dash patterns as pixel lists, [[#5719](https://github.com/plotly/plotly.py/pull/5719)] with thanks to @robertoffmoura for the contribution!
 - Fix Plotly Express mutating lists passed to the `x` or `y` arguments in wide mode [[#5727](https://github.com/plotly/plotly.py/pull/5727)], with thanks to @cpruijsen for the contribution!
 - Fix `px.sunburst`, `px.treemap` and `px.icicle` listing sectors in a different order on every run when `path` is used with a Polars DataFrame; sectors now follow their order of first appearance for all dataframe backends [[#5766](https://github.com/plotly/plotly.py/pull/5766)], with thanks to @Irahan2 for the contribution!
+- Fix `trendline_scope="overall"` drawing the overall trendline on the `marginal_x`/`marginal_y` subplots as well as the main plot; it is now drawn only on the main subplots [[#5780](https://github.com/plotly/plotly.py/pull/5780)], with thanks to @jayzhou2309 for the contribution!
 - Fix `mpl_to_plotly` conversion of matplotlib contour lines and line collections: close contour rings ending with `Z` codes, support dash styles, convert date x-axes, separate disjoint subpaths with `None` separators, hide line collection traces from the legend by default, and group consecutive same-style lines into single traces [[#5770](https://github.com/plotly/plotly.py/pull/5770)], with thanks to @robertoffmoura for the contribution!
 - Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
 - Fix color utilities mutating the list of colors passed to them [[#5836](https://github.com/plotly/plotly.py/pull/5836)], with thanks to @Enesuygurs for the contribution!
 - Fix `plotly.io.from_json` failing on figures whose color, number or angle arrays contained NaN (written to JSON as `null`), such as `marker.color=[0, np.nan]`; `None` elements in these arrays are now accepted and kept [[#5856](https://github.com/plotly/plotly.py/pull/5856)], with thanks to @Thanatos9404 for the contribution!
+- Fix Plotly Express (including `px.imshow`) ignoring `facet_row_spacing=0` and `facet_col_spacing=0` and using the default spacing between facets instead [[#5881](https://github.com/plotly/plotly.py/pull/5881)], with thanks to @rishi02102017 for the contribution!
 
 
 ## [7.1.0] - 2026-09-15

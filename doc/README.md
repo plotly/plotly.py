@@ -21,7 +21,7 @@ environment with the doc-specific dependencies.
 
 ```bash
 cd doc
-uv venv --python 3.9
+uv venv --python 3.10
 source .venv/bin/activate
 uv pip install -r requirements.txt
 ```
@@ -327,7 +327,7 @@ defined in `.github/workflows/build-doc.yml`.
 
 ### Build steps
 
-1. **Environment setup** — Python 3.9, `uv`, and system dependencies (`rename`
+1. **Environment setup** — Python 3.10, `uv`, and system dependencies (`rename`
    utility) are installed.
 2. **Install doc dependencies** — `uv pip install -r requirements.txt` inside
    `doc/`.
