@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove Python 3.8 and Python 3.9 support. plotly.py now requires Python 3.10 or later. [[#5883](https://github.com/plotly/plotly.py/pull/5883)]
 
 ### Fixed
+- Fix `rescale_intensity` in `plotly.express.imshow_utils` raising `AttributeError` under NumPy 2 when `out_range` is a `(min, max)` pair, by replacing the removed `np.float_` alias with `np.float64` [[#PR](https://github.com/plotly/plotly.py/pull/PR)]
 - Fix figures in JupyterLab not redrawing when their output is updated with `update_display_data` (for example `DisplayHandle.update`), which also kept animations in other kernels on their first frame [[#5865](https://github.com/plotly/plotly.py/pull/5865)], with thanks to @AllenDowney for the contribution!
 - Fix `mpl_to_plotly` tick marker mirroring, axis positioning, and trace visibility for twinned and overlaid subplots (such as `twinx` and `twiny`) [[#5310](https://github.com/plotly/plotly.py/pull/5310)], with thanks to @robertoffmoura for the contribution!
 - Fix `mpl_to_plotly` losing matplotlib axis line colors by exporting the color of each axis's displayed spine to the plotly x and y axis `linecolor` [[#5311](https://github.com/plotly/plotly.py/pull/5311)], with thanks to @robertoffmoura for the contribution!

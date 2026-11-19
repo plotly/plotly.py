@@ -109,7 +109,7 @@ def _output_dtype(dtype_or_range):
     """
     if type(dtype_or_range) in [list, tuple, np.ndarray]:
         # pair of values: always return float.
-        return np.float_
+        return np.float64
     if isinstance(dtype_or_range, type):
         # already a type: return it
         return dtype_or_range

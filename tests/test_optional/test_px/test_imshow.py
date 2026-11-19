@@ -553,3 +553,11 @@ def test_imshow_xarray_facet_row_and_col():
     annotations = [a.text for a in fig.layout.annotations]
     assert any("row_dim=R1" in a for a in annotations)
     assert any("col_dim=C1" in a for a in annotations)
+
+
+def test_rescale_intensity_out_range_pair():
+    # A (min, max) out_range used np.float_, which NumPy 2 removed
+    img = np.arange(100, dtype=np.uint8).reshape((10, 10))
+    out = rescale_intensity(img, out_range=(0, 1))
+    assert out.dtype == np.float64
+    assert out.min() == 0 and out.max() == 1
