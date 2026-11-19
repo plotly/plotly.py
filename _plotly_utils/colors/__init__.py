@@ -694,6 +694,9 @@ def n_colors(lowcolor, highcolor, n_colors, colortype="tuple"):
         lowcolor = unlabel_rgb(lowcolor)
         highcolor = unlabel_rgb(highcolor)
 
+    if n_colors == 1:
+        return [lowcolor]
+    
     diff_0 = float(highcolor[0] - lowcolor[0])
     incr_0 = diff_0 / (n_colors - 1)
     diff_1 = float(highcolor[1] - lowcolor[1])
@@ -906,9 +909,13 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
     colors = validate_colors(colors, colortype="tuple")
 
     if isinstance(samplepoints, int):
-        samplepoints = [
-            low + idx / (samplepoints - 1) * (high - low) for idx in range(samplepoints)
-        ]
+        if samplepoints == 1:
+            samplepoints = [low]
+        else:
+            samplepoints = [
+                low + idx / (samplepoints - 1) * (high - low)
+                for idx in range(samplepoints)
+            ]
     elif isinstance(samplepoints, float):
         samplepoints = [samplepoints]
 
