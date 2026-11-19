@@ -304,8 +304,12 @@ else:
 
     # Output graph_objects.py alias
     graph_objects_rel_classes = [
-        "..graph_objs." + rel_path.split(".")[-1]
-        for rel_path in datatype_rel_class_imports[()]
+        *(
+            "..graph_objs." + rel_path.split(".")[-1]
+            for rel_path in datatype_rel_class_imports[()]
+        ),
+        # graph_objs owns the optional ipywidgets import and the fallback
+        "..graph_objs.FigureWidget",
     ]
     graph_objects_rel_modules = [
         "..graph_objs." + rel_module.split(".")[-1]
@@ -315,7 +319,6 @@ else:
     graph_objects_init_source = build_from_imports_py(
         graph_objects_rel_modules,
         graph_objects_rel_classes,
-        init_extra=optional_figure_widget_import,
     )
     graph_objects_path = opath.join(outdir, "graph_objects", "__init__.py")
     os.makedirs(opath.join(outdir, "graph_objects"), exist_ok=True)
