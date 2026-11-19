@@ -10,8 +10,8 @@ This is the release process for releasing plotly.py version `X.Y.Z`, including c
 Ensure you have the following installed:
 
 * `uv>=0.12.15`
-* `twine>=7.0.0`
 * A virtual environment: `uv venv`
+* Membership of the `libraries_admin` GitHub team, which approves publishing to PyPI
 
 ### Prepare local environment
 
@@ -63,26 +63,35 @@ a link to the plotly.js CHANGELOG.
     $ git commit -m "version changes for vX.Y.Z"
     $ git push
     ```
-- Create a GitHub pull request from `release-X.Y.Z` to `main` and wait for CI to be green
-- On the release branch, create and push a tag for the release:
+- Create a GitHub pull request from `release-X.Y.Z` to `main`, wait for CI to be green, and merge it
+- Create and push the tag on the merge commit on `main`. The publish workflow rejects tags that are not reachable from `main`:
     ```sh
+    $ git switch main && git pull
     $ git tag vX.Y.Z
     $ git push origin vX.Y.Z
     ```
 
+### Start the publish workflow
+
+1. Go to the [Publish to PyPI workflow](https://github.com/plotly/plotly.py/actions/workflows/publish-pypi.yml) and choose "Run workflow".
+2. Leave the branch as `main` (the `pypi` environment only deploys from `main`) and enter the tag, for example `v7.1.0` or `v7.1.0rc0`.
+3. The workflow validates the tag, builds the wheel and sdist from it once, and checks that the wheel and sdist (which are named after the version in `pyproject.toml`) carry the tag's version. It then waits for approval of the `pypi` environment.
+
+The accepted tag shapes are `vX.Y.Z`, `vX.Y.ZaN`, `vX.Y.ZbN` and `vX.Y.ZrcN`. Anything else (`.dev`, `.post`, `-rc.1`) is rejected before anything is built.
+
 ### Manual QA in Jupyter
 
-We don't currently have automated tests for Jupyter, so we do this QA step manually.
+We don't currently have automated tests for Jupyter, so we do this QA step manually, while the workflow waits for approval.
 
-The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` 
-which you should download and decompress, which will give you a directory called `output`. The filenames within 
-will contain version numbers; make sure the version numbers are correct.
+When the `build` job finishes, open the workflow run and download the `dist` artifact. The filenames
+will contain version numbers; make sure the version numbers are correct. These are the exact files
+that will be uploaded to PyPI and attached to the GitHub release.
 
 Set up an environment with Jupyter, AnyWidget, and Pandas installed (`pip install jupyter anywidget pandas`). Then:
 
-- unzip downloaded `output.tgz`
+- unzip the downloaded `dist` artifact
 - `pip uninstall plotly`
-- `pip install path/to/output/dist/plotly-X.Y.Z-py3-none-any.whl`
+- `pip install path/to/dist/plotly-X.Y.Z-py3-none-any.whl`
 
 You'll want to check, in both JupyterLab (launch with `jupyter lab`) and Jupyter Notebook (launch with `jupyter notebook`), 
 that `go.Figure()` and `go.FigureWidget()` work as expected. 
@@ -115,29 +124,16 @@ figure_widget  # Figure should render in notebook
 
 Once these are verified working, you can move on to publishing the release.
 
-### Merge the release PR and make a GitHub release
+### Publish the GitHub release
 
-- Merge the pull request you created above into `main`
-- Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
-- Enter the `vX.Y.Z` tag you created already above and make "Release title" the same string as the tag.
-- Copy the changelog section for this version into "Describe this release"
-- Upload the build artifacts downloaded in the previous step (`.tar` and `.whl`)
+**Only members of the `libraries_admin` team can approve publishing to PyPI.**
 
-### Publishing to PyPI
+1. In the workflow run, choose "Review deployments", select `pypi`, and approve. To abandon the release, reject instead; nothing is uploaded and no GitHub release is created.
+2. The workflow uploads the QA'd files to PyPI with trusted publishing (no API token needed).
+3. Only after PyPI accepts the files, the workflow creates a draft GitHub release for the tag with the same files attached and the notes copied from the version's section of `CHANGELOG.md`. The pre-release flag is set from the version (`a`, `b` and `rc` versions are pre-releases), and the workflow fails if the flag and the version disagree.
+4. Review the notes on the draft release, then publish it. Publishing the draft triggers nothing further.
 
-The final step is to publish the release to PyPI. **You will need special permissions from Plotly leadership to do this.**
-
-You must first install [Twine](https://pypi.org/project/twine/) (`pip install twine`) if not already installed.
-
-Publishing to PyPI:
-```bash
-(plotly_dev) $ cd path/to/output
-(plotly_dev) $ twine check plotly-X.Y.Z*
-(plotly_dev) $ twine upload plotly-X.Y.Z*
-```
-
-You will be prompted to enter an API token; this can be generated in your PyPI account settings. 
-Your account must have permissions to publish to the `plotly` project on PyPI.
+If the upload step fails, no GitHub release is created. Fix the cause and re-run the workflow for the same tag; files already on PyPI are skipped. If the GitHub release step fails after PyPI succeeded, delete any partial draft release and re-run.
 
 ### Update documentation site
 
@@ -177,13 +173,9 @@ to features in the release.
 
 (rough notes for a rough/ad hoc process!)
 
-It's the same process as above except that the `X.Y.Z` version has a suffix and there are special instructions below for publishing an RC: note that the `npm` suffix is `-rc.1` and the PyPI suffix is `rc1`. We also don't update the docs with RC information and we inform a limited number of stakeholders.
+It's the same process as above except that the version has an `a`, `b` or `rc` suffix, for example `python commands.py bumpversion 7.1.0rc0` and tag `v7.1.0rc0`. Alpha and beta versions work the same way. The `npm` form of the version uses a dash (`7.1.0-rc0`) and `npm version` normalizes it automatically during `bumpversion`. We also don't update the docs with RC information and we inform a limited number of stakeholders.
 
-PyPI RC (no special flags, just the `rc1` suffix):
+The publish workflow derives "pre-release" from the version, so no extra flags are needed. A pre-release is uploaded to PyPI as a pre-release and its GitHub release is flagged as a pre-release. A stable version is never flagged as a pre-release, and the other way round.
 
-```bash
-(plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
-```
-
-The `rc1` suffix ensures that users won't install this version by default —
-they must explicitly request it (e.g., `pip install plotly==X.Y.Zrc1`).
+Pre-release versions are not installed by default;
+users must explicitly request them (e.g., `pip install plotly==X.Y.ZrcN`).

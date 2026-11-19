@@ -1,0 +1,193 @@
+name: Publish to PyPI
+
+# Run from the "main" branch and give the tag to publish (for example v7.1.0
+# or v7.1.0rc0). Publishing to PyPI waits for approval on the "pypi"
+# environment. The GitHub release is only created after PyPI accepts the files.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to publish (for example v7.1.0 or v7.1.0rc0)
+        required: true
+        type: string
+
+# A second run of the same tag waits for the first run to finish
+concurrency:
+  group: publish-${{ inputs.tag }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  TAG: ${{ inputs.tag }}
+
+jobs:
+  validate:
+    name: Validate tag
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.tag.outputs.version }}
+      prerelease: ${{ steps.tag.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      # Only vX.Y.Z and vX.Y.Z followed by aN, bN or rcN are publishable. The
+      # optional suffix group is the single source of truth for "pre-release".
+      - name: Check the tag format
+        id: tag
+        run: |
+          if [[ ! "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)((a|b|rc)[0-9]+)?$ ]]; then
+            echo "::error::Tag $TAG must look like vX.Y.Z, vX.Y.ZaN, vX.Y.ZbN or vX.Y.ZrcN"
+            exit 1
+          fi
+          if [ -n "${BASH_REMATCH[2]}" ]; then prerelease=true; else prerelease=false; fi
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$prerelease" >> "$GITHUB_OUTPUT"
+          echo "Tag $TAG: version ${TAG#v}, prerelease $prerelease"
+      - name: Check that the tag exists and is on main
+        run: |
+          git rev-parse --verify --quiet "refs/tags/$TAG^{commit}" || {
+            echo "::error::Tag $TAG does not exist"
+            exit 1
+          }
+          git merge-base --is-ancestor "refs/tags/$TAG^{commit}" origin/main || {
+            echo "::error::Tag $TAG is not reachable from main"
+            exit 1
+          }
+
+  build:
+    name: Build files from the tag
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: "22"
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
+      - name: Build wheel and sdist
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync --locked --extra dev_build
+          cd js
+          npm ci
+          npm run build
+          cd ..
+          python -m build --sdist --wheel -o dist
+      # The build backend names both files after the version in pyproject.toml,
+      # so this one check ties pyproject.toml, the wheel and the sdist to the tag.
+      - name: Verify that the build matches the tag
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+        run: |
+          expected=$(printf '%s\n' "plotly-$VERSION-py3-none-any.whl" "plotly-$VERSION.tar.gz")
+          found=$(ls -1 dist | LC_ALL=C sort)
+          if [ "$found" != "$expected" ]; then
+            echo "::error::Tag $TAG expects these files in dist/, but found different ones"
+            printf 'Expected:\n%s\nFound:\n%s\n' "$expected" "$found"
+            exit 1
+          fi
+      - name: Extract release notes from CHANGELOG.md
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+        run: |
+          # Print the lines under "## [<version>] - <date>" up to the next "## " heading
+          awk -v heading="[$VERSION]" '
+            $1 == "##" && $2 == heading { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > notes.md
+          if ! grep -q '[^[:space:]]' notes.md; then
+            echo "::error::CHANGELOG.md has no section for $VERSION"
+            exit 1
+          fi
+          cat notes.md
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: notes
+          path: notes.md
+          if-no-files-found: error
+
+  pypi:
+    name: Upload to PyPI
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    # Waits for a libraries_admin approval before the OIDC token is issued
+    environment:
+      name: pypi
+      url: https://pypi.org/p/plotly
+    # Signs this workflow so PyPI trusts it
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: dist
+          path: dist/
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086  # v1.14.3
+        with:
+          # A re-run of a tag already on PyPI skips instead of failing
+          skip-existing: true
+
+  github-release:
+    name: Create draft GitHub release
+    needs: [validate, pypi]
+    runs-on: ubuntu-latest
+    # Kept apart from the pypi job so that the OIDC token and the write
+    # access to the repository never share a job
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PRERELEASE: ${{ needs.validate.outputs.prerelease }}
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: dist
+          path: dist/
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: notes
+          path: .
+      - name: Create the draft release
+        run: |
+          # gh release view cannot see drafts, so list releases instead
+          existing=$(gh api "repos/$GH_REPO/releases" --paginate --jq ".[] | select(.tag_name == \"$TAG\") | .html_url")
+          if [ -n "$existing" ]; then
+            echo "::error::A release for $TAG exists already: $existing. Delete it and re-run."
+            exit 1
+          fi
+          flags="--draft"
+          if [ "$PRERELEASE" = "true" ]; then
+            flags="$flags --prerelease"
+          fi
+          gh release create "$TAG" dist/* \
+            --title "$TAG" \
+            --notes-file notes.md \
+            --verify-tag \
+            $flags
+      - name: Assert the pre-release flag matches the version
+        run: |
+          actual=$(gh api "repos/$GH_REPO/releases" --paginate --jq ".[] | select(.tag_name == \"$TAG\") | .prerelease")
+          if [ "$actual" != "$PRERELEASE" ]; then
+            echo "::error::Release $TAG has prerelease=$actual, but the version requires $PRERELEASE"
+            exit 1
+          fi
+          echo "Draft release $TAG has prerelease=$actual, as the version requires"
