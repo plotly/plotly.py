@@ -770,15 +770,21 @@ class NumberValidator(BaseValidator):
 
             v = v_array  # Always numeric numpy array
         elif self.array_ok and is_simple_array(v):
+            # None elements are kept: null in figure JSON (e.g. a NaN
+            # written by to_json) loads back as None
+            numeric_els = [e for e in v if e is not None]
+
             # Check numeric
-            invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
+            invalid_els = [e for e in numeric_els if not isinstance(e, numbers.Number)]
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els[:10])
 
             # Check min/max
             if self.has_min_max:
-                invalid_els = [e for e in v if not (self.min_val <= e <= self.max_val)]
+                invalid_els = [
+                    e for e in numeric_els if not (self.min_val <= e <= self.max_val)
+                ]
 
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els[:10])
@@ -1395,7 +1401,8 @@ class ColorValidator(BaseValidator):
         """
         Helper method to find invalid elements in orig array.
         Elements are invalid if their corresponding element in
-        the validated array is None.
+        the validated array is None. None elements in orig are
+        valid, since null in figure JSON loads back as None.
 
         This method handles deeply nested list structures
         """
@@ -1406,7 +1413,7 @@ class ColorValidator(BaseValidator):
             if is_array(orig_el):
                 self.find_invalid_els(orig_el, validated_el, invalid_els)
             else:
-                if validated_el is None:
+                if validated_el is None and orig_el is not None:
                     invalid_els.append(orig_el)
 
         return invalid_els
@@ -1712,13 +1719,18 @@ class AngleValidator(BaseValidator):
             # Normalize v onto the interval [-180, 180)
             v = (v + 180) % 360 - 180
         elif self.array_ok and is_simple_array(v):
-            # Check numeric
-            invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
+            # Check numeric, keeping None elements (null in figure JSON)
+            invalid_els = [
+                e for e in v if e is not None and not isinstance(e, numbers.Number)
+            ]
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els[:10])
 
-            v = [(x + 180) % 360 - 180 for x in to_scalar_or_list(v)]
+            v = [
+                None if x is None else (x + 180) % 360 - 180
+                for x in to_scalar_or_list(v)
+            ]
         elif not isinstance(v, numbers.Number):
             self.raise_invalid_val(v)
         else:
