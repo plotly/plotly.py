@@ -2,8 +2,8 @@ plotly==7.0.0
 anywidget
 cufflinks==0.17.3
 dash-bio
-dask==2022.2.0
-datashader==0.14.4
+dask==2023.3.2
+datashader==0.15.0
 geodatasets==2026.1.0
 geopandas==1.1.2
 geoparse<=2.0.3
@@ -18,9 +18,9 @@ narwhals==2.21.0
 nbconvert==7.17.2
 networkx==2.8.0
 notebook
-numpy==1.22.4
+numpy==1.24.4
 orjson
-pandas==1.4.0
+pandas==2.0.3
 pathlib
 patsy==0.5.6
 polars
@@ -34,8 +34,6 @@ scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
 setuptools<=81
-# geopandas (pinned above) uses a deprecated shapely method, so we require a pin to ensure the deprecated method exists
-shapely==2.0.7
 sphinx==3.5.4
 sphinx_bootstrap_theme
 sphinxcontrib-applehelp==1.0.2
