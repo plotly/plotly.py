@@ -2501,10 +2501,16 @@ def get_groups_and_orders(args, grouper):
         required_grouper = [group for group in orders if group in grouper]
         grouped = dict(df.group_by(required_grouper, drop_null_keys=True).__iter__())
 
+        # dict lookups instead of `in`/`index`, which compare with `==` and
+        # raise for missing values such as pd.NA
+        positions = {
+            group: {value: i for i, value in reversed(list(enumerate(orders[group])))}
+            for group in required_grouper
+        }
         sorted_group_names = sorted(
             grouped.keys(),
             key=lambda values: [
-                orders[group].index(value) if value in orders[group] else -1
+                positions[group].get(value, -1)
                 for group, value in zip(required_grouper, values)
             ],
         )
@@ -2738,9 +2744,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
             frames[frame_name]["data"].append(trace)
     frame_list = [f for f in frames.values()]
     if len(frame_list) > 1:
-        frame_list = sorted(
-            frame_list, key=lambda f: orders[args["animation_frame"]].index(f["name"])
-        )
+        frame_positions = {
+            value: i
+            for i, value in reversed(list(enumerate(orders[args["animation_frame"]])))
+        }
+        frame_list = sorted(frame_list, key=lambda f: frame_positions[f["name"]])
 
     if show_colorbar:
         colorvar = "z" if constructor in [go.Histogram2d, go.Densitymap] else "color"
