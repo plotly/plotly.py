@@ -654,6 +654,15 @@ def test_timeline(constructor):
         px.timeline(df, x_start="Start", x_end=["a", "b", "c"], y="Task", color="Task")
 
 
+def test_timeline_fractional_milliseconds(constructor):
+    start = np.array(["2026-01-01"] * 3 + ["NaT"], "datetime64[us]")
+    ticks = np.array([500, 1_001_000, -2_500, 0], "timedelta64[us]")
+    df = constructor({"Start": start, "Finish": start + ticks, "Task": list("ABCD")})
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task")
+    assert fig.data[0].x.dtype == np.float64
+    assert_array_equal(fig.data[0].x, [0.5, 1001.0, -2.5, np.nan])
+
+
 @pytest.mark.parametrize(
     "datetime_columns",
     [

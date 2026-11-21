@@ -2194,11 +2194,16 @@ def process_dataframe_timeline(args):
                 "Both x_start and x_end must refer to data convertible to datetimes."
             ) from exc
 
+    duration = nw.col(args["x_end"]) - nw.col(args["x_start"])
+    unit = df.head(0).select(duration).schema[args["x_end"]].time_unit
+    ticks = duration.cast(nw.Int64)
+    # Keep fractional milliseconds. Integer divisors let pyarrow divide large ticks.
+    per_ms = {"ms": 1, "us": 1_000, "ns": 1_000_000}
+    milliseconds = ticks * 1000 if unit == "s" else ticks / per_ms[unit]
     # note that we are not adding any columns to the data frame here, so no risk of overwrite
     args["data_frame"] = df.with_columns(
-        (nw.col(args["x_end"]) - nw.col(args["x_start"]))
-        .dt.total_milliseconds()
-        .alias(args["x_end"])
+        # pandas casts NaT to an integer, so keep missing durations missing
+        nw.when(~duration.is_null()).then(milliseconds).alias(args["x_end"])
     )
     args["x"] = args["x_end"]
     args["base"] = args["x_start"]
