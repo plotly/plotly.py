@@ -1,4 +1,4 @@
-{%- extends 'basic.tpl' -%}
+{%- extends 'index.html.j2' -%}
 {%- block header -%}
 ---
 {% for k in nb.metadata.get("plotly") -%}
