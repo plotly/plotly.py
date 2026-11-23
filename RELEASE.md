@@ -11,7 +11,7 @@ Ensure you have the following installed:
 
 * `uv>=0.12.15`
 * A virtual environment: `uv venv`
-* Membership of the `libraries_admin` GitHub team, which approves publishing to PyPI
+* Membership of the `libraries_admin` GitHub team
 
 ### Prepare local environment
 
@@ -63,7 +63,7 @@ a link to the plotly.js CHANGELOG.
     $ git commit -m "version changes for vX.Y.Z"
     $ git push
     ```
-- Create a GitHub pull request from `release-X.Y.Z` to `main`, wait for CI to be green, and merge it
+- Create a GitHub pull request from `release-X.Y.Z` to `main`, wait for CI to be green and approval, and merge it
 - Create and push the tag on the merge commit on `main`. The publish workflow rejects tags that are not reachable from `main`:
     ```sh
     $ git switch main && git pull
@@ -124,16 +124,34 @@ figure_widget  # Figure should render in notebook
 
 Once these are verified working, you can move on to publishing the release.
 
+### If QA fails
+
+Nothing is published until you approve the `pypi` deployment, so a problem found before that point can be fixed in place and the same version number reused.
+
+1. If the run is waiting for approval, open it, choose "Review deployments", select `pypi`, and choose "Reject". The run fails, nothing is uploaded to PyPI and no GitHub release is created. (If a build or validation job already failed, there is nothing to reject.)
+2. Fix the problem on `main` through the normal PR process.
+3. Move the tag to the new tip of `main`:
+    ```sh
+    $ git switch main && git pull
+    $ git tag -d vX.Y.Z
+    $ git push origin :refs/tags/vX.Y.Z
+    $ git tag vX.Y.Z
+    $ git push origin vX.Y.Z
+    ```
+4. Run the publish workflow again with the same tag and redo QA on the new `dist` artifact.
+
+Once PyPI has accepted the files, the version number is taken permanently. PyPI doesn't allow a file name to be uploaded again, even after the file is deleted. If a problem is found after the upload, fix it on `main` and release a new version number.
+
 ### Publish the GitHub release
 
 **Only members of the `libraries_admin` team can approve publishing to PyPI.**
 
 1. In the workflow run, choose "Review deployments", select `pypi`, and approve. To abandon the release, reject instead; nothing is uploaded and no GitHub release is created.
 2. The workflow uploads the QA'd files to PyPI with trusted publishing (no API token needed).
-3. Only after PyPI accepts the files, the workflow creates a draft GitHub release for the tag with the same files attached and the notes copied from the version's section of `CHANGELOG.md`. The pre-release flag is set from the version (`a`, `b` and `rc` versions are pre-releases), and the workflow fails if the flag and the version disagree.
-4. Review the notes on the draft release, then publish it. Publishing the draft triggers nothing further.
+3. Only after PyPI accepts the files, the workflow creates and publishes a GitHub release for the tag with the same files attached and the notes copied from the version's section of `CHANGELOG.md`. The pre-release flag is set from the version (`a`, `b` and `rc` versions are pre-releases), and the workflow fails if the flag and the version disagree.
+4. Open the release and edit the notes if they need polish (for example the title and a link to the forum announcement, see "Notify Stakeholders").
 
-If the upload step fails, no GitHub release is created. Fix the cause and re-run the workflow for the same tag; files already on PyPI are skipped. If the GitHub release step fails after PyPI succeeded, delete any partial draft release and re-run.
+If the upload step fails, no GitHub release is created. Fix the cause and re-run the workflow for the same tag; files already on PyPI are skipped. If the GitHub release step fails after PyPI succeeded, delete any partial release and re-run.
 
 ### Update documentation site
 

@@ -30,6 +30,14 @@ jobs:
       version: ${{ steps.tag.outputs.version }}
       prerelease: ${{ steps.tag.outputs.prerelease }}
     steps:
+      - name: Require the workflow to run from main
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          if [ "$REF" != "refs/heads/main" ]; then
+            echo "::error::Run this workflow from the main branch, not $REF"
+            exit 1
+          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           fetch-depth: 0
@@ -146,7 +154,7 @@ jobs:
           skip-existing: true
 
   github-release:
-    name: Create draft GitHub release
+    name: Create GitHub release
     needs: [validate, pypi]
     runs-on: ubuntu-latest
     # Kept apart from the pypi job so that the OIDC token and the write
@@ -166,17 +174,15 @@ jobs:
         with:
           name: notes
           path: .
-      - name: Create the draft release
+      - name: Create the release
         run: |
-          # gh release view cannot see drafts, so list releases instead
-          existing=$(gh api "repos/$GH_REPO/releases" --paginate --jq ".[] | select(.tag_name == \"$TAG\") | .html_url")
-          if [ -n "$existing" ]; then
-            echo "::error::A release for $TAG exists already: $existing. Delete it and re-run."
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "::error::A release for $TAG exists already. Delete it and re-run."
             exit 1
           fi
-          flags="--draft"
+          flags=""
           if [ "$PRERELEASE" = "true" ]; then
-            flags="$flags --prerelease"
+            flags="--prerelease"
           fi
           gh release create "$TAG" dist/* \
             --title "$TAG" \
@@ -185,9 +191,9 @@ jobs:
             $flags
       - name: Assert the pre-release flag matches the version
         run: |
-          actual=$(gh api "repos/$GH_REPO/releases" --paginate --jq ".[] | select(.tag_name == \"$TAG\") | .prerelease")
+          actual=$(gh release view "$TAG" --json isPrerelease --jq .isPrerelease)
           if [ "$actual" != "$PRERELEASE" ]; then
             echo "::error::Release $TAG has prerelease=$actual, but the version requires $PRERELEASE"
             exit 1
           fi
-          echo "Draft release $TAG has prerelease=$actual, as the version requires"
+          echo "Release $TAG has prerelease=$actual, as the version requires"
