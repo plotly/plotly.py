@@ -364,6 +364,11 @@ def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
                 < 1
             )
 
+def test_rescale_intensity_out_range_pair():
+    # Regression test for #5893: np.float_ was removed in NumPy 2.0
+    out = rescale_intensity(np.arange(4, dtype=np.uint8), out_range=(0, 1))
+    assert out.dtype == np.float64
+    np.testing.assert_allclose(out, [0.0, 1 / 3, 2 / 3, 1.0])
 
 @pytest.mark.parametrize("backend", ["auto", "pypng", "pil"])
 def test_imshow_backend(backend):
