@@ -1,5 +1,25 @@
-import plotly.express as px
 import inspect
+
+import numpy as np
+import pytest
+
+import plotly.express as px
+
+
+@pytest.mark.parametrize(
+    ("samplepoints", "python_samplepoints"),
+    [
+        (np.float16(0.625), 0.625),
+        (np.float32(0.625), 0.625),
+        (np.longdouble(0.625), 0.625),
+        (np.int32(4), 4),
+        (np.uint64(4), 4),
+    ],
+)
+def test_sample_colorscale_accepts_numpy_scalars(samplepoints, python_samplepoints):
+    expected = px.colors.sample_colorscale("Viridis", python_samplepoints)
+
+    assert px.colors.sample_colorscale("Viridis", samplepoints) == expected
 
 
 def test_reversed_colorscale():

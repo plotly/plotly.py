@@ -884,13 +884,14 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
     Interpolates between colors in a colorscale to find the specific colors
     corresponding to the specified sample values. The colorscale can be specified
     as a list of `[scale, color]` pairs, as a list of colors, or as a named
-    plotly colorscale. The samplepoints can be specefied as an iterable of specific
-    points in the range [0.0, 1.0], or as an integer number of points which will
-    be spaced equally between the low value (default 0.0) and the high value
-    (default 1.0). The output is a list of colors, formatted according to the
-    specified colortype.
+    plotly colorscale. Pass a real-valued position or an iterable of positions in
+    [0.0, 1.0], or pass an integer to request that many evenly spaced positions
+    between low (default 0.0) and high (default 1.0). NumPy floating-point and
+    integer scalars are also accepted. The output is a list of colors formatted
+    according to colortype.
     """
     from bisect import bisect_left
+    from numbers import Integral, Real
 
     try:
         validate_colorscale(colorscale)
@@ -905,11 +906,12 @@ def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rg
     colors = colorscale_to_colors(colorscale)
     colors = validate_colors(colors, colortype="tuple")
 
-    if isinstance(samplepoints, int):
+    if isinstance(samplepoints, Integral):
+        samplepoints = int(samplepoints)
         samplepoints = [
             low + idx / (samplepoints - 1) * (high - low) for idx in range(samplepoints)
         ]
-    elif isinstance(samplepoints, float):
+    elif isinstance(samplepoints, Real):
         samplepoints = [samplepoints]
 
     sampled_colors = []

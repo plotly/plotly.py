@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `plotly.io.write_images` ignoring `layout.width`/`layout.height` (and the template's) and exporting every figure at the default 700x500 size; it now uses the same width/height priority as `write_image` and `to_image` [[#5784](https://github.com/plotly/plotly.py/pull/5784)], with thanks to @breken-ai for the contribution!
 - Fix color utilities mutating the list of colors passed to them [[#5836](https://github.com/plotly/plotly.py/pull/5836)], with thanks to @Enesuygurs for the contribution!
 - Fix Plotly Express (including `px.imshow`) ignoring `facet_row_spacing=0` and `facet_col_spacing=0` and using the default spacing between facets instead [[#5881](https://github.com/plotly/plotly.py/pull/5881)], with thanks to @rishi02102017 for the contribution!
+- Fix `sample_colorscale` rejecting NumPy floating-point positions and integer sample counts.
 
 ## [7.1.0] - 2026-09-15
 
