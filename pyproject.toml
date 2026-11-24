@@ -32,7 +32,7 @@ classifiers = [
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE.txt"]
-version = "7.1.0"
+version = "7.2.0rc0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"

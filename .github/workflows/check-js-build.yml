@@ -29,8 +29,9 @@ jobs:
         PYPROJECT_PATH="pyproject.toml"
         PKGJSON_PATH="js/package.json"
         PYPROJECT_VERSION=$(awk -F'"' '/^version/ {print $2; exit}' $PYPROJECT_PATH)
+        EXPECTED_JS_VERSION=$(echo "$PYPROJECT_VERSION" | sed -E 's/(a|b|rc)[0-9]+$/-&/')
         JSPROJECT_VERSION=$(cat $PKGJSON_PATH | jq -r '.version')
-        if [ "$PYPROJECT_VERSION" != "$JSPROJECT_VERSION" ]; then
+        if [ "$EXPECTED_JS_VERSION" != "$JSPROJECT_VERSION" ]; then
           echo "❌ Version number $JSPROJECT_VERSION in $PKGJSON_PATH does not match version number $PYPROJECT_VERSION in $PYPROJECT_PATH"
           exit 1
         else
