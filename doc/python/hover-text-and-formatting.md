@@ -105,7 +105,7 @@ fig.show()
 
 *New in 6.3*
 
-Customize the title shown in unified hover mode, by specifing `unifiedhovertitle.text`.
+Customize the title shown in unified hover mode, by specifying `unifiedhovertitle.text`.
 
 The unified hover title is a template string that supports using variables from the data. Numbers are formatted using d3-format's syntax `%{variable:d3-format}`, for `example \"Price: %{y:$.2f}\"`. Dates are formatted using d3-time-format's syntax `%{variable|d3-time-format}`, for example `\"Day: %{2019-01-01|%A}\"`.
 
