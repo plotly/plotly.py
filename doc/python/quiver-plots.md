@@ -53,6 +53,43 @@ fig = go.Figure(go.Quiver(x=x.flatten(), y=y.flatten(),
 fig.show()
 ```
 
+#### Quiver Plot with Scatter Arrow Markers
+
+A scatter trace can display one arrow marker at each vector location. Set `marker.angle` from the vector components and use `marker.size` to show relative magnitude. This is useful when you want to style each vector as a marker. The arrow glyph size is measured in pixels, so it does not encode a data-space vector length; use the `Quiver` trace above when arrow lengths should represent vector components.
+
+For `angleref="up"`, a zero-degree marker points toward the top of the screen. The following rotational field converts each vector's direction to degrees from that reference and maps its speed to marker size:
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+x, y = np.meshgrid(np.arange(-2, 3), np.arange(-2, 3))
+u, v = -y, x  # rotational field
+speed = np.hypot(u, v)
+nonzero = speed > 0
+
+angle = np.degrees(np.arctan2(u[nonzero], v[nonzero]))
+size = 8 + 20 * speed[nonzero] / speed.max()
+
+fig = go.Figure(go.Scatter(
+    x=x[nonzero],
+    y=y[nonzero],
+    mode="markers",
+    marker=dict(
+        symbol="arrow",
+        angle=angle,
+        angleref="up",
+        size=size,
+        color=speed[nonzero],
+        colorscale="Viridis",
+        showscale=True,
+    ),
+))
+
+fig.update_layout(yaxis_scaleanchor="x")
+fig.show()
+```
+
 #### Arrow Anchor and Length
 
 `anchor` sets which part of the arrow sits at its `(x, y)` position: `"tail"` (the default), `"tip"`, or `"center"`.
