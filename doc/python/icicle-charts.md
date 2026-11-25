@@ -445,7 +445,7 @@ fig.show()
 
 ### Set the Direction of Icicle charts
 
-As mentioned above, Icicle charts can grow in one of four directions. Icicle charts have a `tiling` attribute and this has two attributes: `orientation` and `flip`. `orientation` takes either `h` (horiztonal) or `v` (vertical) and `flip` takes either `x` or `y`. You can use these two attributes in combination to create each of the four cardinal directions: left, right, top, bottom.
+As mentioned above, Icicle charts can grow in one of four directions. Icicle charts have a `tiling` attribute and this has two attributes: `orientation` and `flip`. `orientation` takes either `h` (horizontal) or `v` (vertical) and `flip` takes either `x` or `y`. You can use these two attributes in combination to create each of the four cardinal directions: left, right, top, bottom.
 
 **Up Direction (Flame Chart)**
 

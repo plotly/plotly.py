@@ -194,7 +194,7 @@ fig = px.scatter(df, x="date", y="GOOG", trendline="expanding", trendline_option
 fig.show()
 ```
 
-In some cases, it is necessary to pass options into the underying Pandas function, for example the `std` parameter must be provided if the `win_type` argument to `rolling` is `"gaussian"`. This is possible with the `function_args` trendline option.
+In some cases, it is necessary to pass options into the underlying Pandas function, for example the `std` parameter must be provided if the `win_type` argument to `rolling` is `"gaussian"`. This is possible with the `function_args` trendline option.
 
 ```python
 import plotly.express as px
