@@ -250,3 +250,15 @@ class TestColors(TestCase):
         ]
 
         self.assertEqual(generated_colorscale, expected_colorscale)
+
+    def test_sample_colorscale_single_color(self):
+        result = colors.sample_colorscale("Viridis", 1)
+        assert len(result) == 1
+        assert result[0] == "rgb(68, 1, 84)"
+
+
+    def test_n_colors_single_color(self):
+        result = colors.n_colors(
+            (0, 0, 0), (255, 255, 255), 1
+        )
+        assert result == [(0, 0, 0)]
