@@ -1081,7 +1081,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
         assert fig.data[-1]["marker"]["cmax"] == 1
         assert fig2.data[-1]["marker"]["cmax"] == 1
 
-    def check_pole_labels(self):
+    def test_pole_labels(self):
         a, b = np.mgrid[0:1:20j, 0:1:20j]
         mask = a + b < 1.0
         a = a[mask].ravel()
