@@ -473,3 +473,84 @@ def test_no_warn_on_update_template():
     with warnings.catch_warnings():
         warnings.simplefilter("error")
         fig.update_layout(template="plotly_white")
+
+
+_NULLABLE_VALUES = {
+    "string": ["u", None, "v", "u"],
+    "boolean": [True, None, False, True],
+    "Int64": [1, None, 3, 1],
+    "Float64": [1.5, None, 3.5, 1.5],
+    "string[pyarrow]": ["u", None, "v", "u"],
+}
+_NULLABLE_NAMES = {
+    "string": ["u", "v"],
+    "boolean": ["True", "False"],
+    "Int64": ["1", "3"],
+    "Float64": ["1.5", "3.5"],
+    "string[pyarrow]": ["u", "v"],
+}
+
+
+@pytest.mark.parametrize("dtype", list(_NULLABLE_VALUES))
+@pytest.mark.parametrize(
+    "arg", ["color", "symbol", "line_dash", "facet_col", "line_group"]
+)
+def test_missing_values_in_nullable_grouping_column(dtype, arg):
+    # Missing values in nullable pandas dtypes are pd.NA, which cannot be
+    # compared with `==`; rows with a missing group are dropped.
+    df = pd.DataFrame(
+        {
+            "x": [1, 2, 3, 4],
+            "y": [4, 3, 2, 1],
+            "g": pd.array(_NULLABLE_VALUES[dtype], dtype=dtype),
+        }
+    )
+    fig = px.line(df, x="x", y="y", **{arg: "g"})
+    assert sorted(x for trace in fig.data for x in trace.x) == [1, 3, 4]
+    if arg in ("color", "symbol", "line_dash"):
+        assert [trace.name for trace in fig.data] == _NULLABLE_NAMES[dtype]
+
+
+@pytest.mark.parametrize("arg", ["animation_frame", "pattern_shape", "facet_row"])
+def test_missing_values_in_nullable_string_grouping_column_other_args(arg):
+    df = pd.DataFrame(
+        {
+            "x": [1, 2, 3, 4],
+            "y": [4, 3, 2, 1],
+            "g": pd.array(["u", None, "v", "u"], dtype="string"),
+        }
+    )
+    fn = px.bar if arg == "pattern_shape" else px.scatter
+    fig = fn(df, x="x", y="y", **{arg: "g"})
+    if arg == "animation_frame":
+        assert [f.name for f in fig.frames] == ["u", "v"]
+    else:
+        assert sorted(x for trace in fig.data for x in trace.x) == [1, 3, 4]
+
+
+@pytest.mark.parametrize("arg", ["color", "facet_col"])
+@pytest.mark.parametrize(
+    "values",
+    [
+        pd.array([None] * 3, dtype=object),
+        pd.array([None] * 3, dtype="string"),
+        pd.array([None] * 3, dtype="Int64"),
+        [float("nan")] * 3,
+    ],
+    ids=["object", "string", "Int64", "float"],
+)
+def test_all_missing_grouping_column(values, arg):
+    # An entirely missing grouping column still gives a single trace
+    df = pd.DataFrame({"x": [1, 2, 3], "y": [3, 2, 1], "g": values})
+    fig = px.scatter(df, x="x", y="y", **{arg: "g"})
+    assert [list(trace.x) for trace in fig.data] == [[1, 2, 3]]
+
+
+@pytest.mark.parametrize("arg", ["color", "facet_col"])
+def test_all_missing_polars_grouping_column(arg):
+    pl = pytest.importorskip("polars")
+    df = pl.DataFrame(
+        {"x": [1, 2, 3], "y": [3, 2, 1], "g": pl.Series([None] * 3, dtype=pl.String)}
+    )
+    fig = px.scatter(df, x="x", y="y", **{arg: "g"})
+    assert [list(trace.x) for trace in fig.data] == [[1, 2, 3]]
