@@ -2042,6 +2042,11 @@ def process_dataframe_hierarchy(args):
 
     if args["color"]:
         if discrete_color:
+            # max() is not defined for unordered categoricals, and "(?)" is not
+            # one of the categories, so aggregate categorical colors as strings.
+            color_dtype = df.collect_schema()[args["color"]]
+            if isinstance(color_dtype, (nw.Categorical, nw.Enum)):
+                df = df.with_columns(nw.col(args["color"]).cast(nw.String()))
             discrete_aggs.append(args["color"])
             agg_f[args["color"]] = nw.col(args["color"]).max()
             agg_f[f"{args['color']}{n_unique_token}"] = (

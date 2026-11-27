@@ -375,6 +375,50 @@ def test_sunburst_treemap_with_path_color(constructor):
     assert np.all(np.sort(colors[:8]) == sorted(calls))
 
 
+@pytest.mark.parametrize("px_fn", [px.sunburst, px.treemap, px.icicle])
+def test_sunburst_treemap_with_path_categorical_color(constructor, px_fn):
+    if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
+        pytest.skip(
+            "known issue with pandas 3 + pandas_pyarrow_constructor + px hierarchy charts (https://github.com/plotly/plotly.py/issues/5571)"
+        )
+
+    data = dict(
+        regions=["North", "North", "South", "South"],
+        vendors=["A", "B", "C", "D"],
+        sectors=["Tech", "Tech", "Finance", "Tech"],
+        values=[1, 2, 3, 4],
+    )
+    df = nw.from_native(constructor(data))
+    expected = px_fn(
+        df.to_native(), path=["regions", "vendors"], values="values", color="sectors"
+    ).data[0]
+
+    # A categorical color column used to raise on max() / "(?)" in the group_by
+    df = df.with_columns(nw.col("sectors").cast(nw.Categorical()))
+    fig = px_fn(
+        df.to_native(), path=["regions", "vendors"], values="values", color="sectors"
+    )
+    assert list(fig.data[0].ids) == list(expected.ids)
+    assert list(fig.data[0].marker.colors) == list(expected.marker.colors)
+
+
+def test_sunburst_treemap_with_path_enum_color():
+    pl = pytest.importorskip("polars")
+    df = pl.DataFrame(
+        dict(
+            regions=["North", "North", "South", "South"],
+            vendors=["A", "B", "C", "D"],
+            sectors=["Tech", "Tech", "Finance", "Tech"],
+        )
+    )
+    expected = px.sunburst(df, path=["regions", "vendors"], color="sectors").data[0]
+
+    df = df.with_columns(pl.col("sectors").cast(pl.Enum(["Tech", "Finance"])))
+    fig = px.sunburst(df, path=["regions", "vendors"], color="sectors")
+    assert list(fig.data[0].ids) == list(expected.ids)
+    assert list(fig.data[0].marker.colors) == list(expected.marker.colors)
+
+
 def test_sunburst_treemap_column_parent(constructor):
     if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
         pytest.skip(
