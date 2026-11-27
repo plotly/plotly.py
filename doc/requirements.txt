@@ -33,7 +33,7 @@ requests
 scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
-setuptools<=81
+setuptools<=84.1.0
 sphinx==3.5.4
 sphinx_bootstrap_theme
 sphinxcontrib-applehelp==1.0.2
