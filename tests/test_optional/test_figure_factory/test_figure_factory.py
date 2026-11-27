@@ -1275,6 +1275,30 @@ class TestHexbinMap(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         assert fig3.data[0].z.sum() == 1000
 
+    def test_aggregation_keeps_float_values(self):
+        lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]
+        lon = [1, 2, 3, 3, 0, 4, 5, 0, 5, 3, 1, 5, 4, 0, 1, 2, 5]
+
+        fig = ff.create_hexbin_map(
+            lat=lat,
+            lon=lon,
+            nx_hexagon=1,
+            color=0.5 * np.ones(len(lat)),
+            agg_func=np.mean,
+        )
+        assert np.array_equal(fig.data[0].z, 0.5 * np.ones(5))
+
+        color = np.linspace(0.1, 0.9, len(lat))
+        fig_min = ff.create_hexbin_map(
+            lat=lat, lon=lon, nx_hexagon=1, color=color, agg_func=np.min
+        )
+        fig_max = ff.create_hexbin_map(
+            lat=lat, lon=lon, nx_hexagon=1, color=color, agg_func=np.max
+        )
+        z_min, z_max = fig_min.data[0].z, fig_max.data[0].z
+        assert np.all(z_min >= 0.1) and np.all(z_max <= 0.9)
+        assert np.all(z_min <= z_max) and np.any(z_min < z_max)
+
     def test_build_dataframe(self):
         np.random.seed(0)
         N = 10000
