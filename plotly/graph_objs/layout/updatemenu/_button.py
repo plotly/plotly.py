@@ -3,6 +3,7 @@
 
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
+import plotly.colors as _pc
 
 
 class Button(_BaseLayoutHierarchyType):
@@ -357,3 +358,28 @@ an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`""")
         self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
+
+        if self.method in ("restyle", "update"):
+
+            def normalize_args(args):
+                if not isinstance(args, (list, tuple)) or not args:
+                    return args
+
+                if not isinstance(args[0], dict):
+                    return args
+
+                changes = args[0].copy()
+                scale = changes.get("colorscale")
+
+                if isinstance(scale, str):
+                    if scale.lower() in _pc.named_colorscales():
+                        changes["colorscale"] = [_pc.get_colorscale(scale)]
+                        return [changes, *args[1:]]
+
+                return args
+
+            if self.args is not None:
+                self.args = normalize_args(self.args)
+
+            if self.args2 is not None:
+                self.args2 = normalize_args(self.args2)
