@@ -46,7 +46,9 @@ def validator_extras_aok():
 
 
 # Acceptance
-@pytest.mark.parametrize("val", [1, -19, 0, -1234])
+@pytest.mark.parametrize(
+    "val", [1, -19, 0, -1234, np.int64(5), np.int32(-3), np.uint8(7)]
+)
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
@@ -64,7 +66,7 @@ def test_rejection_by_value(val, validator):
 
 # With min/max
 # min == -1 and max == 2
-@pytest.mark.parametrize("val", [0, 1, -1, 2])
+@pytest.mark.parametrize("val", [0, 1, -1, 2, np.int64(2)])
 def test_acceptance_min_max(val, validator_min_max):
     assert validator_min_max.validate_coerce(val) == approx(val)
 
@@ -91,7 +93,7 @@ def test_rejection_extras(val, validator_extras):
 
 
 @pytest.mark.parametrize(
-    "val", [-1.01, -10, 2.1, 3, np.iinfo(int).max, np.iinfo(int).min]
+    "val", [-1.01, -10, 2.1, 3, np.int64(3), np.iinfo(int).max, np.iinfo(int).min]
 )
 def test_rejection_min_max(val, validator_min_max):
     with pytest.raises(ValueError) as validation_failure:
@@ -140,7 +142,10 @@ def test_acceptance_aok_scalars(val, validator_aok):
     assert validator_aok.validate_coerce(val) == val
 
 
-@pytest.mark.parametrize("val", [[1, 0], [1], [-2, 1, 8], np.array([3, 2, -1, 5])])
+@pytest.mark.parametrize(
+    "val",
+    [[1, 0], [1], [-2, 1, 8], [np.int64(3), np.int32(-1)], np.array([3, 2, -1, 5])],
+)
 def test_acceptance_aok_list(val, validator_aok):
     assert np.array_equal(validator_aok.validate_coerce(val), val)
 
