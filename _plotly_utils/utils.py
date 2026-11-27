@@ -78,6 +78,11 @@ def to_typed_array_spec(v):
 
     dtype = str(v.dtype)
 
+    # plotly.js does not clean NaN/inf out of typed arrays the way it does for
+    # lists (bar stacking breaks, for one), so keep sending those as lists
+    if v.ndim == 1 and v.dtype.kind == "f" and not np.isfinite(v).all():
+        return v
+
     if dtype in plotlyjsShortTypes:
         arrObj = {
             "dtype": plotlyjsShortTypes[dtype],
